@@ -62,7 +62,7 @@ SECRET_KEY = 'u=c2brcszbq7r45^94)xdi(lz=d^%-yoi(38xwq5k0u*8wmb3v'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+#    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -97,6 +97,8 @@ INSTALLED_APPS = (
     # third-party
 
     # internal
+    'app.subapps.home',
+    'app.subapps.structure',
 
     # development
     'debug_toolbar' if DEBUG else None,

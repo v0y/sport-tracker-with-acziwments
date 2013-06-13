@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<!-- ===================================== HEAD ===================================== -->
+	<head>
+		{% load staticfiles %}
+		<title>{% block title %}Tytuł strony{% endblock %}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" media="screen" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+		<link rel="stylesheet" media="screen" href="{% static "bootstrap/css/bootstrap-responsive.min.css" %}">
+	</head>
+	<!-- ===================================== BODY ===================================== -->
+	<body>
+		<div id="wrapper">
+			<div class="row-fluid">
+				<!-- ------------------------------------- HEADER ------------------------------------- -->
+				<div id="header" class="span12">
+					<div class="navbar navbar-static-top">
+						<div class="navbar-inner">
+							<div class="span10 offset1">
+								<a class="brand" href="#">Project name</a>
+									<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+									<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</a>
+								<div class="nav-collapse collapse">	
+									<ul class="nav">
+										<li><a href="#">link</a><li>
+										<li><a href="#">link</a><li>
+										<li><a href="#">link</a><li>
+										<li><a href="#">link</a><li>
+										<li><a href="#">link</a><li>
+										<li><a href="#">link</a><li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+	
+				</div> <!-- header --> 
+
+				<!-- ------------------------------------- CONTENT ------------------------------------- -->
+				<div id="content" class="span10 offset1">
+					{% block content %}{% endblock %}
+				</div>
+	
+				<!-- ------------------------------------- FOOTER ------------------------------------- -->
+				<div id="footer" class="span10 offset1">
+					<p>
+						Kopyrajt &copy; 2013 trolololo
+					</p>
+				</div>
+			</div>
+		</div> <!-- wrapper -->
+		
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+	</body>
+</html>
