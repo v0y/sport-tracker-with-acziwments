@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" media="screen" href="{% static "bootstrap/css/bootstrap.min.css" %}">
 		<link rel="stylesheet" media="screen" href="{% static "bootstrap/css/bootstrap-responsive.min.css" %}">
+		<link rel="stylesheet" media="screen" href="{% static "css/style.css" %}">
 	</head>
 	<!-- ===================================== BODY ===================================== -->
 	<body>
@@ -45,12 +46,13 @@
 				<div id="content" class="span10 offset1">
 					{% block content %}{% endblock %}
 				</div>
-	
 				<!-- ------------------------------------- FOOTER ------------------------------------- -->
-				<div id="footer" class="span10 offset1">
-					<p>
-						Kopyrajt &copy; 2013 trolololo
-					</p>
+				<div id="footer-wrapper">
+					<div id="footer" class="span10 offset1">
+						<p>
+							Kopyrajt &copy; 2013 trolololo
+						</p>
+					</div>
 				</div>
 			</div>
 		</div> <!-- wrapper -->
