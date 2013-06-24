@@ -1,4 +1,4 @@
-#-*- coding:utf-8 -*-
+# coding:utf-8
 from os.path import dirname, join, realpath
 
 _current_dir = dirname(realpath(__file__))
@@ -16,10 +16,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': join(_current_dir, 'db.sqlite3'),
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
