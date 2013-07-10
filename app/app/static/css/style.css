@@ -11,7 +11,7 @@ body {
 }
 
 #content {
-	padding-top: 15px;
+	padding-top: 25px;
 	padding-bottom: 15px;
 	padding-bottom:80px;   /* Height of the footer element */
 }
@@ -22,4 +22,8 @@ body {
 	position:absolute;
 	bottom:0;
 	background-color: #f2f2f2;
+}
+
+.margin-top-minus5 {
+	margin-top: -5px;
 }
