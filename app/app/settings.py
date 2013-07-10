@@ -39,12 +39,13 @@ USE_TZ = True
 MEDIA_ROOT = join(_current_dir, 'media')
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = join(_current_dir, 'static')
+STATIC_ROOT = join(_current_dir, 'public_html')
 STATIC_URL = '/static/'
 
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    join(_current_dir, 'static'),
 )
 
 # List of finder classes that know how to find static files in
