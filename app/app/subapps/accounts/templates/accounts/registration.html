@@ -1,0 +1,10 @@
+{% extends "structure/main.html" %}
+
+{% block content %}
+	{% include "snippets/form_vertical.html" %}
+{% endblock %}
+
+{% block js_import %}
+{% load static %}
+	<script src="{% static 'js/registration_validation.js' %}"></script>
+{% endblock %}

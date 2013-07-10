@@ -1,0 +1,9 @@
+{% extends "structure/main.html" %}
+
+{% block content %}
+
+<div class="alert alert-success text-center">
+	Aktywuj swoje konto klikając w linka, którego wysłaliśmy Ci na adres <b>{{ request.GET.email }}</b>
+</div>
+
+{% endblock %}

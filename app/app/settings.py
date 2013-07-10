@@ -77,6 +77,17 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages"
+    )
+
 ROOT_URLCONF = 'app.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -99,13 +110,14 @@ INSTALLED_APPS = [
     # third-party
 
     # internal
+    'app.subapps.accounts',
     'app.subapps.home',
     'app.subapps.shared',
 
 ]
 
 # setup debug_toolbar
-if DEBUG:
+if not DEBUG:
     INSTALLED_APPS.append('debug_toolbar')
 
     INTERNAL_IPS = ['127.0.0.1', ]
@@ -125,6 +137,27 @@ if DEBUG:
     DEBUG_TOOLBAR_CONFIG = {
         'INTERCEPT_REDIRECTS': False
     }
+
+# accounts
+REDIRECT_AFTER_LOGIN = '/'
+REDIRECT_AFTER_LOGOUT = '/'
+ACCOUNT_ACTIVATION_DAYS = 7
+PASSWORD_RESET_TIMEOUT_DAYS = 3
+LOGIN_URL = '/accounts/login'
+
+# email configuration
+DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    # TODO: konfiguracja SMTP
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = ''
+    EMAIL_PORT = 25
+    EMAIL_HOST_USER = ''
+    EMAIL_HOST_PASSWORD = ''
+    EMAIL_USE_TLS = False
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
