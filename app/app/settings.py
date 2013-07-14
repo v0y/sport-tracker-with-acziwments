@@ -100,7 +100,7 @@ INSTALLED_APPS = (
 
     # internal
     'app.subapps.home',
-    'app.subapps.structure',
+    'app.subapps.shared',
 
     # development
     'debug_toolbar' if DEBUG else None,
