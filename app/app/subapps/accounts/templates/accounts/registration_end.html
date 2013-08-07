@@ -1,0 +1,10 @@
+{% extends "structure/main.html" %}
+
+{% block content %}
+
+<div class="alert alert-success text-center">
+	Dziękujemy za rejestrację. Aktywuj swoje konto klikając w linka, 
+	którego wysłaliśmy Ci na adres <b>{{ request.GET.email }}</b>
+</div>
+
+{% endblock %}

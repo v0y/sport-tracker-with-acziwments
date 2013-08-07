@@ -12,5 +12,7 @@ urlpatterns = patterns('',
     # home
     url(r'^', include('app.subapps.home.urls')),
 
+    # accounts
+    (r'^accounts', include('app.subapps.accounts.urls')),
 
 )

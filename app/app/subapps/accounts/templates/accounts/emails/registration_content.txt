@@ -1,0 +1,9 @@
+Cześć, {{ username }}!
+
+Witamy w serwisie {{ site_name }}. Musimy Cię jeszcze poprosić o jedną małą przysługę.
+Kliknij, proszę, poniższy link, aby aktywować swoje konto:
+
+{{ activation_url }}
+
+Pozdrawiamy,
+załoga {{ site_name }}

@@ -1,0 +1,16 @@
+{% if error %}
+	{{ error }}
+{% endif %}
+{% for field in form %}
+	<div class="label-wrapper">
+		<label for="{{ field.id_for_label }}" class="span5 text-right">{{ field.label }}</label>
+		{{ field }}
+		<span id="js-form-error-{{ field.name }}" class="label label-important hide">
+		</span>
+		{% for error in field.errors %}
+			<span class="label label-important">
+				{{ error }}
+			</span>
+		{% endfor %}
+	</div>
+{% endfor %}

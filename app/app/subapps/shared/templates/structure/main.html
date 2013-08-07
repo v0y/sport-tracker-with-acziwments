@@ -5,9 +5,9 @@
 		{% load staticfiles %}
 		<title>{% block title %}Tytuł strony{% endblock %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" media="screen" href="{% static "bootstrap/css/bootstrap.min.css" %}">
-		<link rel="stylesheet" media="screen" href="{% static "bootstrap/css/bootstrap-responsive.min.css" %}">
-		<link rel="stylesheet" media="screen" href="{% static "css/style.css" %}">
+		<link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/bootstrap-responsive.min.css' %}">
+		<link rel="stylesheet" media="screen" href="{% static 'css/style.css' %}">
 	</head>
 	<!-- ===================================== BODY ===================================== -->
 	<body>
@@ -32,7 +32,14 @@
 										<li><a href="#">link</a><li>
 										<li><a href="#">link</a><li>
 										<li><a href="#">link</a><li>
-										<li><a href="#">link</a><li>
+									</ul>
+									<ul class="nav pull-right">
+										{% if user.is_authenticated %}
+											<li><a href="{% url 'logout' %}">Wyloguj</a><li>
+										{% else %}
+											<li><a href="{% url 'registration' %}">Rejestracja</a><li>
+											<li><a href="{% url 'login' %}">Logowanie</a><li>
+										{% endif %}
 									</ul>
 								</div>
 							</div>
@@ -43,7 +50,7 @@
 				</div> <!-- header --> 
 
 				<!-- ------------------------------------- CONTENT ------------------------------------- -->
-				<div id="content" class="span10 offset1">
+				<div id="content" class="span9 offset1">
 					{% block content %}{% endblock %}
 				</div>
 				<!-- ------------------------------------- FOOTER ------------------------------------- -->
@@ -56,8 +63,10 @@
 				</div>
 			</div>
 		</div> <!-- wrapper -->
-		
-		<script src="http://code.jquery.com/jquery.js"></script>
+		<!-- jQuery 2. Because fuck you IE < 9  -->
+		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+		<!-- Bootstrap rlz -->
 		<script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+		{% block js_import %}{% endblock %}
 	</body>
 </html>
