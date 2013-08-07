@@ -28,11 +28,13 @@ class Field
         @field = $("#id_#{name}")
         @value = @field.val()
         @alert = $("#js-form-error-#{name}")
+        @group = $("#js-#{name}-group")
 
     showAlert: (text) ->
         @alert.removeClass("hide").
-               addClass("label-important").
+               addClass("label-danger").
                text(text)
+        @group.addClass("has-error")
 
     hideInfo: ->
         @alert.addClass("hide").text("")
@@ -40,9 +42,12 @@ class Field
 
     setOk: ->
         @button.fieldStatus(@name, true)
+        @group.removeClass("has-error").
+               addClass("has-success")
 
     setNotOk: ->
         @button.fieldStatus(@name, false)
+        @group.removeClass("has-success")
 
     validateMinLength: (minLength, errorText) ->
         if not @value
@@ -139,6 +144,7 @@ class RePassword extends Field
 
 class Rules extends Field
     validateChecked: ->
+        console.log(@field.is(':checked'))
         if @field.is(':checked')
             @setOk()
         else

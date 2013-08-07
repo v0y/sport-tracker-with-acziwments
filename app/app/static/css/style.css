@@ -12,7 +12,6 @@ body {
 
 #content {
     padding-top: 25px;
-    padding-bottom: 15px;
     padding-bottom:80px;   /* Height of the footer element */
 }
 
@@ -40,6 +39,11 @@ body {
     font-size: 80%;
 }
 
+.box-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .hide {
     display: none;
 }
@@ -58,10 +62,19 @@ body {
 }
 
 button {
-    margin:5px 0;
+    margin: 5px 0;
 }
 
-.form-button {
-    text-align: center;
+.form-checkbox {
+    width: 34px;
+    height: 34px;
+}
+
+.clear-both {
     clear: both;
+}
+
+.row {
+    margin-left: auto;
+    margin-right: auto;
 }

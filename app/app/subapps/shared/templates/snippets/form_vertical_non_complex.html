@@ -1,16 +1,25 @@
+{% load shared_filters %}
+
 {% if error %}
 	{{ error }}
 {% endif %}
 {% for field in form %}
-	<div class="label-wrapper">
-		<label for="{{ field.id_for_label }}" class="span5 text-right">{{ field.label }}</label>
-		{{ field }}
-		<span id="js-form-error-{{ field.name }}" class="label label-important hide">
-		</span>
-		{% for error in field.errors %}
-			<span class="label label-important">
-				{{ error }}
-			</span>
-		{% endfor %}
-	</div>
-{% endfor %}
+		<div class="form-group label-wrapper row" id="js-{{ field.name }}-group">
+			<div class="col-lg-3 col-3 col-sm-3 text-right">
+				<label for="{{ field.id_for_label }}" class="control-label">{{ field.label }}</label><br>
+			</div>
+			<div class="col-lg-7 col-7 col-sm-7">
+				<input type="{{ field.field.widget|klass }}" class="form-control form-{{ field.field.widget|klass }}" id="{{ field.id_for_label }}">
+			</div>
+			<div class="col-lg-2 col-2 col-sm-2">
+				<div class="text-right">
+					<span id="js-form-error-{{ field.name }}" class="label label-important hidden"></span>
+					{% for error in field.errors %}
+						<span class="label label-danger">
+							{{ error }}
+						</span>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endfor %}

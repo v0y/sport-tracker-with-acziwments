@@ -57,7 +57,7 @@ class RegistrationForm(forms.Form):
         max_length=30, required=True, label=u"Login",
         error_messages={
             'required': u"Podaj login",
-            'invalid': u"Login może zawierać tylko litery, "\
+            'invalid': u"Login może zawierać tylko litery, "
                        u"cyfry, podkreślenie i myślnik",
             'min_length': u"Login musi mieć minimum 3 znaki długości"
         }

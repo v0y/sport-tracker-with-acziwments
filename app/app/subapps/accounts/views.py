@@ -160,9 +160,9 @@ def registration_activation_resend(request):
 
         # redirect to success page
         redirect_url = create_url(
-                           path=reverse('registration_activation_resend_end'),
-                           params={'email': user.email}
-                        )
+            path=reverse('registration_activation_resend_end'),
+            params={'email': user.email}
+        )
 
         return redirect(redirect_url)
 

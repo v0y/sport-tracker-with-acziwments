@@ -50,10 +50,12 @@
       this.field = $("#id_" + name);
       this.value = this.field.val();
       this.alert = $("#js-form-error-" + name);
+      this.group = $("#js-" + name + "-group");
     }
 
     Field.prototype.showAlert = function(text) {
-      return this.alert.removeClass("hide").addClass("label-important").text(text);
+      this.alert.removeClass("hide").addClass("label-danger").text(text);
+      return this.group.addClass("has-error");
     };
 
     Field.prototype.hideInfo = function() {
@@ -62,11 +64,13 @@
     };
 
     Field.prototype.setOk = function() {
-      return this.button.fieldStatus(this.name, true);
+      this.button.fieldStatus(this.name, true);
+      return this.group.removeClass("has-error").addClass("has-success");
     };
 
     Field.prototype.setNotOk = function() {
-      return this.button.fieldStatus(this.name, false);
+      this.button.fieldStatus(this.name, false);
+      return this.group.removeClass("has-success");
     };
 
     Field.prototype.validateMinLength = function(minLength, errorText) {
@@ -228,6 +232,7 @@
     }
 
     Rules.prototype.validateChecked = function() {
+      console.log(this.field.is(':checked'));
       if (this.field.is(':checked')) {
         return this.setOk();
       } else {
