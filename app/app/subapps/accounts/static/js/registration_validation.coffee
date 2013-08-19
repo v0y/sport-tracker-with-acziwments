@@ -36,6 +36,7 @@ class Field
 
     hideInfo: ->
         @alert.addClass("hide").text("")
+        @group.removeClass("has-error has-success")
 
     setOk: ->
         @button.fieldStatus(@name, true)
@@ -63,8 +64,6 @@ class Field
                 if ajax.responseText is "found"
                     $field.showAlert(errorText)
                     $field.setNotOk()
-                else
-                    $field.setOk()
 
 
 class Username extends Field

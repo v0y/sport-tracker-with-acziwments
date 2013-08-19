@@ -57,7 +57,8 @@
     };
 
     Field.prototype.hideInfo = function() {
-      return this.alert.addClass("hide").text("");
+      this.alert.addClass("hide").text("");
+      return this.group.removeClass("has-error has-success");
     };
 
     Field.prototype.setOk = function() {
@@ -94,8 +95,6 @@
           if (ajax.responseText === "found") {
             $field.showAlert(errorText);
             return $field.setNotOk();
-          } else {
-            return $field.setOk();
           }
         }
       });
