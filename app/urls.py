@@ -10,9 +10,9 @@ urlpatterns = patterns('',
     url(r'^admin', include(admin.site.urls)),
 
     # home
-    url(r'^', include('app.subapps.home.urls')),
+    url(r'^', include('app.home.urls')),
 
     # accounts
-    (r'^accounts', include('app.subapps.accounts.urls')),
+    (r'^accounts', include('app.accounts.urls')),
 
 )

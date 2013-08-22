@@ -18,7 +18,7 @@ from .forms import (ChangePasswordForm, LoginForm, NewPasswordForm,
                     PasswordResetForm, RegistrationForm,
                     ResendActivationMailForm)
 from .models import UserActivation, PasswordReset
-from app.subapps.shared.helpers import create_url, simple_send_email
+from app.shared.helpers import create_url, simple_send_email
 
 
 @render_to('accounts/login.html')

@@ -110,9 +110,9 @@ INSTALLED_APPS = [
     # third-party
 
     # internal
-    'app.subapps.accounts',
-    'app.subapps.home',
-    'app.subapps.shared',
+    'app.accounts',
+    'app.home',
+    'app.shared',
 
 ]
 

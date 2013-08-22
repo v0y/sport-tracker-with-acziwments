@@ -4,7 +4,7 @@ from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 
 
-urlpatterns = patterns('app.subapps.accounts.views',
+urlpatterns = patterns('app.accounts.views',
     # login
     url(r'^/login$', 'login_view', name='login'),
     url(r'^/logout$', 'logout_view', name='logout'),

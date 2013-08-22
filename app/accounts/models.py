@@ -8,8 +8,8 @@ from django.db.models.signals import post_save
 from django.db import models
 from django.dispatch import receiver
 
-from app.subapps.shared.helpers import create_url
-from app.subapps.shared.models import CreatedAtMixin, SHA1TokenMixin
+from app.shared.helpers import create_url
+from app.shared.models import CreatedAtMixin, SHA1TokenMixin
 
 
 class UserActivation(CreatedAtMixin, SHA1TokenMixin):
