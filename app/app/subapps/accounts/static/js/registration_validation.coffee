@@ -31,13 +31,13 @@ class Field
         @group = $("#js-#{name}-group")
 
     showAlert: (text) ->
-        @alert.removeClass("hide").
+        @alert.removeClass("hidden").
                addClass("label-danger").
                text(text)
         @group.addClass("has-error")
 
     hideInfo: ->
-        @alert.addClass("hide").text("")
+        @alert.addClass("hidden").text("")
         @group.removeClass("has-error has-success")
 
     setOk: ->

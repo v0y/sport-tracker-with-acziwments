@@ -54,12 +54,12 @@
     }
 
     Field.prototype.showAlert = function(text) {
-      this.alert.removeClass("hide").addClass("label-danger").text(text);
+      this.alert.removeClass("hidden").addClass("label-danger").text(text);
       return this.group.addClass("has-error");
     };
 
     Field.prototype.hideInfo = function() {
-      this.alert.addClass("hide").text("");
+      this.alert.addClass("hidden").text("");
       return this.group.removeClass("has-error has-success");
     };
 
