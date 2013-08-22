@@ -4,23 +4,29 @@
 
 <h1 class="text-center">{{ form.Meta.name }}</h1>
 
-<form method="post" action="">{% csrf_token %}
-	{% include "snippets/form_vertical_non_complex.html" %}
-	<div class=" text-center">
-		<button type="submit">{{ form.Meta.button_text }}</button>
-		<br>
-		<a href="{% url 'password_reset' %}"
-			title="Resetuj hasło"
-			class="text-small">
-			Zapomniałeś hasła?
-		</a>
-		<br>
-		<a href="{% url 'registration_activation_resend' %}"
-			title="Wyślij ponownie link aktywacyjny"
-			class="text-small">
-			Wyślij ponownie link aktywacyjny
-		</a>
-	</div>
-</form>
+<div class="row">
+	<form method="post" action="" class="form-horizontal col-lg-6 col-10 col-sm-10 col-lg-offset-3">{% csrf_token %}
+		{% include "snippets/form_vertical_non_complex.html" %}
+		<div class="form-group label-wrapper row">
+			<div class="col-lg-3 col-3 col-sm-3 text-right">
+			</div>
+			<div class="col-lg-7 col-7 col-sm-7">
+				<button type="submit">{{ form.Meta.button_text }}</button>
+				<br>
+				<a href="{% url 'password_reset' %}"
+					title="Resetuj hasło"
+					class="text-small">
+					Zapomniałeś hasła?
+				</a>
+				<br>
+				<a href="{% url 'registration_activation_resend' %}"
+					title="Wyślij ponownie link aktywacyjny"
+					class="text-small">
+					Wyślij ponownie link aktywacyjny
+				</a>
+			</div>
+		</div>
+	</form>
+</div>
 
 {% endblock %}
