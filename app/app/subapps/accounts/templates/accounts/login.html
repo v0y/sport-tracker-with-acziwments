@@ -30,3 +30,8 @@
 </div>
 
 {% endblock %}
+
+{% block js_import %}
+{% load static %}
+	<script src="{% static 'js/login_button_activation.js' %}"></script>
+{% endblock %}
