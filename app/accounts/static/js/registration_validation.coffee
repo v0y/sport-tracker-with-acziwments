@@ -44,10 +44,12 @@ class Field
         @button.fieldStatus(@name, true)
         @group.removeClass("has-error").
                addClass("has-success")
+        return true
 
     setNotOk: ->
         @button.fieldStatus(@name, false)
         @group.removeClass("has-success")
+        return false
 
     validateMinLength: (minLength, errorText) ->
         if not @value
@@ -70,12 +72,27 @@ class Field
                     $field.showAlert(errorText)
                     $field.setNotOk()
 
+    validateRegex: (pattern, alertText) ->
+        if @value.match pattern
+            @setOk()
+        else if not @value
+            @setNotOk()
+        else
+            @showAlert(alertText)
+            @setNotOk()
+
 
 class Username extends Field
+    constructor: ->
+        super
+        @usernamePattern = /^[\w.@+-]+$/i
+
     runValidators: ->
         @hideInfo()
         @value = @field.val()
-        @validateMinLength(3, "Login jest zbyt krótki")
+        isOk = @validateMinLength(3, "Login jest zbyt krótki")
+        if isOk
+            @validateRegex(@usernamePattern, "Login może zawierać tylko litery, cyfry i znaki _ + @ .-")
 
     runValidatorsOnBlur: ->
         @validateIfNotInUse(this, "/accounts/ajax/check_username", "Ten login jest już zajęty")
@@ -92,19 +109,10 @@ class Email extends Field
             (?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])
             $ ///i  # wtf is this shit?
 
-    validateRegex: ->
-        if @value.match @emailPattern
-            @setOk()
-        else if not @value
-            @setNotOk()
-        else
-            @showAlert("Błędny adres e-mail")
-            @setNotOk()
-
     runValidators: ->
         @hideInfo()
         @value = @field.val()
-        @validateRegex()
+        @validateRegex(@emailPattern, "Podaj poprawny adres email")
 
     runValidatorsOnBlur: ->
         @validateIfNotInUse(this, "/accounts/ajax/check_email", "Ten email jest już zajęty")
