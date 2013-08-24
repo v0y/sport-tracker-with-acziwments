@@ -182,8 +182,8 @@ class ChangePasswordForm(SetNewPasswordFormMixin):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        self.fields.keyOrder = ['old_password', 'password', 're_password']
         super(ChangePasswordForm, self).__init__(*args, **kwargs)
+        self.fields.keyOrder = ['old_password', 'password', 're_password']
 
     def clean_old_password(self):
         old_password = self.cleaned_data.get('old_password')
