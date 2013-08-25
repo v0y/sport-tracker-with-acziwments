@@ -216,11 +216,12 @@ def password_reset(request):
             'accounts/emails/password_reset_content.txt',
             [user.email],
             subject_data={'site_name': site.name},
-            message_data={'site_name': site.name,
-                          'reset_url': reset_url,
-                          'username': user.username,
-                          'reset_timeout':
-                              settings.PASSWORD_RESET_TIMEOUT_DAYS}
+            message_data={
+                'site_name': site.name,
+                'reset_url': reset_url,
+                'username': user.username,
+                'reset_timeout': settings.PASSWORD_RESET_TIMEOUT_DAYS
+            }
         )
         return redirect(reverse('password_reset_end'))
 
