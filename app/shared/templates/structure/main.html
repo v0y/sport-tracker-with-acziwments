@@ -26,9 +26,17 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav pull-right">
 						{% if user.is_authenticated %}
-							<li><a href="{% url 'logout' %}">Wyloguj</a><li>
+							<li>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									Cześć, {{ request.user.username }}! <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="{% url 'profile' request.user.username %}"><span class="glyphicon glyphicon-user"></span> Mój profil</a><li>
+									<li><a href="{% url 'account_settings' %}"><span class="glyphicon glyphicon-cog"></span> Ustawienia konta</a><li>
+									<li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-off"></span> Wyloguj</a><li>
+								</ul>
+							</li>
 						{% else %}
-							<li class="active"><a href="{% url 'registration' %}">Rejestracja</a><li>
+							<li><a href="{% url 'registration' %}">Rejestracja</a><li>
 							<li><a href="{% url 'login' %}">Logowanie</a><li>
 						{% endif %}
 					</ul>

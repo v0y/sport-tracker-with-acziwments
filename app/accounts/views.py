@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import (ChangePasswordForm, LoginForm, NewPasswordForm,
@@ -282,3 +282,17 @@ def is_email_used(request):
         return HttpResponse('not found')
     else:
         return HttpResponse('found')
+
+
+@render_to('accounts/user_profile.html')
+def profile(request, username):
+    """Show user profile"""
+    user = get_object_or_404(User, username=username)
+    return {user: user}
+
+
+@login_required
+@render_to('accounts/account_settings.html')
+def account_settings(request):
+    """Show user accounts setting"""
+    return {}
