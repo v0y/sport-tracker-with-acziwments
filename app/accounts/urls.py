@@ -10,9 +10,7 @@ urlpatterns = patterns('app.accounts.views',
     url(r'^/logout$', 'logout_view', name='logout'),
     # registration
     url(r'^/registration$', 'registration', name='registration'),
-    url(r'^/registration/end$',
-        TemplateView.as_view(
-            template_name='accounts/registration_end.html'),
+    url(r'^/registration/end$', 'registration_end',
         name='registration_end'),
     url(r'^/registration/activation$', 'registration_activation',
         name='registration_activation'),

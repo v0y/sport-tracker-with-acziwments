@@ -1,0 +1,38 @@
+{
+    "gmail.com":
+        ["gmail.com"],
+    "poczta.o2.pl":
+        ["go2.pl", "o2.pl", "tlen.pl", "prokonto.pl"],
+    "poczta.onet.pl":
+        ["onet.pl", "op.pl", "poczta.onet.pl", "onet.eu", "onet.com.pl",
+         "vp.pl", "spoko.pl", "vip.onet.pl", "autograf.pl", "opoczta.pl"],
+    "poczta.wp.pl":
+        ["wp.pl"],
+    "poczta.interia.pl":
+        ["interia.pl", "interia.eu", "poczta.fm"],
+    "login.yahoo.com":
+        ["yahoo.com.ar", "yahoo.com.au", "yahoo.at", "yahoo.be", "yahoo.fr",
+         "yahoo.nl", "yahoo.com.br", "yahoo.ca", "yahoo.en", "yahoo.com.cn",
+         "yahoo.cn", "yahoo.cz", "yahoo.dk", "yahoo.fi", "yahoo.de",
+         "yahoo.gr", "yahoo.com.hk", "yahoo.hu", "yahoo.co.in", "yahoo.in",
+         "yahoo.co.id", "yahoo.ie", "yahoo.co.il", "yahoo.it", "yahoo.co.jp",
+         "yahoo.co.kr", "yahoo.com.my", "yahoo.com.mx", "yahoo.ae", "yahoo.nl",
+         "yahoo.co.nz", "yahoo.no", "yahoo.com.ph", "yahoo.pl", "yahoo.pt",
+         "yahoo.ro", "yahoo.ru", "yahoo.com.sg", "yahoo.co.za", "yahoo.es",
+         "yahoo.se", "yahoo.ch", "yahoo.com.tw", "yahoo.co.th", "yahoo.com.tr",
+         "yahoo.co.uk", "yahoo.com", "yahoo.com", "yahoo.com.vn"],
+    "login.live.com":
+        ["hotmail.com", "outlook.com", "windowslive.com"],
+    "inbox.com/login.aspx":
+        ["inbox.com"],
+    "gmx.com":
+        ["gmx.com", "gmx.us"],
+    "mail.india.com":
+        ["india.com"],
+    "webmail.co.za":
+        ["webmail.co.za", "exclusivemail.co.za", "executivemail.co.za",
+         "homemail.co.za", "magicmail.co.za", "mailbox.co.za",
+         "ravemail.co.za", "starmail.co.za", "thecricket.co.za",
+         "thegolf.co.za", "thepub.co.za", "therugby.co.za", "websurfer.co.za",
+         "workmail.co.za"]
+}

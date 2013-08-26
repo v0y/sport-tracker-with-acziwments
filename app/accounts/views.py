@@ -17,6 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import (ChangePasswordForm, LoginForm, NewPasswordForm,
                     PasswordResetForm, RegistrationForm,
                     ResendActivationMailForm)
+from .helpers import get_mail_provider_url
 from .models import UserActivation, PasswordReset
 from app.shared.helpers import create_url, simple_send_email
 
@@ -95,12 +96,21 @@ def registration(request):
                                         'activation_url': activation_url,
                                         'username': username})
 
+        request.session['email'] = email
         # redirect to end registration page
-        redirect_url = create_url(path=reverse('registration_end'),
-                                  params={'email': email})
+        redirect_url = reverse('registration_end')
         return redirect(redirect_url)
 
     return {'form': form}
+
+
+@render_to("accounts/registration_end.html")
+def registration_end(request):
+    """Show after registration page"""
+    email = request.session.get('email')
+    email_provider = get_mail_provider_url(email)
+    return {'email_provider': email_provider,
+            'email': request.session.get('email')}
 
 
 def registration_activation(request):

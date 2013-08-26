@@ -4,7 +4,15 @@
 
 <div class="alert alert-success text-center">
 	Dziękujemy za rejestrację. Aktywuj swoje konto klikając w linka, 
-	którego wysłaliśmy Ci na adres <b>{{ request.GET.email }}</b>
+	którego wysłaliśmy Ci na adres <b>{{ email }}</b>.
 </div>
+
+{% if email_provider %}
+	<div class="box-center text-center">
+		<a href="{{ email_provider }}" title="Przejdź na swoją pocztę">
+			Przejdź na swoją pocztę
+		</a>
+	</div>
+{% endif %}
 
 {% endblock %}

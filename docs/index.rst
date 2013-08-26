@@ -7,6 +7,7 @@ Contents:
    :maxdepth: 2
 
    static/modules/accounts/index.rst
+   static/modules/shared/helpers.rst
    static/modules/shared/index.rst
 
 
