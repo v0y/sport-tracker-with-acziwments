@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 TEMPLATE_DIRS = (
 )
 
-INSTALLED_APPS = [
+INSTALLED_APPS = filter(None, [
     # core
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -108,18 +108,16 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
 
     # third-party
+    'debug_toolbar' if DEBUG else None,
 
     # internal
     'app.accounts',
     'app.home',
     'app.shared',
-
-]
+])
 
 # setup debug_toolbar
-if not DEBUG:
-    INSTALLED_APPS.append('debug_toolbar')
-
+if DEBUG:
     INTERNAL_IPS = ['127.0.0.1', ]
 
     DEBUG_TOOLBAR_PANELS = filter(None, [
