@@ -1,3 +1,5 @@
+{% load shared_tags %}
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -26,7 +28,10 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav pull-right">
 						{% if user.is_authenticated %}
-							<li>
+							<li class="
+								{% is_active_tab request 'profile' request.user.username %}
+								{% is_active_tab request 'account_settings' %}
+							">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									Cześć, {{ request.user.username }}! <b class="caret"></b></a>
 								<ul class="dropdown-menu">
@@ -36,8 +41,10 @@
 								</ul>
 							</li>
 						{% else %}
-							<li><a href="{% url 'registration' %}">Rejestracja</a><li>
-							<li><a href="{% url 'login' %}">Logowanie</a><li>
+							<li class="{% is_active_tab request 'registration' %}">
+								<a href="{% url 'registration' %}">Rejestracja</a><li>
+							<li class="{% is_active_tab request 'login' %}">
+								<a href="{% url 'login' %}">Logowanie</a><li>
 						{% endif %}
 					</ul>
 				</div>
