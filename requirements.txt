@@ -1,3 +1,3 @@
-django==1.5
+django==1.5.2
 django-debug-toolbar
-django-annoying==0.7.4
+django-annoying==0.7.7
