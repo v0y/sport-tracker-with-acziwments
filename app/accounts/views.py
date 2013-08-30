@@ -8,17 +8,17 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
+from django.contrib.sites.models import get_current_site
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import (ChangePasswordForm, LoginForm, NewPasswordForm,
-                    PasswordResetForm, RegistrationForm,
+from .forms import (ChangeEmailForm, ChangePasswordForm, LoginForm,
+                    NewPasswordForm, PasswordResetForm, RegistrationForm,
                     ResendActivationMailForm)
 from .helpers import get_mail_provider_url
-from .models import UserActivation, PasswordReset
+from .models import EmailActivation, UserActivation, PasswordReset
 from app.shared.helpers import create_url, simple_send_email
 
 
@@ -85,7 +85,8 @@ def registration(request):
         # get activation link
         activation_url = u.activation.get_activation_link()
 
-        site = Site.objects.get(pk=settings.SITE_ID)
+        # get site
+        site = get_current_site(request)
 
         # send email
         simple_send_email('accounts/emails/registration_subject.txt',
@@ -159,7 +160,7 @@ def registration_activation_resend(request):
         activation_url = activation.get_activation_link()
 
         # send email
-        site = Site.objects.get(pk=settings.SITE_ID)
+        site = get_current_site(request)
         simple_send_email('accounts/emails/registration_subject.txt',
                           'accounts/emails/registration_content.txt',
                           [user.email],
@@ -207,7 +208,6 @@ def password_reset(request):
             user = get_object_or_None(User, username=username_or_email)
 
         # check, if that user already requested password reset
-        print user
         password_reset = get_object_or_None(PasswordReset, user=user)
         if password_reset:
             password_reset.delete()
@@ -220,7 +220,7 @@ def password_reset(request):
         reset_url = pr.get_password_reset_link()
 
         # send email
-        site = Site.objects.get(pk=settings.SITE_ID)
+        site = get_current_site(request)
         simple_send_email(
             'accounts/emails/password_reset_subject.txt',
             'accounts/emails/password_reset_content.txt',
@@ -306,3 +306,86 @@ def profile(request, username):
 def account_settings(request):
     """Show user accounts setting"""
     return {}
+
+
+@login_required
+@render_to('accounts/email_change.html')
+def email_change(request):
+    """Show form for email change"""
+
+    form = ChangeEmailForm(request.POST or None, request=request)
+    if form.is_valid():
+        email = request.POST.get('email')
+
+        # create activation object
+        existed_email_activation = get_object_or_None(
+            EmailActivation, user=request.user)
+        if existed_email_activation:
+            existed_email_activation.delete()
+        user_activation = EmailActivation.objects.create(
+            user=request.user, email=email)
+
+        # get data for email
+        activation_url = user_activation.get_activation_link()
+        site = get_current_site(request)
+        username = request.user.username
+
+        simple_send_email('accounts/emails/email_change_subject.txt',
+                          'accounts/emails/email_change_content.txt',
+                          [email],
+                          subject_data={'site_name': site.name},
+                          message_data={'site_name': site.name,
+                                        'activation_url': activation_url,
+                                        'username': username})
+
+        request.session['old_email'] = request.user.email
+        request.session['email'] = email
+        return redirect(reverse('email_change_end'))
+
+    return {'form': form}
+
+
+@render_to('accounts/email_change_end.html')
+def email_change_end(request):
+    """Show page after email change"""
+    email = request.session.get('email')
+    old_email = request.session.get('old_email', '')
+    email_provider = get_mail_provider_url(email)
+    return {'email_provider': email_provider,
+            'email': request.session.get('email'),
+            'old_email': old_email}
+
+
+@login_required
+def email_change_confirm(request):
+    """Activate new email address"""
+    token = request.GET.get('token', '')
+    user = request.user
+
+    # check token
+    email_activation = get_object_or_None(
+        EmailActivation, token=token, user=user)
+
+    if not email_activation:
+        return redirect(reverse('email_change_confirm_failed'))
+
+    else:
+        # check, if activation link doesn't expired
+        created_at = email_activation.created_at.replace(tzinfo=None)
+        timedelta = datetime.now() - created_at
+        if timedelta.days > settings.EMAIL_CHANGE_TIMEOUT_DAYS:
+            email_activation.delete()
+            return redirect(reverse('email_change_confirm_failed'))
+
+        # activate new email
+        user.email = email_activation.email
+        user.save()
+        email_activation.delete()
+        request.session['new_email'] = email_activation.email
+        return redirect(reverse('email_change_confirm_end'))
+
+
+@login_required
+@render_to('accounts/email_change_confirm_end.html')
+def email_change_confirm_end(request):
+    return {'new_email': request.session.get('new_email', '')}

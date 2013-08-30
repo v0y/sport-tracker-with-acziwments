@@ -3,8 +3,8 @@
 {% block content %}
 
 <div class="alert alert-success text-center">
-	Dziękujemy za rejestrację. Aktywuj swoje konto klikając w linka, 
-	który został wysłany na adres <b>{{ email }}</b>.
+	Aby potwierdzić zmianę adresu kliknij link, który został wysłany adres <b>{{ email }}</b><br>
+	Dopóki tego nie zrobisz, jedynym adresem powiązanym z Twoim kontem będzie "stary" adres: {{ old_email }}
 </div>
 
 {% if email_provider %}
@@ -14,5 +14,6 @@
 		</a>
 	</div>
 {% endif %}
+
 
 {% endblock %}

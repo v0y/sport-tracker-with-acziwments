@@ -1,0 +1,10 @@
+Cześć, {{ username }}!
+
+Zmieniłeś adres email przypisany do konta. Po aktywacji tego adresu będzie on jedynym powiązanym z Twoim kontem.
+
+Aby potwierdzić zmianę adresu email kliknij w poniższy link:
+
+{{ activation_url }}
+
+Pozdrawiamy,
+załoga {{ site_name }}

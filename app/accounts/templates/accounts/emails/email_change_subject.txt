@@ -1,0 +1,1 @@
+Zmiana adresu email w serwisie {{ site_name }}

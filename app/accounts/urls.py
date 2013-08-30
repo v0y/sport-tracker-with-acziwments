@@ -60,4 +60,16 @@ urlpatterns = patterns('app.accounts.views',
     # user profile
     url(r'^/show/(?P<username>[\w.@+-]+)$', 'profile', name='profile'),
     url(r'^/settings$', 'account_settings', name='account_settings'),
+    # change email
+    url(r'^/settings/email/change$', 'email_change', name='email_change'),
+    url(r'^/settings/email/change/end$', 'email_change_end',
+        name='email_change_end'),
+    url(r'^/settings/email/change/confirm$', 'email_change_confirm',
+        name='email_change_confirm'),
+    url(r'^/settings/email/change/confirm/failed$',
+        TemplateView.as_view(
+            template_name='accounts/email_change_confirm_failed.html'),
+        name='email_change_confirm_failed'),
+    url(r'^/settings/email/change/confirm/end$', 'email_change_confirm_end',
+        name='email_change_confirm_end'),
 )

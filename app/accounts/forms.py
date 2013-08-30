@@ -11,6 +11,49 @@ from django.contrib.auth.models import User
 from .models import UserActivation
 
 
+# -----------------------------------------------------------------------------
+# Mixins
+# -----------------------------------------------------------------------------
+class CheckCurrentPasswordMixin(forms.Form):
+    current_password = forms.CharField(
+        max_length=30, required=True, widget=forms.PasswordInput,
+        label=u"Hasło",
+        error_messages={'required': u"Podaj hasło", }
+    )
+
+    def clean_current_password(self):
+        current_password = self.cleaned_data.get('current_password')
+        if not self.request.user.check_password(current_password):
+            raise forms.ValidationError(u"Podane hasło jest niepoprane")
+        return current_password
+
+
+class EmailMixin(forms.Form):
+    email = forms.EmailField(
+        max_length=50, required=True, label=u"Email",
+        error_messages={'invalid': u"Podaj poprawny adres email",
+                        'required': u"Podaj adres email"}
+    )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        # get activation objects for this email
+        activation = get_object_or_None(UserActivation, user__email=email)
+        # check if activation time has expired
+        if activation:
+            created_at = activation.created_at.replace(tzinfo=None)
+            timedelta = datetime.now() - created_at
+            if timedelta.days > settings.ACCOUNT_ACTIVATION_DAYS:
+                user = activation.user
+                activation.delete()
+                user.delete()
+        if email and User.objects.filter(email=email):
+            raise forms.ValidationError(
+                u"Użytkownik o takim adresie email już istnieje"
+            )
+        return email
+
+
 class SetNewPasswordFormMixin(forms.Form):
     password = forms.CharField(
         validators=[validators.MinLengthValidator(5)],
@@ -35,6 +78,9 @@ class SetNewPasswordFormMixin(forms.Form):
         return re_password
 
 
+# -----------------------------------------------------------------------------
+# Forms
+# -----------------------------------------------------------------------------
 class LoginForm(forms.Form):
     username = forms.CharField(
         max_length=30, label=u"Login", required=True,
@@ -51,7 +97,7 @@ class LoginForm(forms.Form):
         button_text = u"Zaloguj się"
 
 
-class RegistrationForm(forms.Form):
+class RegistrationForm(EmailMixin):
     username = forms.SlugField(
         validators=[validators.MinLengthValidator(3)],
         max_length=30, required=True, label=u"Login",
@@ -61,12 +107,6 @@ class RegistrationForm(forms.Form):
                        u"cyfry, podkreślenie i myślnik",
             'min_length': u"Login musi mieć minimum 3 znaki długości"
         }
-    )
-
-    email = forms.EmailField(
-        max_length=50, required=True, label=u"Email",
-        error_messages={'invalid': u"Podaj poprawny adres email",
-                        'required': u"Podaj adres email"}
     )
 
     password = forms.CharField(
@@ -99,24 +139,6 @@ class RegistrationForm(forms.Form):
         if password != re_password:
             raise forms.ValidationError(u"Hasła nie są zgodne")
         return re_password
-
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        # get activation objects for this email
-        activation = get_object_or_None(UserActivation, user__email=email)
-        # check if activation time has expired
-        if activation:
-            created_at = activation.created_at.replace(tzinfo=None)
-            timedelta = datetime.now() - created_at
-            if timedelta.days > settings.ACCOUNT_ACTIVATION_DAYS:
-                user = activation.user
-                activation.delete()
-                user.delete()
-        if email and User.objects.filter(email=email):
-            raise forms.ValidationError(
-                u"Użytkownik o takim adresie email już istnieje"
-            )
-        return email
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
@@ -227,3 +249,15 @@ class NewPasswordForm(SetNewPasswordFormMixin):
     class Meta:
         name = u"Ustawienie nowego hasła"
         button_text = u"Ustaw nowe hasło"
+
+
+class ChangeEmailForm(CheckCurrentPasswordMixin, EmailMixin):
+
+    class Meta:
+        name = u"Zmiana adresu email"
+        button_text = u"Zmień adres email"
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(ChangeEmailForm, self).__init__(*args, **kwargs)
+        self.fields.keyOrder = ['email', 'current_password']
