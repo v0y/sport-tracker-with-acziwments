@@ -3,6 +3,9 @@
 import json
 from os.path import dirname, join, realpath
 
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+
 
 def get_mail_provider_url(email):
     """
@@ -12,10 +15,11 @@ def get_mail_provider_url(email):
     :return: url to email's provider login page
     """
     try:
-        original_email_alias = email.split('@')[1]
-    except IndexError:
+        validate_email(email)
+    except ValidationError:
         return None
 
+    original_email_alias = email.split('@')[1]
     path = join(dirname(realpath(__file__)), 'emails_providers.json')
     emails_providers_json = open(path)
     emails_providers = json.load(emails_providers_json)
