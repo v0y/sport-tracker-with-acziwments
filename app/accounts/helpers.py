@@ -1,4 +1,4 @@
-# encoding: utf-8
+# coding: utf-8
 
 import json
 from os.path import dirname, join, realpath
