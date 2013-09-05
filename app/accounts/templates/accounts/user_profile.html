@@ -1,10 +1,21 @@
 {% extends "structure/main.html" %}
+{% load gravatar %}
 
 {% block content %}
+	{% if user_profile.username == request.user.username %}
+		<a href="{{ GRAVATAR_CHANGE_URL }}"
+			data-toggle="tooltip" data-placement="bottom" rel="tooltip"
+			title="Zmień avatar na gravatar.com">
+			{% gravatar_img_for_user user_profile %}
+		</a>
+	{% else %}
+		{% gravatar_img_for_user user_profile %}
+	{% endif %}
+
 	<dl>
 		<dt>Login:</dt>
-		<dd>{{ user.username }}</dd>
+		<dd>{{ user_profile.username }}</dd>
 		<dt>Email:</dt>
-		<dd>{{ user.email }}</dd>
+		<dd>{{ user_profile.email }}</dd>
 	</dl>
 {% endblock %}

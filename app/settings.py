@@ -45,7 +45,6 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    join(_current_dir, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -53,7 +52,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -63,7 +61,6 @@ SECRET_KEY = 'u=c2brcszbq7r45^94)xdi(lz=d^%-yoi(38xwq5k0u*8wmb3v'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -72,21 +69,24 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
+    # core
+    "django.core.context_processors.request",
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages"
-    )
+    "django.contrib.messages.context_processors.messages",
+
+    #internal
+    "shared.context_processors.settings_values",
+)
 
 ROOT_URLCONF = 'app.urls'
 
@@ -109,12 +109,19 @@ INSTALLED_APPS = filter(None, [
 
     # third-party
     'debug_toolbar' if DEBUG else None,
+    'gravatar',
 
     # internal
     'app.accounts',
     'app.home',
     'app.shared',
 ])
+
+# gravatar
+# https://github.com/nvie/django-gravatar
+GRAVATAR_CHANGE_URL = 'http://gravatar.com/emails/'
+GRAVATAR_DEFAULT_IMAGE = 'monsterid'
+GRAVATAR_DEFAULT_SIZE = 210
 
 # setup debug_toolbar
 if DEBUG:

@@ -298,7 +298,7 @@ def is_email_used(request):
 def profile(request, username):
     """Show user profile"""
     user = get_object_or_404(User, username=username)
-    return {user: user}
+    return {'user_profile': user}
 
 
 @login_required

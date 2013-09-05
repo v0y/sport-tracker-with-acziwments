@@ -1,3 +1,4 @@
 django==1.5.2
-django-debug-toolbar
 django-annoying==0.7.7
+django-debug-toolbar
+git+https://github.com/LeadSift/django-gravatar.git
