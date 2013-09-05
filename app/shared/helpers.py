@@ -42,7 +42,7 @@ def simple_send_email(subject, message, recipient_list,
     from_email = settings.DEFAULT_FROM_EMAIL
     fail_silently = False if settings.DEBUG else True
     allowed_message_template_extensions = ('.txt', '.html', '.htm')
-    allowed_subject_template_extensions = ('.txt')
+    allowed_subject_template_extensions = ('.txt',)
 
     # parse message template
     if subject.endswith(allowed_subject_template_extensions):

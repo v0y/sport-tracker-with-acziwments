@@ -4,10 +4,9 @@ Welcome to ling's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    static/modules/accounts/index.rst
-   static/modules/shared/helpers.rst
    static/modules/shared/index.rst
 
 

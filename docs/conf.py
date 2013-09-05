@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# ling documentation build configuration file, created by
+# STWA documentation build configuration file, created by
 # sphinx-quickstart on Mon Jun 24 19:26:21 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -44,7 +44,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'ling'
+project = u'STWA'
 copyright = u'2013, Rafał Mirończyk'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -171,7 +171,7 @@ html_static_path = ['static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'lingdoc'
+htmlhelp_basename = 'STWAdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -190,7 +190,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'ling.tex', u'ling Documentation',
+  ('index', 'stwa.tex', u'STWA Documentation',
    u'Rafał Mirończyk', 'manual'),
 ]
 
@@ -220,7 +220,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'ling', u'ling Documentation',
+    ('index', 'STWA', u'STWA Documentation',
      [u'Rafał Mirończyk'], 1)
 ]
 
@@ -234,8 +234,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'ling', u'ling Documentation',
-   u'Rafał Mirończyk', 'ling', 'One line description of project.',
+  ('index', 'STWA', u'STWA Documentation',
+   u'Rafał Mirończyk', 'STWA', 'One line description of project.',
    'Miscellaneous'),
 ]
 
