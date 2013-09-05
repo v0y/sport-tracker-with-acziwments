@@ -14,12 +14,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(_current_dir, 'db.sqlite3'),
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'stwa',
+        'USER': 'stwa',
+        'PASSWORD': 'stwa',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -110,6 +110,7 @@ INSTALLED_APPS = filter(None, [
     # third-party
     'debug_toolbar' if DEBUG else None,
     'gravatar',
+    'south',
 
     # internal
     'app.accounts',

@@ -10,7 +10,7 @@ from app.shared.models import CreatedAtMixin, SHA1TokenMixin
 
 class UserActivation(CreatedAtMixin, SHA1TokenMixin):
     user = models.OneToOneField(
-        User, verbose_name='Użytkownik', related_name='activation')
+        User, verbose_name=u'Użytkownik', related_name='activation')
 
     class Meta:
         verbose_name = u'aktywacja użytkownika'
@@ -29,7 +29,7 @@ class UserActivation(CreatedAtMixin, SHA1TokenMixin):
 
 class PasswordReset(CreatedAtMixin, SHA1TokenMixin):
     user = models.OneToOneField(
-        User, verbose_name='Użytkownik', related_name='password_reset')
+        User, verbose_name=u'Użytkownik', related_name='password_reset')
 
     class Meta:
         verbose_name = u'reset hasła'
@@ -48,7 +48,7 @@ class PasswordReset(CreatedAtMixin, SHA1TokenMixin):
 
 class EmailActivation(CreatedAtMixin, SHA1TokenMixin):
     user = models.OneToOneField(
-        User, verbose_name='Użytkownik', related_name='email_activation')
+        User, verbose_name=u'Użytkownik', related_name='email_activation')
     email = models.EmailField(verbose_name='Adres email')
 
     class Meta:
