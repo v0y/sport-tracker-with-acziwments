@@ -85,7 +85,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
 
     #internal
-    "shared.context_processors.settings_values",
+    "app.shared.context_processors.settings_values",
 )
 
 ROOT_URLCONF = 'app.urls'
