@@ -15,8 +15,8 @@
 
 		<div class="col-lg-7 col-7 col-sm-7">
 			<input name="{{ field.name }}"
-				type="{{ field.field.widget|klass }}"
-				class="form-control form-{{ field.field.widget|klass }}"
+				type="{{ field.field.widget|field_type }}"
+				class="form-control form-{{ field.field.widget|field_type }}"
 				id="{{ field.id_for_label }}"
 				{% if field.value %}
 					value="{{ field.value }}"

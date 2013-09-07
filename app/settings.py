@@ -111,6 +111,7 @@ INSTALLED_APPS = filter(None, [
     'debug_toolbar' if DEBUG else None,
     'gravatar',
     'south',
+    'widget_tweaks',
 
     # internal
     'app.accounts',

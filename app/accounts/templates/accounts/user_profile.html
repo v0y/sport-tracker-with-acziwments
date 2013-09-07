@@ -17,5 +17,13 @@
 		<dd>{{ user_profile.username }}</dd>
 		<dt>Email:</dt>
 		<dd>{{ user_profile.email }}</dd>
+		<dt>Data urodzenia:</dt>
+		<dd>{{ user_profile.profile.dob }}</dd>
+		<dt>Wiek:</dt>
+		<dd>{{ user_profile.profile.age }} lat</dd>
+		<dt>Wzrost:</dt>
+		<dd>{{ user_profile.profile.height }}</dd>
+		<dt>Płeć:</dt>
+		<dd>{{ user_profile.profile.sex_visible }}</dd>
 	</dl>
 {% endblock %}

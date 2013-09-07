@@ -5,22 +5,22 @@ from django import template
 register = template.Library()
 
 
-@register.filter('klass')
-def klass(ob):
-    """Filter for getting object class
+@register.filter('field_type')
+def field_type(widget):
+    """Filter for getting field type
 
-    * general usage: {{ object|klass }}
-    * usage for widget type: {{ field.field.widget|klass }}
+    usage: {{ field.field.widget|field_type }}
 
-    :returns: object class
+    :returns: field type
     """
 
     map_types = {
         'TextInput': 'text',
         'PasswordInput': 'password',
         'CheckboxInput': 'checkbox',
+        'DateInput': 'date',
         # TODO: radio
         # TODO: textarea
     }
 
-    return map_types[ob.__class__.__name__]
+    return map_types[widget.__class__.__name__]

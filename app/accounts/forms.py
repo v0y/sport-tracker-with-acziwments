@@ -1,14 +1,16 @@
 # coding: utf-8
 
-from datetime import datetime
+from datetime import date, datetime
 
 from annoying.functions import get_object_or_None
 from django import forms
 from django.core import validators
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from django.forms import extras
 
-from .models import UserActivation
+from .models import UserActivation, UserProfile
 
 
 # -----------------------------------------------------------------------------
@@ -95,6 +97,7 @@ class UsernameOrEmailMixin(forms.Form):
                     u"Użytkownik o takim loginie nie istnieje")
 
         return username_or_email
+
 
 # -----------------------------------------------------------------------------
 # Forms
@@ -228,3 +231,28 @@ class ChangeEmailForm(CheckCurrentPasswordMixin, EmailMixin):
         self.request = kwargs.pop('request', None)
         super(ChangeEmailForm, self).__init__(*args, **kwargs)
         self.fields.keyOrder = ['email', 'current_password']
+
+
+class UserProfileForm(ModelForm):
+    dob = forms.DateField(widget=extras.SelectDateWidget(
+        years=(lambda y=date.today().year: range(y, y - 100, -1))(),
+        attrs={'class': 'form-control dob-field'}))
+
+    class Meta:
+        model = UserProfile
+        exclude = ('user',)
+        name = u"Edycja profilu"
+        button_text = u"Zapisz zmiany"
+
+    def clean_dob(self):
+        dob = self.cleaned_data.get('dob')
+        if dob and not date.today() > dob:
+            raise forms.ValidationError(
+                u"Śmieszku, jeszcze się nie urodziłeś xD")
+        return dob
+
+    def clean_height(self):
+        height = self.cleaned_data.get('height')
+        if height and not 30 < height < 300:
+            raise forms.ValidationError(u"Serio masz %s cm wzrostu?" % height)
+        return height

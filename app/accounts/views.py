@@ -12,11 +12,12 @@ from django.contrib.sites.models import get_current_site
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import (ChangeEmailForm, ChangePasswordForm, LoginForm,
                     NewPasswordForm, PasswordResetForm, RegistrationForm,
-                    ResendActivationMailForm)
+                    ResendActivationMailForm, UserProfileForm)
 from .helpers import get_mail_provider_url
 from .models import EmailActivation, UserActivation, PasswordReset
 from app.shared.helpers import create_url, simple_send_email
@@ -389,3 +390,16 @@ def email_change_confirm(request):
 @render_to('accounts/email_change_confirm_end.html')
 def email_change_confirm_end(request):
     return {'new_email': request.session.get('new_email', '')}
+
+
+@login_required
+@render_to('accounts/profile_settings.html')
+def profile_settings(request):
+    form = UserProfileForm(
+        request.POST or None, instance=request.user.profile)
+
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('profile', args=[request.user.username]))
+
+    return {'form': form}
