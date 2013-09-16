@@ -149,6 +149,12 @@ class RegistrationForm(EmailMixin):
         name = u"Rejestracja"
         button_text = u"Zarejestruj się"
 
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+        key_order = ['username', 'email', 'password', 're_password', 'rules']
+        self.fields.keyOrder = key_order
+
     def clean_re_password(self):
         password = self.cleaned_data.get('password')
         re_password = self.cleaned_data.get('re_password')
