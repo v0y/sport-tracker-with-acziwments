@@ -5,7 +5,7 @@
 	{% if user_profile.username == request.user.username %}
 		<a href="{{ GRAVATAR_CHANGE_URL }}"
 			data-toggle="tooltip" data-placement="bottom" rel="tooltip"
-			title="Zmień avatar na gravatar.com">
+			title="Zmień avatar na gravatar.com" target="_blank">
 			{% gravatar_img_for_user user_profile %}
 		</a>
 	{% else %}
