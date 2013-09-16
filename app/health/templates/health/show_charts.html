@@ -1,0 +1,36 @@
+{% extends "structure/main.html" %}
+
+{% load static %}
+
+{% block content %}
+
+	<ul class="nav nav-tabs range-type-tabs">
+		<li data-range-type="week"><a href="#" class="js-weight-chart-range" data-range-type="week">Tydzień</a></li>
+		<li data-range-type="month"><a href="#" class="js-weight-chart-range" data-range-type="month">Miesiąc</a></li>
+		<li data-range-type="year"><a href="#" class="js-weight-chart-range" data-range-type="year">Rok</a></li>
+	</ul>
+	<div>
+		<ul class="pager">
+			<li class="js-prev" data-first-date="{{ first_date }}"><a href="#">&larr; wcześniej</a></li>
+			<li><span class="js-current-date"></span></li>
+			<li class="js-next"><a href="#">później &rarr;</a></li>
+		</ul>
+	</div>
+
+	<div class="col-lg-12 col-12 col-sm-12 weight-chart">
+		<svg />
+	</div>
+
+{% endblock %}
+
+{% block css_import %}
+	<link href="{% static 'css/nv.d3.min.css' %}" rel="stylesheet" media="screen">
+	<link href="{% static 'css/nvd3_custom.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block js_import %}
+	<script src="{% static 'js/moment-with-langs.min.js' %}"></script>
+	<script src="{% static 'js/d3.min.js' %}"></script>
+	<script src="{% static 'js/nv.d3.min.js' %}"></script>
+	<script src="{% static 'js/health_charts.js' %}"></script>
+{% endblock %}

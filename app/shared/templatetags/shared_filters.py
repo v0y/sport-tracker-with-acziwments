@@ -7,7 +7,8 @@ register = template.Library()
 
 @register.filter('field_type')
 def field_type(widget):
-    """Filter for getting field type
+    """
+    Filter for getting field type
 
     usage: {{ field.field.widget|field_type }}
 
@@ -24,3 +25,15 @@ def field_type(widget):
     }
 
     return map_types[widget.__class__.__name__]
+
+
+@register.filter('I_dont_want_None')
+def I_dont_want_None(val):
+    """
+    If value is None, returns empty string
+
+    :param val: value to check if is not None
+    :returns: value if not None, otherwise empty string
+    """
+
+    return val if val is not None else ''

@@ -1,12 +1,13 @@
 # coding: utf-8
 
-from datetime import date, timedelta
+from datetime import date
 
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db import models
 from django.dispatch import receiver
 
+from app.health.models import Health
 from app.shared.models import CreatedAtMixin, SHA1TokenMixin
 from .enums import SEX_SELECT
 
@@ -43,6 +44,48 @@ class UserProfile(models.Model):
             if k == self.sex:
                 return v
 
+    @property
+    def last_weight(self):
+        """
+        Get last user weight
+
+        :return: tuple of last weight and date of last weighting or None
+        :rtype: tuple
+        """
+        user = self.user
+        health_list = Health.objects.filter(user=user, weight__isnull=False). \
+            order_by('-related_date')
+        if health_list:
+            return health_list[0].weight, health_list[0].related_date
+        else:
+            return None
+
+    @property
+    def bmi(self):
+        """
+        Compute BMI for last weighting
+
+        :return: tuple of user BMI and date of last weighting
+        :rtype: tuple
+        """
+
+        # validate height
+        try:
+            height_in_meters = float(self.height) / 100
+        except TypeError:
+            return None
+
+        # get weight and date
+        try:
+            weight, date = self.last_weight
+        except TypeError:
+            return None
+
+        # compute BMI
+        bmi = weight / height_in_meters ** 2
+
+        return round(bmi, 2), date
+
 
 class UserActivation(CreatedAtMixin, SHA1TokenMixin):
     user = models.OneToOneField(
@@ -60,6 +103,7 @@ class UserActivation(CreatedAtMixin, SHA1TokenMixin):
         :rtype: str
         """
         url_name = 'registration_activation'
+        # TODO: wat?
         return super(UserActivation, self).get_activation_link(url_name)
 
 
@@ -99,6 +143,7 @@ class EmailActivation(CreatedAtMixin, SHA1TokenMixin):
         :rtype: str
         """
         url_name = 'email_change_confirm'
+        # TODO: wat?
         return super(EmailActivation, self).get_activation_link(url_name)
 
 

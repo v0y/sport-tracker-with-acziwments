@@ -16,8 +16,8 @@ from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import (ChangeEmailForm, ChangePasswordForm, LoginForm,
-                    NewPasswordForm, PasswordResetForm, RegistrationForm,
-                    ResendActivationMailForm, UserProfileForm)
+    NewPasswordForm, PasswordResetForm, RegistrationForm,
+    ResendActivationMailForm, UserProfileForm)
 from .helpers import get_mail_provider_url
 from .models import EmailActivation, UserActivation, PasswordReset
 from app.shared.helpers import create_url, simple_send_email
@@ -47,7 +47,7 @@ def login_view(request):
         # check, if account is activated
         elif not user.is_active:
             return {'form': form,
-                    'error': "Twoje konto nie zostało aktywowane"}
+                    'error': u"Twoje konto nie zostało aktywowane"}
 
         login(request, user)
 

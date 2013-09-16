@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 
 register = template.Library()
 
+
 @register.simple_tag
 def is_active_tab(request, url_name, *parameters):
     """

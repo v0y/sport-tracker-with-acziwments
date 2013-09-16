@@ -6,9 +6,13 @@
 	<head>
 		<title>{% block title %}Tytuł strony{% endblock %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{#		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">#}
+		<link rel="stylesheet" media="screen" href="{% static 'css/reset.css' %}">
 		<link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 		<link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+		<link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/datepicker.css' %}">
 		<link rel="stylesheet" media="screen" href="{% static 'css/style.css' %}">
+		{% block css_import %}{% endblock %}
 	</head>
 
 
@@ -26,6 +30,25 @@
 				</div>
 
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<!-- menu pull-left -->
+					<ul class="nav navbar-nav">
+						{% if user.is_authenticated %}
+							<li class="
+								{% is_active_tab request 'add_health' %}
+								{% is_active_tab request 'health_show_charts' request.user.username %}
+								{% is_active_tab request 'health_show_list' request.user.username %}
+							">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									Waga <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="{% url 'health_show_charts' request.user.username %}"><span class="icon-bar-chart"></span> Wykresy</a><li>
+									<li><a href="{% url 'health_show_list' request.user.username %}"><span class="icon-list-alt"></span> Lista pomiarów</a><li>
+									<li><a href="{% url 'add_health' %}"><span class="glyphicon glyphicon-plus"></span> Dodaj pomiar</a><li>
+								</ul>
+							</li>
+						{% endif %}
+					</ul>
+					<!-- menu pull-right -->
 					<ul class="nav navbar-nav pull-right">
 						{% if user.is_authenticated %}
 							<li class="
@@ -65,9 +88,11 @@
 
 
 		<!-- jQuery 2. Because fuck you IE < 9  -->
-		<script src="{% static "js/jquery-2.0.3.min.js" %}"></script>
-		<script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
-		<script src="{% static "js/onload.js" %}"></script>
+		<script src="{% static "js/jquery-2.0.3.min.js" %}" type="text/javascript"></script>
+		<script src="{% static "bootstrap/js/bootstrap.min.js" %}" type="text/javascript"></script>
+		<script src="{% static "bootstrap/js/bootstrap-datepicker.js" %}" type="text/javascript"></script>
+		<script src="{% static "bootstrap/js/bootstrap-datepicker.pl.js" %}" type="text/javascript" charset="UTF-8"></script>
+		<script src="{% static "js/onload.js" %}" type="text/javascript"></script>
 
 		{% block js_import %}{% endblock %}
 	</body>

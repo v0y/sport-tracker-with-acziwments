@@ -4,42 +4,25 @@
 <div class="row">
 <form method="post" action="" class="form-horizontal col-lg-6 col-10 col-sm-10 col-lg-offset-3">{% csrf_token %}
 	<fieldset>
-		{% if error %}
-			{{ error }}
-		{% endif %}
+		{% include "snippets/form_errors.html" %}
 		{% for field in form %}
 			<div class="form-group label-wrapper row" id="js-{{ field.name }}-group">
-				<div class="col-lg-3 col-3 col-sm-3 text-right">
-					<label for="{{ field.id_for_label }}" class="control-label">{{ field.label }}</label>
-				</div>
+				{% include "snippets/field_label.html" %}
 
 				<div class="col-lg-7 col-7 col-sm-7">
 					<input name="{{ field.name }}"
 						type="{{ field.field.widget|field_type }}"
-						class="form-control form-{{ field.field.widget|field_type }}"
+						class="form-control form-{{ field.field.widget|field_type }} {{ field.field.widget.attrs.class }}"
 						id="{{ field.id_for_label }}"
 						{% if field.value %}
 							value="{{ field.value }}"
 						{% endif %}>
 				</div>
 
-				<div class="col-lg-2 col-2 col-sm-2 text-right">
-					<span id="js-form-error-{{ field.name }}" class="label label-important hidden"></span>
-					{% for error in field.errors %}
-						<span class="label label-danger">
-							{{ error }}
-						</span>
-					{% endfor %}
-				</div>
+				{% include "snippets/error_label.html" %}
 			</div>
 		{% endfor %}
-		<div class="form-group label-wrapper row">
-			<div class="col-lg-3 col-3 col-sm-3 text-right">
-			</div>
-			<div class="col-lg-7 col-7 col-sm-7">
-				<button type="submit">{{ form.Meta.button_text }}</button>
-			</div>
-		</div>
+		{% include "snippets/submit_button.html" %}
 	</fieldset>
 </form>
 </div>

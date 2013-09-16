@@ -1,5 +1,5 @@
 :mod:`Shared`
-===============
+=============
 
 .. toctree::
    :maxdepth: 2

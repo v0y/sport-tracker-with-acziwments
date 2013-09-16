@@ -1,0 +1,30 @@
+{% extends "structure/main.html" %}
+
+{% load shared_filters %}
+
+{% block content %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Data</th>
+				<th>Waga (kg)</th>
+				<th>Tłuszcz (%)</th>
+				<th>Woda (%)</th>
+				{% if is_mine %}<th></th>{% endif %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for health in healths %}
+				<tr>
+					<td>{{ health.related_date }}</td>
+					<td>{{ health.weight|I_dont_want_None }}</td>
+					<td>{{ health.fat|I_dont_want_None }}</td>
+					<td>{{ health.water|I_dont_want_None }}</td>
+					{% if is_mine %}
+						<td><a href="{% url 'edit_health' health.pk %}" title="Edytuj ten pomiar">edycja</a></td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

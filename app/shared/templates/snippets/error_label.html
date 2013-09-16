@@ -1,0 +1,8 @@
+<div class="col-lg-2 col-2 col-sm-2 text-right">
+	<span id="js-form-error-{{ field.name }}" class="label label-important hidden"></span>
+	{% for error in field.errors %}
+		<span class="label label-danger">
+			{{ error }}
+		</span>
+	{% endfor %}
+</div>

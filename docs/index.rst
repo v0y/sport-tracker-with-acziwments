@@ -7,6 +7,7 @@ Contents:
    :maxdepth: 4
 
    static/modules/accounts/index.rst
+   static/modules/health/index.rst
    static/modules/shared/index.rst
 
 

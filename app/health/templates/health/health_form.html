@@ -1,0 +1,125 @@
+{% extends "structure/main.html" %}
+
+{% load shared_filters %}
+
+{% block content %}
+
+	<h1 class="text-center">{{ form.Meta.name }}</h1>
+	<div class="row">
+	<form method="post" action="" class="form-horizontal col-lg-6 col-10 col-sm-10 col-lg-offset-3">{% csrf_token %}
+		<fieldset>
+			{% include "snippets/form_errors.html" %}
+			<!-- data pomiaru -->
+			<div class="form-group label-wrapper row">
+				<div class="col-lg-3 col-3 col-sm-3 text-right">
+					<label for="{{ form.related_date.id_for_label }}"
+						class="control-label">{{ form.related_date.label }}</label>
+				</div>
+
+				<div class="col-lg-7 col-7 col-sm-7 input-group date input-append">
+					<input name="{{ form.related_date.name }}"
+						type="text"
+						class="form-control form-text datepicker"
+						id="{{ form.related_date.id_for_label }}"
+						{% if form.related_date.value %}
+							{% with date=form.related_date.value|date:'d-m-Y' %}
+								value="{% if date %}{{ date }}{% else %}{{ form.related_date.value }}{% endif %}"
+							{% endwith %}
+						{% endif %}>
+					<span class="input-group-addon add-on">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</span>
+				</div>
+
+				<div class="col-lg-2 col-2 col-sm-2 text-right">
+					{% for error in form.related_date.errors %}
+						<span class="label label-danger">
+							{{ error }}
+						</span>
+					{% endfor %}
+				</div>
+			</div>
+
+			<!-- waga -->
+			<div class="form-group label-wrapper row">
+				<div class="col-lg-3 col-3 col-sm-3 text-right">
+					<label for="{{ form.weight.id_for_label }}"
+						class="control-label">{{ form.weight.label }}</label>
+				</div>
+
+				<div class="col-lg-7 col-7 col-sm-7">
+					<input name="{{ form.weight.name }}"
+						type="text"
+						class="form-control form-text"
+						id="{{ form.weight.id_for_label }}"
+						{% if form.weight.value %}
+							value="{{ form.weight.value }}"
+						{% endif %}>
+				</div>
+
+				<div class="col-lg-2 col-2 col-sm-2 text-right">
+					{% for error in form.weight.errors %}
+						<span class="label label-danger">
+							{{ error }}
+						</span>
+					{% endfor %}
+				</div>
+			</div>
+
+			<!-- tłuszcz -->
+			<div class="form-group label-wrapper row">
+				<div class="col-lg-3 col-3 col-sm-3 text-right">
+					<label for="{{ form.fat.id_for_label }}"
+						class="control-label">{{ form.fat.label }}</label>
+				</div>
+
+				<div class="col-lg-7 col-7 col-sm-7">
+					<input name="{{ form.fat.name }}"
+						type="text"
+						class="form-control form-text"
+						id="{{ form.fat.id_for_label }}"
+						{% if form.fat.value %}
+							value="{{ form.fat.value }}"
+						{% endif %}>
+				</div>
+
+				<div class="col-lg-2 col-2 col-sm-2 text-right">
+					{% for error in form.fat.errors %}
+						<span class="label label-danger">
+							{{ error }}
+						</span>
+					{% endfor %}
+				</div>
+			</div>
+
+			<!-- woda -->
+			<div class="form-group label-wrapper row">
+				<div class="col-lg-3 col-3 col-sm-3 text-right">
+					<label for="{{ form.water.id_for_label }}"
+						class="control-label">{{ form.water.label }}</label>
+				</div>
+
+				<div class="col-lg-7 col-7 col-sm-7">
+					<input name="{{ form.water.name }}"
+						type="text"
+						class="form-control form-text"
+						id="{{ form.water.id_for_label }}"
+						{% if form.water.value %}
+							value="{{ form.water.value }}"
+						{% endif %}>
+				</div>
+
+				<div class="col-lg-2 col-2 col-sm-2 text-right">
+					{% for error in form.water.errors %}
+						<span class="label label-danger">
+							{{ error }}
+						</span>
+					{% endfor %}
+				</div>
+			</div>
+			{% include "snippets/submit_button.html" %}
+		</fieldset>
+	</form>
+	</div>
+
+{% endblock %}

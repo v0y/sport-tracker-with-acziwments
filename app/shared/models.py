@@ -38,17 +38,24 @@ class SHA1TokenMixin(models.Model):
         site = Site.objects.get(pk=settings.SITE_ID)
 
         # get activation link
-        activation_url = create_url(scheme='http', url=site.domain,
-                                    path=reverse(url_name),
-                                    params={token_param_name: self.token})
+        activation_url = create_url(
+            scheme='http', url=site.domain,
+            path=reverse(url_name),
+            params={token_param_name: self.token})
 
         return activation_url
 
 
 class CreatedAtMixin(models.Model):
     created_at = models.DateTimeField(
-        verbose_name=u'czas utworzenia', auto_now_add=True
-    )
+        verbose_name=u'czas utworzenia', auto_now_add=True)
+
+    class Meta:
+        abstract = True
+
+
+class RelatedDateMixin(models.Model):
+    related_date = models.DateField(verbose_name=u'powiązana data')
 
     class Meta:
         abstract = True

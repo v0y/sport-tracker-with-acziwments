@@ -41,6 +41,7 @@ body {
 .text-left { text-align: left !important; }
 .text-right { text-align: right !important; }
 .text-small { font-size: 80%; }
+.text-bold { font-weight: bold; }
 
 /*
 *  Forms
@@ -64,6 +65,11 @@ button {
     height: 34px;
 }
 
+.form-errors {
+  .text-center;
+  margin-bottom: 10px;
+}
+
 .form-error {
     height: 30px;
     padding: 0 7px;
@@ -77,6 +83,22 @@ button {
     width: 30%;
     margin: 0 2.5% 0 0;
     display: inline !important;
+}
+
+/*
+*  Tables
+*/
+
+th {
+    .text-bold;
+}
+
+/*
+*  Charts
+*/
+
+.weight-chart svg {
+    height: 300px;
 }
 
 /*

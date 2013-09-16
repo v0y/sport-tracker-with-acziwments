@@ -27,6 +27,17 @@ def create_url(scheme='', url='', path='', params={}):
     return url
 
 
+def get_date_format(date_type):
+    """
+    :param date_type: "week", "month" or "year"
+    :return: date format
+    """
+    return {
+        'week': '%Y-%m-%d',
+        'month': '%Y-%m',
+        'year': '%Y'}[date_type]
+
+
 def simple_send_email(subject, message, recipient_list,
                       subject_data={}, message_data={}):
     """
@@ -58,3 +69,5 @@ def simple_send_email(subject, message, recipient_list,
 
     send_mail(subject_str, message_str, from_email, recipient_list,
               fail_silently=fail_silently)
+
+

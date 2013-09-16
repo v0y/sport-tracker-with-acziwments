@@ -1,5 +1,7 @@
-# coding:utf-8
+# coding: utf-8
+
 from os.path import dirname, join, realpath
+import sys
 
 _current_dir = dirname(realpath(__file__))
 
@@ -23,6 +25,10 @@ DATABASES = {
     }
 }
 
+# switch to sqlite for tests
+if 'test' in sys.argv:
+    DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -45,6 +51,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    join(_current_dir, 'submodules'),
 )
 
 # List of finder classes that know how to find static files in
@@ -109,15 +116,20 @@ INSTALLED_APPS = filter(None, [
 
     # third-party
     'debug_toolbar' if DEBUG else None,
+    'django_nvd3',
     'gravatar',
     'south',
+    'django_nose',  # https://github.com/jbalogh/django-nose#using-with-south
     'widget_tweaks',
 
     # internal
     'app.accounts',
     'app.home',
     'app.shared',
+    'app.health',
 ])
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # gravatar
 # https://github.com/nvie/django-gravatar
@@ -195,3 +207,8 @@ LOGGING = {
         },
     }
 }
+
+# switch to sqlite for tests
+import sys
+if 'test' in sys.argv:
+    DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}
