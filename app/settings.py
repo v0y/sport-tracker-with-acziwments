@@ -22,6 +22,8 @@ DATABASES = {
         'PASSWORD': 'stwa',
         'HOST': 'localhost',
         'PORT': '3306',
+        'TEST_CHARSET': 'utf8',
+        'TEST_COLLATION': 'utf8_general_ci',
     }
 }
 
