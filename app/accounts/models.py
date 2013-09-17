@@ -95,16 +95,15 @@ class UserActivation(CreatedAtMixin, SHA1TokenMixin):
         verbose_name = u'aktywacja użytkownika'
         verbose_name_plural = u'aktywacje użytkowników'
 
-    def get_activation_link(self):
+    @property
+    def activation_link(self):
         """
         Returns user activation link
 
         :returns: complete user activation link
         :rtype: str
         """
-        url_name = 'registration_activation'
-        # TODO: wat?
-        return super(UserActivation, self).get_activation_link(url_name)
+        return self.get_activation_link('registration_activation')
 
 
 class PasswordReset(CreatedAtMixin, SHA1TokenMixin):
@@ -135,16 +134,15 @@ class EmailActivation(CreatedAtMixin, SHA1TokenMixin):
         verbose_name = u'aktywacja emaila'
         verbose_name_plural = u'aktywacja emaila'
 
-    def get_activation_link(self):
+    @property
+    def activation_link(self):
         """
         Get new email activation link
 
         :returns: complete email change activation link
         :rtype: str
         """
-        url_name = 'email_change_confirm'
-        # TODO: wat?
-        return super(EmailActivation, self).get_activation_link(url_name)
+        return self.get_activation_link('email_change_confirm')
 
 
 @receiver(post_save, sender=User)

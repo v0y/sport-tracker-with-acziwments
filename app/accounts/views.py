@@ -84,7 +84,7 @@ def registration(request):
         u.save()
 
         # get activation link
-        activation_url = u.activation.get_activation_link()
+        activation_url = u.activation.activation_link
 
         # get site
         site = get_current_site(request)
@@ -158,7 +158,7 @@ def registration_activation_resend(request):
         activation = UserActivation.objects.create(user=user)
 
         # get activation link
-        activation_url = activation.get_activation_link()
+        activation_url = activation.activation_link
 
         # send email
         site = get_current_site(request)
@@ -327,7 +327,7 @@ def email_change(request):
             user=request.user, email=email)
 
         # get data for email
-        activation_url = user_activation.get_activation_link()
+        activation_url = user_activation.activation_link
         site = get_current_site(request)
         username = request.user.username
 
