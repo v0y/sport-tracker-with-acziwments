@@ -14,9 +14,11 @@ def is_active_tab(request, url_name, *parameters):
     :param request: guess what?
     :param url_name: tab url name (from urls.py)
     :param parameter: parameter for url
-    :return: string "active" if tab is active
+    :return: string "active" if tab is active, else empty string
+    :rtype: str
     """
     tab_url = reverse(url_name, args=list(parameters))
     current_url = request.path_info
     if tab_url == current_url:
         return 'active'
+    return ''
