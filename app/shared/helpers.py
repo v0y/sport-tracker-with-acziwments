@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import render_to_string
 
 
-def create_url(scheme='', url='', path='', params={}):
+def create_url(scheme='', url='', path='', params=None):
     """
     Creates URI by adding GET parameters to URL
 
@@ -20,6 +20,8 @@ def create_url(scheme='', url='', path='', params={}):
     """
     if not (scheme or url or path):
         return
+    params = params or {}
+
     url = scheme + '://' + url if scheme else url
     url += path
     url_parts = list(urlparse(url))
@@ -40,7 +42,7 @@ def get_date_format(date_type):
 
 
 def simple_send_email(subject, message, recipient_list,
-                      subject_data={}, message_data={}):
+                      subject_data=None, message_data=None):
     """
     Send email using default email backend
 
@@ -55,6 +57,8 @@ def simple_send_email(subject, message, recipient_list,
     fail_silently = False if settings.DEBUG else True
     allowed_message_template_extensions = ('.txt', '.html', '.htm')
     allowed_subject_template_extensions = ('.txt',)
+    subject_data = subject_data or {}
+    message_data = message_data or {}
 
     # parse message template
     if subject.endswith(allowed_subject_template_extensions):
