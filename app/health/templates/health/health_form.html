@@ -18,15 +18,14 @@
 
 				<div class="col-lg-7 col-7 col-sm-7 input-group date input-append">
 					<input name="{{ form.related_date.name }}"
-						type="text"
-						class="form-control form-text datepicker"
+						type="text" class="form-control form-text"
 						id="{{ form.related_date.id_for_label }}"
 						{% if form.related_date.value %}
 							{% with date=form.related_date.value|date:'d-m-Y' %}
 								value="{% if date %}{{ date }}{% else %}{{ form.related_date.value }}{% endif %}"
 							{% endwith %}
 						{% endif %}>
-					<span class="input-group-addon add-on">
+					<span class="input-group-addon add-on datepicker-button">
 						<i class="glyphicon glyphicon-calendar"></i>
 					</span>
 				</div>

@@ -3,7 +3,7 @@ $ ->
     $("[rel=tooltip]").tooltip()
 
     # datepicker
-    $(".input-append.date").datepicker({
+    $(".datepicker-button").datepicker({
         format: "dd-mm-yyyy",
         todayBtn: "linked",
         language: "pl",
