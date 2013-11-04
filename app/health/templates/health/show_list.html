@@ -14,7 +14,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for health in healths %}
+			{% for health in page %}
 				<tr>
 					<td>{{ health.related_date }}</td>
 					<td>{{ health.weight|I_dont_want_None }}</td>
@@ -27,4 +27,5 @@
 			{% endfor %}
 		</tbody>
 	</table>
+	{% include "snippets/pagination.html" %}
 {% endblock %}

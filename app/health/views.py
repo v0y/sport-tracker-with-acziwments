@@ -12,6 +12,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
+from app.shared.helpers import get_page
 from .forms import HealthForm
 from .models import Health
 
@@ -169,9 +170,11 @@ def health_show_list(request, username=None):
     """
     Show health list with edit link
     """
-    # TODO: paginacja
     user = get_object_or_404(User, username=username) if username \
         else request.user
-    healths = Health.objects.filter(user=user).order_by('-related_date')
-    return {'healths': healths,
-            'is_mine': user == request.user}
+    health = Health.objects.filter(user=user).order_by('-related_date')
+    page = get_page(request, health, 50)
+
+    return {
+        'page': page,
+        'is_mine': user == request.user}

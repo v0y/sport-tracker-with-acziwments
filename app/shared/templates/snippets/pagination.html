@@ -1,0 +1,65 @@
+{% if page.paginator.num_pages > 1 %}
+	<div class="text-center">
+		<ul class="pagination">
+			{# previous page #}
+			{% if page.has_previous %}
+				<li>
+					<a href="?page={{ page.previous_page_number }}">&laquo;</a>
+				</li>
+			{% else %}
+				<li class="disabled">
+					<a>&laquo;</a>
+				</li>
+			{% endif %}
+
+			{# short paginator #}
+			{% if page.paginator.num_pages <= 15 %}
+
+				{% for pageno in page.paginator.page_range %}
+					<li class="{% if page.number == pageno %}active{% endif %}">
+						<a href="?page={{ pageno }}">{{ pageno }}</a>
+					</li>
+				{% endfor %}
+
+			{# long paginator #}
+			{% else %}
+				{% for pageno in page.paginator.first_few %}
+					<li class="{% if page.number == pageno %}active{% endif %}">
+						<a href="?page={{ pageno }}">{{ pageno }}</a>
+					</li>
+				{% endfor %}
+
+				{% if not page.number in page.paginator.first_few and page.number != page.paginator.first_few_border %}
+					<li class="disabled"><a>...</a></li>
+				{% endif %}
+
+				{% if not page.number in page.paginator.last_few and not page.number in page.paginator.first_few %}
+					<li class="active">
+						<a href="?page={{ page.number }}">{{ page.number }}</a>
+					</li>
+				{% endif %}
+
+				{% if not page.number in page.paginator.last_few and page.number != page.paginator.last_few_border %}
+					<li class="disabled"><a>...</a></li>
+				{% endif %}
+
+				{% for pageno in page.paginator.last_few %}
+					<li class="{% if page.number == pageno %}active{% endif %}">
+						<a href="?page={{ pageno }}">{{ pageno }}</a>
+					</li>
+				{% endfor %}
+			{% endif %}
+
+			{# next page #}
+			{% if page.has_next %}
+				<li>
+					<a href="?page={{ page.next_page_number }}">&raquo;</a>
+				</li>
+			{% else %}
+				<li class="disabled">
+					<a>&raquo;</a>
+				</li>
+			{% endif %}
+		</ul>
+	</div>
+{% endif %}
