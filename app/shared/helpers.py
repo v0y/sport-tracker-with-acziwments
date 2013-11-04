@@ -41,8 +41,9 @@ def get_date_format(date_type):
         'year': '%Y'}[date_type]
 
 
-def simple_send_email(subject, message, recipient_list,
-                      subject_data=None, message_data=None):
+def simple_send_email(
+        subject, message, recipient_list,
+        subject_data=None, message_data=None):
     """
     Send email using default email backend
 
