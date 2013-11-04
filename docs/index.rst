@@ -1,5 +1,5 @@
-Welcome to ling's documentation!
-================================
+STWA docs
+=========
 
 Contents:
 
