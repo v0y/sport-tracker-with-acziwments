@@ -37,3 +37,6 @@ nosetests.xml
 # statics and media
 media
 public_html
+
+# modules
+node_modules
