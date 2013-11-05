@@ -118,7 +118,6 @@ INSTALLED_APPS = filter(None, [
 
     # third-party
     'debug_toolbar' if DEBUG else None,
-    'django_nvd3',
     'gravatar',
     'south',
     'django_nose',  # https://github.com/jbalogh/django-nose#using-with-south
