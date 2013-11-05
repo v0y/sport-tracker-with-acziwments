@@ -140,7 +140,7 @@
     };
 
     Username.prototype.runValidatorsOnBlur = function() {
-      return this.validateIfNotInUse(this, "/accounts/ajax/check_username", "Ten login jest już zajęty");
+      return this.validateIfNotInUse(this, "/accounts/api/check_username", "Ten login jest już zajęty");
     };
 
     return Username;
@@ -162,7 +162,7 @@
     };
 
     Email.prototype.runValidatorsOnBlur = function() {
-      return this.validateIfNotInUse(this, "/accounts/ajax/check_email", "Ten email jest już zajęty");
+      return this.validateIfNotInUse(this, "/accounts/api/check_email", "Ten email jest już zajęty");
     };
 
     return Email;

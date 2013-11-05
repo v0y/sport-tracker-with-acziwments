@@ -54,9 +54,9 @@ urlpatterns = patterns('app.accounts.views',
             template_name='accounts/password_reset_failed.html'),
         name='password_reset_failed'),
     # ajax
-    url(r'^/ajax/check_username$', 'is_username_used',
+    url(r'^/api/check_username$', 'is_username_used',
         name='is_username_used'),
-    url(r'^/ajax/check_email$', 'is_email_used', name='is_email_used'),
+    url(r'^/api/check_email$', 'is_email_used', name='is_email_used'),
     # user profile
     url(r'^/show/(?P<username>[\w.@+-]+)$', 'profile', name='profile'),
     url(r'^/settings$', 'account_settings', name='account_settings'),

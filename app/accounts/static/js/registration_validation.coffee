@@ -95,7 +95,7 @@ class Username extends Field
             @validateRegex(@usernamePattern, "Login może zawierać tylko litery, cyfry i znaki _ + @ .-")
 
     runValidatorsOnBlur: ->
-        @validateIfNotInUse(this, "/accounts/ajax/check_username", "Ten login jest już zajęty")
+        @validateIfNotInUse(this, "/accounts/api/check_username", "Ten login jest już zajęty")
 
 
 class Email extends Field
@@ -115,7 +115,7 @@ class Email extends Field
         @validateRegex(@emailPattern, "Podaj poprawny adres email")
 
     runValidatorsOnBlur: ->
-        @validateIfNotInUse(this, "/accounts/ajax/check_email", "Ten email jest już zajęty")
+        @validateIfNotInUse(this, "/accounts/api/check_email", "Ten email jest już zajęty")
 
 
 class Password extends Field
