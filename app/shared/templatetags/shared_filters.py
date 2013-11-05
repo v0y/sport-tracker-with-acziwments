@@ -10,7 +10,9 @@ def field_type(widget):
     """
     Filter for getting field type
 
-    usage: {{ field.field.widget|field_type }}
+    **Usage**::
+
+        {{ field.field.widget|field_type }}
 
     :returns: field type
     """
