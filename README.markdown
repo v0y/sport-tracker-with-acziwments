@@ -1,8 +1,8 @@
 Sports tracker with achievements
 ================================
 
-Kilka informacji o projekcie
-----------------------------
+Kilka informacji o projekcie - kod
+----------------------------------
 
 ### Paginacja
 
@@ -68,3 +68,14 @@ Aby wysłać maila wystarczy, że wywołasz funkcję [`simple_send_email()`](htt
   filtrujesz nim `request`, jako parametr podajesz nazwę urla, on w całej
   swojej wdzięczności zwraca string `active`, jeśli właśnie znajdujemy się pod
   podanym urlem.
+
+
+Kilka informacji o projekcie - frontend
+---------------------------------------
+
+### Kolory
+
+Schemat kolorów do użycia w kolorowych miejscach typu wykresy został
+zaczerpnięty z [colourlovers.com](http://www.colourlovers.com/business/trends/branding/7880/Papeterie_Haute-Ville_Logo)
+
+![kolory](docs/colors.png)
