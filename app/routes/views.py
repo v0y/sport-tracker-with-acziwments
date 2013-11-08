@@ -1,31 +1,21 @@
 # encoding: utf-8
 
-from datetime import datetime
 import json
-from re import match
 from xml.etree.cElementTree import parse
 
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
-from django.http import Http404, HttpResponse
-from django.shortcuts import redirect, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
 
-from app.shared.helpers import get_page
 from .forms import GPXForm
-#from .models import Health
 
 
-
-#@login_required
+@login_required
 @render_to('routes/routes.html')
 def upload_gpx(request):
-    '''
+    """
     Tansform uploaded .gpx file to json and redirect
     to map page.
-    '''
+    """
     if request.method == 'POST':
         form = GPXForm(request.POST, request.FILES)
         if form.is_valid():
