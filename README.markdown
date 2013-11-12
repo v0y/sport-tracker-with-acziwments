@@ -70,6 +70,23 @@ Aby wysłać maila wystarczy, że wywołasz funkcję [`simple_send_email()`](htt
   podanym urlem.
 
 
+### Mixiny modeli
+
+#### `app.shared.models`
+
+* [`CreatedAtMixin`](http://sports-tracker-with-achievements.readthedocs.org/en/latest/static/modules/shared/models.html#shared.models.CreatedAtMixin) -
+  Czas utworzenia, czyli `DateTimeField` z `auto_now_add=True`
+* `NameMixin` - nazwa. Posiada metodę `__unicode__` zwracającą nazwę jako
+  unicode.
+* [`RelatedDateMixin`](http://sports-tracker-with-achievements.readthedocs.org/en/latest/static/modules/shared/models.html#shared.models.RelatedDateMixin) -
+  Czyli zwykły `DateTimeField`
+* [`SHA1TokenMixin`](http://sports-tracker-with-achievements.readthedocs.org/en/latest/static/modules/shared/models.html#shared.models.SHA1TokenMixin) -
+  Token sha1, jeśli niepodany tworzy się z aktualnego przy zapisie czasu.
+  Posiada metodę [`get_activation_link`](http://sports-tracker-with-achievements.readthedocs.org/en/latest/static/modules/shared/models.html#shared.models.SHA1TokenMixin.get_activation_link)
+  pobierającą link z danym tokenem.
+* `SlugMixin` - slug. Jeśli niepodany, tworzy się z pola `name`.
+
+
 Kilka informacji o projekcie - frontend
 ---------------------------------------
 

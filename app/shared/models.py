@@ -8,7 +8,7 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
 
-from .helpers import create_url
+from .helpers import create_url, slugify
 
 
 class SHA1TokenMixin(models.Model):
@@ -54,8 +54,33 @@ class CreatedAtMixin(models.Model):
         abstract = True
 
 
+class NameMixin(models.Model):
+    name = models.CharField(verbose_name=u"Nazwa", max_length=64)
+
+    class Meta:
+        abstract = True
+
+    def __unicode__(self):
+        return self.name
+
+
 class RelatedDateMixin(models.Model):
     related_date = models.DateField(verbose_name=u'powiązana data')
 
     class Meta:
         abstract = True
+
+
+class SlugMixin(models.Model):
+    slug = models.SlugField(null=True, blank=True, unique=True)
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        # create slug
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        # run normal save
+        return super(SlugMixin, self).save(*args, **kwargs)

@@ -6,6 +6,7 @@ from urlparse import urlparse, urlunparse
 from django.conf import settings
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template.defaultfilters import slugify as django_slugify
 from django.template.loader import render_to_string
 
 
@@ -108,3 +109,12 @@ def get_page(request, objects, per_page=10, few_visible=3):
 
     return page
 
+
+def slugify(s):
+    """
+    Slugify string
+
+    :param s: string to slugify
+    :return: slugified string
+    """
+    return django_slugify(unicode(s).replace(u'ł', 'l').replace(u'Ł', 'L'))
