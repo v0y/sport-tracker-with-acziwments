@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import GPXForm
 
 
-@login_required
+#@login_required
 @render_to('routes/routes.html')
 def upload_gpx(request):
     """
