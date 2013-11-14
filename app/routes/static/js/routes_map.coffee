@@ -43,6 +43,44 @@ drawRoutes = (routes, map) ->
     map.fitBounds(latlngbounds)
 
 ###############################################################################
+# Distance calculations
+###############################################################################
+
+getTotalDistance = (routes) ->
+    distance = 0
+
+    for route in routes
+        for segment in route['segments']
+            for i in [1..segment.length - 1]
+                pt1 = segment[i-1]
+                pt2 = segment[i]
+                x = getDistanceFromLatLonInKm(pt1['lat'], pt1['lon'], pt2['lat'], pt2['lon'])
+                distance += x
+
+    return distance
+
+
+getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) ->
+    R = 6371 # Radius of the earth in km
+    dlat = deg2rad(lat2-lat1)
+    dlon = deg2rad(lon2-lon1)
+    a = Math.sin(dlat/2) * Math.sin(dlat/2) + \
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * \
+    Math.sin(dlon/2) * Math.sin(dlon/2)
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+    d = R * c # Distance in km
+    return d
+
+
+deg2rad = (deg) ->
+    return deg * (Math.PI/180)
+
+displayRoutesDistance = (routesJSON) ->
+    distance = getTotalDistance(routesJSON)
+    distance = Math.round(distance * 100) / 100
+    $("#total-distance").html(distance + " km")
+
+###############################################################################
 # Run
 ###############################################################################
 
@@ -52,3 +90,5 @@ window.main = (routesJSON) ->
         map = initializeMap()
         # draw routes on map
         drawRoutes(routesJSON, map)
+        # get distance related data
+        displayRoutesDistance(routesJSON)
