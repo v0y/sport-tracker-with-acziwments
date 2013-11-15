@@ -8,6 +8,16 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding model 'UserProfile'
+        db.create_table(u'accounts_userprofile', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(related_name='profile', unique=True, to=orm['auth.User'])),
+            ('dob', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
+            ('sex', self.gf('django.db.models.fields.CharField')(max_length=1, null=True, blank=True)),
+            ('height', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
+        ))
+        db.send_create_signal(u'accounts', ['UserProfile'])
+
         # Adding model 'UserActivation'
         db.create_table(u'accounts_useractivation', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -38,6 +48,9 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Deleting model 'UserProfile'
+        db.delete_table(u'accounts_userprofile')
+
         # Deleting model 'UserActivation'
         db.delete_table(u'accounts_useractivation')
 
@@ -70,6 +83,14 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'token': ('django.db.models.fields.CharField', [], {'max_length': '40', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'activation'", 'unique': 'True', 'to': u"orm['auth.User']"})
+        },
+        u'accounts.userprofile': {
+            'Meta': {'object_name': 'UserProfile'},
+            'dob': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
+            'height': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'sex': ('django.db.models.fields.CharField', [], {'max_length': '1', 'null': 'True', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'profile'", 'unique': 'True', 'to': u"orm['auth.User']"})
         },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},

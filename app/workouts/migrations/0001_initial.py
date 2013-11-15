@@ -13,6 +13,7 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, unique=True, null=True, blank=True)),
+            ('category', self.gf('django.db.models.fields.CharField')(max_length=16)),
         ))
         db.send_create_signal(u'workouts', ['Sport'])
 
@@ -78,6 +79,7 @@ class Migration(SchemaMigration):
         },
         u'workouts.sport': {
             'Meta': {'object_name': 'Sport'},
+            'category': ('django.db.models.fields.CharField', [], {'max_length': '16'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'unique': 'True', 'null': 'True', 'blank': 'True'})

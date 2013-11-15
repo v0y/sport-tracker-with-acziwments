@@ -6,7 +6,7 @@ from .models import Sport, Workout
 
 
 class SportAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
+    list_display = ('name', 'slug', 'category')
 admin.site.register(Sport, SportAdmin)
 
 
