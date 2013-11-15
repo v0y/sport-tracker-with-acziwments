@@ -96,3 +96,12 @@ Schemat kolorów do użycia w kolorowych miejscach typu wykresy został
 zaczerpnięty z [colourlovers.com](http://www.colourlovers.com/business/trends/branding/7880/Papeterie_Haute-Ville_Logo)
 
 ![kolory](docs/colors.png)
+
+
+Narzędzia
+---------
+
+### Fabric
+
+Aby sprawdzić dostępne polecenia fabrica odpal `fab --list` z głównego katalogu
+projektu
