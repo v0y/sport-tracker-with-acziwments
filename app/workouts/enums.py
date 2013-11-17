@@ -1,11 +1,14 @@
 # encoding: utf-8
 
 SPORT_CATEGORIES = (
+    ('athletic', u"atletyka"),
+    ('combat', u"sporty walki"),
     ('cycling', u"jazda na rowerze"),
-    ('gymnastic', u"gimnastyka/kalitenistyka"),
+    ('horsemanship', u"jeździectwo"),
+    ('other', u"inne"),
     ('running', u"bieganie"),
-    ('strength', u"sporty siłowe"),
     ('team', u"sporty zespołowe"),
+    ('tennis', u"tenis i podobne"),
     ('walking', u"chodzenie"),
     ('water', u"sporty wodne"),
     ('winter', u"sporty zimowe"),
