@@ -16,25 +16,26 @@ def clear_database():
 
 def create_database():
     """
-    Create database, run migrations, create superuser "admin".
+    Create database with devdata, create superuser.
     """
     local("./manage.py syncdb --noinput -v0")
-    local("./manage.py migrate")
+    local("./manage.py migrate -v0")
     execute(create_superuser)
+    local("./manage.py loaddata devdata -v0")
 
 
-def create_superuser(username='admin'):
+def create_superuser(username='admin', password='a'):
     """
-    Create superuser with given username or "admin".
+    Create superuser with given username (or "admin") and password (or "a").
     """
-    local("./manage.py createsuperuser --username %s --email %s@example.pl"
-        % (username, username))
+    local("./manage.py createsuperuser --noinput --username %s "
+          "--email %s@example.pl" % (username, username))
+    local("./manage.py set_password %s %s" % (username, password))
 
 
 def recreate_database():
     """
-    Drop and create database, run syncdb and migrations, create
-    superuser.
+    Drop and create database, run syncdb and migrations, create superuser.
     """
     execute(clear_database)
     execute(create_database)
