@@ -69,8 +69,8 @@ class UserProfileTestCase(FastFixtureTestCase):
 class TestUserProfile(UserProfileTestCase):
 
     def test_bmi(self):
-        self.assertEqual(self.u1.profile.bmi, (44.44, self.date1.date()))
-        self.assertEqual(self.u2.profile.bmi, (19.69, self.date1.date()))
+        self.assertEqual(self.u1.profile.bmi, (44.4, self.date1.date()))
+        self.assertEqual(self.u2.profile.bmi, (19.7, self.date1.date()))
         self.assertEqual(self.u3.profile.bmi, None)
         self.assertEqual(self.u4.profile.bmi, None)
 

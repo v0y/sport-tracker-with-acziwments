@@ -2,32 +2,56 @@
 {% load gravatar %}
 
 {% block content %}
-	{% if user_profile.username == request.user.username %}
-		<a href="{{ GRAVATAR_CHANGE_URL }}"
-			data-toggle="tooltip" data-placement="bottom" rel="tooltip"
-			title="Zmień avatar na gravatar.com" target="_blank">
-			{% gravatar_img_for_user user_profile %}
-		</a>
-	{% else %}
-		{% gravatar_img_for_user user_profile %}
-	{% endif %}
 
-	<dl>
-		<dt>Login:</dt>
-		<dd>{{ user_profile.username }}</dd>
-		<dt>Email:</dt>
-		<dd>{{ user_profile.email }}</dd>
-		<dt>Data urodzenia:</dt>
-		<dd>{{ user_profile.profile.dob }}</dd>
-		<dt>Wiek:</dt>
-		<dd>{{ user_profile.profile.age }} lat</dd>
-		<dt>Wzrost:</dt>
-		<dd>{{ user_profile.profile.height }}</dd>
-		<dt>Waga:</dt>
-		<dd>{{ user_profile.profile.last_weight.0 }}</dd>
-		<dt>BMI:</dt>
-		<dd>{{ user_profile.profile.last_bmi.0 }}</dd>
-		<dt>Płeć:</dt>
-		<dd>{{ user_profile.profile.sex_visible }}</dd>
-	</dl>
+	<div class="col-md-3 col-sm-5">
+		<div class="panel panel-default user-profile-panel">
+			<div class="panel-heading text-bold">{{ user_profile.username }}</div>
+			<div class="panel-body">
+				<div class="user-profile-avatar">
+					{% if user_profile.username == request.user.username %}
+						<a href="{{ GRAVATAR_CHANGE_URL }}"
+							data-toggle="tooltip" data-placement="bottom" class="js-tooltip"
+							title="Zmień avatar na gravatar.com" target="_blank">
+							{% gravatar_img_for_user user_profile %}
+						</a>
+					{% else %}
+						{% gravatar_img_for_user user_profile %}
+					{% endif %}
+				</div>
+
+				<div class="user-profile-info">
+					<ul>
+						{% if user_profile.profile.sex_visible %}
+							<li>
+								{{ user_profile.profile.sex_visible }}{% if user_profile.profile.age %},
+									{{ user_profile.profile.age }} lat
+								{% endif %}
+							</li>
+						{% elif user_profile.profile.age %}
+							<li>Wiek: <strong>{{ user_profile.profile.age }} lat</strong></li>
+						{% endif %}
+						{% if user_profile.profile.height %}
+							<li>Wzrost: <strong>{{ user_profile.profile.height }} cm</strong></li>
+						{% endif %}
+						{% if user_profile.profile.last_weight.0 %}
+							<li>Waga: <strong>{{ user_profile.profile.last_weight.0 }} kg</strong></li>
+						{% endif %}
+						{% if user_profile.profile.bmi.0 %}
+							<li>BMI: <strong>{{ user_profile.profile.bmi.0 }}</strong></li>
+						{% endif %}
+					</ul>
+				</div> {# user-info #}
+			</div> {# panel-body #}
+		</div> {# panel #}
+	</div> {# cols #}
+
+	<div class="col-md-9 col-sm-7">
+		<div class="panel panel-default user-profile-activity">
+			<div class="panel-heading text-bold">Aktywność użytkownika</div>
+			<div class="panel-body">
+				Tu będzie aktywność użytkownika
+			</div> {# panel-body #}
+		</div> {# panel #}
+	</div> {# cols #}
+
 {% endblock %}

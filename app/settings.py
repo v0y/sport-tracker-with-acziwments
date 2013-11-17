@@ -158,6 +158,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 GRAVATAR_CHANGE_URL = 'http://gravatar.com/emails/'
 GRAVATAR_DEFAULT_IMAGE = 'monsterid'
 GRAVATAR_DEFAULT_SIZE = 210
+GRAVATAR_IMG_CLASS = 'thumbnail'
 
 
 # debug_toolbar

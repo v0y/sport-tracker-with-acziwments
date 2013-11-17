@@ -1,6 +1,6 @@
 $ ->
     # tooltip
-    $("[rel=tooltip]").tooltip()
+    $(".js-tooltip").tooltip()
 
     # datepicker
     $(".datepicker-button").datepicker({

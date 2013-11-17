@@ -84,7 +84,7 @@ class UserProfile(models.Model):
         # compute BMI
         bmi = weight / height_in_meters ** 2
 
-        return round(bmi, 2), date
+        return round(bmi, 1), date
 
 
 class UserActivation(CreatedAtMixin, SHA1TokenMixin):
