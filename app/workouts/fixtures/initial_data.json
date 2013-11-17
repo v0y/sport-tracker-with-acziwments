@@ -1,0 +1,434 @@
+[
+    {
+        "pk": 1,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "athletic",
+            "name": "si\u0142ownia",
+            "slug": "silownia"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "athletic",
+            "name": "podnoszenie ci\u0119\u017car\u00f3w",
+            "slug": "podnoszenie-ciezarow"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "athletic",
+            "name": "gimnastyka",
+            "slug": "gimnastyka"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "other",
+            "name": "golf",
+            "slug": "golf"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "horsemanship",
+            "name": "je\u017adziectwo",
+            "slug": "jezdziectwo"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "cycling",
+            "name": "kolarstwo szosowe",
+            "slug": "kolarstwo-szosowe"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "cycling",
+            "name": "kolarstwo g\u00f3rskie",
+            "slug": "kolarstwo-gorskie"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "cycling",
+            "name": "jazda na rowerze",
+            "slug": "jazda-na-rowerze"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "other",
+            "name": "\u0142ucznictwo",
+            "slug": "lucznictwo"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "other",
+            "name": "strzelectwo",
+            "slug": "strzelectwo"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "combat",
+            "name": "sporty walki",
+            "slug": "sporty-walki"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "combat",
+            "name": "szermierka",
+            "slug": "szermierka"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "water",
+            "name": "p\u0142ywanie",
+            "slug": "plywanie"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "water",
+            "name": "kajakarstwo",
+            "slug": "kajakarstwo"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "water",
+            "name": "\u017ceglarstwo",
+            "slug": "zeglarstwo"
+        }
+    },
+    {
+        "pk": 16,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "tennis",
+            "name": "tenis",
+            "slug": "tenis"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "tennis",
+            "name": "tenis sto\u0142owy",
+            "slug": "tenis-stolowy"
+        }
+    },
+    {
+        "pk": 18,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "team",
+            "name": "hokej",
+            "slug": "hokej"
+        }
+    },
+    {
+        "pk": 19,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "team",
+            "name": "koszyk\u00f3wka",
+            "slug": "koszykowka"
+        }
+    },
+    {
+        "pk": 20,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "team",
+            "name": "pi\u0142ka r\u0119czna",
+            "slug": "pilka-reczna"
+        }
+    },
+    {
+        "pk": 21,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "team",
+            "name": "pi\u0142ka no\u017cna",
+            "slug": "pilka-nozna"
+        }
+    },
+    {
+        "pk": 22,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "team",
+            "name": "pi\u0142ka wodna",
+            "slug": "pilka-wodna"
+        }
+    },
+    {
+        "pk": 23,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "team",
+            "name": "siatk\u00f3wka",
+            "slug": "siatkowka"
+        }
+    },
+    {
+        "pk": 24,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "tennis",
+            "name": "badminton",
+            "slug": "badminton"
+        }
+    },
+    {
+        "pk": 25,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "winter",
+            "name": "\u0142y\u017cwiarstwo",
+            "slug": "lyzwiarstwo"
+        }
+    },
+    {
+        "pk": 26,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "water",
+            "name": "nurkowanie",
+            "slug": "nurkowanie"
+        }
+    },
+    {
+        "pk": 27,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "winter",
+            "name": "narciarstwo",
+            "slug": "narciarstwo"
+        }
+    },
+    {
+        "pk": 28,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "winter",
+            "name": "narciarstwo biegowe",
+            "slug": "narciarstwo-biegowe"
+        }
+    },
+    {
+        "pk": 29,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "winter",
+            "name": "snowboarding",
+            "slug": "snowboarding"
+        }
+    },
+    {
+        "pk": 30,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "winter",
+            "name": "sporty saneczkowe",
+            "slug": "sporty-saneczkowe"
+        }
+    },
+    {
+        "pk": 31,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "winter",
+            "name": "curling",
+            "slug": "curling"
+        }
+    },
+    {
+        "pk": 32,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "combat",
+            "name": "armwrestling",
+            "slug": "armwrestling"
+        }
+    },
+    {
+        "pk": 33,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "horsemanship",
+            "name": "polo",
+            "slug": "polo"
+        }
+    },
+    {
+        "pk": 34,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "team",
+            "name": "futbol",
+            "slug": "futbol"
+        }
+    },
+    {
+        "pk": 35,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "team",
+            "name": "rugby",
+            "slug": "rugby"
+        }
+    },
+    {
+        "pk": 36,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "team",
+            "name": "krykiet",
+            "slug": "krykiet"
+        }
+    },
+    {
+        "pk": 37,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "other",
+            "name": "taniec",
+            "slug": "taniec"
+        }
+    },
+    {
+        "pk": 38,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "other",
+            "name": "wrotkarstwo",
+            "slug": "wrotkarstwo"
+        }
+    },
+    {
+        "pk": 39,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "walking",
+            "name": "marsze na orientacj\u0119",
+            "slug": "marsze-na-orientacje"
+        }
+    },
+    {
+        "pk": 40,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "walking",
+            "name": "chodzenie",
+            "slug": "chodzenie"
+        }
+    },
+    {
+        "pk": 41,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "walking",
+            "name": "w\u0119drowanie",
+            "slug": "wedrowanie"
+        }
+    },
+    {
+        "pk": 42,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "walking",
+            "name": "ch\u00f3d sportowy",
+            "slug": "chod-sportowy"
+        }
+    },
+    {
+        "pk": 43,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "running",
+            "name": "biegi na orientacj\u0119",
+            "slug": "biegi-na-orientacje"
+        }
+    },
+    {
+        "pk": 44,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "cycling",
+            "name": "rower stacjonarny",
+            "slug": "rower-stacjonarny"
+        }
+    },
+    {
+        "pk": 45,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "athletic",
+            "name": "lekka atletyka",
+            "slug": "lekka-atletyka"
+        }
+    },
+    {
+        "pk": 46,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "athletic",
+            "name": "kulturystyka",
+            "slug": "kulturystyka"
+        }
+    },
+    {
+        "pk": 47,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "running",
+            "name": "bieganie",
+            "slug": "bieganie"
+        }
+    },
+    {
+        "pk": 48,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "other",
+            "name": "kr\u0119gle",
+            "slug": "kregle"
+        }
+    }
+]
