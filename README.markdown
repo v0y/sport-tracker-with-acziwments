@@ -106,3 +106,12 @@ Narzędzia
 
 Aby sprawdzić dostępne polecenia fabrica odpal `fab --list` z głównego katalogu
 projektu
+
+
+### Less
+
+W projekcie do pisania styli używany jest [less](http://lesscss.org).
+
+**Uwaga!** Pliki `*.less` należy kompilować z parametrem `--yui-compress`.
+
+Przykład: `lessc styles.less styles.css --yui-compress`.
