@@ -35,9 +35,9 @@ class UserProfileTestCase(FastFixtureTestCase):
 
     def setUp(self):
         # helpers vars
-        self.date1 = datetime.strptime('01 01 2013', '%d %m %Y')
-        self.date2 = datetime.strptime('02 01 2013', '%d %m %Y')
-        self.date3 = datetime.strptime('03 01 2013', '%d %m %Y')
+        self.date1 = datetime(2013, 01, 01)
+        self.date2 = datetime(2013, 01, 02)
+        self.date3 = datetime(2013, 01, 03)
 
         # create users
         self.u1 = User.objects.create_user('u1', 'u1@example.com', 'qwerty')

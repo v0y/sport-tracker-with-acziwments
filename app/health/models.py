@@ -122,16 +122,22 @@ class Health(RelatedDateMixin):
             :param health_qs: queryset of health objects
             :return: date of first given health type measurement
             """
-            # TODO: catch exceptions
-            return {
-                'weight': health_qs.filter(weight__isnull=False),
-                'fat': health_qs.filter(fat__isnull=False),
-                'water': health_qs.filter(water__isnull=False),
-            }[type_][0].related_date
+            try:
+                return {
+                    'weight': health_qs.filter(weight__isnull=False),
+                    'fat': health_qs.filter(fat__isnull=False),
+                    'water': health_qs.filter(water__isnull=False),
+                }[type_][0].related_date
+            except (IndexError, KeyError):
+                return None
 
-        first_weight_date = _get_first_date('weight', health_qs)
-        first_fat_date = _get_first_date('fat', health_qs)
-        first_water_date = _get_first_date('water', health_qs)
-        first_date = min([first_weight_date, first_fat_date, first_water_date])
+        first_weight = _get_first_date('weight', health_qs)
+        first_fat = _get_first_date('fat', health_qs)
+        first_water = _get_first_date('water', health_qs)
+        first_dates_list = filter(None, [first_weight, first_fat, first_water])
 
-        return first_date.strftime(date_format)
+        if first_dates_list:
+            first_date = min(first_dates_list)
+            return first_date.strftime(date_format)
+        else:
+            return None
