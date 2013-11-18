@@ -141,6 +141,7 @@ INSTALLED_APPS = filter(None, [
     'app.home',
     'app.shared',
     'app.health',
+    'app.routes',
     'app.workouts',
 ])
 

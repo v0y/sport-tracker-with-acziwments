@@ -14,5 +14,7 @@ urlpatterns = patterns('',
     (r'^accounts', include('app.accounts.urls')),
     # health
     (r'^health', include('app.health.urls')),
+    # routes
+    (r'^routes', include('app.routes.urls')),
 
 )
