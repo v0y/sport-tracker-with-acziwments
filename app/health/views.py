@@ -158,7 +158,7 @@ def health_api(request):
     _get_and_validate_date(range_type, date)
 
     # get dict data
-    data_dict = Health.get_datas(user, range_type, date)
+    data_dict = Health.get_data(user, range_type, date)
 
     # return json
     return HttpResponse(json.dumps(data_dict), content_type="application/json")

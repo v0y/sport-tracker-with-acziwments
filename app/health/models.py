@@ -54,7 +54,7 @@ class Health(RelatedDateMixin):
         return health
 
     @classmethod
-    def get_datas(cls, user, range_type, date_str):
+    def get_data(cls, user, range_type, date_str):
         """
         Get datas for health in pretty format
 

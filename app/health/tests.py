@@ -18,18 +18,18 @@ class TestHealth(UserProfileTestCase):
         self.assertEqual(u3_first_date, None)
         self.assertEqual(u4_first_date, '2013 01 02')
 
-    def test_get_datas(self):
-        u1_datas = Health.get_datas(self.u1, 'year', '2013')
-        u2_datas = Health.get_datas(self.u2, 'week', '2013-01-02')
-        u3_datas = Health.get_datas(self.u3, 'month', '2013-01')
-        u4_datas = Health.get_datas(self.u4, 'month', '2013-01')
+    def test_get_data(self):
+        u1_data = Health.get_data(self.u1, 'year', '2013')
+        u2_data = Health.get_data(self.u2, 'week', '2013-01-02')
+        u3_data = Health.get_data(self.u3, 'month', '2013-01')
+        u4_data = Health.get_data(self.u4, 'month', '2013-01')
 
-        u1_expected_datas = {
+        u1_expected_data = {
             'weight': [{'x': '2013-01-01', 'y': 100}],
             'fat': [{'x': '2013-01-01', 'y': None}],
             'water': [{'x': '2013-01-01', 'y': None}]
         }
-        u2_expected_datas = {
+        u2_expected_data = {
             'weight': [
                 {'x': '2013-01-02', 'y': None},
                 {'x': '2013-01-03', 'y': None}
@@ -43,14 +43,14 @@ class TestHealth(UserProfileTestCase):
                 {'x': '2013-01-03', 'y': 1}
             ]
         }
-        u3_expected_datas = {'weight': [], 'fat': [], 'water': []}
-        u4_expected_datas = {
+        u3_expected_data = {'weight': [], 'fat': [], 'water': []}
+        u4_expected_data = {
             'weight': [{'x': '2013-01-02', 'y': 98}],
             'fat': [{'x': '2013-01-02', 'y': 69}],
             'water': [{'x': '2013-01-02', 'y': 13}]
         }
 
-        self.assertEqual(u1_datas, u1_expected_datas)
-        self.assertEqual(u2_datas, u2_expected_datas)
-        self.assertEqual(u3_datas, u3_expected_datas)
-        self.assertEqual(u4_datas, u4_expected_datas)
+        self.assertEqual(u1_data, u1_expected_data)
+        self.assertEqual(u2_data, u2_expected_data)
+        self.assertEqual(u3_data, u3_expected_data)
+        self.assertEqual(u4_data, u4_expected_data)
