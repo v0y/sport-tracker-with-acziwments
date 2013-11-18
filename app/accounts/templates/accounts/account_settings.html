@@ -1,11 +1,10 @@
 {% extends "structure/main.html" %}
 
 {% block content %}
-	<ul>
-		<li><a href="{% url 'profile_settings' %}" title="Edycja profilu">Edycja profilu</a></li>
-		<li><a href="{% url 'password_change' %}" title="Zmiana hasła">Zmiana hasła</a></li>
-		<li><a href="{% url 'email_change' %}" title="Zmiana adresu email">Zmiana adresu email</a></li>
-		<li><a href="{{ GRAVATAR_CHANGE_URL }}" title="Zmiana avataru na gravatar.com" target="_blank">
-			Zmiana avataru na gravatar.com</a></li>
-	</ul>
+	<div class="list-group col-md-4">
+		<a href="{% url 'profile_settings' %}" title="Edycja profilu" class="list-group-item">Edycja profilu</a>
+		<a href="{% url 'password_change' %}" title="Zmiana hasła" class="list-group-item">Zmiana hasła</a>
+		<a href="{% url 'email_change' %}" title="Zmiana adresu email" class="list-group-item">Zmiana adresu email</a>
+		<a href="{{ GRAVATAR_CHANGE_URL }}" title="Zmiana avataru na gravatar.com" target="_blank" class="list-group-item">Zmiana avataru na gravatar.com</a>
+	</div>
 {% endblock %}
