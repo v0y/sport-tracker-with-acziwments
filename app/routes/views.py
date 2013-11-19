@@ -9,13 +9,14 @@ from django.contrib.auth.decorators import login_required
 from .forms import GPXForm
 
 
-#@login_required
+@login_required
 @render_to('routes/routes.html')
 def upload_gpx(request):
     """
     Tansform uploaded .gpx file to json and redirect
     to map page.
     """
+    tracks = "{}"
     if request.method == 'POST':
         form = GPXForm(request.POST, request.FILES)
         if form.is_valid():
@@ -23,7 +24,6 @@ def upload_gpx(request):
             tracks = gpx_to_json(request.FILES['gpx_file'])
     else:
         form = GPXForm()
-        tracks = "{}"
 
     return {'form': form, 'tracks': tracks}
 
