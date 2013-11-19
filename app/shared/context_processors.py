@@ -12,4 +12,5 @@ def settings_values(request):
     return {
         'DEBUG': settings.DEBUG,
         'GRAVATAR_CHANGE_URL': settings.GRAVATAR_CHANGE_URL,
+        'GOOGLE_BROWSER_KEY': settings.GOOGLE_BROWSER_KEY,
     }
