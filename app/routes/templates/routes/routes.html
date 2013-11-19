@@ -3,24 +3,23 @@
 {% load static %}
 
 {% block content %}
-    <style type="text/css">
-      #map-canvas { height: 250px }
-    </style>
-    <div id="map-canvas"></div>
+	<style type="text/css">
+		#map-canvas { height: 250px }
+	</style>
+	<div id="map-canvas"></div>
 	<h5 id="total-distance"></h5>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <button class="btn btn-large btn-success pull-right" type="submit"><i class="icon-ok icon-white"></i>Zapisz</button>
-    </form>
-
+	<form method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form }}
+		<button class="btn btn-large btn-success pull-right" type="submit"><i class="icon-ok icon-white"></i>Zapisz</button>
+	</form>
 {% endblock %}
 
 {% block js_import %}
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCzE8_trkkFKSyVl3n6fMkhMAK2g3ENn4&sensor=false">
-    </script>
-    <script src="{% static 'js/routes_map.js' %}"></script>
-    <script type="text/javascript">$(function(){main({{ tracks|safe }})})</script>
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCzE8_trkkFKSyVl3n6fMkhMAK2g3ENn4&sensor=false">
+	</script>
+	<script src="{% static 'js/routes_map.js' %}"></script>
+	<script type="text/javascript">$(function(){main({{ tracks|safe }})})</script>
 {% endblock %}
