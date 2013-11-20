@@ -241,7 +241,7 @@ class ChangeEmailForm(CheckCurrentPasswordMixin, EmailMixin):
 class UserProfileForm(ModelForm):
     dob = forms.DateField(widget=extras.SelectDateWidget(
         years=(lambda y=date.today().year: range(y, y - 100, -1))(),
-        attrs={'class': 'form-control dob-field'}))
+        attrs={'class': 'form-control dob-field'}), required=False)
 
     class Meta:
         model = UserProfile
