@@ -59,9 +59,8 @@ urlpatterns = patterns('app.accounts.views',
     url(r'^/api/check_email$', 'is_email_used', name='is_email_used'),
     # user profile
     url(r'^/show/(?P<username>[\w.@+-]+)$', 'profile', name='profile'),
-    url(r'^/settings$', 'account_settings', name='account_settings'),
-    url(r'^/settings/profile$', 'profile_settings',
-        name='profile_settings'),
+    url(r'^/settings$', 'profile_settings'),
+    url(r'^/settings/profile$', 'profile_settings', name='profile_settings'),
     # change email
     url(r'^/settings/email/change$', 'email_change', name='email_change'),
     url(r'^/settings/email/change/end$', 'email_change_end',

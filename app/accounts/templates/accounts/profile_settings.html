@@ -3,6 +3,9 @@
 {% load widget_tweaks %}
 
 {% block content %}
+
+	{% include "accounts/account_settings_menu.html" %}
+
 	<h1 class="text-center">{{ form.Meta.name }}</h1>
 	<div class="row">
 		<form method="post" action="" class="form-horizontal col-lg-6 col-10 col-sm-10 col-lg-offset-3">{% csrf_token %}

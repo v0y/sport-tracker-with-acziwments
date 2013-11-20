@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% include "accounts/account_settings_menu.html" %}
+
 <div class="alert alert-success text-center">
 	Aby potwierdzić zmianę adresu kliknij link, który został wysłany adres <b>{{ email }}</b><br>
 	Dopóki tego nie zrobisz, jedynym adresem powiązanym z Twoim kontem będzie "stary" adres: {{ old_email }}
