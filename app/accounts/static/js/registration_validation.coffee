@@ -64,7 +64,9 @@ class Field
         ajax = $.ajax url,
             type: 'POST'
             dataType: 'html'
-            data: {superCoolData: @value}
+            data:
+                superCoolData: @value
+                csrfmiddlewaretoken: $.cookie('csrftoken')
             error: (jqXHR, textStatus, errorThrown) ->
                 console.log("AJAX Error: #{errorThrown}")
             success: (data, textStatus, jqXHR) ->

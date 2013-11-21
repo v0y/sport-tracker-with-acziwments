@@ -13,7 +13,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render_to_response
-from django.views.decorators.csrf import csrf_exempt
 
 from .forms import (ChangeEmailForm, ChangePasswordForm, LoginForm,
     NewPasswordForm, PasswordResetForm, RegistrationForm,
@@ -267,7 +266,6 @@ def password_reset_confirm(request):
         return redirect(reverse('password_reset_failed'))
 
 
-@csrf_exempt
 def is_username_used(request):
     """
     Check, if username is already in database
@@ -281,7 +279,6 @@ def is_username_used(request):
         return HttpResponse('found')
 
 
-@csrf_exempt
 def is_email_used(request):
     """
     Check, if email is already in use by any user

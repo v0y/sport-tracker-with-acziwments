@@ -10,7 +10,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
 
 from app.shared.helpers import get_page
 from .forms import HealthForm
@@ -124,7 +123,6 @@ def health_show_charts(request, username=None, range_type='month', date=None):
     return {'first_date': first_date}
 
 
-@csrf_exempt
 def health_api(request):
     """
     Return health data as json

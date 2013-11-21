@@ -92,7 +92,8 @@
         type: 'POST',
         dataType: 'html',
         data: {
-          superCoolData: this.value
+          superCoolData: this.value,
+          csrfmiddlewaretoken: $.cookie('csrftoken')
         },
         error: function(jqXHR, textStatus, errorThrown) {
           return console.log("AJAX Error: " + errorThrown);
