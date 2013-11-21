@@ -115,3 +115,21 @@ W projekcie do pisania styli używany jest [less](http://lesscss.org).
 **Uwaga!** Pliki `*.less` należy kompilować z parametrem `--yui-compress`.
 
 Przykład: `lessc styles.less styles.css --yui-compress`.
+
+
+### JS
+
+Zewnętrze biblioteki/skrypty js powinny:
+
+* być wrzucane do katalogu `app/shared/static/js`, chyba, że są szczególne dla
+  jakiejś aplikacji - wtedy do statyków tej apki
+* minimalizowane za pomocą [`uglifyjs2`](https://github.com/mishoo/UglifyJS2) z
+  parametrami `-c --preamble`, na przykład:
+  ```
+  uglifyjs script.js -o script.min.js -c --preamble
+  ```
+  Jeśli parametr `--preamble` uniemożliwi kompresję, należy skompresować plik
+  bez niego, ale ręcznie przekleić nagłówek (ten komentarz z licencją, autorem,
+  itp.) do pliku skompresowanego
+* po skompresowaniu zapisane z rozszerzeniem `*.min.js`. Nieskompresowany plik
+  nie powinien się znaleźć w repo.
