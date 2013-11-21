@@ -7,8 +7,9 @@ from django import forms
 from django.core import validators
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.forms import ModelForm, extras
+from django.forms import ModelForm
 
+from app.shared.forms import SelectDateWidgetWithNone
 from .models import UserActivation, UserProfile
 
 
@@ -239,8 +240,8 @@ class ChangeEmailForm(CheckCurrentPasswordMixin, EmailMixin):
 
 
 class UserProfileForm(ModelForm):
-    dob = forms.DateField(widget=extras.SelectDateWidget(
-        years=(lambda y=date.today().year: range(y, y - 100, -1))(),
+    dob = forms.DateField(widget=SelectDateWidgetWithNone(
+        years=(lambda y=date.today().year: range(y, y - 150, -1))(),
         attrs={'class': 'form-control dob-field'}), required=False)
 
     class Meta:
