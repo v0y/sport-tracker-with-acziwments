@@ -12,7 +12,6 @@ from django.contrib.sites.models import get_current_site
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
-from django.shortcuts import render_to_response
 
 from .forms import (ChangeEmailForm, ChangePasswordForm, LoginForm,
     NewPasswordForm, PasswordResetForm, RegistrationForm,
@@ -24,7 +23,9 @@ from app.shared.helpers import create_url, simple_send_email
 
 @render_to('accounts/login.html')
 def login_view(request):
-    """login user"""
+    """
+    login user
+    """
 
     # if logged in, redirect to login success page
     if request.user.is_authenticated():
@@ -57,14 +58,18 @@ def login_view(request):
 
 
 def logout_view(request):
-    """Log out user"""
+    """
+    Log out user
+    """
     logout(request)
     return redirect(getattr(settings, 'REDIRECT_AFTER_LOGOUT', '/'))
 
 
 @render_to('accounts/registration.html')
 def registration(request):
-    """Create new account"""
+    """
+    Create new account
+    """
 
     # if logged in, redirect to login success page
     if request.user.is_authenticated():
@@ -107,7 +112,9 @@ def registration(request):
 
 @render_to("accounts/registration_end.html")
 def registration_end(request):
-    """Show after registration page"""
+    """
+    Show after registration page
+    """
     email = request.session.get('email')
     email_provider = get_mail_provider_url(email)
     return {'email_provider': email_provider,
@@ -115,7 +122,9 @@ def registration_end(request):
 
 
 def registration_activation(request):
-    """Activate account and delete used token"""
+    """
+    Activate account and delete used token
+    """
     token = request.GET.get('token', '')
 
     # check token
@@ -136,7 +145,9 @@ def registration_activation(request):
 
 @render_to('accounts/registration_activation_resend.html')
 def registration_activation_resend(request):
-    """Resend activation email"""
+    """
+    Resend activation email
+    """
 
     form = ResendActivationMailForm(request.POST or None)
 
@@ -183,7 +194,9 @@ def registration_activation_resend(request):
 @login_required
 @render_to('accounts/password_change.html')
 def password_change(request):
-    """Change password"""
+    """
+    Change password
+    """
     form = ChangePasswordForm(request.POST or None, request=request)
 
     if form.is_valid():
@@ -196,7 +209,9 @@ def password_change(request):
 
 @render_to('accounts/password_reset.html')
 def password_reset(request):
-    """Password reset"""
+    """
+    Password reset
+    """
     form = PasswordResetForm(request.POST or None)
 
     if form.is_valid():
@@ -240,7 +255,9 @@ def password_reset(request):
 
 @render_to('accounts/password_reset_confirm.html')
 def password_reset_confirm(request):
-    """Confirm password reset"""
+    """
+    Confirm password reset
+    """
 
     token = request.GET.get('token')
     password_reset = get_object_or_None(PasswordReset, token=token)
@@ -300,16 +317,11 @@ def profile(request, username):
 
 
 @login_required
-@render_to('accounts/account_settings.html')
-def account_settings(request):
-    """Show user accounts setting"""
-    return {}
-
-
-@login_required
 @render_to('accounts/email_change.html')
 def email_change(request):
-    """Show form for email change"""
+    """
+    Show form for email change
+    """
 
     form = ChangeEmailForm(request.POST or None, request=request)
     if form.is_valid():
@@ -345,7 +357,9 @@ def email_change(request):
 
 @render_to('accounts/email_change_end.html')
 def email_change_end(request):
-    """Show page after email change"""
+    """
+    Show page after email change
+    """
     email = request.session.get('email')
     old_email = request.session.get('old_email', '')
     email_provider = get_mail_provider_url(email)
@@ -356,7 +370,9 @@ def email_change_end(request):
 
 @login_required
 def email_change_confirm(request):
-    """Activate new email address"""
+    """
+    Activate new email address
+    """
     token = request.GET.get('token', '')
     user = request.user
 
