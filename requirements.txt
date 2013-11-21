@@ -1,4 +1,4 @@
-django==1.5.2
+django==1.6
 django-annoying==0.7.7
 django-debug-toolbar
 django-nose
