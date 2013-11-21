@@ -22,6 +22,7 @@ def field_type(widget):
         'PasswordInput': 'password',
         'CheckboxInput': 'checkbox',
         'DateInput': 'date',
+        'EmailInput': 'email',
         # TODO: radio
         # TODO: textarea
     }
