@@ -21,11 +21,11 @@ class Migration(SchemaMigration):
         db.create_table(u'workouts_workout', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=64, null=True, blank=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='workouts', to=orm['auth.User'])),
             ('sport', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['workouts.Sport'])),
-            ('notes', self.gf('django.db.models.fields.CharField')(max_length=512)),
-            ('distance', self.gf('django.db.models.fields.FloatField')()),
+            ('notes', self.gf('django.db.models.fields.CharField')(max_length=512, null=True, blank=True)),
+            ('distance', self.gf('django.db.models.fields.FloatField')(null=True, blank=True)),
             ('datetime_start', self.gf('django.db.models.fields.DateTimeField')()),
             ('datetime_stop', self.gf('django.db.models.fields.DateTimeField')()),
         ))
@@ -59,7 +59,7 @@ class Migration(SchemaMigration):
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -67,7 +67,7 @@ class Migration(SchemaMigration):
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
         u'contenttypes.contenttype': {
@@ -89,10 +89,10 @@ class Migration(SchemaMigration):
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'datetime_start': ('django.db.models.fields.DateTimeField', [], {}),
             'datetime_stop': ('django.db.models.fields.DateTimeField', [], {}),
-            'distance': ('django.db.models.fields.FloatField', [], {}),
+            'distance': ('django.db.models.fields.FloatField', [], {'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
-            'notes': ('django.db.models.fields.CharField', [], {'max_length': '512'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'}),
+            'notes': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True', 'blank': 'True'}),
             'sport': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['workouts.Sport']"}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'workouts'", 'to': u"orm['auth.User']"})
         }

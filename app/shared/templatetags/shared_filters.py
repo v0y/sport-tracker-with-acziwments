@@ -1,6 +1,8 @@
 # coding: utf-8
 
 from django import template
+from django.template import Context
+from django.template.loader import get_template
 
 register = template.Library()
 
@@ -40,3 +42,9 @@ def I_dont_want_None(val):
     """
 
     return val if val is not None else ''
+
+
+@register.filter
+def bootstrap(field, addon=False):
+    context = Context({'field': field, 'addon': addon})
+    return get_template("snippets/field.html").render(context)

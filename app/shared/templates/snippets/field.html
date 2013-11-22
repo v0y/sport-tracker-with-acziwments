@@ -1,0 +1,29 @@
+<div class="form-group label-wrapper row">
+	{% include 'snippets/field_label.html' %}
+
+	<div class="col-lg-7 col-7 col-sm-7 input-group date input-append">
+		<input name="{{ field.name }}"
+			type="text"
+			class="form-control form-text"
+			id="{{ field.id_for_label }}"
+			{% if addon == 'datepicker' %}
+				{% if field.value %}
+					{% with date=field.value|date:'d-m-Y' %}
+						value="{% if date %}{{ date }}{% else %}{{ field.value }}{% endif %}"
+					{% endwith %}
+				{% endif %}
+			{% else %}
+				{% if field.value %}
+					value="{{ field.value }}"
+				{% endif %}
+			{% endif %}
+		>
+		{% if addon == 'datepicker' %}
+			<span class="input-group-addon add-on datepicker-button">
+				<i class="glyphicon glyphicon-calendar"></i>
+			</span>
+		{% endif %}
+	</div>
+
+	{% include 'snippets/error_label.html' %}
+</div>

@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     (r'^health', include('app.health.urls')),
     # routes
     (r'^routes', include('app.routes.urls')),
-
+    # workouts
+    (r'^workouts', include('app.workouts.urls')),
 )

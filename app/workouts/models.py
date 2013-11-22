@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 from django.db import models
 
 from app.shared.models import CreatedAtMixin, NameMixin, SlugMixin
@@ -20,8 +21,10 @@ class Workout(CreatedAtMixin, NameMixin):
     user = models.ForeignKey(
         User, verbose_name=u"Użytkownik", related_name='workouts')
     sport = models.ForeignKey('Sport', verbose_name=u"Dyscyplina")
-    notes = models.CharField(verbose_name=u"Notatki", max_length=512)
-    distance = models.FloatField(verbose_name=u"Dystans w km")
+    notes = models.CharField(
+        verbose_name=u"Notatki", max_length=512, null=True, blank=True)
+    distance = models.FloatField(
+        verbose_name=u"Dystans (km)", validators=[MinValueValidator(0)])
     datetime_start = models.DateTimeField(verbose_name=u"Czas rozpoczęcia")
     datetime_stop = models.DateTimeField(verbose_name=u"Czas zakończenia")
 
