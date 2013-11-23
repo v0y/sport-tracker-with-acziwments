@@ -3,6 +3,6 @@
 from django.conf.urls import patterns, url
 
 
-urlpatterns = patterns('app.routes.views',
-    url(r'^/add$', 'upload_gpx', name='upload_gpx'),
+urlpatterns = patterns('app.routes.api_views',
+    url(r'^/api/upload_gpx$', 'upload_gpx', name='upload_gpx'),
 )
