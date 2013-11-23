@@ -2,9 +2,9 @@
 
 from django.conf.urls import patterns, url
 
-from .views import WorkoutCreate
+from .views import WorkoutCreateView
 
 
 urlpatterns = patterns('',
-    url(r'^/add$', WorkoutCreate.as_view(), name='workout_add'),
+    url(r'^/add$', WorkoutCreateView.as_view(), name='workout_add'),
 )

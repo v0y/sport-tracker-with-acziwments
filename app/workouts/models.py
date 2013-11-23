@@ -17,14 +17,17 @@ class Sport(NameMixin, SlugMixin):
         verbose_name_plural = u"sporty"
 
 
-class Workout(CreatedAtMixin, NameMixin):
+class Workout(CreatedAtMixin):
+    name = models.CharField(
+        verbose_name=u"Nazwa", max_length=64, null=True, blank=True)
     user = models.ForeignKey(
         User, verbose_name=u"Użytkownik", related_name='workouts')
     sport = models.ForeignKey('Sport', verbose_name=u"Dyscyplina")
     notes = models.CharField(
         verbose_name=u"Notatki", max_length=512, null=True, blank=True)
     distance = models.FloatField(
-        verbose_name=u"Dystans (km)", validators=[MinValueValidator(0)])
+        verbose_name=u"Dystans", validators=[MinValueValidator(0)], null=True,
+        blank=True)
     datetime_start = models.DateTimeField(verbose_name=u"Czas rozpoczęcia")
     datetime_stop = models.DateTimeField(verbose_name=u"Czas zakończenia")
 

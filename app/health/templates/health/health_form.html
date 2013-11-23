@@ -6,7 +6,7 @@
 
 	<h1 class="text-center">{{ form.Meta.name }}</h1>
 	<div class="row">
-	<form method="post" action="" class="form-horizontal col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">{% csrf_token %}
+	<form method="post" action="" class="form-horizontal col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">{% csrf_token %}
 		<fieldset>
 			{% include "snippets/form_errors.html" %}
 			<!-- data pomiaru -->
@@ -18,14 +18,15 @@
 
 				<div class="col-lg-7 col-7 col-sm-7 input-group date input-append">
 					<input name="{{ form.related_date.name }}"
-						type="text" class="form-control form-text"
+						type="text"
+						class="form-control form-text datepicker"
 						id="{{ form.related_date.id_for_label }}"
 						{% if form.related_date.value %}
 							{% with date=form.related_date.value|date:'d-m-Y' %}
 								value="{% if date %}{{ date }}{% else %}{{ form.related_date.value }}{% endif %}"
 							{% endwith %}
 						{% endif %}>
-					<span class="input-group-addon add-on datepicker-button">
+					<span class="input-group-addon add-on">
 						<i class="glyphicon glyphicon-calendar"></i>
 					</span>
 				</div>

@@ -48,6 +48,18 @@ def I_dont_want_None(val):
 
 
 @register.filter
-def bootstrap(field, addon=False):
-    context = Context({'field': field, 'addon': addon})
+def bootstrap(field, addon=''):
+    if addon:
+        splitted_addon = addon.split('|')
+        addon_type = splitted_addon[0]
+        try:
+            addon_text = splitted_addon[1]
+        except IndexError:
+            addon_text = ''
+    else:
+        addon_type = ''
+        addon_text = ''
+
+    context = Context(
+        {'field': field, 'addon': addon_type, 'addon_text': addon_text})
     return get_template("snippets/field.html").render(context)

@@ -1,29 +1,55 @@
+{% load widget_tweaks %}
+{% load shared_filters %}
+
 <div class="form-group label-wrapper row">
 	{% include 'snippets/field_label.html' %}
 
-	<div class="col-lg-7 col-7 col-sm-7 input-group date input-append">
-		<input name="{{ field.name }}"
-			type="text"
-			class="form-control form-text"
-			id="{{ field.id_for_label }}"
+	<div class="col-lg-7 col-7 col-sm-7
+			{% if addon %} input-group input-append {% endif %}
+			{% if addon == 'datepicker' %} date {% endif %}">
+
+		{# textarea #}
+		{% if field.field.widget|field_type == 'textarea' %}
+			<textarea id="{{ field.id_for_label }}" name="{{ field.name }}"
+				class="form-control" rows="5"
+				>{% if field.value %}value="{{ field.value }}"{% endif %}</textarea>
+
+		{# selection #}
+		{% elif field.field.widget|field_type == 'selection' %}
+			{{ field|add_class:"form-control" }}
+
+		{# other #}
+		{% else %}
+			<input name="{{ field.name }}"
+				type="text"
+				class="form-control form-text"
+				id="{{ field.id_for_label }}"
+				{% if addon == 'datepicker' %}
+					{% if field.value %}
+						{% with date=field.value|date:'d-m-Y' %}
+							value="{% if date %}{{ date }}{% else %}{{ field.value }}{% endif %}"
+						{% endwith %}
+					{% endif %}
+				{% else %}
+					{% if field.value %}
+						value="{{ field.value }}"
+					{% endif %}
+				{% endif %}>
+
+			{# addon #}
 			{% if addon == 'datepicker' %}
-				{% if field.value %}
-					{% with date=field.value|date:'d-m-Y' %}
-						value="{% if date %}{{ date }}{% else %}{{ field.value }}{% endif %}"
-					{% endwith %}
-				{% endif %}
-			{% else %}
-				{% if field.value %}
-					value="{{ field.value }}"
-				{% endif %}
+				<span class="input-group-addon add-on datepicker-button">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</span>
+			{% elif addon == 'text' %}
+				<span class="input-group-addon add-on">
+					{{ addon_text }}
+				</span>
 			{% endif %}
-		>
-		{% if addon == 'datepicker' %}
-			<span class="input-group-addon add-on datepicker-button">
-				<i class="glyphicon glyphicon-calendar"></i>
-			</span>
+
 		{% endif %}
 	</div>
 
 	{% include 'snippets/error_label.html' %}
+
 </div>
