@@ -2,7 +2,7 @@
 (function() {
   $(function() {
     $(".js-tooltip").tooltip();
-    return $(".datepicker-button").datepicker({
+    return $(".input-append.date").datepicker({
       format: "dd-mm-yyyy",
       todayBtn: "linked",
       language: "pl",

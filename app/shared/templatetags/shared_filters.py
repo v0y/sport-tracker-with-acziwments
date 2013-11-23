@@ -26,9 +26,9 @@ def field_type(widget):
         'DateInput': 'date',
         'EmailInput': 'email',
         'NumberInput': 'number',
-        'Select': '',
+        'Select': 'selection',
         'DateTimeInput': 'text',
-        'Textarea': '',
+        'Textarea': 'textarea',
         # TODO: radio
     }
 
