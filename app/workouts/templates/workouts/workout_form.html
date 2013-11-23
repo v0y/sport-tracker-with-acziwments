@@ -1,12 +1,22 @@
 {% extends "structure/main.html" %}
 {% load shared_filters %}
+{% load static %}
 
 {% block content %}
 	<h1 class="text-center">{{ form.Meta.name }}</h1>
+	<style type="text/css">
+		#map-canvas { height: 250px }
+	</style>
+	<div id="map-canvas"></div>
+	<form method="post" id="gpx-file-input-form" enctype="multipart/form-data" data-url="{% url 'upload_gpx' %}">
+		<input type="file" name="gpx_file">
+	</form>
+
 	<div class="row">
 	<form method="post" action="" class="form-horizontal col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
 		<fieldset>
 			{% csrf_token %}
+			{{ form.route_id }}
 			{{ form.name|bootstrap }}
 			{{ form.sport|bootstrap }}
 			{{ form.notes|bootstrap }}
@@ -65,4 +75,15 @@
 		</fieldset>
 	</form>
 	</div>
+{% endblock %}
+
+
+{% block js_import %}
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_BROWSER_KEY }}&sensor=false">
+	</script>
+	<script src="{% static 'js/moment-with-langs.min.js' %}"></script>
+	<script src="{% static 'js/jquery.cookie.min.js' %}"></script>
+	<script src="{% static 'js/map_handler.js' %}"></script>
+	<script src="{% static 'js/routes_map.js' %}"></script>
 {% endblock %}
