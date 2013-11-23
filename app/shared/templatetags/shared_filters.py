@@ -7,7 +7,7 @@ from django.template.loader import get_template
 register = template.Library()
 
 
-@register.filter('field_type')
+@register.filter
 def field_type(widget):
     """
     Filter for getting field type
@@ -25,8 +25,11 @@ def field_type(widget):
         'CheckboxInput': 'checkbox',
         'DateInput': 'date',
         'EmailInput': 'email',
+        'NumberInput': 'number',
+        'Select': '',
+        'DateTimeInput': 'text',
+        'Textarea': '',
         # TODO: radio
-        # TODO: textarea
     }
 
     return map_types[widget.__class__.__name__]
