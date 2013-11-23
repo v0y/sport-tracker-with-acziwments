@@ -1,10 +1,6 @@
 # encoding: utf-8
 
-from annoying.functions import get_object_or_None
 from django import forms
-from django.core.validators import MaxValueValidator, MinValueValidator
-from django.db.models import Q
-from django.forms import widgets
 from django.forms.models import ModelForm
 
 from .models import Health
