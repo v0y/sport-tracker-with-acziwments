@@ -2,7 +2,8 @@
 
 <h1 class="text-center">{{ form.Meta.name }}</h1>
 <div class="row">
-<form method="post" action="" class="form-horizontal col-lg-6 col-10 col-sm-10 col-lg-offset-3">{% csrf_token %}
+<form method="post" action="" class="form-horizontal col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+	{% csrf_token %}
 	<fieldset>
 		{% include "snippets/form_errors.html" %}
 		{% for field in form %}
