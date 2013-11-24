@@ -7,7 +7,8 @@
       todayBtn: "linked",
       language: "pl",
       forceParse: false,
-      todayHighlight: true
+      todayHighlight: true,
+      autoclose: true
     });
   });
 
