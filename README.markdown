@@ -133,3 +133,24 @@ Zewnętrze biblioteki/skrypty js powinny:
   itp.) do pliku skompresowanego
 * po skompresowaniu zapisane z rozszerzeniem `*.min.js`. Nieskompresowany plik
   nie powinien się znaleźć w repo.
+
+
+Zasady
+------
+
+### Urle
+
+Ścieżki urli powinny wygladać mniej więcej tak:
+
+```
+/obiekt/add
+/obiekt/edit
+/obiekt/edit/identyfikator
+/obiekt/show/identyfikator (jeśli tylko jeden typ widoku)
+/obiekt/show/[list|chart|detail]/identyfikator
+```
+
+`identyfikator` - id lub slug
+
+Gdy brak identyfikatora powinien zostać wyświetlony zasób dla zalogowanego
+usera
