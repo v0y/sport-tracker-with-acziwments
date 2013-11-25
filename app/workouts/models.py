@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator
 from django.db import models
 
@@ -34,6 +35,9 @@ class Workout(CreatedAtMixin):
     class Meta:
         verbose_name = u"trening"
         verbose_name_plural = u"treningi"
+
+    def get_absolute_url(self):
+        return reverse('workout_show', args=[self.pk])
 
     @property
     def duration(self):
