@@ -8,13 +8,7 @@
 		{% is_active_tab request 'password_change_end' %}
 	">
 		<a href="{% url 'password_change' %}" title="Zmiana hasła">Zmiana hasła</a></li>
-	<li class="
-		{% is_active_tab request 'email_change' %}
-		{% is_active_tab request 'email_change_end' %}
-		{% is_active_tab request 'email_change_confirm' %}
-		{% is_active_tab request 'email_change_confirm_end' %}
-		{% is_active_tab request 'email_change_confirm_failed' %}
-	">
+	<li class="{% is_active_tab request '/accounts/settings/email' %}">
 		<a href="{% url 'email_change' %}" title="Zmiana adresu email">Zmiana adresu email</a></li>
 	<li><a href="{{ GRAVATAR_CHANGE_URL }}" title="Zmiana avataru na gravatar.com" target="_blank">Zmiana avataru na gravatar.com</a></li>
 </ul>

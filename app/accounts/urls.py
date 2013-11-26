@@ -43,8 +43,6 @@ urlpatterns = patterns('app.accounts.views',
         name='password_reset_end'),
     url(r'^/password/reset/confirm$', 'password_reset_confirm',
         name='password_reset_confirm'),
-    url(r'^/password/reset/confirm$', 'password_reset_confirm',
-        name='password_reset_confirm'),
     url(r'^/password/reset/confirm/end$',
         TemplateView.as_view(
             template_name='accounts/password_reset_confirm_end.html'),

@@ -33,10 +33,7 @@
 					<!-- menu pull-left -->
 					<ul class="nav navbar-nav">
 						{% if user.is_authenticated %}
-							<li class="
-								{% is_active_tab request 'workout_add' %}
-								{% is_active_tab request 'workout_show' object.pk %}
-							">
+							<li class="{% is_active_tab request '/workouts' %}">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									Treningi <b class="caret"></b></a>
 								<ul class="dropdown-menu">
@@ -44,11 +41,7 @@
 								</ul>
 							</li>
 
-							<li class="
-								{% is_active_tab request 'add_health' %}
-								{% is_active_tab request 'health_show_charts' request.user.username %}
-								{% is_active_tab request 'health_show_list' request.user.username %}
-							">
+							<li class="{% is_active_tab request '/health' %}">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									Waga <b class="caret"></b></a>
 								<ul class="dropdown-menu">
@@ -62,10 +55,7 @@
 					<!-- menu pull-right -->
 					<ul class="nav navbar-nav pull-right">
 						{% if user.is_authenticated %}
-							<li class="
-								{% is_active_tab request 'profile' request.user.username %}
-								{% is_active_tab request 'profile_settings' %}
-							">
+							<li class="{% is_active_tab request '/accounts' %}">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									Cześć, {{ request.user.username }}! <b class="caret"></b></a>
 								<ul class="dropdown-menu">

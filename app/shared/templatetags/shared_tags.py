@@ -7,26 +7,29 @@ register = template.Library()
 
 
 @register.simple_tag
-def is_active_tab(request, url_name, *params):
+def is_active_tab(request, url, *params):
     """
     Check, if given tab is active
 
     **Usage**::
 
-        {% is_active_tab request 'url_name' %}
-        {% is_active_tab request 'url_name' request.parameter %}
+        {% is_active_tab 'url_startswith' %}
 
-    :param request: guess what?
-    :param url_name: tab url name (from urls.py)
-    :param parameter: parameter for url
+    :param url: first part of url path with starting '/'
+    :param params: parameters for url
     :return: string "active" if tab is active, else empty string
     :rtype: str
     """
+
+    if request.path_info.startswith(url):
+        return 'active'
+
     try:
-        tab_url = reverse(url_name, args=params)
+        tab_url = reverse(url, args=params)
     except NoReverseMatch:
         return ''
 
     if tab_url == request.path_info:
         return 'active'
+
     return ''
