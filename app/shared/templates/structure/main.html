@@ -34,6 +34,17 @@
 					<ul class="nav navbar-nav">
 						{% if user.is_authenticated %}
 							<li class="
+								{% is_active_tab request 'workout_add' %}
+								{% is_active_tab request 'workout_show' object.pk %}
+							">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									Treningi <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="{% url 'workout_add' %}"><span class="glyphicon glyphicon-plus"></span> Nowy trening</a><li>
+								</ul>
+							</li>
+
+							<li class="
 								{% is_active_tab request 'add_health' %}
 								{% is_active_tab request 'health_show_charts' request.user.username %}
 								{% is_active_tab request 'health_show_list' request.user.username %}
