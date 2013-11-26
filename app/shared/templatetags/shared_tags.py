@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from django import template
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import NoReverseMatch, reverse
 
 register = template.Library()
 
@@ -22,8 +22,11 @@ def is_active_tab(request, url_name, *params):
     :return: string "active" if tab is active, else empty string
     :rtype: str
     """
-    tab_url = reverse(url_name, args=params)
-    current_url = request.path_info
-    if tab_url == current_url:
+    try:
+        tab_url = reverse(url_name, args=params)
+    except NoReverseMatch:
+        return ''
+
+    if tab_url == request.path_info:
         return 'active'
     return ''
