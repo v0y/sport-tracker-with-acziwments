@@ -65,8 +65,9 @@ Aby wysłać maila wystarczy, że wywołasz funkcję [`simple_send_email()`](htt
   przefiltruj ją tym filtrem. Zamiast `Nona` dostaniesz pusty string.
 
 * [`is_active_tab()`](http://sports-tracker-with-achievements.readthedocs.org/en/latest/static/modules/shared/templatetags/shared_tags.html#shared.templatetags.shared_tags.is_active_tab) -
-  filtrujesz nim `request`, jako parametr podajesz nazwę urla, on w całej
-  swojej wdzięczności zwraca string `active`, jeśli właśnie znajdujemy się pod
+  filtrujesz nim `request`, jako parametr podajesz nazwę lub poszątkowy
+  fragment urla (pamiętaj o początkowym slaszu!), on w całej swojej
+  wdzięczności zwraca string `active`, jeśli właśnie znajdujemy się pod
   podanym urlem.
 
 
