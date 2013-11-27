@@ -19,9 +19,9 @@ def create_database():
     Create database with devdata, create superuser.
     """
     local("./manage.py syncdb --noinput -v0")
-    local("./manage.py migrate -v0")
+    local("./manage.py migrate -v0 --no-initial-data")
     execute(create_superuser)
-    local("./manage.py loaddata devdata -v0")
+    local("./manage.py loaddata devdata initial_data -v0")
 
 
 def create_superuser(username='admin', password='a'):
