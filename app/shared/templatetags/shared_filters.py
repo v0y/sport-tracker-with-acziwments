@@ -23,12 +23,14 @@ def field_type(widget):
         'TextInput': 'text',
         'PasswordInput': 'password',
         'CheckboxInput': 'checkbox',
-        'DateInput': 'date',
+        'DateInput': 'text',
+        'TimeInput': 'text',
         'EmailInput': 'email',
-        'NumberInput': 'number',
+        'NumberInput': 'text',
         'Select': 'selection',
         'DateTimeInput': 'text',
         'Textarea': 'textarea',
+        'SelectDateWidgetWithNone': 'special',
         # TODO: radio
     }
 

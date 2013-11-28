@@ -242,7 +242,8 @@ class ChangeEmailForm(CheckCurrentPasswordMixin, EmailMixin):
 class UserProfileForm(ModelForm):
     dob = forms.DateField(widget=SelectDateWidgetWithNone(
         years=(lambda y=date.today().year: range(y, y - 150, -1))(),
-        attrs={'class': 'form-control dob-field'}), required=False)
+        attrs={'class': 'form-control dob-field'}), required=False,
+        label=u"Data urodzenia")
 
     class Meta:
         model = UserProfile

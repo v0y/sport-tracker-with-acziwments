@@ -7,21 +7,7 @@
 	<fieldset>
 		{% include "snippets/form_errors.html" %}
 		{% for field in form %}
-			<div class="form-group label-wrapper row" id="js-{{ field.name }}-group">
-				{% include "snippets/field_label.html" %}
-
-				<div class="col-lg-7 col-7 col-sm-7">
-					<input name="{{ field.name }}"
-						type="{{ field.field.widget|field_type }}"
-						class="form-control form-{{ field.field.widget|field_type }} {{ field.field.widget.attrs.class }}"
-						id="{{ field.id_for_label }}"
-						{% if field.value %}
-							value="{{ field.value }}"
-						{% endif %}>
-				</div>
-
-				{% include "snippets/error_label.html" %}
-			</div>
+			{{ field|bootstrap }}
 		{% endfor %}
 		{% include "snippets/submit_button.html" %}
 	</fieldset>

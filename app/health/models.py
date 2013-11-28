@@ -13,11 +13,11 @@ from app.shared.models import RelatedDateMixin
 class Health(RelatedDateMixin):
     user = models.ForeignKey(
         User, verbose_name=u'Użytkownik', related_name='health')
-    weight = models.FloatField(verbose_name=u'Waga (kg)', null=True,
+    weight = models.FloatField(verbose_name=u'Waga', null=True,
         blank=True, validators=[MinValueValidator(0)])
-    fat = models.FloatField(verbose_name=u'Tłuszcz (%)', null=True, blank=True,
+    fat = models.FloatField(verbose_name=u'Tłuszcz', null=True, blank=True,
         validators=[MaxValueValidator(100), MinValueValidator(0)])
-    water = models.FloatField(verbose_name=u'Woda (%)', null=True, blank=True,
+    water = models.FloatField(verbose_name=u'Woda', null=True, blank=True,
         validators=[MaxValueValidator(100), MinValueValidator(0)])
 
     class Meta:

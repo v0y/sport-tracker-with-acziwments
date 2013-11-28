@@ -22,7 +22,10 @@ def add_health(request):
     """
     Add health entry
     """
-    form = HealthForm(request.POST or None)
+    form = HealthForm(
+        request.POST or None,
+        initial={'related_date': datetime.strftime(datetime.now(), '%d-%m-%Y')}
+    )
     if form.is_valid():
         pre_saved_form = form.save(commit=False)
         pre_saved_form.user = request.user
@@ -45,9 +48,8 @@ def edit_health(request, pk):
 
     form = HealthForm(request.POST or None, instance=health)
     if form.is_valid():
-        pre_saved_form = form.save(commit=False)
-        pre_saved_form.user = request.user
-        pre_saved_form.save()
+        form.user = request.user
+        form.save()
         return redirect(reverse('health_show_list'))
     return {'form': form}
 

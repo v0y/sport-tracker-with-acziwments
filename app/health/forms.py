@@ -6,11 +6,20 @@ from django.forms.models import ModelForm
 from .models import Health
 
 
+def _str_to_float(string):
+    try:
+        number = float(string.replace(',', '.'))
+    except ValueError:
+        return None
+    return number
+
+
 class HealthForm(ModelForm):
-    related_date = forms.CharField(label=u"Data pomiaru")
-    weight = forms.CharField(label=u'Waga (kg)', required=False)
-    fat = forms.CharField(label=u'Tłuszcz (%)', required=False)
-    water = forms.CharField(label=u'Woda (%)', required=False)
+    related_date = forms.DateField(
+        label=u"Data Pomiaru", input_formats=['%d-%m-%Y'])
+    weight = forms.CharField(label=u'Waga', required=False)
+    fat = forms.CharField(label=u'Tłuszcz', required=False)
+    water = forms.CharField(label=u'Woda', required=False)
 
     class Meta:
         button_text = u"Zapisz"
@@ -23,21 +32,14 @@ class HealthForm(ModelForm):
         weight = cd.get('weight')
         fat = cd.get('fat')
         water = cd.get('water')
-        datas = [weight, fat, water]
-        if not [data for data in datas if type(data) in (float, int)]:
+        if not any([weight, fat, water]):
             raise forms.ValidationError(
-                u"Conajmniej jedno z pól 'Waga', 'Tłuszcz', 'Woda' musi "
+                u"Co najmniej jedno z pól 'Waga', 'Tłuszcz', 'Woda' musi "
                 u"zostać wypełnione")
         return cd
 
     def clean_related_date(self):
         date = self.cleaned_data.get('related_date')
-        # change format
-        try:
-            ds = date.split('-')
-            date = '%s-%s-%s' % (ds[2], ds[1], ds[0])
-        except IndexError:
-            pass
         # check, if entry for this date already exist
         current_pk = self.instance.pk
         if Health.objects.filter(related_date=date).exclude(pk=current_pk):
@@ -46,25 +48,10 @@ class HealthForm(ModelForm):
         return date
 
     def clean_weight(self):
-        weight = self.cleaned_data.get('weight')
-        try:
-            weight = float(weight.replace(',', '.'))
-        except ValueError:
-            pass
-        return weight
-    
+        return _str_to_float(self.cleaned_data.get('weight'))
+
     def clean_fat(self):
-        fat = self.cleaned_data.get('fat')
-        try:
-            fat = float(fat.replace(',', '.'))
-        except ValueError:
-            pass
-        return fat
-    
+        return _str_to_float(self.cleaned_data.get('fat'))
+
     def clean_water(self):
-        water = self.cleaned_data.get('water')
-        try:
-            water = float(water.replace(',', '.'))
-        except ValueError:
-            pass
-        return water
+        return _str_to_float(self.cleaned_data.get('water'))

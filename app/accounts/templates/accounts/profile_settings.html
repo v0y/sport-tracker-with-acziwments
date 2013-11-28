@@ -11,61 +11,10 @@
 		<form method="post" action="" class="form-horizontal col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
 			{% csrf_token %}
 			<fieldset>
-				<div class="form-group label-wrapper row">
-					<div class="col-lg-3 col-3 col-sm-3 text-right">
-						<label for="{{ form.dob.id_for_label }}" class="control-label">Data urodzin</label>
-					</div>
 
-					<div class="col-lg-7 col-7 col-sm-7">
-						{{ form.dob }}
-					</div>
-
-					<div class="col-lg-2 col-2 col-sm-2 text-right">
-						{% for error in form.dob.errors %}
-							<span class="label label-danger">
-								{{ error }}
-							</span>
-						{% endfor %}
-					</div>
-				</div>
-
-
-				<div class="form-group label-wrapper row">
-					<div class="col-lg-3 col-3 col-sm-3 text-right">
-						<label for="{{ form.sex.id_for_label }}" class="control-label">Płeć</label>
-					</div>
-
-					<div class="col-lg-7 col-7 col-sm-7">
-						{{ form.sex|add_class:"form-control" }}
-					</div>
-
-					<div class="col-lg-2 col-2 col-sm-2 text-right">
-						{% for error in form.sex.errors %}
-							<span class="label label-danger">
-								{{ error }}
-							</span>
-						{% endfor %}
-					</div>
-				</div>
-
-
-				<div class="form-group label-wrapper row">
-					<div class="col-lg-3 col-3 col-sm-3 text-right">
-						<label for="{{ form.height.id_for_label }}" class="control-label">Wzrost (cm)</label>
-					</div>
-
-					<div class="col-lg-7 col-7 col-sm-7">
-						{{ form.height|add_class:"form-control" }}
-					</div>
-
-					<div class="col-lg-2 col-2 col-sm-2 text-right">
-						{% for error in form.height.errors %}
-							<span class="label label-danger">
-								{{ error }}
-							</span>
-						{% endfor %}
-					</div>
-				</div>
+				{{ form.dob|bootstrap }}
+				{{ form.sex|bootstrap }}
+				{{ form.height|bootstrap:"text|cm" }}
 
 				{% include "snippets/submit_button.html" %}
 			</fieldset>

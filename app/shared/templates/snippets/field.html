@@ -1,7 +1,7 @@
 {% load widget_tweaks %}
 {% load shared_filters %}
 
-<div class="form-group label-wrapper row">
+<div class="form-group label-wrapper row" id="js-{{ field.name }}-group">
 	{% include 'snippets/field_label.html' %}
 
 	<div class="col-lg-7 col-7 col-sm-7
@@ -11,18 +11,17 @@
 		{# textarea #}
 		{% if field.field.widget|field_type == 'textarea' %}
 			<textarea id="{{ field.id_for_label }}" name="{{ field.name }}"
-				class="form-control" rows="5"
-				>{% if field.value %}value="{{ field.value }}"{% endif %}</textarea>
+				class="form-control" rows="5">{{ field.value|I_dont_want_None }}</textarea>
 
 		{# selection #}
-		{% elif field.field.widget|field_type == 'selection' %}
+		{% elif field.field.widget|field_type == 'selection' or field.field.widget|field_type == 'special' %}
 			{{ field|add_class:"form-control" }}
 
 		{# other #}
 		{% else %}
 			<input name="{{ field.name }}"
-				type="text"
-				class="form-control form-text"
+				type="{{ field.field.widget|field_type }}"
+				class="form-control form-{{ field.field.widget|field_type }} {{ field.field.widget.attrs.class }}"
 				id="{{ field.id_for_label }}"
 				{% if addon == 'datepicker' %}
 					{% if field.value %}
@@ -31,9 +30,7 @@
 						{% endwith %}
 					{% endif %}
 				{% else %}
-					{% if field.value %}
-						value="{{ field.value }}"
-					{% endif %}
+					value="{{ field.value|I_dont_want_None }}"
 				{% endif %}>
 
 			{# addon #}
