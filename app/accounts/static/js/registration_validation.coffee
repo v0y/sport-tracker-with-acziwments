@@ -154,7 +154,6 @@ class RePassword extends Field
 
 class Rules extends Field
     validateChecked: ->
-        console.log(@field.is(':checked'))
         if @field.is(':checked')
             @setOk()
         else
@@ -162,6 +161,7 @@ class Rules extends Field
 
     runValidators: ->
         @validateChecked()
+        return true
 
 main = ->
     # initialize

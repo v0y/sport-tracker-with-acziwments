@@ -239,7 +239,6 @@
     }
 
     Rules.prototype.validateChecked = function() {
-      console.log(this.field.is(':checked'));
       if (this.field.is(':checked')) {
         return this.setOk();
       } else {
@@ -248,7 +247,8 @@
     };
 
     Rules.prototype.runValidators = function() {
-      return this.validateChecked();
+      this.validateChecked();
+      return true;
     };
 
     return Rules;
