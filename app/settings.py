@@ -45,7 +45,6 @@ DATABASES = {
 if 'test' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}
 
-
 ###############################################################################
 # Localization settings
 ###############################################################################
@@ -158,7 +157,8 @@ INSTALLED_APPS = filter(None, [
 # Third party apps settings
 ###############################################################################
 
-# Django Nose
+# Tests
+SOUTH_TESTS_MIGRATE = False
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 
