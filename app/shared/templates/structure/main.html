@@ -6,7 +6,7 @@
 	<head>
 		<title>{% block title %}Tytuł strony{% endblock %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 		<link rel="stylesheet" media="screen" href="{% static 'css/reset.css' %}">
 		<link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 		<link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
@@ -37,7 +37,7 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									Treningi <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="{% url 'workout_add' %}"><span class="glyphicon glyphicon-plus"></span> Nowy trening</a><li>
+									<li><a href="{% url 'workout_add' %}"><i class="fa fa-plus"></i> Nowy trening</a><li>
 								</ul>
 							</li>
 
@@ -45,9 +45,9 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									Waga <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="{% url 'health_show_charts' request.user.username %}"><span class="icon-bar-chart"></span> Wykresy</a><li>
-									<li><a href="{% url 'health_show_list' request.user.username %}"><span class="icon-list-alt"></span> Lista pomiarów</a><li>
-									<li><a href="{% url 'add_health' %}"><span class="glyphicon glyphicon-plus"></span> Dodaj pomiar</a><li>
+									<li><a href="{% url 'health_show_charts' request.user.username %}"><i class="fa fa-bar-chart-o"></i> Wykresy</a><li>
+									<li><a href="{% url 'health_show_list' request.user.username %}"><i class="fa fa-list-alt"></i> Lista pomiarów</a><li>
+									<li><a href="{% url 'add_health' %}"><i class="fa fa-plus"></i> Dodaj pomiar</a><li>
 								</ul>
 							</li>
 						{% endif %}
@@ -59,9 +59,9 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									Cześć, {{ request.user.username }}! <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="{% url 'profile' request.user.username %}"><span class="glyphicon glyphicon-user"></span> Mój profil</a><li>
-									<li><a href="{% url 'profile_settings' %}"><span class="glyphicon glyphicon-cog"></span> Ustawienia konta</a><li>
-									<li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-off"></span> Wyloguj</a><li>
+									<li><a href="{% url 'profile' request.user.username %}"><i class="fa fa-user"></i> Mój profil</a><li>
+									<li><a href="{% url 'profile_settings' %}"><i class="fa fa-cog"></i> Ustawienia konta</a><li>
+									<li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Wyloguj</a><li>
 								</ul>
 							</li>
 						{% else %}
