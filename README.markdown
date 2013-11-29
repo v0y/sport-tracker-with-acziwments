@@ -100,6 +100,12 @@ zaczerpnięty z [colourlovers.com](http://www.colourlovers.com/business/trends/b
 ![kolory](docs/colors.png)
 
 
+### Ikony
+
+Nie używaj bootstrapowych [Glyphicons](http://getbootstrap.com/components/#glyphicons),
+zamiast tegu użyj [Font Awesome 4](http://fontawesome.io/).
+
+
 Narzędzia
 ---------
 
