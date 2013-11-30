@@ -45,11 +45,20 @@ def create_superuser(username='admin', password='a'):
     local("./manage.py set_password %s %s" % (username, password))
 
 
+def install_host_requirements():
+    """
+    Install pip and bower requirements.
+    """
+    local("pip install -r host-requirements.txt")
+    local("cat npm-host-requirements.txt | xargs -I % npm install %")
+
+
 def install_requirements():
     """
     Install pip and bower requirements.
     """
     local("pip install -r requirements.txt")
+    local("cat npm-requirements.txt | xargs -I % npm install %")
     local("./manage.py bower_install")
 
 
