@@ -39,5 +39,6 @@ media
 public_html
 
 # modules
+node-*
 node_modules
 components
