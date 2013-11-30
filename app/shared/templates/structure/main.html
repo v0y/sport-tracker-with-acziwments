@@ -6,12 +6,7 @@
 	<head>
 		<title>{% block title %}Tytuł strony{% endblock %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-		<link rel="stylesheet" media="screen" href="{% static 'css/reset.css' %}">
-		<link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-		<link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
-		<link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/datepicker.min.css' %}">
-		<link rel="stylesheet" media="screen" href="{% static 'css/style.css' %}">
+		{% include 'structure/include_css.html' %}
 		{% block css_import %}{% endblock %}
 	</head>
 
@@ -87,14 +82,7 @@
 			</div>
 		</div> <!-- wrapper -->
 
-
-		<!-- jQuery 2. Because fuck you IE < 9  -->
-		<script src="{% static "js/jquery-2.0.3.min.js" %}" type="text/javascript"></script>
-		<script src="{% static "bootstrap/js/bootstrap.min.js" %}" type="text/javascript"></script>
-		<script src="{% static "bootstrap/js/bootstrap-datepicker.min.js" %}" type="text/javascript"></script>
-		<script src="{% static "bootstrap/js/bootstrap-datepicker.pl.min.js" %}" type="text/javascript" charset="UTF-8"></script>
-		<script src="{% static "js/onload.js" %}" type="text/javascript"></script>
-
+		{% include 'structure/include_js.html' %}
 		{% block js_import %}{% endblock %}
 	</body>
 </html>
