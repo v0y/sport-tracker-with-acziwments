@@ -1,1 +1,2 @@
 uglify-js
+uglifycss

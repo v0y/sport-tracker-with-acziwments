@@ -136,12 +136,36 @@ W projekcie do pisania styli używany jest [less](http://lesscss.org).
 Przykład: `lessc styles.less styles.css --yui-compress`.
 
 
+### CSS
+
+**Uwaga!** uglifycss instalowany jest przez polecenie
+`fab install_host_requirements`
+
+Zewnętrzne CSS-y powinny:
+
+* być wrzucane do katalogu `app/shared/static/css` lub
+  `app/shared/static/bootstrap/css` (jeśli dotyczą bootstrapa, np.
+  "bootarap-cośtam.min.css"), chyba, że są szczególne dla jakiejś aplikacji -
+  wtedy do statyków tej apki
+* minimalizowane za pomocą [uglifycss](https://github.com/fmarcia/UglifyCSS) z
+  parametrami `--cute-comments`, na przykład:
+  ```
+  uglifycss --cute-comments style.css > style.min.css
+  ```
+* po skompresowaniu zapisane z rozszerzeniem `*.min.css`. Nieskompresowany plik
+  nie powinien się znaleźć w repo.
+
 ### JS
+
+**Uwaga!** uglify-js instalowany jest przez polecenie
+`fab install_host_requirements`
 
 Zewnętrze biblioteki/skrypty js powinny:
 
-* być wrzucane do katalogu `app/shared/static/js`, chyba, że są szczególne dla
-  jakiejś aplikacji - wtedy do statyków tej apki
+* być wrzucane do katalogu `app/shared/static/js` lub
+  `app/shared/static/bootstrap/js` (jeśli dotyczą bootstrapa, np.
+  "bootarap-cośtam.min.js"), chyba, że są szczególne dla jakiejś aplikacji -
+  wtedy do statyków tej apki
 * minimalizowane za pomocą [`uglifyjs2`](https://github.com/mishoo/UglifyJS2) z
   parametrami `-c --preamble`, na przykład:
   ```
