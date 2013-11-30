@@ -1,6 +1,18 @@
 Sports tracker with achievements
 ================================
 
+Zaczynamy zabawę!
+-----------------
+
+1. Zainstaluj [virtualenv](https://pypi.python.org/pypi/virtualenv), utwórz
+   virtualenva, aktywuj virtualenva, przejdź do katalogu, gdzie chcesz mieć
+   projekt
+1. `git clone git@github.com:v0y/sport-tracker-with-acziwments.git`
+1. Przejdź do folderu zassanego projektu: `cd sport-tracker-with-acziwments`
+1. `pip install -r host-requirements.txt`
+1. Zainstaluj całą resztę i utwórz bazę danych przez `fab lets_rock`
+
+
 Kilka informacji o projekcie - kod
 ----------------------------------
 
