@@ -79,7 +79,6 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    join(_current_dir, 'submodules'),
 )
 
 STATICFILES_FINDERS = (
@@ -158,6 +157,7 @@ INSTALLED_APPS = filter(None, [
 ])
 
 BOWER_INSTALLED_APPS = (
+    'fullcalendar',
 )
 
 

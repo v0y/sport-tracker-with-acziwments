@@ -1,5 +1,13 @@
 {% extends "structure/main.html" %}
 
 {% block content %}
+	<div class="row">
+		<div id="calendar" class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1"></div>
+	</div>
 	{{ object }}
+{% endblock %}
+
+{% block js_import %}
+	{% load static %}
+	<script src="{% static "js/workouts_calendar.js" %}" type="text/javascript"></script>
 {% endblock %}
