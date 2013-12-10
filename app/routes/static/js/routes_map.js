@@ -68,7 +68,7 @@
     $('#id_route_id').val(routeId);
     $('#id_distance').val(mapHandler.distance);
     $('#id_datetime_start').val(mapHandler.startTime.format('DD-MM-YYYY'));
-    $('#id_time_start').val(mapHandler.startTime.format('HH:mm'));
+    $('#id_time_start').val(mapHandler.startTime.format('HH:mm:ss'));
     $('#id_duration_hours').val(mapHandler.duration.hours());
     $('#id_duration_mins').val(mapHandler.duration.minutes());
     return $('#id_duration_secs').val(mapHandler.duration.seconds());

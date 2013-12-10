@@ -161,13 +161,13 @@ class Route
 
     getStartFinishTimes: ->
         startTimeString = @tracks[0].segments[0][0].time
-        @startTime = moment(startTimeString, 'YYYY-MM-DD HH:mm')
+        @startTime = moment(startTimeString, 'YYYY-MM-DD HH:mm:ss')
 
         lastTracks = @tracks[@tracks.length-1].segments
         lastSegment = lastTracks[lastTracks.length-1]
         endTimeString = lastSegment[lastSegment.length-1].time
 
-        @endTime = moment(endTimeString, 'YYYY-MM-DD HH:mm')
+        @endTime = moment(endTimeString, 'YYYY-MM-DD HH:mm:ss')
 
         @totalTime = @endTime.diff(@startTime, 'minutes')
 

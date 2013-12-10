@@ -202,11 +202,11 @@
       var endTimeString, lastSegment, lastTracks, startTimeString;
 
       startTimeString = this.tracks[0].segments[0][0].time;
-      this.startTime = moment(startTimeString, 'YYYY-MM-DD HH:mm');
+      this.startTime = moment(startTimeString, 'YYYY-MM-DD HH:mm:ss');
       lastTracks = this.tracks[this.tracks.length - 1].segments;
       lastSegment = lastTracks[lastTracks.length - 1];
       endTimeString = lastSegment[lastSegment.length - 1].time;
-      this.endTime = moment(endTimeString, 'YYYY-MM-DD HH:mm');
+      this.endTime = moment(endTimeString, 'YYYY-MM-DD HH:mm:ss');
       return this.totalTime = this.endTime.diff(this.startTime, 'minutes');
     };
 

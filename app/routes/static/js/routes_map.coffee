@@ -74,7 +74,7 @@ fillFormFields = (routeId, mapHandler) ->
     # start date
     $('#id_datetime_start').val(mapHandler.startTime.format('DD-MM-YYYY'))
     # start time
-    $('#id_time_start').val(mapHandler.startTime.format('HH:mm'))
+    $('#id_time_start').val(mapHandler.startTime.format('HH:mm:ss'))
     # duration
     $('#id_duration_hours').val(mapHandler.duration.hours())
     $('#id_duration_mins').val(mapHandler.duration.minutes())
