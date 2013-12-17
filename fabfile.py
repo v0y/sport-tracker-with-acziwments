@@ -5,9 +5,17 @@ from os.path import dirname, join, realpath
 from fabric.context_managers import lcd
 from fabric.operations import local
 from fabric.tasks import execute
+from app.settings import DATABASES
 
 
 _current_dir = dirname(realpath(__file__))
+
+
+def _mysql_command(sql):
+    db = DATABASES['default']
+    return local(
+        'echo "%s" | mysql --batch --user=%s --password=%s' %
+        (sql, db['USER'], db['PASSWORD']))
 
 
 def drop_database():
@@ -21,10 +29,11 @@ def create_database():
     """
     Create database with devdata, create superuser.
     """
+
     # create database
-    sql = 'CREATE DATABASE stwa ' \
-          'CHARACTER SET utf8 COLLATE utf8_general_ci;'
-    local("echo '%s' | python ./manage.py dbshell" % sql)
+    _mysql_command(
+        'CREATE DATABASE %s CHARACTER SET utf8 COLLATE utf8_general_ci;' %
+        DATABASES['default']['NAME'])
 
     # sync
     local("./manage.py syncdb --noinput -v0")
@@ -34,6 +43,19 @@ def create_database():
 
     # load data
     local("./manage.py loaddata devdata initial_data -v0")
+
+
+def create_database_role():
+    """
+    Creates database role for django app.
+    """
+    db = DATABASES['default']
+
+    sql = "CREATE USER '%s'@'localhost' IDENTIFIED BY '%s';" % \
+          (db['USER'], db['PASSWORD'])
+    sql += "GRANT ALL PRIVILEGES ON *.* TO '%s'@'localhost'" \
+           " WITH GRANT OPTION;" % db['USER']
+    local('echo "%s" | mysql -u root -p' % sql)
 
 
 def create_superuser(username='admin', password='a'):
@@ -57,7 +79,7 @@ def install_npm_requirements():
     """
     Install npm requirements.
     """
-    local("cat npm-requirements.txt | xargs -I % npm install %")
+    local("cat npm-requirements.txt | xargs -I % sudo npm install %")
 
 
 def install_requirements():
@@ -82,12 +104,11 @@ def lets_rock():
     # npm
     local("curl https://npmjs.org/install.sh | sh")
 
-    # npm requirements
-    local("cat npm-requirements.txt | xargs -I % npm install %")
-
     # Install pip and bower requirements
     execute(install_requirements)
 
+    # database
+    execute(create_database_role)
     execute(create_database)
 
 
