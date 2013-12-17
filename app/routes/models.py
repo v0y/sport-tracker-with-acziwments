@@ -9,6 +9,7 @@ from app.shared.models import CreatedAtMixin
 from app.workouts.models import Workout
 from .gpx_handler import handle_gpx
 
+
 class Route(CreatedAtMixin):
     workout = models.ForeignKey(
         Workout, null=True, related_name=u'routes', default=None,
@@ -17,15 +18,15 @@ class Route(CreatedAtMixin):
         User, related_name=u'routes', verbose_name=u"Użytkownik")
 
     start_time = models.DateTimeField(
-        auto_now=False, null=True, verbose_name=u'Czas rozpoczęcia trasy')
+        auto_now=False, null=True, verbose_name=u"Czas rozpoczęcia trasy")
     finish_time = models.DateTimeField(
-        auto_now=False, null=True, verbose_name=u'Czas zakończenia trasy')
+        auto_now=False, null=True, verbose_name=u"Czas zakończenia trasy")
     length = models.FloatField(
-        default=0, verbose_name=u'Długość trasy')
+        default=0, verbose_name=u"Długość trasy")
     height_up = models.FloatField(
-        default=0, verbose_name=u'Różnica wysokości w górę')
+        default=0, verbose_name=u"Różnica wysokości w górę")
     height_down = models.FloatField(
-        default=0, verbose_name=u'Różnica wysokości w dół')
+        default=0, verbose_name=u"Różnica wysokości w dół")
 
     tracks_json = models.TextField(default='[]')
 

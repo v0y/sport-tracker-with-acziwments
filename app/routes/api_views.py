@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Route
 
+
 @ajax_request
 @login_required
 def upload_gpx(request):
@@ -12,9 +13,10 @@ def upload_gpx(request):
     Accept uploaded gpx file and create new route object.
     """
     # TODO: file validation
-    if request.FILES['gpx_file']:
+    gpx_file = request.FILES['gpx_file']
+    if gpx_file:
         # save file to db
-        id, tracks_json = Route.route_from_gpx(request.FILES['gpx_file'], request)
-        return {'id': id, 'tracks': tracks_json, 'info': 'OK'}
+        route_id, tracks_json = Route.route_from_gpx(gpx_file, request)
+        return {'id': route_id, 'tracks': tracks_json, 'info': 'OK'}
 
     return {'info': 'Error'}

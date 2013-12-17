@@ -11,9 +11,9 @@ class RouteIdMixin(ModelForm):
 
     def clear_route_id(self):
         if self.cleaned_data['route_id']:
-            id = self.cleaned_data['route_id']
-            if Route.objects.filter(id=id).exists():
-                return id
+            route_id = self.cleaned_data['route_id']
+            if Route.objects.filter(id=route_id).exists():
+                return route_id
             else:
                 raise forms.ValidationError("Non-existent route id supplied.")
 
@@ -23,6 +23,6 @@ class RouteIdMixin(ModelForm):
         if route_id:
             route = Route.objects.get(id=route_id)
 
-        # save
-        route.workout = workout
-        route.save()
+            # save
+            route.workout = workout
+            route.save()

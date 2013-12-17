@@ -6,6 +6,7 @@ from xml.etree.cElementTree import parse
 
 from dateutil import parser as iso8601parser
 
+
 def handle_gpx(gpx_file):
     # convert gpx to tracks
     tracks = gpx_to_tracks(gpx_file)
@@ -14,7 +15,7 @@ def handle_gpx(gpx_file):
     start_time, finish_time = get_start_and_finish_times(tracks)
     length, height_up, height_down = get_distance_and_elevations_delta(tracks)
 
-    return (tracks, start_time, finish_time, length, height_up, height_down)
+    return tracks, start_time, finish_time, length, height_up, height_down
 
 
 def gpx_to_tracks(gpx_file):
@@ -43,7 +44,8 @@ def gpx_to_tracks(gpx_file):
             segment = []
             for pt in seg:
                 # convert iso 8601 to string suitable for javascript conversion
-                time = iso8601parser.parse(pt.find(time_ns).text).strftime("%Y-%m-%d %H:%M:%S")
+                time = iso8601parser.parse(pt.find(time_ns).text) \
+                    .strftime("%Y-%m-%d %H:%M:%S")
                 point = {
                     'lat': float(pt.attrib['lat']),
                     'lon': float(pt.attrib['lon']),
@@ -65,7 +67,7 @@ def get_distance_and_elevations_delta(tracks):
         for segment in track['segments']:
             i = 1
             while i < len(segment):
-                point1 = segment[i-1]
+                point1 = segment[i - 1]
                 point2 = segment[i]
 
                 # get distance
@@ -101,18 +103,18 @@ def get_start_and_finish_times(tracks):
 
 
 def get_distance(point1, point2):
-    lat1 ,lon1 = point1['lat'], point1['lon']
+    lat1, lon1 = point1['lat'], point1['lon']
     lat2, lon2 = point2['lat'], point2['lon']
 
-    dlat = deg2rad(lat2-lat1)
-    dlon = deg2rad(lon2-lon1)
-    a = math.sin(dlat/2) ** 2 + (math.cos(deg2rad(lat1)) *
-        math.cos(deg2rad(lat2)) * math.sin(dlon/2) ** 2)
-    return 2 * math.atan2(math.sqrt(a), math.sqrt(1-a)) * 6371
+    dlat = deg2rad(lat2 - lat1)
+    dlon = deg2rad(lon2 - lon1)
+    a = math.sin(dlat / 2) ** 2 + (math.cos(deg2rad(lat1)) *
+        math.cos(deg2rad(lat2)) * math.sin(dlon / 2) ** 2)
+    return 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a)) * 6371
 
 
 def deg2rad(deg):
-    return deg * (math.pi/180)
+    return deg * (math.pi / 180)
 
 
 # A UTC class.
