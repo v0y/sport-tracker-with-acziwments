@@ -38,10 +38,7 @@ def create_database():
         'CREATE DATABASE %s CHARACTER SET utf8 COLLATE utf8_general_ci;' %
         DATABASES['default']['NAME'])
 
-    # sync
-    local("./manage.py syncdb --noinput -v0")
-    local("./manage.py migrate -v0 --no-initial-data")
-
+    execute(syncdb)
     execute(create_superuser)
 
     # load data
@@ -127,3 +124,12 @@ def recreate_database():
     """
     execute(drop_database)
     execute(create_database)
+
+
+@task(alias='migrate')
+def syncdb():
+    """
+    Migrate database (syncdb + migrate)
+    """
+    local("./manage.py syncdb --noinput -v0")
+    local("./manage.py migrate -v0 --no-initial-data")
