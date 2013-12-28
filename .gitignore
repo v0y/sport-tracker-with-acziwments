@@ -42,3 +42,6 @@ public_html
 node-*
 node_modules
 components
+
+# logs
+*.log
