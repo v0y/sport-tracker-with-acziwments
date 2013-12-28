@@ -3,6 +3,7 @@
 from os.path import dirname, join, realpath
 
 from fabric.context_managers import lcd
+from fabric.decorators import task
 from fabric.operations import local
 from fabric.tasks import execute
 from app.settings import DATABASES
@@ -18,6 +19,7 @@ def _mysql_command(sql):
         (sql, db['USER'], db['PASSWORD']))
 
 
+@task
 def drop_database():
     """
     Drop and create database.
@@ -25,6 +27,7 @@ def drop_database():
     local("echo 'DROP DATABASE stwa;' | python ./manage.py dbshell")
 
 
+@task
 def create_database():
     """
     Create database with devdata, create superuser.
@@ -58,6 +61,7 @@ def create_database_role():
     local('echo "%s" | mysql -u root -p' % sql)
 
 
+@task
 def create_superuser(username='admin', password='a'):
     """
     Create superuser with given username (or "admin") and password (or "a").
@@ -67,6 +71,7 @@ def create_superuser(username='admin', password='a'):
     local("./manage.py set_password %s %s" % (username, password))
 
 
+@task
 def install_host_requirements():
     """
     Install pip and npm host requirements.
@@ -75,6 +80,7 @@ def install_host_requirements():
     local("cat npm-host-requirements.txt | xargs -I % npm install %")
 
 
+@task
 def install_npm_requirements():
     """
     Install npm requirements.
@@ -82,6 +88,7 @@ def install_npm_requirements():
     local("cat npm-requirements.txt | xargs -I % sudo npm install %")
 
 
+@task
 def install_requirements():
     """
     Install pip and bower requirements.
@@ -91,6 +98,7 @@ def install_requirements():
     local("./manage.py bower_install")
 
 
+@task
 def lets_rock():
     """
     Install all required packages and create database.
@@ -112,6 +120,7 @@ def lets_rock():
     execute(create_database)
 
 
+@task
 def recreate_database():
     """
     Drop and create database, run syncdb and migrations, create superuser.
