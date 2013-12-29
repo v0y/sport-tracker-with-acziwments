@@ -131,9 +131,10 @@ projektu
 
 W projekcie do pisania styli używany jest [less](http://lesscss.org).
 
-**Uwaga!** Pliki `*.less` należy kompilować z parametrem `--yui-compress`.
+**Uwaga!** Pliki `*.less` należy kompilować z parametrem `-x` odpowiedzialnym za
+minifikację.
 
-Przykład: `lessc styles.less styles.css --yui-compress`.
+Przykład: `lessc styles.less styles.css -x`.
 
 
 ### CSS
