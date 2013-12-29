@@ -1,13 +1,111 @@
 {% extends "structure/main.html" %}
 
 {% block content %}
-	<div class="row">
-		<div id="calendar" class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1"></div>
+	<div class="workout">
+
+		<div class="row">
+			<div id="calendar" class="col-lg-12 col-md-12 col-sm-12"></div>
+		</div>
+
+		<div class="row workout-details">
+			<div class="col-lg-7 col-md-7 col-sm-12">
+
+				<div class="panel panel-default">
+
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							{% if object.name %}
+								{{ object.name }}
+							{% else %}
+								{{ object.sport }}
+							{% endif %}
+						</h3>
+					</div>
+
+					<div class="panel-body">
+						<ul class="list-group details-list">
+
+							{% if object.notes %}
+								<li class="list-group-item">
+									<div class="detail-container">
+										<div class="detail-icon">
+											<i class="fa fa-pencil fa-2x"></i>
+										</div>
+										<div class="detail-element">
+											<span class="text-muted">
+												notatki
+											</span><br>
+											{{ object.notes }}
+										</div>
+									</div>
+								</li>
+							{% endif %}
+
+							<li class="list-group-item">
+								<div class="detail-icon">
+									<i class="fa fa-calendar fa-2x"></i>
+								</div>
+								<div class="detail-element">
+									<span class="text-muted">
+										czas rozpoczęcia treningu
+									</span><br>
+									<strong>{{ object.datetime_start }}</strong>
+								</div>
+							</li>
+
+							<li class="list-group-item">
+								<div class="detail-icon">
+									<i class="fa fa-flag fa-2x"></i>
+								</div>
+								<div class="detail-element">
+									<span class="text-muted">
+										dyscyplina
+									</span><br>
+									<strong>{{ object.sport }}</strong>
+								</div>
+							</li>
+
+							{% if object.distance %}
+								<li class="list-group-item">
+									<div class="detail-icon">
+										<i class="fa fa-road fa-2x"></i>
+									</div>
+									<div class="detail-element">
+										<span class="text-muted">
+											dystans
+										</span><br>
+										<strong>{{ object.distance }} km</strong>
+									</div>
+								</li>
+							{% endif %}
+
+							<li class="list-group-item">
+								<div class="detail-icon">
+									<i class="fa fa-clock-o fa-2x"></i>
+								</div>
+								<div class="detail-element">
+									<span class="text-muted">
+										czas trwania
+									</span><br>
+									<strong>{{ object.duration }}</strong>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+			<div id="map-canvas" class="col-lg-5 col-md-5 col-sm-12">
+				tu bedzie mapa
+			</div>
+		</div>
+
 	</div>
-	{{ object }}
 {% endblock %}
 
 {% block js_import %}
 	{% load static %}
 	<script src="{% static "js/workouts_calendar.js" %}" type="text/javascript"></script>
 {% endblock %}
+main
