@@ -5,6 +5,8 @@ import json
 import re
 
 from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.views.generic import View
 from django.views.generic.edit import CreateView
 
 from app.shared.views import LoginRequiredMixin
@@ -40,6 +42,19 @@ class WorkoutCreateView(LoginRequiredMixin, CreateView):
         form.instance.user_id = self.request.user.id
 
         return super(WorkoutCreateView, self).form_valid(form)
+
+
+class LastWorkoutView(LoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        try:
+            latest_pk = Workout.objects.filter(user=request.user) \
+                .latest('datetime_start').pk
+        except Workout.DoesNotExist:
+            return render(request, 'workouts/workout_missing.html')
+
+        print '*' * 40
+        return redirect('workout_show', latest_pk)
 
 
 def workouts_calendar_api(request):

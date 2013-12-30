@@ -1,0 +1,7 @@
+{% extends "structure/main.html" %}
+
+{% block content %}
+	<div class="alert alert-warning">
+		Nie masz żadnych treningów. <a href="{% url 'workout_add' %}" title="Dodaj trening">Dodaj teraz</a>.
+	</div>
+{% endblock %}
