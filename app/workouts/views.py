@@ -32,12 +32,11 @@ class WorkoutCreateView(LoginRequiredMixin, CreateView):
             hours=int(post['duration_hours'] or 0),
             minutes=int(post['duration_mins'] or 0),
             seconds=int(post['duration_secs'] or 0))
-        datetime_start = form.instance.datetime_start
 
         # update fields
-        form.instance.datetime_start = str(form.instance.datetime_start
-            .replace(hour=hour, minute=minute, second=second))
-        form.instance.datetime_stop = str(datetime_start + duration)
+        form.instance.datetime_start = form.instance.datetime_start \
+            .replace(hour=hour, minute=minute, second=second)
+        form.instance.datetime_stop = form.instance.datetime_start + duration
         form.instance.user_id = self.request.user.id
 
         return super(WorkoutCreateView, self).form_valid(form)
