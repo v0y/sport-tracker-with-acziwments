@@ -6,7 +6,7 @@ from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 from app.routes.forms import RouteIdMixin
-from .models import Workout
+from .models import Sport, Workout
 
 
 class WorkoutForm(RouteIdMixin):
@@ -22,6 +22,7 @@ class WorkoutForm(RouteIdMixin):
     duration_secs = forms.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(59)], initial=0,
         required=False)
+    sport = forms.ChoiceField(label=u"Dyscyplina")
 
     class Meta:
         button_text = u"Zapisz"
@@ -30,6 +31,8 @@ class WorkoutForm(RouteIdMixin):
         name = u"Dodaj trening"
 
     def __init__(self, initial=None, *args, **kwargs):
+        super(WorkoutForm, self).__init__(*args, **kwargs)
+
         now_ = datetime.now()
         now_date = datetime.strftime(now_, '%d-%m-%Y')
         now_time = datetime.strftime(now_, '%H:%M')
@@ -38,7 +41,7 @@ class WorkoutForm(RouteIdMixin):
         initial['datetime_start'] = initial.get('datetime_start', now_date)
         initial['time_start'] = initial.get('time_start', now_time)
 
-        super(WorkoutForm, self).__init__(initial=initial, *args, **kwargs)
+        self.fields['sport'].choices = Sport.get_sports_choices()
 
     def clean_duration_secs(self):
         cd = self.cleaned_data
