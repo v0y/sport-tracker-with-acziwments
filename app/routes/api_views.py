@@ -2,6 +2,7 @@
 
 from annoying.decorators import ajax_request
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 from .models import Route
 
@@ -20,3 +21,10 @@ def upload_gpx(request):
         return {'id': route_id, 'tracks': tracks_json, 'info': 'OK'}
 
     return {'info': 'Error'}
+
+@ajax_request
+@login_required
+def get_route_json(request):
+    route_id = request.GET['route_id'][0]
+    route = get_object_or_404(Route, pk=route_id)
+    return {'route': route.tracks_json}

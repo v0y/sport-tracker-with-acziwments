@@ -96,7 +96,7 @@
 
 			</div>
 
-			<div id="map-canvas" class="col-lg-5 col-md-5 col-sm-12">
+			<div id="map-canvas" class="col-lg-5 col-md-5 col-sm-12" data-route-id="{{ object.routes.all.0.id }}" data-url="{% url 'get_route_json' %}">
 				tu bedzie mapa
 			</div>
 		</div>
@@ -106,6 +106,12 @@
 
 {% block js_import %}
 	{% load static %}
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_BROWSER_KEY }}&sensor=false">
+	</script>
 	<script src="{% static "js/workouts_calendar.js" %}" type="text/javascript"></script>
+	<script src="{% static 'js/moment-with-langs.min.js' %}"></script>
+	<script src="{% static 'js/map_handler.js' %}"></script>
+	<script src="{% static 'js/routes_map.js' %}"></script>
 {% endblock %}
 main

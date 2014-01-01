@@ -48,7 +48,7 @@ fileUploadChangeState = (xhr, mapHandler) ->
         # response = {'id': 5, 'routesJSON': ...}
         routes = JSON.parse(response['tracks'])
         # display new route
-        handleMapOnFileUploadSuccess(mapHandler, routes)
+        handleNewRoute(mapHandler, routes)
         # fill form fields
         fillFormFields(routeId, mapHandler)
     # alert if something went wrong
@@ -56,7 +56,7 @@ fileUploadChangeState = (xhr, mapHandler) ->
         alert("Something went wrong. Error" + xhr.status)
 
 
-handleMapOnFileUploadSuccess = (mapHandler, routes) ->
+handleNewRoute = (mapHandler, routes) ->
     # check if map was initialized
     if not mapHandler.map
         mapHandler.initializeMap()
@@ -82,16 +82,37 @@ fillFormFields = (routeId, mapHandler) ->
 
 
 ###############################################################################
+# Handle route download
+###############################################################################
+
+displayRelatedRoute = (routeId, url, mapHandler) ->
+    $.ajax(
+        url: url,
+        data: {'route_id': routeId},
+        success: (data, textStatus, jqXHR) ->
+            handleNewRoute(mapHandler, JSON.parse(data['route']))
+        ,
+        dataType: "json"
+    )
+
+###############################################################################
 # Run
 ###############################################################################
 
 main = ->
-    $("#map-canvas").hide()
+    # if there's no canvas then fail fast
+    mapCanvas = $("#map-canvas")
+    if mapCanvas[0]
+        mapHandler = new RoutesMapHandler()
+        # bind to form file input change event
+        bindToFileInputChange(mapHandler)
 
-    mapHandler = new RoutesMapHandler()
-
-    # bind to form file input change event
-    bindToFileInputChange(mapHandler)
+        # if map canvas has a route-id data, then get that route with AJAX
+        routeId = mapCanvas.data("route-id")
+        if routeId
+            displayRelatedRoute(routeId, mapCanvas.data("url"), mapHandler)
+        else
+            mapCanvas.hide()
 
 $ ->
     main()
