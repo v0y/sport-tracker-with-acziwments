@@ -54,6 +54,9 @@ class WorkoutForm(RouteIdMixin):
 
         return secs
 
+    def clean_sport(self):
+        return Sport.objects.get(pk=self.cleaned_data['sport'])
+
     def save(self, *args, **kwargs):
         # save as normal model form
         workout = super(WorkoutForm, self).save(*args, **kwargs)

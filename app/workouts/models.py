@@ -19,7 +19,7 @@ class Sport(NameMixin, SlugMixin):
 
     @classmethod
     def get_sports_choices(cls):
-        choices = [('', '-----')]
+        choices = [('', '---------')]
         choices += [(s.pk, s.name) for s in cls.objects.all().order_by('name')]
         return choices
 
