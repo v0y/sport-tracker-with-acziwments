@@ -7,7 +7,7 @@
 		<div class="panel panel-default user-profile-panel">
 			<div class="panel-heading text-bold">{{ user_profile.username }}</div>
 			<div class="panel-body">
-				<div class="user-profile-avatar">
+				<div class="user-profile-avatar col-lg-12 col-md-12 col-sm-6">
 					{% if user_profile.username == request.user.username %}
 						<a href="{{ GRAVATAR_CHANGE_URL }}"
 							data-toggle="tooltip" data-placement="bottom" class="js-tooltip"
@@ -19,7 +19,7 @@
 					{% endif %}
 				</div>
 
-				<div class="user-profile-info">
+				<div class="user-profile-info col-lg-12 col-md-12 col-sm-6">
 					<ul>
 						{% if user_profile.profile.sex_visible %}
 							<li>
