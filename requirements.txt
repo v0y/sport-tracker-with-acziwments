@@ -8,4 +8,4 @@ MySQL-python==1.2.4
 python-dateutil==2.2
 South==0.8
 
-git+https://github.com/v0y/django-gravatar.git@d870fb54ac3f2d1b7707e0e5af73689fb6cdbef5
+git+https://github.com/v0y/django-gravatar.git@2b5e3eee02e883f6f708fe0f1dadd23c1b5a6814
