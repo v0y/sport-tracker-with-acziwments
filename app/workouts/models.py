@@ -42,9 +42,24 @@ class Workout(CreatedAtMixin):
         verbose_name = u"trening"
         verbose_name_plural = u"treningi"
 
+    def __unicode__(self):
+        visible_name = self.sport.name
+        if self.distance:
+            visible_name += ", %s km" % str(self.distance)
+
+        return visible_name
+
     def get_absolute_url(self):
         return reverse('workout_show', args=[self.pk])
 
     @property
     def duration(self):
         return self.datetime_stop - self.datetime_start
+
+    @property
+    def duration_visible(self):
+        visible = str(self.datetime_stop - self.datetime_start)
+        splitted = visible.split(':')
+        return '%s godz. %s min. %s sek.' \
+            % (splitted[0], splitted[1], splitted[2])
+

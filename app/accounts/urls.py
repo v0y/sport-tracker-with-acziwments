@@ -3,6 +3,8 @@
 from django.conf.urls import patterns, url
 from django.views.generic import RedirectView, TemplateView
 
+from .views import ShowUserProfileView
+
 
 urlpatterns = patterns('app.accounts.views',
     # login
@@ -56,7 +58,8 @@ urlpatterns = patterns('app.accounts.views',
         name='is_username_used'),
     url(r'^/api/check_email$', 'is_email_used', name='is_email_used'),
     # user profile
-    url(r'^/show/(?P<username>[\w.@+-]+)$', 'profile', name='profile'),
+    url(r'^/show/(?P<username>[\w.@+-]+)$',
+        ShowUserProfileView.as_view(), name='profile'),
     url(r'^/settings$', RedirectView.as_view(pattern_name='profile_settings')),
     url(r'^/settings/profile$', 'profile_settings', name='profile_settings'),
     # change email

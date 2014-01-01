@@ -5,39 +5,39 @@
 
 	<div class="col-md-3 col-sm-5">
 		<div class="panel panel-default user-profile-panel">
-			<div class="panel-heading text-bold">{{ user_profile.username }}</div>
+			<div class="panel-heading text-bold">{{ object.username }}</div>
 			<div class="panel-body">
 				<div class="user-profile-avatar col-lg-12 col-md-12 col-sm-6">
-					{% if user_profile.username == request.user.username %}
+					{% if object.username == request.user.username %}
 						<a href="{{ GRAVATAR_CHANGE_URL }}"
 							data-toggle="tooltip" data-placement="bottom" class="js-tooltip"
 							title="Zmień avatar na gravatar.com" target="_blank">
-							{% gravatar_img_for_user user_profile %}
+							{% gravatar_img_for_user object %}
 						</a>
 					{% else %}
-						{% gravatar_img_for_user user_profile %}
+						{% gravatar_img_for_user object %}
 					{% endif %}
 				</div>
 
 				<div class="user-profile-info col-lg-12 col-md-12 col-sm-6">
 					<ul>
-						{% if user_profile.profile.sex_visible %}
+						{% if object.profile.sex_visible %}
 							<li>
-								{{ user_profile.profile.sex_visible }}{% if user_profile.profile.age %},
-									{{ user_profile.profile.age }} lat
+								{{ object.profile.sex_visible }}{% if object.profile.age %},
+									{{ object.profile.age }} lat
 								{% endif %}
 							</li>
-						{% elif user_profile.profile.age %}
-							<li>Wiek: <strong>{{ user_profile.profile.age }} lat</strong></li>
+						{% elif object.profile.age %}
+							<li>Wiek: <strong>{{ object.profile.age }} lat</strong></li>
 						{% endif %}
-						{% if user_profile.profile.height %}
-							<li>Wzrost: <strong>{{ user_profile.profile.height }} cm</strong></li>
+						{% if object.profile.height %}
+							<li>Wzrost: <strong>{{ object.profile.height }} cm</strong></li>
 						{% endif %}
-						{% if user_profile.profile.last_weight.0 %}
-							<li>Waga: <strong>{{ user_profile.profile.last_weight.0 }} kg</strong></li>
+						{% if object.profile.last_weight.0 %}
+							<li>Waga: <strong>{{ object.profile.last_weight.0 }} kg</strong></li>
 						{% endif %}
-						{% if user_profile.profile.bmi.0 %}
-							<li>BMI: <strong>{{ user_profile.profile.bmi.0 }}</strong></li>
+						{% if object.profile.bmi.0 %}
+							<li>BMI: <strong>{{ object.profile.bmi.0 }}</strong></li>
 						{% endif %}
 					</ul>
 				</div> {# user-info #}
@@ -49,7 +49,19 @@
 		<div class="panel panel-default user-profile-activity">
 			<div class="panel-heading text-bold">Aktywność użytkownika</div>
 			<div class="panel-body">
-				Tu będzie aktywność użytkownika
+				{% if not activities %}
+					<div class="alert alert-info">
+						Brak aktywności użytkownika
+					</div>
+				{% else %}
+					<ul class="list-group">
+						{% for activity in activities %}
+							<li class="list-group-item">
+								{{ activity }}
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
 			</div> {# panel-body #}
 		</div> {# panel #}
 	</div> {# cols #}

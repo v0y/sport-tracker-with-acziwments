@@ -11,14 +11,35 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import get_current_site
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
+from django.views.generic import DetailView
 
+from app.activities.models import Activity
+from app.activities.views import render_activities
 from .forms import (ChangeEmailForm, ChangePasswordForm, LoginForm,
     NewPasswordForm, PasswordResetForm, RegistrationForm,
     ResendActivationMailForm, UserProfileForm)
 from .helpers import get_mail_provider_url
 from .models import EmailActivation, UserActivation, PasswordReset
 from app.shared.helpers import create_url, simple_send_email
+
+
+class ShowUserProfileView(DetailView):
+    model = User
+    template_name = 'accounts/user_profile.html'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShowUserProfileView, self).get_context_data(**kwargs)
+
+        # get activities
+        activities = Activity.objects.filter(user=self.object) \
+            .order_by('-related_date', '-created_at')
+
+        # render activities
+        context['activities'] = render_activities(activities)
+        return context
 
 
 @render_to('accounts/login.html')
@@ -307,13 +328,6 @@ def is_email_used(request):
         return HttpResponse('not found')
     else:
         return HttpResponse('found')
-
-
-@render_to('accounts/user_profile.html')
-def profile(request, username):
-    """Show user profile"""
-    user = get_object_or_404(User, username=username)
-    return {'user_profile': user}
 
 
 @login_required

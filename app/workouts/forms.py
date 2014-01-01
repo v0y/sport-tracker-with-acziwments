@@ -41,6 +41,7 @@ class WorkoutForm(RouteIdMixin):
         initial['datetime_start'] = initial.get('datetime_start', now_date)
         initial['time_start'] = initial.get('time_start', now_time)
 
+        self.initial = initial
         self.fields['sport'].choices = Sport.get_sports_choices()
 
     def clean_duration_secs(self):
