@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+import datetime
 from urllib import unquote, urlencode
 from urlparse import urlparse, urlunparse
 
@@ -8,6 +9,7 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.defaultfilters import slugify as django_slugify
 from django.template.loader import render_to_string
+from django.utils import timezone
 
 
 def create_url(scheme='', url='', path='', params=None):
@@ -118,3 +120,18 @@ def slugify(s):
     :return: slugified string
     """
     return django_slugify(unicode(s).replace(u'ł', 'l').replace(u'Ł', 'L'))
+
+
+def unix_time(datetime_):
+    """
+    :param datetime_: datetime object with or without timezone
+    :return: unix time for given datetime
+    """
+    epoch = datetime.datetime.utcfromtimestamp(0)
+
+    if timezone.is_aware(datetime_):
+        epoch = timezone.make_aware(epoch, timezone.utc)
+
+    delta = datetime_ - epoch
+
+    return delta.total_seconds()

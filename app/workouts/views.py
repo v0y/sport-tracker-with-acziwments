@@ -9,6 +9,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.views.generic.edit import CreateView
 
+from app.shared.helpers import unix_time
 from app.shared.views import LoginRequiredMixin
 from .forms import WorkoutForm
 from .models import Workout
@@ -78,7 +79,7 @@ def workouts_calendar_api(request):
         # make workout dict
         workout_dict = {
             'title': title,
-            'start': workout.datetime_start.strftime('%s'),
+            'start': unix_time(workout.datetime_start),
             'url': workout.get_absolute_url()
         }
 
