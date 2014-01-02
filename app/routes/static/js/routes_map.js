@@ -66,7 +66,7 @@
 
   fillFormFields = function(routeId, mapHandler) {
     $('#id_route_id').val(routeId);
-    $('#id_distance').val(mapHandler.distance);
+    $('#id_distance').val(mapHandler.distance.toFixed(2));
     $('#id_datetime_start').val(mapHandler.startTime.format('DD-MM-YYYY'));
     $('#id_time_start').val(mapHandler.startTime.format('HH:mm:ss'));
     $('#id_duration_hours').val(mapHandler.duration.hours());

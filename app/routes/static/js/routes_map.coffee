@@ -70,7 +70,7 @@ fillFormFields = (routeId, mapHandler) ->
     # route id
     $('#id_route_id').val(routeId)
     # distance
-    $('#id_distance').val(mapHandler.distance)
+    $('#id_distance').val(mapHandler.distance.toFixed(2))
     # start date
     $('#id_datetime_start').val(mapHandler.startTime.format('DD-MM-YYYY'))
     # start time
