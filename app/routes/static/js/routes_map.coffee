@@ -71,10 +71,13 @@ fillFormFields = (routeId, mapHandler) ->
     $('#id_route_id').val(routeId)
     # distance
     $('#id_distance').val(mapHandler.distance.toFixed(2))
+    # adjust start time according to timezone
+    startTime = moment.tz(mapHandler.startTime._d, "Europe/Warsaw")
+    startTime.add('minutes', -startTime.zone())
     # start date
-    $('#id_datetime_start').val(mapHandler.startTime.format('DD-MM-YYYY'))
+    $('#id_datetime_start').val(startTime.format('DD-MM-YYYY'))
     # start time
-    $('#id_time_start').val(mapHandler.startTime.format('HH:mm:ss'))
+    $('#id_time_start').val(startTime.format('HH:mm:ss'))
     # duration
     $('#id_duration_hours').val(mapHandler.duration.hours())
     $('#id_duration_mins').val(mapHandler.duration.minutes())
