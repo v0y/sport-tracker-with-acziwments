@@ -76,7 +76,7 @@ def _get_and_validate_date(range_type, date=None):
     # get date if not given
     if not date:
         today = datetime.now()
-        date = '%s-%s' % (today.year, today.month)
+        date = '%s-%s' % (today.year, str(today.month).zfill(2))
 
     # check, if regex is valid for chosen range type
     if not match(regex, date):
