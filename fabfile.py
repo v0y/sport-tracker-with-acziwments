@@ -73,7 +73,7 @@ def install_host_requirements():
     Install pip and npm host requirements.
     """
     local("pip install -r host-requirements.txt")
-    local("cat npm-host-requirements.txt | xargs -I % npm install %")
+    local("cat npm-host-requirements.txt | xargs -I % sudo npm install % -g")
 
 
 @task
