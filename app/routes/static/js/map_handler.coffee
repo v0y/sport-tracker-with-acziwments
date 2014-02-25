@@ -173,6 +173,7 @@ class Route
         @totalTime = @endTime.diff(@startTime, 'minutes')
 
     drawFullKmMarkers: (fullKmSectionsList) ->
+        markerCounter = 1
         for section in fullKmSectionsList
             # split section to subsections (in case section is more then km long)
             start = Math.ceil(section.startDistance)
@@ -191,13 +192,16 @@ class Route
                 # add marker to map
                 latlng = new google.maps.LatLng(lat, lon)
 
+                image = {url: "http://www.markericons.eu/ico?file=903f5ca84d5043e8998f379fe6fe8608.png&txt=#{markerCounter}km&fs=10"}
+
                 marker = new google.maps.Marker({
                     position: latlng,
                     map: @map,
-                    title: i + "km"
+                    icon: image
                 })
 
                 @fullKmMarkers.push(marker)
+                markerCounter += 1
 
 
 ###############################################################################
