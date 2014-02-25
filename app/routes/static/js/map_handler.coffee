@@ -127,15 +127,6 @@ class Route
             title: "Start"
         })
 
-        startInfoWindow = new google.maps.InfoWindow({
-            content: "<span>Start</span>"
-        })
-
-        google.maps.event.addListener(@startMarker, 'click', ->
-            finishInfoWindow.close()
-            startInfoWindow.open(@map, @startMarker)
-        )
-
         # finish marker
         routePoints = @mapPoints[@mapPoints.length - 1]
         trackPoints = routePoints[routePoints.length - 1]
@@ -145,11 +136,21 @@ class Route
             title: "Koniec"
         })
 
+        # add info windows
         finishInfoWindow = new google.maps.InfoWindow({
             content: "<span>Koniec</span>"
         })
 
-        google.maps.event.addListener(@finishMarker, 'click', ->
+        startInfoWindow = new google.maps.InfoWindow({
+            content: "<span>Start</span>"
+        })
+
+        google.maps.event.addListener(@startMarker, 'click', =>
+            finishInfoWindow.close()
+            startInfoWindow.open(@map, @startMarker)
+        )
+
+        google.maps.event.addListener(@finishMarker, 'click', =>
             startInfoWindow.close()
             finishInfoWindow.open(@map, @finishMarker)
         )
