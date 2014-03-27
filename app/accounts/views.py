@@ -62,18 +62,23 @@ def login_view(request):
         # check authentication data
         user = authenticate(username=username, password=password)
         if user is None:
-            return {'form': form,
-                    'error': u"Nieprawidłowy login lub hasło"}
+            return {
+                'form': form,
+                'error': u"Nieprawidłowy login lub hasło"
+            }
 
         # check, if account is activated
         elif not user.is_active:
-            return {'form': form,
-                    'error': u"Twoje konto nie zostało aktywowane"}
+            return {
+                'form': form,
+                'error': u"Twoje konto nie zostało aktywowane"
+            }
 
         login(request, user)
 
-        return redirect(request.GET.get('next') or
-                        getattr(settings, 'REDIRECT_AFTER_LOGIN', '/'))
+        return redirect(
+            request.GET.get('next') or
+            getattr(settings, 'REDIRECT_AFTER_LOGIN', '/'))
 
     return {'form': form}
 
@@ -114,14 +119,19 @@ def registration(request):
         # get site
         site = get_current_site(request)
 
+        message_data = {
+            'site_name': site.name,
+            'activation_url': activation_url,
+            'username': username
+        }
+
         # send email
-        simple_send_email('accounts/emails/registration_subject.txt',
-                          'accounts/emails/registration_content.txt',
-                          [email],
-                          subject_data={'site_name': site.name},
-                          message_data={'site_name': site.name,
-                                        'activation_url': activation_url,
-                                        'username': username})
+        simple_send_email(
+            'accounts/emails/registration_subject.txt',
+            'accounts/emails/registration_content.txt',
+            [email],
+            subject_data={'site_name': site.name},
+            message_data=message_data)
 
         request.session['email'] = email
         # redirect to end registration page
@@ -138,8 +148,10 @@ def registration_end(request):
     """
     email = request.session.get('email')
     email_provider = get_mail_provider_url(email)
-    return {'email_provider': email_provider,
-            'email': request.session.get('email')}
+    return {
+        'email_provider': email_provider,
+        'email': request.session.get('email')
+    }
 
 
 def registration_activation(request):
@@ -191,21 +203,25 @@ def registration_activation_resend(request):
         # get activation link
         activation_url = activation.activation_link
 
-        # send email
         site = get_current_site(request)
-        simple_send_email('accounts/emails/registration_subject.txt',
-                          'accounts/emails/registration_content.txt',
-                          [user.email],
-                          subject_data={'site_name': site.name},
-                          message_data={'site_name': site.name,
-                                        'activation_url': activation_url,
-                                        'username': user.username})
+        # send email
+        message_data = {
+            'site_name': site.name,
+            'activation_url': activation_url,
+            'username': user.username
+        }
+
+        simple_send_email(
+            'accounts/emails/registration_subject.txt',
+            'accounts/emails/registration_content.txt',
+            [user.email],
+            subject_data={'site_name': site.name},
+            message_data=message_data)
 
         # redirect to success page
         redirect_url = create_url(
             path=reverse('registration_activation_resend_end'),
-            params={'email': user.email}
-        )
+            params={'email': user.email})
 
         return redirect(redirect_url)
 
@@ -223,7 +239,7 @@ def password_change(request):
     if form.is_valid():
         request.user.set_password(request.POST['password'])
         request.user.save()
-        return redirect(reverse('password_change_end'))
+        return redirect('password_change_end')
 
     return {'form': form}
 
@@ -244,9 +260,9 @@ def password_reset(request):
             user = get_object_or_None(User, username=username_or_email)
 
         # check, if that user already requested password reset
-        password_reset = get_object_or_None(PasswordReset, user=user)
-        if password_reset:
-            password_reset.delete()
+        password_reset_obj = get_object_or_None(PasswordReset, user=user)
+        if password_reset_obj:
+            password_reset_obj.delete()
 
         # create password reset object
         pr = PasswordReset(user=user)
@@ -267,9 +283,8 @@ def password_reset(request):
                 'reset_url': reset_url,
                 'username': user.username,
                 'reset_timeout': settings.PASSWORD_RESET_TIMEOUT_DAYS
-            }
-        )
-        return redirect(reverse('password_reset_end'))
+            })
+        return redirect('password_reset_end')
 
     return {'form': form}
 
@@ -281,27 +296,27 @@ def password_reset_confirm(request):
     """
 
     token = request.GET.get('token')
-    password_reset = get_object_or_None(PasswordReset, token=token)
-    user = password_reset.user if password_reset else None
+    password_reset_obj = get_object_or_None(PasswordReset, token=token)
+    user = password_reset_obj.user if password_reset_obj else None
     form = NewPasswordForm(request.POST or None)
 
     # if form is valid, change password and redirect to success page
     if form.is_valid():
         user.set_password(request.POST['password'])
         user.save()
-        password_reset.delete()
-        return redirect(reverse('password_reset_confirm_end'))
+        password_reset_obj.delete()
+        return redirect('password_reset_confirm_end')
 
-    if password_reset:
+    if password_reset_obj:
         # check, if reset link doesn't expired
-        created_at = password_reset.created_at.replace(tzinfo=None)
+        created_at = password_reset_obj.created_at.replace(tzinfo=None)
         timedelta = datetime.now() - created_at
         if timedelta.days > settings.PASSWORD_RESET_TIMEOUT_DAYS:
-            password_reset.delete()
-            return redirect(reverse('password_reset_failed'))
+            password_reset_obj.delete()
+            return redirect('password_reset_failed')
         return {'form': form}
     else:
-        return redirect(reverse('password_reset_failed'))
+        return redirect('password_reset_failed')
 
 
 def is_username_used(request):
@@ -354,17 +369,22 @@ def email_change(request):
         site = get_current_site(request)
         username = request.user.username
 
-        simple_send_email('accounts/emails/email_change_subject.txt',
-                          'accounts/emails/email_change_content.txt',
-                          [email],
-                          subject_data={'site_name': site.name},
-                          message_data={'site_name': site.name,
-                                        'activation_url': activation_url,
-                                        'username': username})
+        message_data = {
+            'site_name': site.name,
+            'activation_url': activation_url,
+            'username': username
+        }
+
+        simple_send_email(
+            'accounts/emails/email_change_subject.txt',
+            'accounts/emails/email_change_content.txt',
+            [email],
+            subject_data={'site_name': site.name},
+            message_data=message_data)
 
         request.session['old_email'] = request.user.email
         request.session['email'] = email
-        return redirect(reverse('email_change_end'))
+        return redirect('email_change_end')
 
     return {'form': form}
 
@@ -377,9 +397,11 @@ def email_change_end(request):
     email = request.session.get('email')
     old_email = request.session.get('old_email', '')
     email_provider = get_mail_provider_url(email)
-    return {'email_provider': email_provider,
-            'email': request.session.get('email'),
-            'old_email': old_email}
+    return {
+        'email_provider': email_provider,
+        'email': request.session.get('email'),
+        'old_email': old_email
+    }
 
 
 @login_required
@@ -395,7 +417,7 @@ def email_change_confirm(request):
         EmailActivation, token=token, user=user)
 
     if not email_activation:
-        return redirect(reverse('email_change_confirm_failed'))
+        return redirect('email_change_confirm_failed')
 
     else:
         # check, if activation link doesn't expired
@@ -403,14 +425,14 @@ def email_change_confirm(request):
         timedelta = datetime.now() - created_at
         if timedelta.days > settings.EMAIL_CHANGE_TIMEOUT_DAYS:
             email_activation.delete()
-            return redirect(reverse('email_change_confirm_failed'))
+            return redirect('email_change_confirm_failed')
 
         # activate new email
         user.email = email_activation.email
         user.save()
         email_activation.delete()
         request.session['new_email'] = email_activation.email
-        return redirect(reverse('email_change_confirm_end'))
+        return redirect('email_change_confirm_end')
 
 
 @login_required
