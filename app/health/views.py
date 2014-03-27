@@ -10,8 +10,8 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, get_object_or_404
+from fiut.helpers import get_page_and_paginator
 
-from app.shared.helpers import get_page
 from .forms import HealthForm
 from .models import Health
 
@@ -24,8 +24,7 @@ def add_health(request):
     """
     form = HealthForm(
         request.POST or None,
-        initial={'related_date': datetime.strftime(datetime.now(), '%d-%m-%Y')}
-    )
+        initial={'related_date': datetime.now().strftime('%d-%m-%Y')})
     if form.is_valid():
         pre_saved_form = form.save(commit=False)
         pre_saved_form.user = request.user
@@ -170,11 +169,15 @@ def health_show_list(request, username=None):
     """
     Show health list with edit link
     """
-    user = get_object_or_404(User, username=username) if username \
-        else request.user
+    if username:
+        user = get_object_or_404(User, username=username)
+    else:
+        user = request.user
+
     health = Health.objects.filter(user=user).order_by('-related_date')
-    page = get_page(request, health, 50)
+    page, _ = get_page_and_paginator(request, health, 1)
 
     return {
         'page': page,
-        'is_mine': user == request.user}
+        'is_mine': user == request.user
+    }

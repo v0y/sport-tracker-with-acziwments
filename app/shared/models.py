@@ -7,8 +7,9 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
+from fiut.helpers import slugify
 
-from .helpers import create_url, slugify
+from .helpers import create_url
 
 
 class SHA1TokenMixin(models.Model):

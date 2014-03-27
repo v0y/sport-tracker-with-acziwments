@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.generic import DetailView
+from fiut.helpers import simple_send_email
 
 from app.activities.models import Activity
 from app.activities.views import render_activities
@@ -21,7 +22,7 @@ from .forms import (ChangeEmailForm, ChangePasswordForm, LoginForm,
     ResendActivationMailForm, UserProfileForm)
 from .helpers import get_mail_provider_url
 from .models import EmailActivation, UserActivation, PasswordReset
-from app.shared.helpers import create_url, simple_send_email
+from app.shared.helpers import create_url
 
 
 class ShowUserProfileView(DetailView):
