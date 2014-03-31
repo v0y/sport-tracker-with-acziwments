@@ -77,14 +77,14 @@ class UserProfile(models.Model):
 
         # get weight and date
         try:
-            weight, date = self.last_weight
+            weight, date_ = self.last_weight
         except TypeError:
             return None
 
         # compute BMI
         bmi = weight / height_in_meters ** 2
 
-        return round(bmi, 1), date
+        return round(bmi, 1), date_
 
 
 class UserActivation(CreatedAtMixin, SHA1TokenMixin):
