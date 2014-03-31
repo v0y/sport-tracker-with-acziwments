@@ -1,0 +1,1575 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<gpx version="1.1" creator="TrekBuddy 1.2.4" xmlns="http://www.topografix.com/GPX/1/1" xmlns:nmea="http://trekbuddy.net/2009/01/gpx/nmea">
+  <trk>
+    <trkseg>
+      <trkpt lat="52.257336364" lon="21.030547040">
+        <ele>93.9</ele>
+        <time>2014-03-03T18:37:26.185Z</time>
+        <extensions>
+          <nmea:course>232.6</nmea:course>
+          <nmea:speed>1.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.256806594" lon="21.029453613">
+        <ele>93.7</ele>
+        <time>2014-03-03T18:38:01.066Z</time>
+        <extensions>
+          <nmea:course>250.6</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.256619646" lon="21.028823292">
+        <ele>93.4</ele>
+        <time>2014-03-03T18:38:19.068Z</time>
+        <extensions>
+          <nmea:course>233.2</nmea:course>
+          <nmea:speed>2.8</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.256504936" lon="21.028694942">
+        <ele>93.2</ele>
+        <time>2014-03-03T18:38:24.241Z</time>
+        <extensions>
+          <nmea:course>211.7</nmea:course>
+          <nmea:speed>2.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.256161325" lon="21.028133217">
+        <ele>91.8</ele>
+        <time>2014-03-03T18:38:44.041Z</time>
+        <extensions>
+          <nmea:course>226.9</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.256055748" lon="21.028275060">
+        <ele>91.3</ele>
+        <time>2014-03-03T18:38:57.096Z</time>
+        <extensions>
+          <nmea:course>112.7</nmea:course>
+          <nmea:speed>1.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.256136792" lon="21.028478751">
+        <ele>91.1</ele>
+        <time>2014-03-03T18:39:04.072Z</time>
+        <extensions>
+          <nmea:course>43.8</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.256184983" lon="21.028697391">
+        <ele>90.7</ele>
+        <time>2014-03-03T18:39:12.169Z</time>
+        <extensions>
+          <nmea:course>76.3</nmea:course>
+          <nmea:speed>1.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.256047358" lon="21.028788935">
+        <ele>90.4</ele>
+        <time>2014-03-03T18:39:21.17Z</time>
+        <extensions>
+          <nmea:course>162.0</nmea:course>
+          <nmea:speed>1.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.255897444" lon="21.028810225">
+        <ele>90.1</ele>
+        <time>2014-03-03T18:39:27.249Z</time>
+        <extensions>
+          <nmea:course>177.7</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.254754418" lon="21.028902962">
+        <ele>89.9</ele>
+        <time>2014-03-03T18:40:08.2Z</time>
+        <extensions>
+          <nmea:course>194.3</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.254681711" lon="21.028685364">
+        <ele>90.0</ele>
+        <time>2014-03-03T18:40:18.099Z</time>
+        <extensions>
+          <nmea:course>240.0</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.254691410" lon="21.028440474">
+        <ele>90.1</ele>
+        <time>2014-03-03T18:40:24.177Z</time>
+        <extensions>
+          <nmea:course>262.5</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.254430083" lon="21.026593353">
+        <ele>90.8</ele>
+        <time>2014-03-03T18:41:10.082Z</time>
+        <extensions>
+          <nmea:course>256.4</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.254252700" lon="21.025904372">
+        <ele>90.9</ele>
+        <time>2014-03-03T18:41:32.134Z</time>
+        <extensions>
+          <nmea:course>248.8</nmea:course>
+          <nmea:speed>0.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.254134716" lon="21.025904630">
+        <ele>90.6</ele>
+        <time>2014-03-03T18:42:32.209Z</time>
+        <extensions>
+          <nmea:course>96.9</nmea:course>
+          <nmea:speed>0.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.254101158" lon="21.025597276">
+        <ele>90.5</ele>
+        <time>2014-03-03T18:43:08.218Z</time>
+        <extensions>
+          <nmea:course>294.9</nmea:course>
+          <nmea:speed>1.8</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.254004234" lon="21.025420963">
+        <ele>90.5</ele>
+        <time>2014-03-03T18:43:18.118Z</time>
+        <extensions>
+          <nmea:course>231.7</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.253862463" lon="21.025404808">
+        <ele>90.5</ele>
+        <time>2014-03-03T18:43:24.193Z</time>
+        <extensions>
+          <nmea:course>208.3</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.253697112" lon="21.025421108">
+        <ele>90.3</ele>
+        <time>2014-03-03T18:43:31.168Z</time>
+        <extensions>
+          <nmea:course>192.5</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.253401494" lon="21.025439114">
+        <ele>90.2</ele>
+        <time>2014-03-03T18:43:42.198Z</time>
+        <extensions>
+          <nmea:course>177.3</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.252775669" lon="21.025549124">
+        <ele>90.0</ele>
+        <time>2014-03-03T18:44:09.198Z</time>
+        <extensions>
+          <nmea:course>198.1</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.252682701" lon="21.025360822">
+        <ele>90.1</ele>
+        <time>2014-03-03T18:44:17.074Z</time>
+        <extensions>
+          <nmea:course>216.3</nmea:course>
+          <nmea:speed>1.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.252239691" lon="21.024444376">
+        <ele>90.0</ele>
+        <time>2014-03-03T18:44:48.128Z</time>
+        <extensions>
+          <nmea:course>196.5</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.251961664" lon="21.024361289">
+        <ele>90.1</ele>
+        <time>2014-03-03T18:45:01.175Z</time>
+        <extensions>
+          <nmea:course>180.3</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.251812071" lon="21.024369812">
+        <ele>90.0</ele>
+        <time>2014-03-03T18:45:07.255Z</time>
+        <extensions>
+          <nmea:course>160.8</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.250974442" lon="21.024773390">
+        <ele>90.0</ele>
+        <time>2014-03-03T18:45:39.206Z</time>
+        <extensions>
+          <nmea:course>177.4</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.250689351" lon="21.024819602">
+        <ele>90.1</ele>
+        <time>2014-03-03T18:45:53.153Z</time>
+        <extensions>
+          <nmea:course>158.1</nmea:course>
+          <nmea:speed>1.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.250488821" lon="21.025078129">
+        <ele>90.9</ele>
+        <time>2014-03-03T18:46:21.059Z</time>
+        <extensions>
+          <nmea:course>188.8</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.250339012" lon="21.025153153">
+        <ele>91.1</ele>
+        <time>2014-03-03T18:46:27.138Z</time>
+        <extensions>
+          <nmea:course>155.1</nmea:course>
+          <nmea:speed>2.8</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.249351653" lon="21.026101546">
+        <ele>91.9</ele>
+        <time>2014-03-03T18:47:10.117Z</time>
+        <extensions>
+          <nmea:course>148.1</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.248814064" lon="21.026791606">
+        <ele>92.6</ele>
+        <time>2014-03-03T18:47:37.121Z</time>
+        <extensions>
+          <nmea:course>132.6</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.248157981" lon="21.027934399">
+        <ele>90.9</ele>
+        <time>2014-03-03T18:48:20.098Z</time>
+        <extensions>
+          <nmea:course>115.8</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.248078670" lon="21.028539307">
+        <ele>89.5</ele>
+        <time>2014-03-03T18:48:38.099Z</time>
+        <extensions>
+          <nmea:course>100.6</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.247919985" lon="21.029278527">
+        <ele>88.8</ele>
+        <time>2014-03-03T18:49:01.051Z</time>
+        <extensions>
+          <nmea:course>117.1</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.247575689" lon="21.030130970">
+        <ele>89.3</ele>
+        <time>2014-03-03T18:49:32.106Z</time>
+        <extensions>
+          <nmea:course>133.1</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.246768049" lon="21.031454888">
+        <ele>89.7</ele>
+        <time>2014-03-03T18:50:17.108Z</time>
+        <extensions>
+          <nmea:course>137.2</nmea:course>
+          <nmea:speed>2.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.245605843" lon="21.033375877">
+        <ele>87.8</ele>
+        <time>2014-03-03T18:50:59.188Z</time>
+        <extensions>
+          <nmea:course>136.0</nmea:course>
+          <nmea:speed>4.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.244750520" lon="21.034595114">
+        <ele>88.4</ele>
+        <time>2014-03-03T18:51:39.241Z</time>
+        <extensions>
+          <nmea:course>138.6</nmea:course>
+          <nmea:speed>2.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.244186546" lon="21.035732982">
+        <ele>88.6</ele>
+        <time>2014-03-03T18:52:15.245Z</time>
+        <extensions>
+          <nmea:course>123.2</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.244068757" lon="21.036260706">
+        <ele>89.3</ele>
+        <time>2014-03-03T18:52:31.221Z</time>
+        <extensions>
+          <nmea:course>108.1</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243908060" lon="21.037048259">
+        <ele>90.6</ele>
+        <time>2014-03-03T18:52:53.049Z</time>
+        <extensions>
+          <nmea:course>115.6</nmea:course>
+          <nmea:speed>0.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243699746" lon="21.037767675">
+        <ele>91.7</ele>
+        <time>2014-03-03T18:53:14.2Z</time>
+        <extensions>
+          <nmea:course>125.7</nmea:course>
+          <nmea:speed>0.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243669018" lon="21.037951956">
+        <ele>90.4</ele>
+        <time>2014-03-03T18:54:15.177Z</time>
+        <extensions>
+          <nmea:course>301.9</nmea:course>
+          <nmea:speed>0.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243783996" lon="21.038125184">
+        <ele>89.9</ele>
+        <time>2014-03-03T18:54:27.106Z</time>
+        <extensions>
+          <nmea:course>41.6</nmea:course>
+          <nmea:speed>2.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243837174" lon="21.038357089">
+        <ele>89.8</ele>
+        <time>2014-03-03T18:54:34.079Z</time>
+        <extensions>
+          <nmea:course>77.8</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243759796" lon="21.038538002">
+        <ele>89.6</ele>
+        <time>2014-03-03T18:54:39.255Z</time>
+        <extensions>
+          <nmea:course>123.2</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243640298" lon="21.038668156">
+        <ele>89.3</ele>
+        <time>2014-03-03T18:54:44.208Z</time>
+        <extensions>
+          <nmea:course>150.0</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243410926" lon="21.038811598">
+        <ele>88.9</ele>
+        <time>2014-03-03T18:54:54.108Z</time>
+        <extensions>
+          <nmea:course>167.6</nmea:course>
+          <nmea:speed>1.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243326038" lon="21.038611467">
+        <ele>88.5</ele>
+        <time>2014-03-03T18:55:54.191Z</time>
+        <extensions>
+          <nmea:course>240.7</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243188305" lon="21.038509521">
+        <ele>88.5</ele>
+        <time>2014-03-03T18:56:00.038Z</time>
+        <extensions>
+          <nmea:course>179.6</nmea:course>
+          <nmea:speed>2.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243002983" lon="21.038632977">
+        <ele>88.2</ele>
+        <time>2014-03-03T18:56:07.241Z</time>
+        <extensions>
+          <nmea:course>163.3</nmea:course>
+          <nmea:speed>2.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.241903867" lon="21.039017165">
+        <ele>87.1</ele>
+        <time>2014-03-03T18:56:53.145Z</time>
+        <extensions>
+          <nmea:course>157.3</nmea:course>
+          <nmea:speed>2.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.241697871" lon="21.039206454">
+        <ele>87.2</ele>
+        <time>2014-03-03T18:57:03.046Z</time>
+        <extensions>
+          <nmea:course>142.1</nmea:course>
+          <nmea:speed>2.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.240847860" lon="21.040435632">
+        <ele>87.4</ele>
+        <time>2014-03-03T18:57:53.225Z</time>
+        <extensions>
+          <nmea:course>142.9</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.239862558" lon="21.041319879">
+        <ele>87.5</ele>
+        <time>2014-03-03T18:58:44.079Z</time>
+        <extensions>
+          <nmea:course>144.5</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.238870812" lon="21.042247870">
+        <ele>88.3</ele>
+        <time>2014-03-03T18:59:32.236Z</time>
+        <extensions>
+          <nmea:course>144.5</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.238202977" lon="21.042898742">
+        <ele>88.9</ele>
+        <time>2014-03-03T19:00:09.132Z</time>
+        <extensions>
+          <nmea:course>147.5</nmea:course>
+          <nmea:speed>0.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.237206925" lon="21.043813165">
+        <ele>88.8</ele>
+        <time>2014-03-03T19:01:01.118Z</time>
+        <extensions>
+          <nmea:course>149.1</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.236238666" lon="21.044790483">
+        <ele>90.6</ele>
+        <time>2014-03-03T19:01:54.222Z</time>
+        <extensions>
+          <nmea:course>150.9</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.235534708" lon="21.045537145">
+        <ele>89.9</ele>
+        <time>2014-03-03T19:02:30.225Z</time>
+        <extensions>
+          <nmea:course>135.2</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.234792837" lon="21.046485811">
+        <ele>89.7</ele>
+        <time>2014-03-03T19:03:13.206Z</time>
+        <extensions>
+          <nmea:course>151.0</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.233783865" lon="21.047326827">
+        <ele>89.2</ele>
+        <time>2014-03-03T19:04:07.208Z</time>
+        <extensions>
+          <nmea:course>151.7</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.232763920" lon="21.048147860">
+        <ele>89.4</ele>
+        <time>2014-03-03T19:05:03.238Z</time>
+        <extensions>
+          <nmea:course>147.8</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.231758019" lon="21.049030679">
+        <ele>90.8</ele>
+        <time>2014-03-03T19:06:01.072Z</time>
+        <extensions>
+          <nmea:course>148.9</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.230734887" lon="21.049851268">
+        <ele>89.6</ele>
+        <time>2014-03-03T19:06:52.149Z</time>
+        <extensions>
+          <nmea:course>147.8</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.229761673" lon="21.050765544">
+        <ele>89.1</ele>
+        <time>2014-03-03T19:07:47.054Z</time>
+        <extensions>
+          <nmea:course>149.8</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.228766271" lon="21.051620571">
+        <ele>89.7</ele>
+        <time>2014-03-03T19:08:40.159Z</time>
+        <extensions>
+          <nmea:course>148.6</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.227776069" lon="21.052585592">
+        <ele>89.5</ele>
+        <time>2014-03-03T19:09:37.088Z</time>
+        <extensions>
+          <nmea:course>152.6</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.226932811" lon="21.053429449">
+        <ele>89.0</ele>
+        <time>2014-03-03T19:10:22.089Z</time>
+        <extensions>
+          <nmea:course>125.0</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.226873623" lon="21.053748711">
+        <ele>89.0</ele>
+        <time>2014-03-03T19:10:34.244Z</time>
+        <extensions>
+          <nmea:course>141.6</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.226257035" lon="21.054518820">
+        <ele>90.2</ele>
+        <time>2014-03-03T19:11:13.172Z</time>
+        <extensions>
+          <nmea:course>157.6</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.225918256" lon="21.054677871">
+        <ele>90.7</ele>
+        <time>2014-03-03T19:11:26.222Z</time>
+        <extensions>
+          <nmea:course>141.5</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.224992779" lon="21.055747748">
+        <ele>91.0</ele>
+        <time>2014-03-03T19:12:22.25Z</time>
+        <extensions>
+          <nmea:course>140.4</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.224482010" lon="21.056784119">
+        <ele>91.5</ele>
+        <time>2014-03-03T19:13:03.208Z</time>
+        <extensions>
+          <nmea:course>124.2</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.223756818" lon="21.058184813">
+        <ele>92.0</ele>
+        <time>2014-03-03T19:13:53.162Z</time>
+        <extensions>
+          <nmea:course>128.2</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.223239958" lon="21.059359833">
+        <ele>93.2</ele>
+        <time>2014-03-03T19:14:37.263Z</time>
+        <extensions>
+          <nmea:course>116.9</nmea:course>
+          <nmea:speed>0.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.223311191" lon="21.059562551">
+        <ele>93.1</ele>
+        <time>2014-03-03T19:14:56.167Z</time>
+        <extensions>
+          <nmea:course>43.0</nmea:course>
+          <nmea:speed>1.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.223474299" lon="21.059916096">
+        <ele>91.2</ele>
+        <time>2014-03-03T19:15:56.244Z</time>
+        <extensions>
+          <nmea:course>45.4</nmea:course>
+          <nmea:speed>0.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.223459900" lon="21.060136090">
+        <ele>91.3</ele>
+        <time>2014-03-03T19:16:07.274Z</time>
+        <extensions>
+          <nmea:course>106.6</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.223358860" lon="21.060288999">
+        <ele>91.3</ele>
+        <time>2014-03-03T19:16:17.175Z</time>
+        <extensions>
+          <nmea:course>125.7</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.223034470" lon="21.061192948">
+        <ele>91.3</ele>
+        <time>2014-03-03T19:16:49.128Z</time>
+        <extensions>
+          <nmea:course>109.6</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222680330" lon="21.062956787">
+        <ele>91.2</ele>
+        <time>2014-03-03T19:17:40.207Z</time>
+        <extensions>
+          <nmea:course>108.6</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222297716" lon="21.064757271">
+        <ele>90.8</ele>
+        <time>2014-03-03T19:18:33.085Z</time>
+        <extensions>
+          <nmea:course>108.6</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222021062" lon="21.066549597">
+        <ele>90.7</ele>
+        <time>2014-03-03T19:19:20.118Z</time>
+        <extensions>
+          <nmea:course>101.2</nmea:course>
+          <nmea:speed>2.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221848618" lon="21.068364658">
+        <ele>90.5</ele>
+        <time>2014-03-03T19:20:09.17Z</time>
+        <extensions>
+          <nmea:course>95.4</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221853904" lon="21.070203141">
+        <ele>89.5</ele>
+        <time>2014-03-03T19:21:02.276Z</time>
+        <extensions>
+          <nmea:course>90.7</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221810688" lon="21.072055075">
+        <ele>88.2</ele>
+        <time>2014-03-03T19:21:58.081Z</time>
+        <extensions>
+          <nmea:course>90.4</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221773959" lon="21.073898352">
+        <ele>89.4</ele>
+        <time>2014-03-03T19:22:48.258Z</time>
+        <extensions>
+          <nmea:course>90.1</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221750952" lon="21.075728738">
+        <ele>90.2</ele>
+        <time>2014-03-03T19:23:39.116Z</time>
+        <extensions>
+          <nmea:course>90.9</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221716286" lon="21.077585169">
+        <ele>90.9</ele>
+        <time>2014-03-03T19:24:32.219Z</time>
+        <extensions>
+          <nmea:course>89.3</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221706905" lon="21.079430372">
+        <ele>91.5</ele>
+        <time>2014-03-03T19:25:26.224Z</time>
+        <extensions>
+          <nmea:course>89.2</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221676379" lon="21.080492917">
+        <ele>91.9</ele>
+        <time>2014-03-03T19:25:57.277Z</time>
+        <extensions>
+          <nmea:course>105.1</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221432233" lon="21.082283511">
+        <ele>92.0</ele>
+        <time>2014-03-03T19:26:54.207Z</time>
+        <extensions>
+          <nmea:course>101.8</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221176960" lon="21.084067149">
+        <ele>90.8</ele>
+        <time>2014-03-03T19:27:46.186Z</time>
+        <extensions>
+          <nmea:course>104.5</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.220913679" lon="21.085881186">
+        <ele>90.6</ele>
+        <time>2014-03-03T19:28:40.191Z</time>
+        <extensions>
+          <nmea:course>104.1</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.220579438" lon="21.087655527">
+        <ele>90.9</ele>
+        <time>2014-03-03T19:29:34.196Z</time>
+        <extensions>
+          <nmea:course>105.2</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.220240062" lon="21.089417389">
+        <ele>90.6</ele>
+        <time>2014-03-03T19:30:30.225Z</time>
+        <extensions>
+          <nmea:course>83.3</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.220383793" lon="21.089522064">
+        <ele>90.3</ele>
+        <time>2014-03-03T19:30:37.202Z</time>
+        <extensions>
+          <nmea:course>42.8</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221252812" lon="21.090792956">
+        <ele>91.1</ele>
+        <time>2014-03-03T19:31:30.083Z</time>
+        <extensions>
+          <nmea:course>35.1</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221701635" lon="21.091138385">
+        <ele>91.7</ele>
+        <time>2014-03-03T19:31:52.134Z</time>
+        <extensions>
+          <nmea:course>19.1</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221908683" lon="21.091292779">
+        <ele>92.0</ele>
+        <time>2014-03-03T19:32:03.16Z</time>
+        <extensions>
+          <nmea:course>37.7</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222013903" lon="21.091601318">
+        <ele>92.0</ele>
+        <time>2014-03-03T19:32:13.284Z</time>
+        <extensions>
+          <nmea:course>56.0</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221987648" lon="21.091823415">
+        <ele>91.9</ele>
+        <time>2014-03-03T19:32:19.132Z</time>
+        <extensions>
+          <nmea:course>83.3</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221915934" lon="21.092127561">
+        <ele>91.7</ele>
+        <time>2014-03-03T19:32:28.135Z</time>
+        <extensions>
+          <nmea:course>99.3</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221631335" lon="21.093909148">
+        <ele>89.8</ele>
+        <time>2014-03-03T19:33:24.166Z</time>
+        <extensions>
+          <nmea:course>102.7</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221256179" lon="21.095653594">
+        <ele>91.5</ele>
+        <time>2014-03-03T19:34:16.147Z</time>
+        <extensions>
+          <nmea:course>100.8</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221218544" lon="21.097108695">
+        <ele>91.7</ele>
+        <time>2014-03-03T19:34:54.175Z</time>
+        <extensions>
+          <nmea:course>85.4</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221420304" lon="21.098318749">
+        <ele>92.4</ele>
+        <time>2014-03-03T19:35:29.277Z</time>
+        <extensions>
+          <nmea:course>67.4</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.221884975" lon="21.100025824">
+        <ele>93.1</ele>
+        <time>2014-03-03T19:36:20.131Z</time>
+        <extensions>
+          <nmea:course>55.9</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222127377" lon="21.100435256">
+        <ele>93.2</ele>
+        <time>2014-03-03T19:36:36.107Z</time>
+        <extensions>
+          <nmea:course>39.5</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222829691" lon="21.101058859">
+        <ele>93.6</ele>
+        <time>2014-03-03T19:37:14.139Z</time>
+        <extensions>
+          <nmea:course>50.1</nmea:course>
+          <nmea:speed>0.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222828881" lon="21.101299725">
+        <ele>92.8</ele>
+        <time>2014-03-03T19:37:41.14Z</time>
+        <extensions>
+          <nmea:course>101.5</nmea:course>
+          <nmea:speed>2.7</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222771326" lon="21.101589946">
+        <ele>92.5</ele>
+        <time>2014-03-03T19:37:49.242Z</time>
+        <extensions>
+          <nmea:course>118.3</nmea:course>
+          <nmea:speed>2.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222235496" lon="21.102838576">
+        <ele>92.9</ele>
+        <time>2014-03-03T19:38:29.068Z</time>
+        <extensions>
+          <nmea:course>135.1</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222048109" lon="21.103411294">
+        <ele>92.7</ele>
+        <time>2014-03-03T19:38:49.097Z</time>
+        <extensions>
+          <nmea:course>119.9</nmea:course>
+          <nmea:speed>1.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222133700" lon="21.103610112">
+        <ele>92.2</ele>
+        <time>2014-03-03T19:39:00.124Z</time>
+        <extensions>
+          <nmea:course>53.3</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.222885730" lon="21.104995906">
+        <ele>90.7</ele>
+        <time>2014-03-03T19:39:52.1Z</time>
+        <extensions>
+          <nmea:course>43.9</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.223700175" lon="21.106349026">
+        <ele>91.8</ele>
+        <time>2014-03-03T19:40:46.104Z</time>
+        <extensions>
+          <nmea:course>47.2</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.224516896" lon="21.107618148">
+        <ele>91.9</ele>
+        <time>2014-03-03T19:41:34.259Z</time>
+        <extensions>
+          <nmea:course>41.0</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.225296315" lon="21.108943568">
+        <ele>92.3</ele>
+        <time>2014-03-03T19:42:26.242Z</time>
+        <extensions>
+          <nmea:course>42.9</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.226126618" lon="21.110191551">
+        <ele>91.7</ele>
+        <time>2014-03-03T19:43:19.121Z</time>
+        <extensions>
+          <nmea:course>45.9</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.226946697" lon="21.111467514">
+        <ele>91.2</ele>
+        <time>2014-03-03T19:44:12.226Z</time>
+        <extensions>
+          <nmea:course>43.6</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.227743407" lon="21.112787180">
+        <ele>90.7</ele>
+        <time>2014-03-03T19:45:04.206Z</time>
+        <extensions>
+          <nmea:course>43.1</nmea:course>
+          <nmea:speed>2.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.228537923" lon="21.114114053">
+        <ele>90.2</ele>
+        <time>2014-03-03T19:45:54.161Z</time>
+        <extensions>
+          <nmea:course>42.6</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.229381932" lon="21.115342938">
+        <ele>90.2</ele>
+        <time>2014-03-03T19:46:47.264Z</time>
+        <extensions>
+          <nmea:course>39.7</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.230218897" lon="21.116594581">
+        <ele>90.9</ele>
+        <time>2014-03-03T19:47:42.169Z</time>
+        <extensions>
+          <nmea:course>41.0</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.231087619" lon="21.117823270">
+        <ele>92.0</ele>
+        <time>2014-03-03T19:48:39.1Z</time>
+        <extensions>
+          <nmea:course>44.2</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.231668089" lon="21.118985232">
+        <ele>92.7</ele>
+        <time>2014-03-03T19:49:26.126Z</time>
+        <extensions>
+          <nmea:course>59.8</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.232307811" lon="21.120498504">
+        <ele>92.6</ele>
+        <time>2014-03-03T19:50:21.256Z</time>
+        <extensions>
+          <nmea:course>53.9</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.232480035" lon="21.120917656">
+        <ele>93.0</ele>
+        <time>2014-03-03T19:50:35.204Z</time>
+        <extensions>
+          <nmea:course>33.8</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.232670739" lon="21.120985599">
+        <ele>93.2</ele>
+        <time>2014-03-03T19:50:45.104Z</time>
+        <extensions>
+          <nmea:course>7.4</nmea:course>
+          <nmea:speed>1.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.232811591" lon="21.121047668">
+        <ele>92.8</ele>
+        <time>2014-03-03T19:50:53.212Z</time>
+        <extensions>
+          <nmea:course>60.6</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.232930313" lon="21.121267697">
+        <ele>92.5</ele>
+        <time>2014-03-03T19:50:58.163Z</time>
+        <extensions>
+          <nmea:course>77.6</nmea:course>
+          <nmea:speed>2.4</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.233056609" lon="21.123098399">
+        <ele>91.5</ele>
+        <time>2014-03-03T19:51:54.193Z</time>
+        <extensions>
+          <nmea:course>77.8</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.233207059" lon="21.123953439">
+        <ele>91.2</ele>
+        <time>2014-03-03T19:52:19.169Z</time>
+        <extensions>
+          <nmea:course>61.9</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.233708037" lon="21.125670198">
+        <ele>90.2</ele>
+        <time>2014-03-03T19:53:16.098Z</time>
+        <extensions>
+          <nmea:course>58.6</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.233933450" lon="21.126212242">
+        <ele>90.0</ele>
+        <time>2014-03-03T19:53:33.198Z</time>
+        <extensions>
+          <nmea:course>33.1</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.234708214" lon="21.127458265">
+        <ele>91.2</ele>
+        <time>2014-03-03T19:54:33.281Z</time>
+        <extensions>
+          <nmea:course>28.6</nmea:course>
+          <nmea:speed>1.8</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.235630308" lon="21.128530684">
+        <ele>90.8</ele>
+        <time>2014-03-03T19:55:33.133Z</time>
+        <extensions>
+          <nmea:course>30.4</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.236590752" lon="21.129511567">
+        <ele>89.5</ele>
+        <time>2014-03-03T19:56:26.238Z</time>
+        <extensions>
+          <nmea:course>30.5</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.236810042" lon="21.129848322">
+        <ele>89.7</ele>
+        <time>2014-03-03T19:56:44.241Z</time>
+        <extensions>
+          <nmea:course>45.7</nmea:course>
+          <nmea:speed>1.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.237017838" lon="21.130097742">
+        <ele>90.3</ele>
+        <time>2014-03-03T19:57:04.267Z</time>
+        <extensions>
+          <nmea:course>62.2</nmea:course>
+          <nmea:speed>1.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.237166036" lon="21.130203298">
+        <ele>90.6</ele>
+        <time>2014-03-03T19:57:11.244Z</time>
+        <extensions>
+          <nmea:course>21.6</nmea:course>
+          <nmea:speed>1.8</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.238154081" lon="21.130911590">
+        <ele>88.4</ele>
+        <time>2014-03-03T19:57:53.096Z</time>
+        <extensions>
+          <nmea:course>37.0</nmea:course>
+          <nmea:speed>1.8</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.239114188" lon="21.131765968">
+        <ele>89.7</ele>
+        <time>2014-03-03T19:58:53.177Z</time>
+        <extensions>
+          <nmea:course>28.5</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.240067079" lon="21.132789070">
+        <ele>90.8</ele>
+        <time>2014-03-03T19:59:44.259Z</time>
+        <extensions>
+          <nmea:course>30.9</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.240868761" lon="21.133760157">
+        <ele>90.1</ele>
+        <time>2014-03-03T20:00:30.163Z</time>
+        <extensions>
+          <nmea:course>46.7</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.241677747" lon="21.135042303">
+        <ele>88.0</ele>
+        <time>2014-03-03T20:01:20.118Z</time>
+        <extensions>
+          <nmea:course>50.2</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.241806909" lon="21.135186907">
+        <ele>88.2</ele>
+        <time>2014-03-03T20:01:27.091Z</time>
+        <extensions>
+          <nmea:course>25.4</nmea:course>
+          <nmea:speed>1.8</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.242072621" lon="21.135341286">
+        <ele>87.8</ele>
+        <time>2014-03-03T20:01:44.193Z</time>
+        <extensions>
+          <nmea:course>44.1</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.242220713" lon="21.135658203">
+        <ele>87.3</ele>
+        <time>2014-03-03T20:01:55.221Z</time>
+        <extensions>
+          <nmea:course>61.3</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.242378725" lon="21.136000942">
+        <ele>86.8</ele>
+        <time>2014-03-03T20:02:07.147Z</time>
+        <extensions>
+          <nmea:course>43.4</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.242662212" lon="21.136672620">
+        <ele>86.3</ele>
+        <time>2014-03-03T20:02:36.174Z</time>
+        <extensions>
+          <nmea:course>59.7</nmea:course>
+          <nmea:speed>1.7</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.242762299" lon="21.136850308">
+        <ele>86.7</ele>
+        <time>2014-03-03T20:02:45.175Z</time>
+        <extensions>
+          <nmea:course>41.2</nmea:course>
+          <nmea:speed>1.7</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243643414" lon="21.137776349">
+        <ele>87.2</ele>
+        <time>2014-03-03T20:03:29.279Z</time>
+        <extensions>
+          <nmea:course>56.5</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243826685" lon="21.138204317">
+        <ele>86.1</ele>
+        <time>2014-03-03T20:04:01.23Z</time>
+        <extensions>
+          <nmea:course>184.8</nmea:course>
+          <nmea:speed>1.8</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243721823" lon="21.138371996">
+        <ele>85.7</ele>
+        <time>2014-03-03T20:04:08.208Z</time>
+        <extensions>
+          <nmea:course>138.5</nmea:course>
+          <nmea:speed>2.6</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243688594" lon="21.138621199">
+        <ele>85.2</ele>
+        <time>2014-03-03T20:04:25.085Z</time>
+        <extensions>
+          <nmea:course>67.8</nmea:course>
+          <nmea:speed>1.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243772973" lon="21.138890365">
+        <ele>85.0</ele>
+        <time>2014-03-03T20:04:34.083Z</time>
+        <extensions>
+          <nmea:course>47.6</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.243913805" lon="21.138947087">
+        <ele>85.0</ele>
+        <time>2014-03-03T20:04:42.185Z</time>
+        <extensions>
+          <nmea:course>7.7</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.244047057" lon="21.138988160">
+        <ele>84.7</ele>
+        <time>2014-03-03T20:04:50.287Z</time>
+        <extensions>
+          <nmea:course>25.7</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.244983885" lon="21.140045681">
+        <ele>83.2</ele>
+        <time>2014-03-03T20:05:45.189Z</time>
+        <extensions>
+          <nmea:course>31.1</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.245889464" lon="21.141177990">
+        <ele>83.5</ele>
+        <time>2014-03-03T20:06:39.195Z</time>
+        <extensions>
+          <nmea:course>39.1</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.246261218" lon="21.141557588">
+        <ele>83.7</ele>
+        <time>2014-03-03T20:06:59.22Z</time>
+        <extensions>
+          <nmea:course>20.7</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.247123709" lon="21.142353709">
+        <ele>84.6</ele>
+        <time>2014-03-03T20:07:46.25Z</time>
+        <extensions>
+          <nmea:course>36.0</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.248032223" lon="21.143432091">
+        <ele>85.0</ele>
+        <time>2014-03-03T20:08:38.231Z</time>
+        <extensions>
+          <nmea:course>24.7</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.248991864" lon="21.144421336">
+        <ele>86.0</ele>
+        <time>2014-03-03T20:09:29.088Z</time>
+        <extensions>
+          <nmea:course>35.6</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.249618560" lon="21.145198076">
+        <ele>86.4</ele>
+        <time>2014-03-03T20:10:05.088Z</time>
+        <extensions>
+          <nmea:course>54.6</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.249689993" lon="21.145422240">
+        <ele>86.5</ele>
+        <time>2014-03-03T20:10:12.29Z</time>
+        <extensions>
+          <nmea:course>79.5</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.249765674" lon="21.145630708">
+        <ele>86.5</ele>
+        <time>2014-03-03T20:10:19.266Z</time>
+        <extensions>
+          <nmea:course>59.3</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.250136767" lon="21.146341581">
+        <ele>86.5</ele>
+        <time>2014-03-03T20:10:46.264Z</time>
+        <extensions>
+          <nmea:course>42.0</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.250563270" lon="21.147350648">
+        <ele>86.6</ele>
+        <time>2014-03-03T20:11:21.146Z</time>
+        <extensions>
+          <nmea:course>58.0</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.251307848" lon="21.148757626">
+        <ele>86.7</ele>
+        <time>2014-03-03T20:12:13.126Z</time>
+        <extensions>
+          <nmea:course>60.0</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.251813597" lon="21.149770173">
+        <ele>86.6</ele>
+        <time>2014-03-03T20:12:52.277Z</time>
+        <extensions>
+          <nmea:course>44.3</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.251934147" lon="21.149914541">
+        <ele>86.6</ele>
+        <time>2014-03-03T20:12:55.204Z</time>
+        <extensions>
+          <nmea:course>60.4</nmea:course>
+          <nmea:speed>2.7</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.252633845" lon="21.151432054">
+        <ele>87.3</ele>
+        <time>2014-03-03T20:13:49.207Z</time>
+        <extensions>
+          <nmea:course>53.7</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.253286638" lon="21.152945493">
+        <ele>87.3</ele>
+        <time>2014-03-03T20:14:48.166Z</time>
+        <extensions>
+          <nmea:course>49.8</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.253743906" lon="21.153685840">
+        <ele>87.6</ele>
+        <time>2014-03-03T20:15:24.165Z</time>
+        <extensions>
+          <nmea:course>31.4</nmea:course>
+          <nmea:speed>1.8</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.254619804" lon="21.154872221">
+        <ele>87.8</ele>
+        <time>2014-03-03T20:16:20.199Z</time>
+        <extensions>
+          <nmea:course>42.1</nmea:course>
+          <nmea:speed>1.7</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.254862686" lon="21.155146552">
+        <ele>87.6</ele>
+        <time>2014-03-03T20:16:40.222Z</time>
+        <extensions>
+          <nmea:course>359.4</nmea:course>
+          <nmea:speed>1.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.255025498" lon="21.155197300">
+        <ele>87.5</ele>
+        <time>2014-03-03T20:16:46.298Z</time>
+        <extensions>
+          <nmea:course>19.4</nmea:course>
+          <nmea:speed>2.5</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.255248636" lon="21.155447888">
+        <ele>87.5</ele>
+        <time>2014-03-03T20:16:56.201Z</time>
+        <extensions>
+          <nmea:course>34.8</nmea:course>
+          <nmea:speed>2.3</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.255997723" lon="21.156451041">
+        <ele>87.9</ele>
+        <time>2014-03-03T20:17:42.103Z</time>
+        <extensions>
+          <nmea:course>14.6</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.256156011" lon="21.156443220">
+        <ele>88.0</ele>
+        <time>2014-03-03T20:17:51.106Z</time>
+        <extensions>
+          <nmea:course>348.9</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.256774462" lon="21.156366644">
+        <ele>88.3</ele>
+        <time>2014-03-03T20:18:22.159Z</time>
+        <extensions>
+          <nmea:course>5.2</nmea:course>
+          <nmea:speed>1.9</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.257429506" lon="21.156550258">
+        <ele>88.2</ele>
+        <time>2014-03-03T20:18:49.16Z</time>
+        <extensions>
+          <nmea:course>21.0</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.257528747" lon="21.156714066">
+        <ele>87.7</ele>
+        <time>2014-03-03T20:18:57.259Z</time>
+        <extensions>
+          <nmea:course>60.5</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.257594688" lon="21.157249518">
+        <ele>87.2</ele>
+        <time>2014-03-03T20:19:12.111Z</time>
+        <extensions>
+          <nmea:course>78.3</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.257566830" lon="21.157546223">
+        <ele>87.2</ele>
+        <time>2014-03-03T20:19:20.213Z</time>
+        <extensions>
+          <nmea:course>94.0</nmea:course>
+          <nmea:speed>2.2</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.257527015" lon="21.158527913">
+        <ele>87.4</ele>
+        <time>2014-03-03T20:19:48.117Z</time>
+        <extensions>
+          <nmea:course>77.7</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.257612919" lon="21.158729529">
+        <ele>87.6</ele>
+        <time>2014-03-03T20:19:54.193Z</time>
+        <extensions>
+          <nmea:course>57.1</nmea:course>
+          <nmea:speed>2.1</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.258125697" lon="21.159689799">
+        <ele>88.1</ele>
+        <time>2014-03-03T20:20:32.221Z</time>
+        <extensions>
+          <nmea:course>41.1</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.258945338" lon="21.160951346">
+        <ele>87.6</ele>
+        <time>2014-03-03T20:21:27.125Z</time>
+        <extensions>
+          <nmea:course>36.7</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.259815146" lon="21.162199026">
+        <ele>87.8</ele>
+        <time>2014-03-03T20:22:19.102Z</time>
+        <extensions>
+          <nmea:course>32.0</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="52.260124807" lon="21.162486489">
+        <ele>87.5</ele>
+        <time>2014-03-03T20:22:36.202Z</time>
+        <extensions>
+          <nmea:course>38.2</nmea:course>
+          <nmea:speed>2.0</nmea:speed>
+        </extensions>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
