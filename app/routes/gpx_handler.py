@@ -104,6 +104,14 @@ def get_start_and_finish_times(tracks):
 
 
 def get_distance(point1, point2):
+    """
+    Get distance in kilometers between two points.
+
+    :param point1: 1st point in format {'lat': 52., 'lon': 21.}
+    :param point2: 2nd point in format {'lat': 52., 'lon': 21.}
+    :return: distance in kilometers between given points
+    :rtype: float
+    """
     lat1, lon1 = point1['lat'], point1['lon']
     lat2, lon2 = point2['lat'], point2['lon']
 
