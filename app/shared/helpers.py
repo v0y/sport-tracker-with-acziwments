@@ -52,3 +52,25 @@ def unix_time(datetime_):
     delta = datetime_ - epoch
 
     return delta.total_seconds()
+
+
+def km2mi(km):
+    """
+    Converts miles to kilometers
+
+    :param km: kilometers to convert to miles
+    :return: kilometers converted to miles
+    :rtype: float
+    """
+    return km * 0.621371
+
+
+def mi2km(mi):
+    """
+    Converts miles to kilometers
+
+    :param mi: miles to convert to kiloeters
+    :return: miles converted to kilometers
+    :rtype: float
+    """
+    return mi * 1.60934
