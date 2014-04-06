@@ -8,13 +8,14 @@ from xml.etree.cElementTree import parse
 from dateutil import parser as iso8601parser
 
 
-def handle_gpx(gpx_file):
+def handle_gpx(gpx_file, round_distance_to=False):
     # convert gpx to tracks
     tracks = gpx_to_tracks(gpx_file)
 
     # get additional route data
     start_time, finish_time = get_start_and_finish_times(tracks)
-    length, height_up, height_down = get_distance_and_elevations_delta(tracks)
+    length, height_up, height_down = \
+        get_distance_and_elevations_delta(tracks, round_distance_to)
 
     return tracks, start_time, finish_time, length, height_up, height_down
 
@@ -60,7 +61,7 @@ def gpx_to_tracks(gpx_file):
     return tracks
 
 
-def get_distance_and_elevations_delta(tracks):
+def get_distance_and_elevations_delta(tracks, round_distance_to=False):
     distance = 0
     delta_elevation_up = 0
     delta_elevation_down = 0
@@ -84,6 +85,9 @@ def get_distance_and_elevations_delta(tracks):
                 # update counter
                 i += 1
 
+    if round_distance_to:
+        distance = round(distance, round_distance_to)
+
     return distance, delta_elevation_up, delta_elevation_down
 
 
@@ -103,7 +107,7 @@ def get_start_and_finish_times(tracks):
     return start_time, finish_time
 
 
-def get_distance(point1, point2):
+def get_distance(point1, point2, round_to=False):
     """
     Get distance in kilometers between two points.
 
@@ -119,7 +123,11 @@ def get_distance(point1, point2):
     dlon = deg2rad(lon2 - lon1)
     a = math.sin(dlat / 2) ** 2 + (math.cos(deg2rad(lat1)) *
         math.cos(deg2rad(lat2)) * math.sin(dlon / 2) ** 2)
-    return 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a)) * 6371
+    distance = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a)) * 6371
+    if round_to:
+        distance = round(distance, round_to)
+
+    return distance
 
 
 def deg2rad(deg):
