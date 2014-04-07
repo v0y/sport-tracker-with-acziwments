@@ -91,20 +91,27 @@ def get_distance_and_elevations_delta(tracks, round_distance_to=False):
     return distance, delta_elevation_up, delta_elevation_down
 
 
+def get_segment_start_and_finish_times(segment):
+    start = segment[0]['time']
+    finish = segment[-1]['time']
+    return handle_datetime_string(start), handle_datetime_string(finish)
+
+
 def get_start_and_finish_times(tracks):
-    # get times as strings
-    start_time = tracks[0]['segments'][0][0]['time']
-    finish_time = tracks[-1]['segments'][-1][-1]['time']
+    start = tracks[0]['segments'][0][0]['time']
+    finish = tracks[-1]['segments'][-1][-1]['time']
+    return handle_datetime_string(start), handle_datetime_string(finish)
 
-    # convert strings to datetimes
-    start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
-    finish_time = datetime.strptime(finish_time, "%Y-%m-%d %H:%M:%S")
 
-    # add timezone information (gpx files use UTC)
-    start_time = start_time.replace(tzinfo=UTC)
-    finish_time = finish_time.replace(tzinfo=UTC)
-
-    return start_time, finish_time
+def handle_datetime_string(datetime_str, datetime_format='%Y-%m-%d %H:%M:%S'):
+    """
+    :param datetime_str: time string
+    :param datetime_format: format of time
+    :return: datetime with UTC timezone
+    :rtype: datetime
+    """
+    datetime_object = datetime.strptime(datetime_str, datetime_format)
+    return datetime_object.replace(tzinfo=UTC)
 
 
 def get_distance(point1, point2, round_to=False):
