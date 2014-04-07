@@ -61,29 +61,43 @@ def gpx_to_tracks(gpx_file):
     return tracks
 
 
+def get_segment_dist_and_ele(
+        segment, round_distance_to=False):
+    distance = 0
+    delta_elevation_up = 0
+    delta_elevation_down = 0
+    i = 1
+    while i < len(segment):
+        point1 = segment[i - 1]
+        point2 = segment[i]
+
+        # get distance
+        distance += get_distance(point1, point2)
+
+        # get height difference
+        d_ele = point2['ele'] - point1['ele']
+        if d_ele > 0:
+            delta_elevation_up += d_ele
+        else:
+            delta_elevation_down += d_ele
+
+        # update counter
+        i += 1
+
+    if round_distance_to:
+        distance = round(distance, round_distance_to)
+
+    return distance, delta_elevation_up, delta_elevation_down
+
+
 def get_distance_and_elevations_delta(tracks, round_distance_to=False):
     distance = 0
     delta_elevation_up = 0
     delta_elevation_down = 0
     for track in tracks:
         for segment in track['segments']:
-            i = 1
-            while i < len(segment):
-                point1 = segment[i - 1]
-                point2 = segment[i]
-
-                # get distance
-                distance += get_distance(point1, point2)
-
-                # get height difference
-                d_ele = point2['ele'] - point1['ele']
-                if d_ele > 0:
-                    delta_elevation_up += d_ele
-                else:
-                    delta_elevation_down += d_ele
-
-                # update counter
-                i += 1
+            distance, delta_elevation_up, delta_elevation_down = \
+                get_segment_dist_and_ele(segment)
 
     if round_distance_to:
         distance = round(distance, round_distance_to)
