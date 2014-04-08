@@ -1,3 +1,5 @@
+![travis](https://api.travis-ci.org/v0y/sport-tracker-with-acziwments.svg)
+
 Sports tracker with achievements
 ================================
 
