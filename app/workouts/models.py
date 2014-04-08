@@ -1,10 +1,14 @@
 # encoding: utf-8
 
+from datetime import timedelta
+
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator
 from django.db import models
 
+from app.shared.helpers import mi2km
 from app.shared.models import CreatedAtMixin, NameMixin, SlugMixin
 from .enums import SPORT_CATEGORIES
 
@@ -63,3 +67,31 @@ class Workout(CreatedAtMixin):
         return '%s godz. %s min. %s sek.' \
             % (splitted[0], splitted[1], splitted[2])
 
+    def best_time_for_x_km(self, distance):
+        """
+        Get best time on x km
+
+        :param distance: get time for this distance
+        :return: fastest time for given distance
+        :rtype: timedelta
+        """
+
+        if self.distance < distance:
+            return
+
+        # if there is no track
+        try:
+            return self.routes.get().best_time_for_x_km(distance)
+        except ObjectDoesNotExist:
+            proportions = distance / float(self.distance)
+            return timedelta(seconds=int(proportions * self.duration.seconds))
+
+    def best_time_for_x_mi(self, distance):
+        """
+        Get best time on x miles
+
+        :param distance: get time for this distance
+        :return: fastest time for given distance
+        :rtype: timedelta
+        """
+        return self.best_time_for_x_km(mi2km(distance))
