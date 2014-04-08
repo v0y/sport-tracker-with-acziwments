@@ -141,6 +141,7 @@ INSTALLED_APPS = filter(None, [
 
     # third-party
     'debug_toolbar' if DEBUG else None,
+    'django_coverage',
     'djangobower',
     'gravatar',
     'south',
