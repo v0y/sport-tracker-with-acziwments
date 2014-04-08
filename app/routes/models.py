@@ -101,7 +101,7 @@ class Route(CreatedAtMixin):
             last_distance = get_distance(track_[p2_ - 2], track_[p2_ - 1])
 
             # get proportions
-            proportions = missing_distance / last_distance
+            proportions = missing_distance / float(last_distance)
 
             # get missing time
             missing_seconds = proportions * last_timedelta.seconds
