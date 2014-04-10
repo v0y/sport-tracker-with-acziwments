@@ -7,10 +7,31 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator
 from django.db import models
+from timedelta.fields import TimedeltaField
 
 from app.shared.helpers import mi2km
 from app.shared.models import CreatedAtMixin, NameMixin, SlugMixin
-from .enums import SPORT_CATEGORIES
+from .enums import SPORT_CATEGORIES, UNIT_CHOICES
+
+
+class BestTime(models.Model):
+    distance = models.ForeignKey('Distance')
+    workout = models.ForeignKey('Workout')
+    unit = models.CharField(choices=UNIT_CHOICES, max_length=2)
+    duration = TimedeltaField()
+
+    class Meta:
+        verbose_name = u"najlepszy czas"
+        verbose_name_plural = u"najlepsze czaasy"
+
+
+class Distance(models.Model):
+    unit = models.CharField(choices=UNIT_CHOICES, max_length=2)
+    distance = models.FloatField()
+
+    class Meta:
+        verbose_name = u"dystans"
+        verbose_name_plural = u"dystanse"
 
 
 class Sport(NameMixin, SlugMixin):

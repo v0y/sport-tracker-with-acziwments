@@ -13,3 +13,8 @@ SPORT_CATEGORIES = (
     ('water', u"sporty wodne"),
     ('winter', u"sporty zimowe"),
 )
+
+UNIT_CHOICES = (
+    ('km', u"kilometers"),
+    ('mi', u"miles")
+)
