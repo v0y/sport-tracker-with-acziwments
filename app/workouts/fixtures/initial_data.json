@@ -430,5 +430,117 @@
             "name": "kr\u0119gle",
             "slug": "kregle"
         }
+    },
+    {
+        "pk": 1,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 1.0,
+            "unit": "km"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 3.0,
+            "unit": "km"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 5.0,
+            "unit": "km"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 10.0,
+            "unit": "km"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 21.975,
+            "unit": "km"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 42.195,
+            "unit": "km"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 50.0,
+            "unit": "km"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 100.0,
+            "unit": "km"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 1.0,
+            "unit": "mi"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 3.0,
+            "unit": "mi"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 5.0,
+            "unit": "mi"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 10.0,
+            "unit": "mi"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 50.0,
+            "unit": "mi"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 100.0,
+            "unit": "mi"
+        }
     }
 ]
