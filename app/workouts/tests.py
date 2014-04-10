@@ -4,20 +4,15 @@ from datetime import datetime, timedelta
 from pytz import UTC
 
 from django.contrib.auth.models import User
-from django.test.client import RequestFactory
 from django_nose import FastFixtureTestCase
 
-from .models import Sport, Workout
+from .models import Distance, Sport, Workout, BestTime
 
 
-class TestWorkoutTestCase(FastFixtureTestCase):
-
+class CreateWorkoutsMixin(object):
     def setUp(self):
         # create request and user
-        factory = RequestFactory()
         user = User.objects.create(username='a', email='a@a.aa', password='a')
-        self.request = factory.get('/')
-        self.request.user = user
 
         # create workout
         sport = Sport.objects.create(name=u'sport', category='cycling')
@@ -30,6 +25,9 @@ class TestWorkoutTestCase(FastFixtureTestCase):
         self.workout1 = Workout.objects.create(distance=5, **defaults)
         self.workout2 = Workout.objects.create(distance=10.5, **defaults)
         self.workout3 = Workout.objects.create(distance=11.111, **defaults)
+
+
+class TestWorkoutTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
 
     def test_best_time_for_x_km(self):
         test_values = [
@@ -73,3 +71,22 @@ class TestWorkoutTestCase(FastFixtureTestCase):
 
         self.assertEqual(time_for_1_mi, expected_for_1_mi)
         self.assertEqual(time_for_3_mi, expected_for_3_mi)
+
+
+class TestDistancesTestCase(FastFixtureTestCase):
+
+    def setUp(self):
+        self.distance1 = Distance.objects.get(distance=1, unit='km')
+        self.distance2 = Distance.objects.get(distance=10, unit='km')
+        self.distance3 = Distance.objects.get(distance=42.195, unit='km')
+        self.distance4 = Distance.objects.get(distance=1, unit='mi')
+        self.distance5 = Distance.objects.create(distance=15.99, unit='mi')
+        self.distance6 = Distance.objects.get(distance=100, unit='mi')
+
+    def test_distance_km(self):
+        self.assertEqual(self.distance1.distance_km, 1)
+        self.assertEqual(self.distance2.distance_km, 10)
+        self.assertEqual(self.distance3.distance_km, 42.195)
+        self.assertEqual(self.distance4.distance_km, 1.60934)
+        self.assertEqual(self.distance5.distance_km, 25.7333466)
+        self.assertEqual(self.distance6.distance_km, 160.934)
