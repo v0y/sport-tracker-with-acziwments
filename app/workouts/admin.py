@@ -2,7 +2,17 @@
 
 from django.contrib import admin
 
-from .models import Sport, Workout
+from .models import BestTime, Distance, Sport, Workout
+
+
+class BestTimeAdmin(admin.ModelAdmin):
+    list_display = ('distance', 'workout', 'unit', 'duration')
+admin.site.register(BestTime, BestTimeAdmin)
+
+
+class DistanceAdmin(admin.ModelAdmin):
+    list_display = ('distance', 'unit')
+admin.site.register(Distance, DistanceAdmin)
 
 
 class SportAdmin(admin.ModelAdmin):
