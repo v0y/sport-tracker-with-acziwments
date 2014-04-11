@@ -129,3 +129,16 @@ class TestBestTimesTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
                 best_time = BestTime.objects.get(
                     workout=workout, distance=distance)
                 self.assertEqual(best_time.duration, case[1])
+
+    def test_best_times_update(self):
+        distance = Distance.objects.get(distance=5, unit='km')
+        best_time = \
+            BestTime.objects.get(workout=self.workout1, distance=distance)
+        self.assertEqual(best_time.duration, timedelta(minutes=60))
+
+        # update workout and check best time
+        self.workout1.datetime_stop = datetime(2000, 01, 01, 14, tzinfo=UTC)
+        self.workout1.save()
+        best_time = \
+            BestTime.objects.get(workout=self.workout1, distance=distance)
+        self.assertEqual(best_time.duration, timedelta(minutes=120))
