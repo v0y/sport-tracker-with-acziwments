@@ -26,6 +26,9 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'workouts', ['Distance'])
 
+        # Adding unique constraint on 'Distance', fields ['distance', 'unit']
+        db.create_unique(u'workouts_distance', ['distance', 'unit'])
+
         # Adding model 'Sport'
         db.create_table(u'workouts_sport', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -51,6 +54,9 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Removing unique constraint on 'Distance', fields ['distance', 'unit']
+        db.delete_unique(u'workouts_distance', ['distance', 'unit'])
+
         # Deleting model 'BestTime'
         db.delete_table(u'workouts_besttime')
 
@@ -110,7 +116,7 @@ class Migration(SchemaMigration):
             'workout': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['workouts.Workout']"})
         },
         u'workouts.distance': {
-            'Meta': {'object_name': 'Distance'},
+            'Meta': {'unique_together': "(('distance', 'unit'),)", 'object_name': 'Distance'},
             'distance': ('django.db.models.fields.FloatField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'unit': ('django.db.models.fields.CharField', [], {'max_length': '2'})
