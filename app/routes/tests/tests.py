@@ -75,6 +75,7 @@ class TestRoutesTestCase(FastFixtureTestCase):
         time_for_5_km = self.route.best_time_for_x_km(5)
         time_for_8_38_km = self.route.best_time_for_x_km(8.38)
         time_for_10_km = self.route.best_time_for_x_km(10)
+        time_for_1000_km = self.route.best_time_for_x_km(1000)
 
         expected_for_1_km = timedelta(minutes=5, seconds=43)
         expected_for_1_76_km = timedelta(minutes=12, seconds=2)
@@ -89,6 +90,7 @@ class TestRoutesTestCase(FastFixtureTestCase):
         self.assertEqual(time_for_5_km, expected_for_5_km)
         self.assertEqual(time_for_8_38_km, expected_for_8_38_km)
         self.assertEqual(time_for_10_km, expected_for_10_km)
+        self.assertEqual(time_for_1000_km, None)
 
     def test_best_time_for_x_mi(self):
         time_for_1_mi = self.route.best_time_for_x_mi(1)
