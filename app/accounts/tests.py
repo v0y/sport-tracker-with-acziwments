@@ -3,6 +3,7 @@
 from datetime import datetime
 
 from django.contrib.auth.models import User
+from django.core import management
 from django_nose import FastFixtureTestCase
 
 from app.health.models import Health
@@ -86,4 +87,36 @@ class TestUserProfile(UserProfileTestCase):
             self.u2.profile.last_weight, (56.9, self.date1.date()))
         self.assertEqual(self.u3.profile.last_weight, None)
         self.assertEqual(self.u4.profile.last_weight, (98, self.date2.date()),)
+
+
+class TestSetPasswordManagementCommand(FastFixtureTestCase):
+
+    def setUp(self):
+        # create request and user
+        self.user = User.objects.create(
+            username='u', email='a@a.aa', password='z')
+
+    def test_change_password_to_a(self):
+        # check if user can not log in with password 'a'
+        self.assertFalse(self.user.check_password('a'))
+
+        # change pasword
+        management.call_command('set_password', username='u')
+
+        # check, if password is changed
+        user = User.objects.get(username='u')
+        self.assertTrue(user.check_password('a'))
+
+    def test_change_password_to_something_else(self):
+        # check if user can not log in with password 'a'
+        self.assertFalse(self.user.check_password('dupa.8'))
+
+        # change pasword
+        management.call_command(
+            'set_password', username='u', password='dupa.8')
+
+        # check, if password is changed
+        user = User.objects.get(username='u')
+        self.assertTrue(user.check_password('dupa.8'))
+
 
