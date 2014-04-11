@@ -90,3 +90,42 @@ class TestDistancesTestCase(FastFixtureTestCase):
         self.assertEqual(self.distance4.distance_km, 1.60934)
         self.assertEqual(self.distance5.distance_km, 25.7333466)
         self.assertEqual(self.distance6.distance_km, 160.934)
+
+
+class TestBestTimesTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
+
+    def setUp(self):
+        super(TestBestTimesTestCase, self).setUp()
+        self.distance1 = Distance.objects.get(distance=1, unit='km')
+        self.distance3 = Distance.objects.get(distance=3, unit='km')
+        self.distance4 = Distance.objects.get(distance=5, unit='km')
+        self.distance6 = Distance.objects.get(distance=10, unit='km')
+
+    def test_best_times_creation(self):
+        test_values = [
+            (self.workout1, [
+                # (distance, expected_value)
+                (1, timedelta(minutes=12)),
+                (3, timedelta(seconds=2160)),
+                (5, timedelta(minutes=60)),
+            ]),
+            (self.workout2, [
+                (1, timedelta(seconds=342)),
+                (3, timedelta(seconds=1028)),
+                (5, timedelta(seconds=1714)),
+                (10, timedelta(seconds=3428)),
+            ]),
+            (self.workout3, [
+                (1, timedelta(seconds=324)),
+                (3, timedelta(seconds=972)),
+                (5, timedelta(seconds=1620)),
+                (10, timedelta(seconds=3240)),
+            ]),
+        ]
+
+        for workout, test_cases in test_values:
+            for case in test_cases:
+                distance = Distance.objects.get(distance=case[0], unit='km')
+                best_time = BestTime.objects.get(
+                    workout=workout, distance=distance)
+                self.assertEqual(best_time.duration, case[1])
