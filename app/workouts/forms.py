@@ -34,8 +34,8 @@ class WorkoutForm(RouteIdMixin):
         super(WorkoutForm, self).__init__(*args, **kwargs)
 
         now_ = datetime.now()
-        now_date = datetime.strftime(now_, '%d-%m-%Y')
-        now_time = datetime.strftime(now_, '%H:%M')
+        now_date = now_.strftime('%d-%m-%Y')
+        now_time = now_.strftime('%H:%M')
 
         initial = initial or {}
         initial['datetime_start'] = initial.get('datetime_start', now_date)
