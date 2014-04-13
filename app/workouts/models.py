@@ -147,9 +147,10 @@ class Workout(CreatedAtMixin):
 
 @receiver(post_save, sender=Workout)
 def update_best_times(sender, instance, **kwargs):
-    distances = Distance.objects.filter(
-        Q(distance__lte=instance.distance, unit='km') |
-        Q(distance__lte=km2mi(instance.distance), unit='mi'))
+    if instance.distance:
+        distances = Distance.objects.filter(
+            Q(distance__lte=instance.distance, unit='km') |
+            Q(distance__lte=km2mi(instance.distance), unit='mi'))
 
-    for distance in distances:
-        instance.update_best_time(distance)
+        for distance in distances:
+            instance.update_best_time(distance)
