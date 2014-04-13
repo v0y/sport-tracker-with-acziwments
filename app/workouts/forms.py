@@ -26,7 +26,7 @@ class WorkoutForm(RouteIdMixin):
 
     class Meta:
         button_text = u"Zapisz"
-        exclude = ('user', 'datetime_stop')
+        exclude = ('user', 'datetime_stop', 'is_active')
         model = Workout
         name = u"Dodaj trening"
 

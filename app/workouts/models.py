@@ -70,6 +70,8 @@ class Workout(CreatedAtMixin):
         blank=True)
     datetime_start = models.DateTimeField(verbose_name=u"Czas rozpoczęcia")
     datetime_stop = models.DateTimeField(verbose_name=u"Czas zakończenia")
+    is_active = models.BooleanField(
+        verbose_name=u"Włączony do statystyk", default=True)
 
     class Meta:
         verbose_name = u"trening"
