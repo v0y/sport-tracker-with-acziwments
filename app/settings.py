@@ -192,6 +192,12 @@ if DEBUG:
 # Django Bower
 BOWER_COMPONENTS_ROOT = join(_current_dir, 'components')
 
+# Dajngo coverage
+COVERAGE_MODULE_EXCLUDES = [
+    'debug_toolbar$', 'south$', 'widget_tweaks$', 'tests$', 'settings$',
+    'urls$', 'locale$', 'common.views.test', '__init__', 'django', 'migrations'
+]
+
 
 ###############################################################################
 # Core/internal apps settings
