@@ -1,14 +1,17 @@
 # coding: utf-8
 
-from datetime import date
+from datetime import date, datetime, timedelta
+from pytz import UTC
 
 from django.contrib.auth.models import User
+from django.db.models import Count
 from django.db.models.signals import post_save
 from django.db import models
 from django.dispatch import receiver
 
 from app.health.models import Health
 from app.shared.models import CreatedAtMixin, SHA1TokenMixin
+from app.workouts.models import Sport
 from .enums import SEX_SELECT
 
 
@@ -85,6 +88,32 @@ class UserProfile(models.Model):
         bmi = weight / height_in_meters ** 2
 
         return round(bmi, 1), date_
+
+    @property
+    def favourite_sport(self):
+        """
+        1. get discipline with most workouts in last year
+        2. If there is no workouts in last year - get from all workouts
+
+        :return: favourite discipline object
+        """
+        year_ago = datetime.now(tz=UTC) - timedelta(days=365)
+
+        sport_base_qs = Sport.objects \
+            .filter(workout__user=self.user, workout__is_active=True) \
+            .annotate(workouts_count=Count('workout'))
+
+        favourite_sport = sport_base_qs \
+            .filter(workout__datetime_stop__gt=year_ago) \
+            .order_by('-workouts_count', '-workout__datetime_stop') \
+            .first()
+
+        if favourite_sport:
+            return favourite_sport
+        else:
+            return sport_base_qs \
+                .order_by('-workouts_count', '-workout__datetime_stop') \
+                .first()
 
 
 class UserActivation(CreatedAtMixin, SHA1TokenMixin):
