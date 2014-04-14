@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from pytz import UTC
 
 from django.contrib.auth.models import User
@@ -181,3 +181,24 @@ class TestFavouriteSport(FastFixtureTestCase):
 
     def test_favourite_sport_without_workouts_in_last_year(self):
         self.assertEquals(self.user3.profile.favourite_sport, self.sport1)
+
+
+class TestAge(FastFixtureTestCase):
+
+    def setUp(self):
+        self.user1 = User.objects.create(
+            username='u1', email='a@a.aa', password='z')
+        self.user1.profile.dob = date.today() - timedelta(days=365 * 26)
+
+        self.user2 = User.objects.create(
+            username='u2', email='a@a.aa', password='z')
+        self.user2.profile.dob = date.today() - timedelta(days=364)
+
+        self.user3 = User.objects.create(
+            username='u3', email='a@a.aa', password='z')
+        self.user3.profile.dob = date.today() - timedelta(days=366)
+
+    def test_age(self):
+        self.assertEquals(self.user1.profile.age, 26)
+        self.assertEquals(self.user2.profile.age, 0)
+        self.assertEquals(self.user3.profile.age, 1)
