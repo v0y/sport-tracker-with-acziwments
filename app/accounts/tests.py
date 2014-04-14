@@ -1,12 +1,14 @@
 # coding: utf-8
 
-from datetime import datetime
+from datetime import datetime, timedelta
+from pytz import UTC
 
 from django.contrib.auth.models import User
 from django.core import management
 from django_nose import FastFixtureTestCase
 
 from app.health.models import Health
+from app.workouts.models import Workout, Sport
 from .enums import SEX_SELECT
 from .helpers import get_mail_provider_url
 
@@ -92,7 +94,6 @@ class TestUserProfile(UserProfileTestCase):
 class TestSetPasswordManagementCommand(FastFixtureTestCase):
 
     def setUp(self):
-        # create request and user
         self.user = User.objects.create(
             username='u', email='a@a.aa', password='z')
 
@@ -120,3 +121,63 @@ class TestSetPasswordManagementCommand(FastFixtureTestCase):
         self.assertTrue(user.check_password('dupa.8'))
 
 
+class TestFavouriteSport(FastFixtureTestCase):
+
+    def setUp(self):
+        # create users
+        self.user1 = User.objects.create(
+            username='u1', email='a@a.aa', password='z')
+        self.user2 = User.objects.create(
+            username='u2', email='b@b.bb', password='z')
+        self.user3 = User.objects.create(
+            username='u3', email='c@c.cc', password='z')
+
+        # get dates
+        today = datetime.now(tz=UTC)
+        self.year_ago = today - timedelta(days=365)
+        in_last_year_start = today - timedelta(days=101)
+        in_last_year_stop = today - timedelta(days=100)
+        older_than_last_year_start = today - timedelta(days=501)
+        older_than_last_year_stop = today - timedelta(days=500)
+
+        # get sports
+        self.sport1 = Sport.objects.get(id=1)
+        self.sport2 = Sport.objects.get(id=2)
+
+        # create workouts for user1
+        Workout.objects.create(
+            user=self.user1, sport=self.sport1,
+            datetime_start=older_than_last_year_start,
+            datetime_stop=older_than_last_year_stop)
+        Workout.objects.create(
+            user=self.user1, sport=self.sport1,
+            datetime_start=older_than_last_year_start,
+            datetime_stop=older_than_last_year_stop)
+        Workout.objects.create(
+            user=self.user1, sport=self.sport1,
+            datetime_start=in_last_year_start, datetime_stop=in_last_year_stop)
+        Workout.objects.create(
+            user=self.user1, sport=self.sport2,
+            datetime_start=in_last_year_start, datetime_stop=in_last_year_stop)
+        Workout.objects.create(
+            user=self.user1, sport=self.sport2,
+            datetime_start=in_last_year_start, datetime_stop=in_last_year_stop)
+
+        # create workouts for user3
+        Workout.objects.create(
+            user=self.user3, sport=self.sport1,
+            datetime_start=older_than_last_year_start,
+            datetime_stop=older_than_last_year_stop)
+        Workout.objects.create(
+            user=self.user3, sport=self.sport1,
+            datetime_start=older_than_last_year_start,
+            datetime_stop=older_than_last_year_stop)
+
+    def test_favourite_sport_without_workouts(self):
+        self.assertIsNone(self.user2.profile.favourite_sport)
+
+    def test_favourite_sport_with_workouts_in_last_year(self):
+        self.assertEquals(self.user1.profile.favourite_sport, self.sport2)
+
+    def test_favourite_sport_without_workouts_in_last_year(self):
+        self.assertEquals(self.user3.profile.favourite_sport, self.sport1)
