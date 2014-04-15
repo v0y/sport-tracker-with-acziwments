@@ -19,12 +19,12 @@
 					{% endif %}
 				</div>
 
-				<div class="user-profile-info col-lg-12 col-md-12 col-sm-6">
+				<div class="user-info col-lg-12 col-md-12 col-sm-6">
 					<ul>
 						{% if object.profile.sex_visible %}
 							<li>
 								{{ object.profile.sex_visible }}{% if object.profile.age %},
-									{{ object.profile.age }} lat
+									{{ object.profile.age }}&nbsp;lat
 								{% endif %}
 							</li>
 						{% elif object.profile.age %}
