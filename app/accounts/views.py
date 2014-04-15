@@ -36,7 +36,7 @@ class ShowUserProfileView(DetailView):
 
         # get activities
         activities = Activity.objects.filter(user=self.object) \
-            .order_by('-related_date', '-created_at')
+            .order_by('-related_date', '-created_at').select_related()
 
         # render activities
         context['activities'] = render_activities(activities)
