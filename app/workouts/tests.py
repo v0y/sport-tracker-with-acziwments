@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from datetime import datetime, timedelta
+import numbers
 from pytz import UTC
 
 from django.contrib.auth.models import User
@@ -143,3 +144,25 @@ class BestTimesTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
         best_time = \
             BestTime.objects.get(workout=self.workout1, distance=distance)
         self.assertEqual(best_time.duration, timedelta(minutes=120))
+
+
+class SportTestCase(FastFixtureTestCase):
+
+    def test_get_sports_choices(self):
+        choices = Sport.get_sports_choices()
+
+        # ensure choices are list
+        self.assertIsInstance(choices, list)
+
+        for index, choice in enumerate(choices):
+            # ensure every choice is two elements tuple
+            self.assertIsInstance(choice, tuple)
+            self.assertEquals(len(choice), 2)
+
+            if index == 0:
+                # ensure first choice is no choice
+                self.assertEquals(choice[0], '')
+            else:
+                # ensure firts tuple item is id, second is unicode
+                self.assertIsInstance(choice[0], numbers.Integral)
+                self.assertIsInstance(choice[1], unicode)
