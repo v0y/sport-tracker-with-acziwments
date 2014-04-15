@@ -39,6 +39,11 @@
 						{% if object.profile.bmi.0 %}
 							<li>BMI: <strong>{{ object.profile.bmi.0 }}</strong></li>
 						{% endif %}
+						{% with object.profile.favourite_sport as favourite_sport %}
+							{% if favourite_sport %}
+								<li>Ulubiona dyscyplina: <strong>{{ favourite_sport }}</strong></li>
+							{% endif %}
+						{% endwith %}
 					</ul>
 				</div> {# user-info #}
 			</div> {# panel-body #}
