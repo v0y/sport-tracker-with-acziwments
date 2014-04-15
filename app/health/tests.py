@@ -5,7 +5,7 @@ from app.accounts.tests import UserProfileTestCase
 from app.health.models import Health
 
 
-class TestHealth(UserProfileTestCase):
+class HealthTestCase(UserProfileTestCase):
 
     def test_get_first_date(self):
         u1_first_date = Health.get_first_date(self.u1, '%Y %m %d')

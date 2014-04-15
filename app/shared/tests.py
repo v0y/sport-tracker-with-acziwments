@@ -7,19 +7,11 @@ from django_nose import FastFixtureTestCase
 from app.shared.models import SHA1TokenMixin
 
 
-# inherit abstract class
-class SHA1Token(SHA1TokenMixin):
-    pass
-
-
 class SHA1TokenMixinTestCase(FastFixtureTestCase):
     urls = 'app.test_urls'
 
     def setUp(self):
-        self.token = SHA1Token(token='123')
-
-
-class TestSHA1TokenMixin(SHA1TokenMixinTestCase):
+        self.token = SHA1TokenMixin(token='123')
 
     def test_get_activation_link(self):
         domain = Site.objects.get(pk=settings.SITE_ID).domain

@@ -13,7 +13,7 @@ from .enums import SEX_SELECT
 from .helpers import get_mail_provider_url
 
 
-class TestGetMailProvider(FastFixtureTestCase):
+class GetMailProviderTestCase(FastFixtureTestCase):
 
     def test_basic(self):
         # {'given mail': 'expected result}
@@ -68,9 +68,6 @@ class UserProfileTestCase(FastFixtureTestCase):
         self.u3.profile.sex = SEX_SELECT[1][0]
         self.u4.profile.sex = SEX_SELECT[1][0]
 
-
-class TestUserProfile(UserProfileTestCase):
-
     def test_bmi(self):
         self.assertEqual(self.u1.profile.bmi, (44.4, self.date1.date()))
         self.assertEqual(self.u2.profile.bmi, (19.7, self.date1.date()))
@@ -91,7 +88,7 @@ class TestUserProfile(UserProfileTestCase):
         self.assertEqual(self.u4.profile.last_weight, (98, self.date2.date()),)
 
 
-class TestSetPasswordManagementCommand(FastFixtureTestCase):
+class SetPasswordManagementCommandTestCase(FastFixtureTestCase):
 
     def setUp(self):
         self.user = User.objects.create(
@@ -121,7 +118,7 @@ class TestSetPasswordManagementCommand(FastFixtureTestCase):
         self.assertTrue(user.check_password('dupa.8'))
 
 
-class TestUserSports(FastFixtureTestCase):
+class UserSportsTestCase(FastFixtureTestCase):
 
     def setUp(self):
         # create users
@@ -201,7 +198,7 @@ class TestUserSports(FastFixtureTestCase):
         self.assertEquals(sports, [])
 
 
-class TestAge(FastFixtureTestCase):
+class AgeTestCase(FastFixtureTestCase):
 
     def setUp(self):
         self.user1 = User.objects.create(

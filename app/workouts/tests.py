@@ -10,6 +10,7 @@ from .models import Distance, Sport, Workout, BestTime
 
 
 class CreateWorkoutsMixin(object):
+
     def setUp(self):
         # create request and user
         user = User.objects.create(username='a', email='a@a.aa', password='a')
@@ -27,7 +28,7 @@ class CreateWorkoutsMixin(object):
         self.workout3 = Workout.objects.create(distance=11.111, **defaults)
 
 
-class TestWorkoutTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
+class WorkoutTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
 
     def test_best_time_for_x_km(self):
         test_values = [
@@ -73,7 +74,7 @@ class TestWorkoutTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
         self.assertEqual(time_for_3_mi, expected_for_3_mi)
 
 
-class TestDistancesTestCase(FastFixtureTestCase):
+class DistancesTestCase(FastFixtureTestCase):
 
     def setUp(self):
         self.distance1 = Distance.objects.get(distance=1, unit='km')
@@ -92,10 +93,10 @@ class TestDistancesTestCase(FastFixtureTestCase):
         self.assertEqual(self.distance6.distance_km, 160.934)
 
 
-class TestBestTimesTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
+class BestTimesTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
 
     def setUp(self):
-        super(TestBestTimesTestCase, self).setUp()
+        super(BestTimesTestCase, self).setUp()
         self.distance1 = Distance.objects.get(distance=1, unit='km')
         self.distance3 = Distance.objects.get(distance=3, unit='km')
         self.distance4 = Distance.objects.get(distance=5, unit='km')
