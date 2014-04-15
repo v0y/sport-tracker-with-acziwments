@@ -43,6 +43,7 @@ def unix_time(datetime_):
     """
     :param datetime_: datetime object with or without timezone
     :return: unix time for given datetime
+    :rtype: int
     """
     epoch = datetime.datetime.utcfromtimestamp(0)
 
@@ -51,7 +52,7 @@ def unix_time(datetime_):
 
     delta = datetime_ - epoch
 
-    return delta.total_seconds()
+    return int(delta.total_seconds())
 
 
 def km2mi(km):
