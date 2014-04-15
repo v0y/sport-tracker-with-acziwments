@@ -115,6 +115,29 @@ class UserProfile(models.Model):
                 .order_by('-workouts_count', '-workout__datetime_stop') \
                 .first()
 
+    def get_sports_in_year(self, year=None):
+        """
+        Returns list of sports from workouts in given calendar year
+        sorted by workouts number.
+
+        If year is not given use current year.
+
+        :param year: int, year
+        :return: sports from given year workouts
+        :rtype: list
+        """
+        year = year or date.today().year
+
+        sports = Sport.objects \
+            .filter(
+                workout__user=self.user,
+                workout__is_active=True,
+                workout__datetime_stop__year=year) \
+            .annotate(workouts_count=Count('workout')) \
+            .filter(workouts_count__gt=0) \
+            .order_by('-workouts_count', '-workout__datetime_stop')
+        return list(sports)
+
 
 class UserActivation(CreatedAtMixin, SHA1TokenMixin):
     user = models.OneToOneField(
