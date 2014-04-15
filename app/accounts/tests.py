@@ -121,7 +121,7 @@ class TestSetPasswordManagementCommand(FastFixtureTestCase):
         self.assertTrue(user.check_password('dupa.8'))
 
 
-class TestFavouriteSport(FastFixtureTestCase):
+class TestUserSports(FastFixtureTestCase):
 
     def setUp(self):
         # create users
@@ -139,6 +139,7 @@ class TestFavouriteSport(FastFixtureTestCase):
         in_last_year_stop = today - timedelta(days=100)
         older_than_last_year_start = today - timedelta(days=501)
         older_than_last_year_stop = today - timedelta(days=500)
+        self.old_year = older_than_last_year_stop.year
 
         # get sports
         self.sport1 = Sport.objects.get(id=1)
@@ -181,6 +182,23 @@ class TestFavouriteSport(FastFixtureTestCase):
 
     def test_favourite_sport_without_workouts_in_last_year(self):
         self.assertEquals(self.user3.profile.favourite_sport, self.sport1)
+
+    def test_sports_in_year_with_current_year(self):
+        expected_sports = [self.sport2, self.sport1]
+        sports = self.user1.profile.get_sports_in_year()
+        self.assertEquals(sports, expected_sports)
+
+    def test_sports_in_year_with_given_year(self):
+        expected_sports = [self.sport1]
+        sports = self.user1.profile.get_sports_in_year(self.old_year)
+        self.assertEquals(sports, expected_sports)
+
+    def test_sports_in_year_with_current_year_and_user_without_workouts(self):
+        self.assertEquals(self.user2.profile.get_sports_in_year(), [])
+
+    def test_sports_in_year_with_given_year_and_user_without_workouts(self):
+        sports = self.user2.profile.get_sports_in_year(self.old_year)
+        self.assertEquals(sports, [])
 
 
 class TestAge(FastFixtureTestCase):
