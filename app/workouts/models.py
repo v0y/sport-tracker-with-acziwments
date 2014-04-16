@@ -45,6 +45,8 @@ class Distance(models.Model):
 class Sport(NameMixin, SlugMixin):
     category = models.CharField(
         verbose_name=u"Kategoria", choices=SPORT_CATEGORIES, max_length=16)
+    show_distances = models.BooleanField(default=True)
+    show_map = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = u"sport"

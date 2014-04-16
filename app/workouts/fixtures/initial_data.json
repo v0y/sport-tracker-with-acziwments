@@ -4,6 +4,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "athletic",
+            "show_map": false,
+            "show_distances": false,
             "name": "si\u0142ownia",
             "slug": "silownia"
         }
@@ -13,6 +15,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "athletic",
+            "show_map": false,
+            "show_distances": false,
             "name": "podnoszenie ci\u0119\u017car\u00f3w",
             "slug": "podnoszenie-ciezarow"
         }
@@ -22,6 +26,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "athletic",
+            "show_map": false,
+            "show_distances": false,
             "name": "gimnastyka",
             "slug": "gimnastyka"
         }
@@ -31,6 +37,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "other",
+            "show_map": false,
+            "show_distances": false,
             "name": "golf",
             "slug": "golf"
         }
@@ -40,6 +48,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "horsemanship",
+            "show_map": true,
+            "show_distances": true,
             "name": "je\u017adziectwo",
             "slug": "jezdziectwo"
         }
@@ -49,6 +59,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "cycling",
+            "show_map": true,
+            "show_distances": true,
             "name": "kolarstwo szosowe",
             "slug": "kolarstwo-szosowe"
         }
@@ -58,6 +70,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "cycling",
+            "show_map": true,
+            "show_distances": true,
             "name": "kolarstwo g\u00f3rskie",
             "slug": "kolarstwo-gorskie"
         }
@@ -67,6 +81,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "cycling",
+            "show_map": true,
+            "show_distances": true,
             "name": "jazda na rowerze",
             "slug": "jazda-na-rowerze"
         }
@@ -76,6 +92,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "other",
+            "show_map": false,
+            "show_distances": false,
             "name": "\u0142ucznictwo",
             "slug": "lucznictwo"
         }
@@ -85,6 +103,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "other",
+            "show_map": false,
+            "show_distances": false,
             "name": "strzelectwo",
             "slug": "strzelectwo"
         }
@@ -94,6 +114,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "combat",
+            "show_map": false,
+            "show_distances": false,
             "name": "sporty walki",
             "slug": "sporty-walki"
         }
@@ -103,6 +125,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "combat",
+            "show_map": false,
+            "show_distances": false,
             "name": "szermierka",
             "slug": "szermierka"
         }
@@ -112,6 +136,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "water",
+            "show_map": true,
+            "show_distances": true,
             "name": "p\u0142ywanie",
             "slug": "plywanie"
         }
@@ -121,6 +147,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "water",
+            "show_map": true,
+            "show_distances": true,
             "name": "kajakarstwo",
             "slug": "kajakarstwo"
         }
@@ -130,6 +158,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "water",
+            "show_map": true,
+            "show_distances": true,
             "name": "\u017ceglarstwo",
             "slug": "zeglarstwo"
         }
@@ -139,6 +169,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "tennis",
+            "show_map": false,
+            "show_distances": false,
             "name": "tenis",
             "slug": "tenis"
         }
@@ -148,6 +180,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "tennis",
+            "show_map": false,
+            "show_distances": false,
             "name": "tenis sto\u0142owy",
             "slug": "tenis-stolowy"
         }
@@ -157,6 +191,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "team",
+            "show_map": true,
+            "show_distances": true,
             "name": "hokej",
             "slug": "hokej"
         }
@@ -166,6 +202,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "team",
+            "show_map": true,
+            "show_distances": true,
             "name": "koszyk\u00f3wka",
             "slug": "koszykowka"
         }
@@ -175,6 +213,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "team",
+            "show_map": true,
+            "show_distances": true,
             "name": "pi\u0142ka r\u0119czna",
             "slug": "pilka-reczna"
         }
@@ -184,6 +224,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "team",
+            "show_map": true,
+            "show_distances": true,
             "name": "pi\u0142ka no\u017cna",
             "slug": "pilka-nozna"
         }
@@ -193,6 +235,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "team",
+            "show_map": true,
+            "show_distances": true,
             "name": "pi\u0142ka wodna",
             "slug": "pilka-wodna"
         }
@@ -202,6 +246,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "team",
+            "show_map": false,
+            "show_distances": false,
             "name": "siatk\u00f3wka",
             "slug": "siatkowka"
         }
@@ -211,6 +257,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "tennis",
+            "show_map": false,
+            "show_distances": false,
             "name": "badminton",
             "slug": "badminton"
         }
@@ -220,6 +268,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "winter",
+            "show_map": true,
+            "show_distances": true,
             "name": "\u0142y\u017cwiarstwo",
             "slug": "lyzwiarstwo"
         }
@@ -229,6 +279,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "water",
+            "show_map": false,
+            "show_distances": false,
             "name": "nurkowanie",
             "slug": "nurkowanie"
         }
@@ -238,6 +290,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "winter",
+            "show_map": true,
+            "show_distances": true,
             "name": "narciarstwo",
             "slug": "narciarstwo"
         }
@@ -247,6 +301,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "winter",
+            "show_map": true,
+            "show_distances": true,
             "name": "narciarstwo biegowe",
             "slug": "narciarstwo-biegowe"
         }
@@ -256,6 +312,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "winter",
+            "show_map": true,
+            "show_distances": true,
             "name": "snowboarding",
             "slug": "snowboarding"
         }
@@ -265,6 +323,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "winter",
+            "show_map": true,
+            "show_distances": true,
             "name": "sporty saneczkowe",
             "slug": "sporty-saneczkowe"
         }
@@ -274,6 +334,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "winter",
+            "show_map": false,
+            "show_distances": false,
             "name": "curling",
             "slug": "curling"
         }
@@ -283,6 +345,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "combat",
+            "show_map": false,
+            "show_distances": false,
             "name": "armwrestling",
             "slug": "armwrestling"
         }
@@ -292,6 +356,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "horsemanship",
+            "show_map": true,
+            "show_distances": true,
             "name": "polo",
             "slug": "polo"
         }
@@ -301,6 +367,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "team",
+            "show_map": true,
+            "show_distances": true,
             "name": "futbol",
             "slug": "futbol"
         }
@@ -310,6 +378,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "team",
+            "show_map": true,
+            "show_distances": true,
             "name": "rugby",
             "slug": "rugby"
         }
@@ -319,6 +389,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "team",
+            "show_map": true,
+            "show_distances": true,
             "name": "krykiet",
             "slug": "krykiet"
         }
@@ -328,6 +400,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "other",
+            "show_map": false,
+            "show_distances": false,
             "name": "taniec",
             "slug": "taniec"
         }
@@ -337,6 +411,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "other",
+            "show_map": true,
+            "show_distances": true,
             "name": "wrotkarstwo",
             "slug": "wrotkarstwo"
         }
@@ -346,6 +422,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "walking",
+            "show_map": true,
+            "show_distances": true,
             "name": "marsze na orientacj\u0119",
             "slug": "marsze-na-orientacje"
         }
@@ -355,6 +433,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "walking",
+            "show_map": true,
+            "show_distances": true,
             "name": "chodzenie",
             "slug": "chodzenie"
         }
@@ -364,6 +444,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "walking",
+            "show_map": true,
+            "show_distances": true,
             "name": "w\u0119drowanie",
             "slug": "wedrowanie"
         }
@@ -373,6 +455,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "walking",
+            "show_map": true,
+            "show_distances": true,
             "name": "ch\u00f3d sportowy",
             "slug": "chod-sportowy"
         }
@@ -382,6 +466,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "running",
+            "show_map": true,
+            "show_distances": true,
             "name": "biegi na orientacj\u0119",
             "slug": "biegi-na-orientacje"
         }
@@ -391,6 +477,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "cycling",
+            "show_map": false,
+            "show_distances": true,
             "name": "rower stacjonarny",
             "slug": "rower-stacjonarny"
         }
@@ -400,6 +488,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "athletic",
+            "show_map": true,
+            "show_distances": true,
             "name": "lekka atletyka",
             "slug": "lekka-atletyka"
         }
@@ -409,6 +499,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "athletic",
+            "show_map": false,
+            "show_distances": false,
             "name": "kulturystyka",
             "slug": "kulturystyka"
         }
@@ -418,6 +510,8 @@
         "model": "workouts.sport",
         "fields": {
             "category": "running",
+            "show_map": true,
+            "show_distances": true,
             "name": "bieganie",
             "slug": "bieganie"
         }
@@ -427,8 +521,21 @@
         "model": "workouts.sport",
         "fields": {
             "category": "other",
+            "show_map": false,
+            "show_distances": false,
             "name": "kr\u0119gle",
             "slug": "kregle"
+        }
+    },
+    {
+        "pk": 49,
+        "model": "workouts.sport",
+        "fields": {
+            "category": "running",
+            "show_map": false,
+            "show_distances": true,
+            "name": "bieg na bie\u017cni",
+            "slug": "bieg-na-biezni"
         }
     },
     {
