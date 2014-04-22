@@ -543,6 +543,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 1.0,
+            "only_for": [],
             "unit": "km"
         }
     },
@@ -551,6 +552,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 3.0,
+            "only_for": [],
             "unit": "km"
         }
     },
@@ -559,6 +561,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 5.0,
+            "only_for": [],
             "unit": "km"
         }
     },
@@ -567,6 +570,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 10.0,
+            "only_for": [],
             "unit": "km"
         }
     },
@@ -575,6 +579,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 21.975,
+            "only_for": [43, 47, 49],
             "unit": "km"
         }
     },
@@ -583,6 +588,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 42.195,
+            "only_for": [43, 47, 49],
             "unit": "km"
         }
     },
@@ -591,6 +597,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 50.0,
+            "only_for": [],
             "unit": "km"
         }
     },
@@ -599,6 +606,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 100.0,
+            "only_for": [],
             "unit": "km"
         }
     },
@@ -607,6 +615,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 1.0,
+            "only_for": [],
             "unit": "mi"
         }
     },
@@ -615,6 +624,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 3.0,
+            "only_for": [],
             "unit": "mi"
         }
     },
@@ -623,6 +633,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 5.0,
+            "only_for": [],
             "unit": "mi"
         }
     },
@@ -631,6 +642,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 10.0,
+            "only_for": [],
             "unit": "mi"
         }
     },
@@ -639,6 +651,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 50.0,
+            "only_for": [],
             "unit": "mi"
         }
     },
@@ -647,6 +660,7 @@
         "model": "workouts.distance",
         "fields": {
             "distance": 100.0,
+            "only_for": [],
             "unit": "mi"
         }
     }

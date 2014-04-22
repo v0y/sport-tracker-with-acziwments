@@ -31,6 +31,10 @@ class BestTime(models.Model):
 class Distance(models.Model):
     unit = models.CharField(choices=UNIT_CHOICES, max_length=2)
     distance = models.FloatField()
+    only_for = models.ManyToManyField(
+        'Sport', null=True, blank=True,
+        help_text=u"Jeśli podane, dystans pojawi się wyłącznie dla danych "
+                  u"dyscyplin")
 
     class Meta:
         verbose_name = u"dystans"
