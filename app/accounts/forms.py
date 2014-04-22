@@ -247,7 +247,7 @@ class UserProfileForm(ModelForm):
 
     class Meta:
         model = UserProfile
-        exclude = ('user',)
+        exclude = ('user', 'units')
         name = u"Edycja profilu"
         button_text = u"Zapisz zmiany"
 
@@ -263,3 +263,12 @@ class UserProfileForm(ModelForm):
         if height and not 30 < height < 300:
             raise forms.ValidationError(u"Serio masz %s cm wzrostu?" % height)
         return height
+
+
+class SettingsForm(ModelForm):
+
+    class Meta:
+        model = UserProfile
+        exclude = ('user', 'dob', 'sex', 'height')
+        name = u"Edycja ustawień"
+        button_text = u"Zapisz zmiany"

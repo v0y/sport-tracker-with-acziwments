@@ -3,7 +3,7 @@
 from django.conf.urls import patterns, url
 from django.views.generic import RedirectView, TemplateView
 
-from .views import ShowUserProfileView
+from .views import SettingsView, ShowUserProfileView
 
 
 urlpatterns = patterns('app.accounts.views',
@@ -62,6 +62,8 @@ urlpatterns = patterns('app.accounts.views',
         ShowUserProfileView.as_view(), name='profile'),
     url(r'^/settings$', RedirectView.as_view(pattern_name='profile_settings')),
     url(r'^/settings/profile$', 'profile_settings', name='profile_settings'),
+    url(r'^/settings/website$',
+        SettingsView.as_view(), name='website_settings'),
     # change email
     url(r'^/settings/email/change$', 'email_change', name='email_change'),
     url(r'^/settings/email/change/end$', 'email_change_end',

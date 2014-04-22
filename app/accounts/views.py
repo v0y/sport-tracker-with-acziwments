@@ -12,16 +12,18 @@ from django.contrib.sites.models import get_current_site
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
 from fiut.helpers import simple_send_email
 
 from app.activities.models import Activity
 from app.activities.views import render_activities
-from .forms import (ChangeEmailForm, ChangePasswordForm, LoginForm,
-    NewPasswordForm, PasswordResetForm, RegistrationForm,
-    ResendActivationMailForm, UserProfileForm)
+from app.shared.views import LoginRequiredMixin
+from .forms import (
+    ChangeEmailForm, ChangePasswordForm, LoginForm, NewPasswordForm,
+    PasswordResetForm, RegistrationForm, ResendActivationMailForm,
+    SettingsForm, UserProfileForm)
 from .helpers import get_mail_provider_url
-from .models import EmailActivation, UserActivation, PasswordReset
+from .models import EmailActivation, UserActivation, PasswordReset, UserProfile
 from app.shared.helpers import create_url
 
 
@@ -453,3 +455,15 @@ def profile_settings(request):
         return redirect(reverse('profile', args=[request.user.username]))
 
     return {'form': form}
+
+
+class SettingsView(LoginRequiredMixin, UpdateView):
+    form_class = SettingsForm
+    model = UserProfile
+    template_name = 'accounts/website_settings.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+
+    def get_success_url(self):
+        return reverse('website_settings')
