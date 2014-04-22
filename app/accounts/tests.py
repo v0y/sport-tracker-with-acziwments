@@ -140,7 +140,7 @@ class UserSportsTestCase(FastFixtureTestCase):
 
         # get sports
         self.sport1 = Sport.objects.get(id=1)
-        self.sport2 = Sport.objects.get(id=2)
+        self.sport2 = Sport.objects.get(id=5)
 
         # create workouts for user1
         Workout.objects.create(
@@ -179,6 +179,16 @@ class UserSportsTestCase(FastFixtureTestCase):
 
     def test_favourite_sport_without_workouts_in_last_year(self):
         self.assertEquals(self.user3.profile.favourite_sport, self.sport1)
+
+    def test_favourite_sport_with_distance_without_workouts(self):
+        self.assertIsNone(self.user2.profile.favourite_sport_with_distance)
+
+    def test_favourite_sport_with_distance_with_workouts_in_last_year(self):
+        self.assertEquals(
+            self.user1.profile.favourite_sport_with_distance, self.sport2)
+
+    def test_favourite_sport_with_distance_without_workouts_in_last_year(self):
+        self.assertIsNone(self.user3.profile.favourite_sport_with_distance)
 
     def test_sports_in_year_with_current_year(self):
         expected_sports = [self.sport2, self.sport1]

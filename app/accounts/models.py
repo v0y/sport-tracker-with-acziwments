@@ -89,18 +89,21 @@ class UserProfile(models.Model):
 
         return round(bmi, 1), date_
 
-    @property
-    def favourite_sport(self):
+    def favourite_sport_method(self, **extra_filters):
         """
         1. get discipline with most workouts in last year
         2. If there is no workouts in last year - get from all workouts
 
+        :param extra_filters: extra sport queryset filters
         :return: favourite discipline object
         """
         year_ago = datetime.now(tz=UTC) - timedelta(days=365)
 
         sport_base_qs = Sport.objects \
-            .filter(workout__user=self.user, workout__is_active=True) \
+            .filter(
+                workout__user=self.user,
+                workout__is_active=True,
+                **extra_filters) \
             .annotate(workouts_count=Count('workout'))
 
         favourite_sport = sport_base_qs \
@@ -114,6 +117,29 @@ class UserProfile(models.Model):
             return sport_base_qs \
                 .order_by('-workouts_count', '-workout__datetime_stop') \
                 .first()
+
+    @property
+    def favourite_sport(self):
+        """
+        1. get discipline with most workouts in last year
+        2. If there is no workouts in last year - get from all workouts
+
+        :return: favourite discipline object
+        """
+        return self.favourite_sport_method()
+
+
+    @property
+    def favourite_sport_with_distance(self):
+        """
+        Get favourite discipline with displayable distance.
+
+        1. get discipline with most workouts in last year
+        2. If there is no workouts in last year - get from all workouts
+
+        :return: favourite discipline with displayable distance object
+        """
+        return self.favourite_sport_method(show_distances=True)
 
     def get_sports_in_year(self, year=None):
         """
