@@ -35,11 +35,15 @@ class Distance(models.Model):
         'Sport', null=True, blank=True,
         help_text=u"Jeśli podane, dystans pojawi się wyłącznie dla danych "
                   u"dyscyplin")
+    name = models.CharField(verbose_name=u"Nazwa", max_length=64, blank=True)
 
     class Meta:
         verbose_name = u"dystans"
         verbose_name_plural = u"dystanse"
         unique_together = (('distance', 'unit'),)
+
+    def __unicode__(self):
+        return self.name or "%s %s" % (self.distance, self.unit)
 
     @property
     def distance_km(self):

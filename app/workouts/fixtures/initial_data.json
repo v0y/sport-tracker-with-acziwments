@@ -544,6 +544,7 @@
         "fields": {
             "distance": 1.0,
             "only_for": [],
+            "name": "",
             "unit": "km"
         }
     },
@@ -553,6 +554,7 @@
         "fields": {
             "distance": 3.0,
             "only_for": [],
+            "name": "",
             "unit": "km"
         }
     },
@@ -562,6 +564,7 @@
         "fields": {
             "distance": 5.0,
             "only_for": [],
+            "name": "",
             "unit": "km"
         }
     },
@@ -571,6 +574,7 @@
         "fields": {
             "distance": 10.0,
             "only_for": [],
+            "name": "",
             "unit": "km"
         }
     },
@@ -580,6 +584,7 @@
         "fields": {
             "distance": 21.975,
             "only_for": [43, 47, 49],
+            "name": "p\u00f3\u0142maraton",
             "unit": "km"
         }
     },
@@ -589,6 +594,7 @@
         "fields": {
             "distance": 42.195,
             "only_for": [43, 47, 49],
+            "name": "maraton",
             "unit": "km"
         }
     },
@@ -598,6 +604,7 @@
         "fields": {
             "distance": 50.0,
             "only_for": [],
+            "name": "",
             "unit": "km"
         }
     },
@@ -607,6 +614,7 @@
         "fields": {
             "distance": 100.0,
             "only_for": [],
+            "name": "",
             "unit": "km"
         }
     },
@@ -616,6 +624,7 @@
         "fields": {
             "distance": 1.0,
             "only_for": [],
+            "name": "",
             "unit": "mi"
         }
     },
@@ -625,6 +634,7 @@
         "fields": {
             "distance": 3.0,
             "only_for": [],
+            "name": "",
             "unit": "mi"
         }
     },
@@ -634,6 +644,7 @@
         "fields": {
             "distance": 5.0,
             "only_for": [],
+            "name": "",
             "unit": "mi"
         }
     },
@@ -643,6 +654,7 @@
         "fields": {
             "distance": 10.0,
             "only_for": [],
+            "name": "",
             "unit": "mi"
         }
     },
@@ -652,6 +664,7 @@
         "fields": {
             "distance": 50.0,
             "only_for": [],
+            "name": "",
             "unit": "mi"
         }
     },
@@ -661,6 +674,7 @@
         "fields": {
             "distance": 100.0,
             "only_for": [],
+            "name": "",
             "unit": "mi"
         }
     }

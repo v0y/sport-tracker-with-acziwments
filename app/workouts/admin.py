@@ -11,7 +11,7 @@ admin.site.register(BestTime, BestTimeAdmin)
 
 
 class DistanceAdmin(admin.ModelAdmin):
-    list_display = ('distance', 'unit')
+    list_display = ('__unicode__', 'name', 'distance', 'unit')
 admin.site.register(Distance, DistanceAdmin)
 
 
