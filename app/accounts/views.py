@@ -444,26 +444,24 @@ def email_change_confirm_end(request):
     return {'new_email': request.session.get('new_email', '')}
 
 
-@login_required
-@render_to('accounts/profile_settings.html')
-def profile_settings(request):
-    form = UserProfileForm(
-        request.POST or None, instance=request.user.profile)
-
-    if form.is_valid():
-        form.save()
-        return redirect(reverse('profile', args=[request.user.username]))
-
-    return {'form': form}
-
-
-class SettingsView(LoginRequiredMixin, UpdateView):
-    form_class = SettingsForm
+class BaseProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
-    template_name = 'accounts/website_settings.html'
 
     def get_object(self, queryset=None):
         return self.request.user.profile
+
+
+class ProfileSettingsView(BaseProfileUpdateView):
+    form_class = UserProfileForm
+    template_name = 'accounts/profile_settings.html'
+
+    def get_success_url(self):
+        return reverse('profile_settings')
+
+
+class SettingsView(BaseProfileUpdateView):
+    form_class = SettingsForm
+    template_name = 'accounts/website_settings.html'
 
     def get_success_url(self):
         return reverse('website_settings')
