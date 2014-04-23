@@ -12,7 +12,7 @@ from django.dispatch import receiver
 from app.health.models import Health
 from app.shared.models import CreatedAtMixin, SHA1TokenMixin
 from app.workouts.models import Sport
-from .enums import SEX_SELECT, Units, UNITS_SELECT
+from .enums import SEX_SELECT, UnitsTypes, UNITS_SELECT
 
 
 class UserProfile(models.Model):
@@ -24,7 +24,7 @@ class UserProfile(models.Model):
         blank=True)
     height = models.IntegerField(verbose_name=u'Wzrost', null=True, blank=True)
     units = models.IntegerField(
-        verbose_name=u'Jednostki miary', default=Units.metric,
+        verbose_name=u'Jednostki miary', default=UnitsTypes.metric,
         choices=UNITS_SELECT)
 
     class Meta:

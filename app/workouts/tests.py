@@ -148,6 +148,11 @@ class BestTimesTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
 
 class SportTestCase(FastFixtureTestCase):
 
+    def setUp(self):
+        self.running = Sport.objects.get(id=47)
+        self.bowling = Sport.objects.get(id=48)
+        self.cycling = Sport.objects.get(id=8)
+
     def test_get_sports_choices(self):
         choices = Sport.get_sports_choices()
 
@@ -166,3 +171,29 @@ class SportTestCase(FastFixtureTestCase):
                 # ensure firts tuple item is id, second is unicode
                 self.assertIsInstance(choice[0], numbers.Integral)
                 self.assertIsInstance(choice[1], unicode)
+
+    def test_get_distances_metric_running(self):
+        distance_ids = [d.id for d in self.running.get_distances('km')]
+        expected_ids = [1, 2, 3, 4, 5, 6, 7, 8]
+        self.assertListEqual(distance_ids, expected_ids)
+
+    def test_get_distances_metric_cycling(self):
+        distance_ids = [d.id for d in self.cycling.get_distances('km')]
+        expected_ids = [1, 2, 3, 4, 7, 8]
+        self.assertListEqual(distance_ids, expected_ids)
+
+    def test_get_distances_metric_bowling(self):
+        self.assertIsNone(self.bowling.get_distances('km'))
+
+    def test_get_distances_imperial_running(self):
+        distance_ids = [d.id for d in self.running.get_distances('mi')]
+        expected_ids = [9, 10, 11, 12, 13, 14, 15, 16]
+        self.assertListEqual(distance_ids, expected_ids)
+
+    def test_get_distances_imperial_cycling(self):
+        distance_ids = [d.id for d in self.cycling.get_distances('mi')]
+        expected_ids = [9, 10, 11, 12, 15, 16]
+        self.assertListEqual(distance_ids, expected_ids)
+
+    def test_get_distances_imperial_bowling(self):
+        self.assertIsNone(self.bowling.get_distances('mi'))

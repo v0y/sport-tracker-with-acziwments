@@ -14,7 +14,13 @@ SPORT_CATEGORIES = (
     ('winter', u"sporty zimowe"),
 )
 
+
+class Unit(object):
+    kilometers = 'km'
+    miles = 'mi'
+
+
 UNIT_CHOICES = (
-    ('km', u"kilometers"),
-    ('mi', u"miles")
+    (Unit.kilometers, u"kilometers"),
+    (Unit.miles, u"miles")
 )

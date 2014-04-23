@@ -662,6 +662,26 @@
         "pk": 13,
         "model": "workouts.distance",
         "fields": {
+            "distance": 13.655,
+            "only_for": [43, 47, 49],
+            "name": "p\u00f3\u0142maraton",
+            "unit": "mi"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "workouts.distance",
+        "fields": {
+            "distance": 26.219,
+            "only_for": [43, 47, 49],
+            "name": "maraton",
+            "unit": "mi"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "workouts.distance",
+        "fields": {
             "distance": 50.0,
             "only_for": [],
             "name": "",
@@ -669,7 +689,7 @@
         }
     },
     {
-        "pk": 14,
+        "pk": 16,
         "model": "workouts.distance",
         "fields": {
             "distance": 100.0,

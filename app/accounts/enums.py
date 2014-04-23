@@ -7,13 +7,13 @@ SEX_SELECT = (
 )
 
 
-class Units(object):
+class UnitsTypes(object):
     metric = 1
     imperial = 2
 
 
 #: selection for units field
 UNITS_SELECT = (
-    (Units.metric, u'Metryczne'),
-    (Units.imperial, u'Imperialne')
+    (UnitsTypes.metric, u'Metryczne'),
+    (UnitsTypes.imperial, u'Imperialne')
 )

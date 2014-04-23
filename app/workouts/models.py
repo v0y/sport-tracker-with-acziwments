@@ -12,9 +12,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from timedelta.fields import TimedeltaField
 
+from app.accounts.enums import UnitsTypes
 from app.shared.helpers import mi2km, km2mi
 from app.shared.models import CreatedAtMixin, NameMixin, SlugMixin
-from .enums import SPORT_CATEGORIES, UNIT_CHOICES
+from .enums import SPORT_CATEGORIES, Unit, UNIT_CHOICES
 
 
 class BestTime(models.Model):
@@ -41,6 +42,7 @@ class Distance(models.Model):
         verbose_name = u"dystans"
         verbose_name_plural = u"dystanse"
         unique_together = (('distance', 'unit'),)
+        ordering = ['id']
 
     def __unicode__(self):
         return self.name or "%s %s" % (self.distance, self.unit)
@@ -65,6 +67,14 @@ class Sport(NameMixin, SlugMixin):
         choices = [('', '---------')]
         choices += [(s.pk, s.name) for s in cls.objects.all().order_by('name')]
         return choices
+
+    def get_distances(self, unit=None):
+        assert unit in (None, Unit.kilometers, Unit.miles)
+        if not self.show_distances:
+            return
+        unit = unit or UnitsTypes.metric
+        distances = Distance.objects.filter(only_for=None, unit=unit)
+        return distances | self.distance_set.filter(unit=unit)
 
 
 class Workout(CreatedAtMixin):
