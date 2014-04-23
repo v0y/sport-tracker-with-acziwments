@@ -6,7 +6,7 @@ from .models import BestTime, Distance, Sport, Workout
 
 
 class BestTimeAdmin(admin.ModelAdmin):
-    list_display = ('distance', 'workout', 'unit', 'duration')
+    list_display = ('distance', 'workout', 'unit', 'duration', 'user')
 admin.site.register(BestTime, BestTimeAdmin)
 
 

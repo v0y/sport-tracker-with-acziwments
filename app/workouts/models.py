@@ -21,12 +21,13 @@ from .enums import SPORT_CATEGORIES, Unit, UNIT_CHOICES
 class BestTime(models.Model):
     distance = models.ForeignKey('Distance')
     workout = models.ForeignKey('Workout')
+    user = models.ForeignKey(User)
     unit = models.CharField(choices=UNIT_CHOICES, max_length=2)
     duration = TimedeltaField()
 
     class Meta:
         verbose_name = u"najlepszy czas"
-        verbose_name_plural = u"najlepsze czaasy"
+        verbose_name_plural = u"najlepsze czasy"
 
 
 class Distance(models.Model):
@@ -162,7 +163,8 @@ class Workout(CreatedAtMixin):
         else:
             BestTime.objects.create(
                 distance=distance, unit=distance.unit, workout=self,
-                duration=self.best_time_for_x_km(distance.distance))
+                duration=self.best_time_for_x_km(distance.distance),
+                user=self.user)
 
 
 @receiver(post_save, sender=Workout)
