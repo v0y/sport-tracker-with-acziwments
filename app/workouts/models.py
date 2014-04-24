@@ -29,6 +29,26 @@ class BestTime(models.Model):
         verbose_name = u"najlepszy czas"
         verbose_name_plural = u"najlepsze czasy"
 
+    @classmethod
+    def get_records(cls, sport, user, unit=None):
+        unit = unit or Unit.kilometers
+        distances = sport.get_distances(unit)
+        distance_ids = distances.values_list('pk', flat=True)
+        best_times = BestTime.objects \
+            .filter(
+                distance_id__in=distance_ids,
+                user=user,
+                workout__sport_id=sport.id) \
+            .order_by('duration')
+
+        results = []
+        for distance_id in distance_ids:
+            record = best_times.filter(distance_id=distance_id).first()
+            if record:
+                results.append(record)
+
+        return sorted(results, key=lambda a: a.distance.distance_km)
+
 
 class Distance(models.Model):
     unit = models.CharField(choices=UNIT_CHOICES, max_length=2)
