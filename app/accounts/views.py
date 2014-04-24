@@ -17,14 +17,17 @@ from fiut.helpers import simple_send_email
 
 from app.activities.models import Activity
 from app.activities.views import render_activities
+from app.shared.helpers import create_url
 from app.shared.views import LoginRequiredMixin
+from app.workouts.enums import Unit
+from app.workouts.models import BestTime
+from .enums import UnitsTypes
 from .forms import (
     ChangeEmailForm, ChangePasswordForm, LoginForm, NewPasswordForm,
     PasswordResetForm, RegistrationForm, ResendActivationMailForm,
     SettingsForm, UserProfileForm)
 from .helpers import get_mail_provider_url
 from .models import EmailActivation, UserActivation, PasswordReset, UserProfile
-from app.shared.helpers import create_url
 
 
 class ShowUserProfileView(DetailView):
@@ -39,9 +42,25 @@ class ShowUserProfileView(DetailView):
         # get activities
         activities = Activity.objects.filter(user=self.object) \
             .order_by('-related_date', '-created_at').select_related()
-
         # render activities
         context['activities'] = render_activities(activities)
+
+        # get best distances for favourite sport with distances
+        sport = self.object.profile.favourite_sport_with_distance
+        if sport:
+            if (
+                    self.request.user.is_authenticated() and
+                    self.request.user.profile.units == UnitsTypes.imperial
+            ):
+                unit = Unit.miles
+            else:
+                unit = Unit.kilometers
+
+            context['best_times'] = {
+                'sport': sport,
+                'times': BestTime.get_records(sport, self.object, unit)
+            }
+
         return context
 
 

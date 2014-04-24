@@ -48,6 +48,23 @@
 				</div> {# user-info #}
 			</div> {# panel-body #}
 		</div> {# panel #}
+
+		{% if best_times.times %}
+			<div class="panel panel-default user-profile-panel">
+				<div class="panel-heading text-bold">Rekordy życiowe</div>
+				<div class="panel-body">
+					<div class="user-info col-lg-12 col-md-12 col-sm-6">
+						<ul>
+							<li><b>{{ best_times.sport }}</b></li>
+							{% for record in best_times.times %}
+								<li>{{ record.distance }}: <b>{{ record.duration_visible }}</b></li>
+							{% endfor %}
+						</ul>
+					</div> {# user-info #}
+				</div> {# panel-body #}
+			</div> {# panel #}
+		{% endif %}
+
 	</div> {# cols #}
 
 	<div class="col-md-9 col-sm-7">

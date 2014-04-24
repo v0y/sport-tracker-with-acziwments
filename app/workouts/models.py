@@ -49,6 +49,13 @@ class BestTime(models.Model):
 
         return sorted(results, key=lambda a: a.distance.distance_km)
 
+    @property
+    def duration_visible(self):
+        splitted = str(self.duration).split(':')
+        result = "%sg:" % splitted[0] if splitted[0] != '0' else ""
+        result += "%sm:%ss" % (splitted[1], splitted[2])
+        return result
+
 
 class Distance(models.Model):
     unit = models.CharField(choices=UNIT_CHOICES, max_length=2)
