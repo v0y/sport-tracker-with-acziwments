@@ -177,14 +177,17 @@ class Workout(CreatedAtMixin):
         """
         best_times = BestTime.objects.filter(distance=distance, workout=self)
 
-        if best_times.exists():
+        if distance.unit == Unit.kilometers:
             duration = self.best_time_for_x_km(distance.distance)
+        else:
+            duration = self.best_time_for_x_mi(distance.distance)
+
+        if best_times.exists():
             best_times.update(duration=duration)
         else:
             BestTime.objects.create(
                 distance=distance, unit=distance.unit, workout=self,
-                duration=self.best_time_for_x_km(distance.distance),
-                user=self.user)
+                duration=duration, user=self.user)
 
 
 @receiver(post_save, sender=Workout)
