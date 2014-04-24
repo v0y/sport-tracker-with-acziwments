@@ -75,3 +75,10 @@ def mi2km(mi):
     :rtype: float
     """
     return mi * 1.60934
+
+
+def is_whole(x):
+    if (x % 1) == 0:
+        return True
+    else:
+        return False

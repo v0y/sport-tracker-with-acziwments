@@ -13,7 +13,7 @@ from django.dispatch import receiver
 from timedelta.fields import TimedeltaField
 
 from app.accounts.enums import UnitsTypes
-from app.shared.helpers import mi2km, km2mi
+from app.shared.helpers import is_whole, km2mi, mi2km
 from app.shared.models import CreatedAtMixin, NameMixin, SlugMixin
 from .enums import SPORT_CATEGORIES, Unit, UNIT_CHOICES
 
@@ -66,7 +66,8 @@ class Distance(models.Model):
         ordering = ['id']
 
     def __unicode__(self):
-        return self.name or "%s %s" % (self.distance, self.unit)
+        distance_repr = int(self.distance) if is_whole else self.distance
+        return self.name or "%s %s" % (distance_repr, self.unit)
 
     @property
     def distance_km(self):
