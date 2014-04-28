@@ -112,6 +112,13 @@ class Sport(NameMixin, SlugMixin):
         return choices
 
     def get_distances(self, unit=None):
+        """
+        Get distanced for sport.
+
+        :param unit: get distances in this unit, default: kilometers
+        :return: distances for sport
+        :rtype: list
+        """
         assert unit in (None, Unit.kilometers, Unit.miles)
         if not self.show_distances:
             return
