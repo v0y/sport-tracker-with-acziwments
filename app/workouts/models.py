@@ -3,6 +3,7 @@
 from datetime import timedelta
 
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator
@@ -35,6 +36,11 @@ class BestTime(models.Model):
         distances = sport.get_distances(unit)
         distance_ids = distances.values_list('pk', flat=True)
 
+        # get from cache
+        results = cache.get(cls.records_cache_key(user, sport))
+        if results:
+            return results
+
         results = []
         for distance_id in distance_ids:
             best_time = BestTime.objects \
@@ -48,6 +54,9 @@ class BestTime(models.Model):
             if best_time:
                 results.append(best_time)
 
+        # set cache
+        cache.set(cls.records_cache_key(user, sport), results, 24*60*60)
+
         return results
 
     @property
@@ -56,6 +65,10 @@ class BestTime(models.Model):
         result = "%sg:" % splitted[0] if splitted[0] != '0' else ""
         result += "%sm:%ss" % (splitted[1], splitted[2])
         return result
+
+    @staticmethod
+    def records_cache_key(user, sport):
+        return 'get_records_%s_%s' % (user.id, sport.id)
 
 
 class Distance(models.Model):
@@ -208,3 +221,10 @@ def update_best_times(sender, instance, **kwargs):
 
         for distance in distances:
             instance.update_best_time(distance)
+
+
+@receiver(post_save, sender=BestTime)
+def clear_best_time_cache(sender, instance, **kwargs):
+    cache_name = \
+        BestTime.records_cache_key(instance.user, instance.workout.sport)
+    cache.delete(cache_name)
