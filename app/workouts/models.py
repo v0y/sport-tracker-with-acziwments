@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 from datetime import timedelta
+from itertools import chain
 
 from django.contrib.auth.models import User
 from django.core.cache import cache
@@ -13,7 +14,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from timedelta.fields import TimedeltaField
 
-from app.accounts.enums import UnitsTypes
 from app.shared.helpers import is_whole, km2mi, mi2km
 from app.shared.models import CreatedAtMixin, NameMixin, SlugMixin
 from .enums import SPORT_CATEGORIES, Unit, UNIT_CHOICES
@@ -34,7 +34,7 @@ class BestTime(models.Model):
     def get_records(cls, sport, user, unit=None):
         unit = unit or Unit.kilometers
         distances = sport.get_distances(unit)
-        distance_ids = distances.values_list('pk', flat=True)
+        distance_ids = [d.id for d in distances]
 
         # get from cache
         results = cache.get(cls.records_cache_key(user, sport))
@@ -115,9 +115,14 @@ class Sport(NameMixin, SlugMixin):
         assert unit in (None, Unit.kilometers, Unit.miles)
         if not self.show_distances:
             return
-        unit = unit or UnitsTypes.metric
-        distances = Distance.objects.filter(only_for=None, unit=unit)
-        return distances | self.distance_set.filter(unit=unit)
+        unit = unit or Unit.kilometers
+
+        distances_without_only = \
+            Distance.objects.filter(only_for__isnull=True, unit=unit)
+        distances_from_only = self.distance_set.filter(unit=unit)
+        distances = list(chain(distances_without_only, distances_from_only))
+
+        return sorted(distances, key=lambda d: d.distance)
 
 
 class Workout(CreatedAtMixin):
