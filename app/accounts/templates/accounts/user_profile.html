@@ -21,25 +21,25 @@
 
 				<div class="user-info col-lg-12 col-md-12 col-sm-6">
 					<ul>
-						{% if object.profile.sex_visible %}
+						{% if profile.sex_visible %}
 							<li>
-								{{ object.profile.sex_visible }}{% if object.profile.age %},
-									{{ object.profile.age }}&nbsp;lat
+								{{ profile.sex_visible }}{% if profile.age %},
+									{{ profile.age }}&nbsp;lat
 								{% endif %}
 							</li>
-						{% elif object.profile.age %}
-							<li>Wiek: <strong>{{ object.profile.age }} lat</strong></li>
+						{% elif profile.age %}
+							<li>Wiek: <strong>{{ profile.age }} lat</strong></li>
 						{% endif %}
-						{% if object.profile.height %}
-							<li>Wzrost: <strong>{{ object.profile.height }} cm</strong></li>
+						{% if profile.height %}
+							<li>Wzrost: <strong>{{ profile.height }} cm</strong></li>
 						{% endif %}
-						{% if object.profile.last_weight.0 %}
-							<li>Waga: <strong>{{ object.profile.last_weight.0 }} kg</strong></li>
+						{% if profile.last_weight.0 %}
+							<li>Waga: <strong>{{ profile.last_weight.0 }} kg</strong></li>
 						{% endif %}
-						{% if object.profile.bmi.0 %}
-							<li>BMI: <strong>{{ object.profile.bmi.0 }}</strong></li>
+						{% if profile.bmi.0 %}
+							<li>BMI: <strong>{{ profile.bmi.0 }}</strong></li>
 						{% endif %}
-						{% with object.profile.favourite_sport as favourite_sport %}
+						{% with profile.favourite_sport as favourite_sport %}
 							{% if favourite_sport %}
 								<li>Ulubiona dyscyplina: <strong>{{ favourite_sport }}</strong></li>
 							{% endif %}

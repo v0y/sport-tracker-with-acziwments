@@ -34,20 +34,21 @@ class BestTime(models.Model):
         unit = unit or Unit.kilometers
         distances = sport.get_distances(unit)
         distance_ids = distances.values_list('pk', flat=True)
-        best_times = BestTime.objects \
-            .filter(
-                distance_id__in=distance_ids,
-                user=user,
-                workout__sport_id=sport.id) \
-            .order_by('duration')
 
         results = []
         for distance_id in distance_ids:
-            record = best_times.filter(distance_id=distance_id).first()
-            if record:
-                results.append(record)
+            best_time = BestTime.objects \
+                .filter(
+                    distance_id=distance_id,
+                    user=user,
+                    workout__sport_id=sport.id) \
+                .order_by('duration') \
+                .select_related('distance') \
+                .first()
+            if best_time:
+                results.append(best_time)
 
-        return sorted(results, key=lambda a: a.distance.distance_km)
+        return results
 
     @property
     def duration_visible(self):
@@ -70,7 +71,7 @@ class Distance(models.Model):
         verbose_name = u"dystans"
         verbose_name_plural = u"dystanse"
         unique_together = (('distance', 'unit'),)
-        ordering = ['id']
+        ordering = ['unit', 'distance']
 
     def __unicode__(self):
         distance_repr = int(self.distance) if is_whole else self.distance

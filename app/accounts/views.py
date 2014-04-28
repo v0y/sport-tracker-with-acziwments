@@ -58,7 +58,8 @@ class ShowUserProfileView(DetailView):
 
             context['best_times'] = {
                 'sport': sport,
-                'times': BestTime.get_records(sport, self.object, unit)
+                'times': BestTime.get_records(sport, self.object, unit),
+                'profile': self.object.profile
             }
 
         return context
