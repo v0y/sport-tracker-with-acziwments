@@ -3,8 +3,13 @@
 ###############################################################################
 
 class MapHandler
-    map: null
+    mode: 'gpx'
+    map: null;
     routes: []
+
+    activeRoute: null;
+
+    directionsService: null;
 
     initializeMap: ->
         mapOptions = {
@@ -12,16 +17,26 @@ class MapHandler
             zoom: 3,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-
         @map = new google.maps.Map($("#map-canvas")[0], mapOptions)
 
-    addRoute: (routeJson) ->
+    addRoute: (isManual) ->
         route = new Route()
-        route.tracks = routeJson
         route.map = @map
-        route.draw()
+        if isManual
+            route.isManual = true;
         @routes.push(route)
+        @activeRoute = route
+
+        return route
+
+    addRouteFromJson: (routeJson) ->
+        route = @addRoute()
+        route.tracks = routeJson
+        route.draw()
         @getDistanceAndTimes()
+
+    addManualRoute: ->
+        route = @addRoute()
 
     clearRoutes: ->
         for route in @routes
@@ -29,7 +44,7 @@ class MapHandler
 
     singleNewRoute: (routeJson) ->
         @clearRoutes()
-        @addRoute(routeJson)
+        @addRouteFromJson(routeJson)
 
     getDistanceAndTimes: ->
         @distance = 0
@@ -48,13 +63,47 @@ class MapHandler
         durationSeconds = @endTime.diff(@startTime, 'seconds')
         @duration = moment.duration(durationSeconds, 'seconds')
 
+    toggleManualRouteDrawing: ->
+        switch @mode
+            when 'gpx' then @initializeManualRouteHandling()
+            when 'manual' then @finishManualRouteHandling()
+
+    initializeManualRouteHandling: ->
+        # clear existing routes (revert if possible)
+        @clearRoutes()
+
+        # get directions service object
+        if not @directionsService
+            @directionsService = new google.maps.DirectionsService();
+
+        # show controls
+
+        # create new route
+        route = @addRoute(true)
+        route.directionsService = @directionsService
+
+        # initialize route to map bindings
+        route.initializeMapBindings()
+
+        console.log("<<< - - - >>>")
+
+    finishManualRouteHandling: ->
+        console.log('clearManualRouteHandling')
+
+        # unbind route to map events
+        @activeRoute.removeMapBindings()
+
+        # save actie route
+
 ###############################################################################
 # Route Class
 ###############################################################################
 
 class Route
-    map: null
-    tracks: null
+    map: null;
+    tracks: null;
+
+    isManual: false;
 
     polylines: []
 
@@ -62,8 +111,8 @@ class Route
     distance: 0
     fullKmSectionsList: []
 
-    startMarker: null
-    finishMarker: null
+    startMarker: null;
+    finishMarker: null;
     fullKmMarkers: []
 
     draw: ->
@@ -203,6 +252,153 @@ class Route
                 @fullKmMarkers.push(marker)
                 markerCounter += 1
 
+    # manual route related stuff
+    markers: []
+    polyline: null;
+
+    directionsService: null;
+
+    mapEventHandles: [];
+
+    initializeMapBindings: ->
+        # bind to map on click event
+        _this = @
+        mapListenerHandle = google.maps.event.addListener(@map, 'click', (point) ->
+            # add new marker to route
+            _this.addMarker(point)
+        )
+
+        @mapEventHandles.push(mapListenerHandle)
+
+    removeMapBindings: ->
+        for handle in @mapEventHandles
+            google.maps.event.removeListener(handle)
+
+    addMarker: (point, position) ->
+        _this = @
+        marker = new google.maps.Marker({
+            position: point.latLng,
+            map: _this.map,
+            draggable:true,
+        });
+
+        # add marker to list of markers
+        if position
+            _this.markers.splice(position, 0, marker)
+        else
+            _this.markers.push(marker)
+
+        # todo: check if should use google directions
+        @addSimpleManualRouteMarker(marker)
+        #addGoogleDirectionsRouteMarker(marker)
+
+        @drawManualRoute()
+
+    addSimpleManualRouteMarker: (marker) ->
+        _this = @
+        # bind to marker events
+        # right click removes marker
+        handle = google.maps.event.addListener(marker, 'rightclick', ->
+            marker.setMap(null)
+            for i in [0 .. _this.markers.length]
+                if marker == _this.markers[i]
+                    _this.markers.splice(i, 1)
+                    break
+            _this.drawManualRoute()
+        )
+        @mapEventHandles.push(handle)
+
+        # marker drag re-renders route
+        handle = google.maps.event.addListener(marker, 'drag', ->
+            _this.drawManualRoute()
+        )
+        @mapEventHandles.push(handle)
+
+    addGoogleDirectionsRouteMarker: (point, position) ->
+        null;
+
+    drawManualRoute: ->
+        # remove previous polyline
+        if @polyline
+            @polyline.setMap(null)
+
+        # get path from markers
+        path = []
+        for marker in @markers
+            path.push(marker.position)
+
+        # draw a polyline between all markers on the map
+        @polyline = new google.maps.Polyline({
+            path: path,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        # bind click on polyline
+        _this = @
+        handle = google.maps.event.addListener(@polyline, 'click', (point) ->
+            # try to determin between witch two markers the line was clicked
+            # how the fuck? - shortest path !
+            position = getPositionOnShortestPath(_this.markers, point)
+            console.log(['position', position])
+
+            # create new marker and put it into markers list
+            _this.addMarker(point, position)
+        )
+        @mapEventHandles.push(handle)
+
+        @polyline.setMap(@map);
+
+
+###############################################################################
+# Manual route handler
+###############################################################################
+
+class ManualRouteHandler
+    map: null;
+    routes: [];
+
+    activeRoute: null;
+
+    @directionsService: null;
+    @directionsDisplay: null;
+
+    staraightRoutePolyline: null;
+
+    messageAreaSelector: '.js-message-area'
+
+    initialize: ->
+        @directionsService = new google.maps.DirectionsService();
+        @directionsDisplay = new google.maps.DirectionsRenderer({draggable:true})
+        @directionsDisplay.setMap(@map)
+
+    routeFromGoogle: ->
+        # extend the road to the last marker
+        request = {
+            origin: @markers[markersLen - 2].position,
+            destination: @markers[markersLen - 1].position,
+            travelMode: google.maps.TravelMode.WALKING, # BICYCLING
+            #unitSystem: UnitSystem.METRIC, # IMPERIAL
+            #waypoints[]: DirectionsWaypoint,
+            optimizeWaypoints: false,
+            provideRouteAlternatives: false,
+            region: 'pl'
+        }
+
+        _this = @
+        console.log([@, 'this'])
+        @directionsService.route(request, (response, status) ->
+            if status == google.maps.DirectionsStatus.OK
+                # var warnings = document.getElementById("warnings_panel");
+                # warnings.innerHTML = "" + response.routes[0].warnings + "";
+                #_this.directionsDisplay.setDirections(response);
+                console.log(response)
+                # showSteps(response);
+        );
+
+
 
 ###############################################################################
 # Distance calculations
@@ -247,6 +443,26 @@ get2PointsDistance = (pt1, pt2) ->
     return getDistanceFromLatLonInKm(pt1['lat'], pt1['lon'], pt2['lat'], pt2['lon'])
 
 
+get2MarkersDistance = (mark1, mark2) ->
+    pt1 = {'lat': mark1.position.lat(), 'lon': mark1.position.lng()}
+    pt2 = {'lat': mark2.position.lat(), 'lon': mark2.position.lng()}
+    return get2PointsDistance(pt1, pt2)
+
+
+getPointToMarkerDistance = (obj1, obj2) ->
+    if obj1.position?  # this is probably a marker
+        pt1 = {'lat': obj1.position.lat(), 'lon': obj1.position.lng()}
+    else  # this is probably a point
+        pt1 = {'lat': obj1.latLng.lat(), 'lon': obj1.latLng.lng()}
+
+    if obj2.position?  # this is probably a marker
+        pt2 = {'lat': obj2.position.lat(), 'lon': obj2.position.lng()}
+    else  # this is probably a point
+        pt2 = {'lat': obj2.latLng.lat(), 'lon': obj2.latLng.lng()}
+
+    return get2PointsDistance(pt1, pt2)
+
+
 getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) ->
     R = 6371 # Radius of the earth in km
     dlat = deg2rad(lat2-lat1)
@@ -261,6 +477,23 @@ getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) ->
 
 deg2rad = (deg) ->
     return deg * (Math.PI/180)
+
+
+getPositionOnShortestPath = (path, newPoint) ->
+    bestDistance = 1/0
+    position = null;
+    for index in [1 .. path.length - 1]
+        tmpPath = path.slice(0)
+        tmpPath.splice(index, 0, newPoint)
+
+        distance = 0
+        for i in [1 .. tmpPath.length - 2]
+            distance += getPointToMarkerDistance(tmpPath[i-1], tmpPath[i])
+
+        if distance < bestDistance
+            bestDistance = distance
+            position = index
+    return position
 
 
 getPointOnSection = (section, pt1ToFullKmDistance, ithKilometer) ->

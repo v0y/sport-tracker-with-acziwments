@@ -1,5 +1,4 @@
-﻿
-###############################################################################
+﻿###############################################################################
 # Handle AJAX file upload
 ###############################################################################
 
@@ -95,7 +94,21 @@ displayRelatedRoute = (routeId, url, mapHandler) ->
         success: (data, textStatus, jqXHR) ->
             handleNewRoute(mapHandler, JSON.parse(data['route']))
         ,
-        dataType: "json"
+        dataType: 'json'
+    )
+
+###############################################################################
+# Handle manual drawing of routes
+###############################################################################
+
+bindManualRouteSwitch = (mapHandler) ->
+    $('#route-drawing-switch').on('click', ->
+        # initialize map (if it's not initialized yet).
+        if not mapHandler.map
+            mapHandler.initializeMap()
+            $("#map-canvas").show()
+
+        mapHandler.toggleManualRouteDrawing()
     )
 
 ###############################################################################
@@ -104,16 +117,19 @@ displayRelatedRoute = (routeId, url, mapHandler) ->
 
 main = ->
     # if there's no canvas then fail fast
-    mapCanvas = $("#map-canvas")
+    mapCanvas = $('#map-canvas')
     if mapCanvas[0]
         mapHandler = new RoutesMapHandler()
         # bind to form file input change event
         bindToFileInputChange(mapHandler)
 
+        # bind drawing on map initialization
+        bindManualRouteSwitch(mapHandler)
+
         # if map canvas has a route-id data, then get that route with AJAX
-        routeId = mapCanvas.data("route-id")
+        routeId = mapCanvas.data('route-id')
         if routeId
-            displayRelatedRoute(routeId, mapCanvas.data("url"), mapHandler)
+            displayRelatedRoute(routeId, mapCanvas.data('url'), mapHandler)
         else
             mapCanvas.hide()
 

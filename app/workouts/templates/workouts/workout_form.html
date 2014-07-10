@@ -9,9 +9,11 @@
 		#map-canvas { height: 250px }
 	</style>
 	<div id="map-canvas"></div>
+	<div id="map-additional-info"></div>
 	<form method="post" id="gpx-file-input-form" enctype="multipart/form-data" data-url="{% url 'upload_gpx' %}">
 		<input type="file" name="gpx_file">
 	</form>
+	<a id="route-drawing-switch">trasa z palca</a>
 
 	<div class="row">
 	<form method="post" action="" class="form-horizontal col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
