@@ -140,7 +140,7 @@ class Route
         for track in @tracks
             trackMapPoints = []
             for segment in track['segments']
-                # get googl map points array
+                # get google map points array
                 segmentMapPoints = []
                 for point in segment
                     pt = new google.maps.LatLng(point['lat'], point['lon'])
@@ -257,6 +257,7 @@ class Route
     polyline: null;
 
     directionsService: null;
+    directionsCache: {}
 
     mapEventHandles: [];
 
@@ -289,12 +290,15 @@ class Route
             _this.markers.push(marker)
 
         # todo: check if should use google directions
-        @addSimpleManualRouteMarker(marker)
-        #addGoogleDirectionsRouteMarker(marker)
+        #@addSimpleManualRouteMarker(marker)
+        @addGoogleDirectionsRouteMarker(marker)
 
         @drawManualRoute()
 
     addSimpleManualRouteMarker: (marker) ->
+        # make the marker remembre not to use google directions
+        marker.useGoogleDirections = false;
+
         _this = @
         # bind to marker events
         # right click removes marker
@@ -314,8 +318,36 @@ class Route
         )
         @mapEventHandles.push(handle)
 
-    addGoogleDirectionsRouteMarker: (point, position) ->
-        null;
+    addGoogleDirectionsRouteMarker: (marker) ->
+        console.log(marker.getPosition)
+        # make the marker remembre to use google directions
+        marker.useGoogleDirections = true;
+
+        # TODO - usuń duplikację kodu
+        _this = @
+        # bind to marker events
+        # right click removes marker
+        handle = google.maps.event.addListener(marker, 'rightclick', ->
+            marker.setMap(null)
+            for i in [0 .. _this.markers.length]
+                if marker == _this.markers[i]
+                    _this.markers.splice(i, 1)
+                    break
+            _this.drawManualRoute()
+        )
+        @mapEventHandles.push(handle)
+
+        # bind to marker drag with delay
+        delay = 1000
+        scrollTimeoutId = null;
+        # marker drag re-renders route
+        handle = google.maps.event.addListener(marker, 'drag', ->
+            clearTimeout(scrollTimeoutId)
+            scrollTimeoutId = setTimeout(->
+                _this.drawManualRoute()
+            , delay)
+        )
+        @mapEventHandles.push(handle)
 
     drawManualRoute: ->
         # remove previous polyline
@@ -324,8 +356,19 @@ class Route
 
         # get path from markers
         path = []
+        i = 0
         for marker in @markers
-            path.push(marker.position)
+            if not marker.useGoogleDirections or i == 0
+                path.push(marker.position)
+            else
+                prevMarker = @markers[i - 1]
+                googlePath = @getGoogleDirections(prevMarker, marker)
+                if not googlePath
+                    return
+                else
+                    path.push.apply(path, googlePath)
+
+            i += 1
 
         # draw a polyline between all markers on the map
         @polyline = new google.maps.Polyline({
@@ -339,17 +382,68 @@ class Route
         # bind click on polyline
         _this = @
         handle = google.maps.event.addListener(@polyline, 'click', (point) ->
-            # try to determin between witch two markers the line was clicked
-            # how the fuck? - shortest path !
-            position = getPositionOnShortestPath(_this.markers, point)
-            console.log(['position', position])
-
-            # create new marker and put it into markers list
-            _this.addMarker(point, position)
+            _this.polylineClickCalback(point)
         )
         @mapEventHandles.push(handle)
 
         @polyline.setMap(@map);
+
+    polylineClickCalback: (point) ->
+        # try to determin between witch two markers the line was clicked
+        # how the fuck? - shortest path!
+        # this might not work well with google directions
+        position = getPositionOnShortestPath(@.markers, point)
+
+        # create new marker and put it into markers list
+        @.addMarker(point, position)
+
+    getGoogleDirections: (mark1, mark2) ->
+        # check directionsCache
+        cacheKey = "#{mark1.position.B}:#{mark1.position.k}-#{mark2.position.B}:#{mark2.position.k}"
+        console.log([mark1, mark2, cacheKey])
+
+        path = @directionsCache[cacheKey]
+
+        if path
+            return path
+
+        # ask google
+        request = {
+            origin: mark1.position,
+            destination: mark2.position,
+            travelMode: google.maps.TravelMode.WALKING, # BICYCLING
+            #unitSystem: UnitSystem.METRIC, # IMPERIAL
+            #waypoints[]: DirectionsWaypoint,
+            optimizeWaypoints: false,
+            provideRouteAlternatives: false,
+            region: 'pl'
+        }
+
+        _this = @
+        @directionsService.route(request, (response, status) ->
+            # TODO - fallback
+            if status == google.maps.DirectionsStatus.OK
+                # var warnings = document.getElementById("warnings_panel");
+                # warnings.innerHTML = "" + response.routes[0].warnings + "";
+                # write result to local cache
+                path = _this.googleResponceToPath(response)
+                _this.directionsCache[cacheKey] = path
+
+                # TODO - handle additional response information
+
+                # re render path
+                _this.drawManualRoute()
+        )
+
+        return false;
+
+    googleResponceToPath: (response) ->
+        path = []
+
+        for point in response.routes[0].overview_path
+            path.push(point)
+
+        return path
 
 
 ###############################################################################

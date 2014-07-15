@@ -17,8 +17,8 @@
     MapHandler.prototype.initializeMap = function() {
       var mapOptions;
       mapOptions = {
-        center: new google.maps.LatLng(15, 15),
-        zoom: 3,
+        center: new google.maps.LatLng(50.15, 14.5),
+        zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       return this.map = new google.maps.Map($("#map-canvas")[0], mapOptions);
@@ -291,6 +291,8 @@
 
     Route.prototype.directionsService = null;
 
+    Route.prototype.directionsCache = {};
+
     Route.prototype.mapEventHandles = [];
 
     Route.prototype.initializeMapBindings = function() {
@@ -326,12 +328,13 @@
       } else {
         _this.markers.push(marker);
       }
-      this.addSimpleManualRouteMarker(marker);
+      this.addGoogleDirectionsRouteMarker(marker);
       return this.drawManualRoute();
     };
 
     Route.prototype.addSimpleManualRouteMarker = function(marker) {
       var handle, _this;
+      marker.useGoogleDirections = false;
       _this = this;
       handle = google.maps.event.addListener(marker, 'rightclick', function() {
         var i, _i, _ref;
@@ -351,20 +354,51 @@
       return this.mapEventHandles.push(handle);
     };
 
-    Route.prototype.addGoogleDirectionsRouteMarker = function(point, position) {
-      return null;
+    Route.prototype.addGoogleDirectionsRouteMarker = function(marker) {
+      var handle, _this;
+      console.log(marker.getPosition);
+      marker.useGoogleDirections = true;
+      _this = this;
+      handle = google.maps.event.addListener(marker, 'rightclick', function() {
+        var i, _i, _ref;
+        marker.setMap(null);
+        for (i = _i = 0, _ref = _this.markers.length; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+          if (marker === _this.markers[i]) {
+            _this.markers.splice(i, 1);
+            break;
+          }
+        }
+        return _this.drawManualRoute();
+      });
+      this.mapEventHandles.push(handle);
+      handle = google.maps.event.addListener(marker, 'drag', function() {
+        return _this.drawManualRoute();
+      });
+      return this.mapEventHandles.push(handle);
     };
 
     Route.prototype.drawManualRoute = function() {
-      var handle, marker, path, _i, _len, _ref, _this;
+      var googlePath, handle, i, marker, path, prevMarker, _i, _len, _ref, _this;
       if (this.polyline) {
         this.polyline.setMap(null);
       }
       path = [];
+      i = 0;
       _ref = this.markers;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         marker = _ref[_i];
-        path.push(marker.position);
+        if (!marker.useGoogleDirections || i === 0) {
+          path.push(marker.position);
+        } else {
+          prevMarker = this.markers[i - 1];
+          googlePath = this.getGoogleDirections(prevMarker, marker);
+          if (!googlePath) {
+            return;
+          } else {
+            path.push.apply(path, googlePath);
+          }
+        }
+        i += 1;
       }
       this.polyline = new google.maps.Polyline({
         path: path,
@@ -382,6 +416,44 @@
       });
       this.mapEventHandles.push(handle);
       return this.polyline.setMap(this.map);
+    };
+
+    Route.prototype.getGoogleDirections = function(mark1, mark2) {
+      var cacheKey, path, request, _this;
+      cacheKey = "" + mark1.position.B + ":" + mark1.position.k + "-" + mark2.position.B + ":" + mark2.position.k;
+      console.log([mark1, mark2, cacheKey]);
+      path = this.directionsCache[cacheKey];
+      if (path) {
+        return path;
+      }
+      request = {
+        origin: mark1.position,
+        destination: mark2.position,
+        travelMode: google.maps.TravelMode.WALKING,
+        optimizeWaypoints: false,
+        provideRouteAlternatives: false,
+        region: 'pl'
+      };
+      _this = this;
+      this.directionsService.route(request, function(response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+          path = _this.googleResponceToPath(response);
+          _this.directionsCache[cacheKey] = path;
+          return _this.drawManualRoute();
+        }
+      });
+      return false;
+    };
+
+    Route.prototype.googleResponceToPath = function(response) {
+      var path, point, _i, _len, _ref;
+      path = [];
+      _ref = response.routes[0].overview_path;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        point = _ref[_i];
+        path.push(point);
+      }
+      return path;
     };
 
     return Route;
@@ -411,67 +483,6 @@
         draggable: true
       });
       return this.directionsDisplay.setMap(this.map);
-    };
-
-    ManualRouteHandler.prototype.turnOn = function() {
-      var _this;
-      _this = this;
-      return this.mapListenerHandle = google.maps.event.addListener(this.map, 'click', function(point) {
-        if (!_this.activeRoute) {
-          _this.addRoute();
-        }
-        return _this.activeRoute.addMarker(point);
-      });
-    };
-
-    ManualRouteHandler.prototype.turnOff = function() {
-      return google.maps.event.removeListener(this.mapListenerHandle);
-    };
-
-    ManualRouteHandler.prototype.addRoute = function() {
-      var route;
-      route = new Route();
-      route.map = this.map;
-      this.activeRoute = route;
-      return this.routes.push(route);
-    };
-
-    ManualRouteHandler.prototype.extendRoute = function() {
-      var markersLen;
-      markersLen = this.markers.length;
-      if (markersLen < 2) {
-        return;
-      }
-      return this.drawStraightLinesRoute();
-    };
-
-    ManualRouteHandler.prototype.drawStraightLinesRoute = function() {
-      var marker, path, _i, _len, _ref, _this;
-      if (this.staraightRoutePolyline) {
-        this.staraightRoutePolyline.setMap(null);
-      }
-      path = [];
-      _ref = this.markers;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        marker = _ref[_i];
-        path.push(marker.position);
-      }
-      this.staraightRoutePolyline = new google.maps.Polyline({
-        path: path,
-        geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
-      _this = this;
-      google.maps.event.addListener(this.staraightRoutePolyline, 'click', function(point) {
-        var position;
-        position = getPositionOnShortestPath(_this.markers, point);
-        console.log(['position', position]);
-        _this.addMarker(point, position);
-        return _this.extendRoute();
-      });
-      return this.staraightRoutePolyline.setMap(this.map);
     };
 
     ManualRouteHandler.prototype.routeFromGoogle = function() {
