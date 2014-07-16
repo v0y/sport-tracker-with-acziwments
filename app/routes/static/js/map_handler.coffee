@@ -3,7 +3,7 @@
 ###############################################################################
 
 class MapHandler
-    mode: 'gpx'
+    mode: 'readOnly'
     map: null;
     routes: []
 
@@ -65,8 +65,8 @@ class MapHandler
 
     toggleManualRouteDrawing: ->
         switch @mode
-            when 'gpx' then @initializeManualRouteHandling()
-            when 'manual' then @finishManualRouteHandling()
+            when 'readOnly' then @initializeManualRouteHandling()
+            when 'edit' then @finishManualRouteHandling()
 
     initializeManualRouteHandling: ->
         # clear existing routes (revert if possible)
@@ -85,7 +85,8 @@ class MapHandler
         # initialize route to map bindings
         route.initializeMapBindings()
 
-        console.log("<<< - - - >>>")
+        # update handler mode
+        @mode = 'edit'
 
     finishManualRouteHandling: ->
         console.log('clearManualRouteHandling')
@@ -93,7 +94,13 @@ class MapHandler
         # unbind route to map events
         @activeRoute.removeMapBindings()
 
+        # make markers undragable
+        @activeRoute.makeMarkersUnDragable()
+
         # save actie route
+
+        # update handler mode
+        @mode = 'readOnly'
 
 ###############################################################################
 # Route Class
@@ -445,53 +452,9 @@ class Route
 
         return path
 
-
-###############################################################################
-# Manual route handler
-###############################################################################
-
-class ManualRouteHandler
-    map: null;
-    routes: [];
-
-    activeRoute: null;
-
-    @directionsService: null;
-    @directionsDisplay: null;
-
-    staraightRoutePolyline: null;
-
-    messageAreaSelector: '.js-message-area'
-
-    initialize: ->
-        @directionsService = new google.maps.DirectionsService();
-        @directionsDisplay = new google.maps.DirectionsRenderer({draggable:true})
-        @directionsDisplay.setMap(@map)
-
-    routeFromGoogle: ->
-        # extend the road to the last marker
-        request = {
-            origin: @markers[markersLen - 2].position,
-            destination: @markers[markersLen - 1].position,
-            travelMode: google.maps.TravelMode.WALKING, # BICYCLING
-            #unitSystem: UnitSystem.METRIC, # IMPERIAL
-            #waypoints[]: DirectionsWaypoint,
-            optimizeWaypoints: false,
-            provideRouteAlternatives: false,
-            region: 'pl'
-        }
-
-        _this = @
-        console.log([@, 'this'])
-        @directionsService.route(request, (response, status) ->
-            if status == google.maps.DirectionsStatus.OK
-                # var warnings = document.getElementById("warnings_panel");
-                # warnings.innerHTML = "" + response.routes[0].warnings + "";
-                #_this.directionsDisplay.setDirections(response);
-                console.log(response)
-                # showSteps(response);
-        );
-
+    makeMarkersUnDragable: () ->
+        for marker in @markers
+            marker.setDraggable(false)
 
 
 ###############################################################################
