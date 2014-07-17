@@ -369,7 +369,8 @@ class Route
                 path.push(marker.position)
             else
                 prevMarker = @markers[i - 1]
-                googlePath = @getGoogleDirections(prevMarker, marker)
+                nextMarker = @markers[i + 1]
+                googlePath = @getGoogleDirections(prevMarker, marker, nextMarker)
                 if not googlePath
                     return
                 else
@@ -404,17 +405,16 @@ class Route
         # create new marker and put it into markers list
         @.addMarker(point, position)
 
-    getGoogleDirections: (mark1, mark2) ->
+    getGoogleDirections: (mark1, mark2, mark3) ->
         # check directionsCache
         cacheKey = "#{mark1.position.B}:#{mark1.position.k}-#{mark2.position.B}:#{mark2.position.k}"
-        console.log([mark1, mark2, cacheKey])
 
         path = @directionsCache[cacheKey]
 
         if path
             return path
 
-        # ask google
+        # prepare request
         request = {
             origin: mark1.position,
             destination: mark2.position,
@@ -426,6 +426,18 @@ class Route
             region: 'pl'
         }
 
+        # modyfy request if mark3 is given, and no path is found betwen
+        # mark2 and mark3
+        if mark3
+            cacheKey2 = "#{mark2.position.B}:#{mark2.position.k}-#{mark3.position.B}:#{mark3.position.k}"
+            path2 = @directionsCache[cacheKey2]
+
+            if not path2
+                request.destination = mark3.position
+                waypoint = {location:mark2.position, stopover:false}
+                request.waypoints = [waypoint]
+
+        # finaly ask google
         _this = @
         @directionsService.route(request, (response, status) ->
             # TODO - fallback
@@ -433,8 +445,11 @@ class Route
                 # var warnings = document.getElementById("warnings_panel");
                 # warnings.innerHTML = "" + response.routes[0].warnings + "";
                 # write result to local cache
-                path = _this.googleResponceToPath(response)
+                [path, path2] = _this.googleResponceToPath(response)
                 _this.directionsCache[cacheKey] = path
+
+                if path2
+                    _this.directionsCache[cacheKey2] = path2
 
                 # TODO - handle additional response information
 
@@ -446,11 +461,28 @@ class Route
 
     googleResponceToPath: (response) ->
         path = []
+        path2 = []
 
-        for point in response.routes[0].overview_path
-            path.push(point)
+        # just to shorten some code lines
+        route = response.routes[0]
 
-        return path
+        if route.legs[0].via_waypoint.length
+            waypointStepIdx = route.legs[0].via_waypoint[0].step_index
+
+            idx = 0
+            for step in route.legs[0].steps
+                if idx <= waypointStepIdx
+                    for point in step.path
+                        path.push(point)
+                else
+                    for point in step.path
+                        path2.push(point)
+                idx += 1
+        else
+            for point in route.overview_path
+                path.push(point)
+
+        return [path, path2]
 
     makeMarkersUnDragable: () ->
         for marker in @markers
