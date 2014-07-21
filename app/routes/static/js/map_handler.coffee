@@ -76,7 +76,7 @@ class MapHandler
         if not @directionsService
             @directionsService = new google.maps.DirectionsService();
 
-        # show controls
+        # TODO show controls
 
         # create new route
         route = @addRoute(true)
@@ -98,6 +98,8 @@ class MapHandler
         @activeRoute.makeMarkersUnDragable()
 
         # save actie route
+
+        # hide controls
 
         # update handler mode
         @mode = 'readOnly'
@@ -122,12 +124,16 @@ class Route
     finishMarker: null;
     fullKmMarkers: []
 
+    @latlngbounds: null;
+
     draw: ->
         @drawTracks()
         @addStartFinishMarkers()
         fullKmSectionsList = @getRouteDistance()
         @drawFullKmMarkers(fullKmSectionsList)
         @getStartFinishTimes()
+        # center / zoom map
+        @map.fitBounds(@latlngbounds)
 
     clear: ->
         for marker in @fullKmMarkers
@@ -139,9 +145,11 @@ class Route
         for polyline in @polylines
             polyline.setMap(null)
 
+        @polylines = []
+
     drawTracks: ->
         # object for handling initial map zoom level and center
-        latlngbounds = new google.maps.LatLngBounds()
+        @latlngbounds = new google.maps.LatLngBounds()
 
         # add points to map
         for track in @tracks
@@ -152,7 +160,7 @@ class Route
                 for point in segment
                     pt = new google.maps.LatLng(point['lat'], point['lon'])
                     segmentMapPoints.push(pt)
-                    latlngbounds.extend(pt)
+                    @latlngbounds.extend(pt)
 
                 # create new polyline
                 polyline = new google.maps.Polyline({
@@ -171,9 +179,6 @@ class Route
                 trackMapPoints.push(segmentMapPoints)
 
             @mapPoints.push(trackMapPoints)
-
-        # center / zoom map
-        @map.fitBounds(latlngbounds)
 
     addStartFinishMarkers: ->
         # start marker
@@ -288,6 +293,10 @@ class Route
             position: point.latLng,
             map: _this.map,
             draggable:true,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 5
+            }
         });
 
         # add marker to list of markers
@@ -296,7 +305,18 @@ class Route
         else
             _this.markers.push(marker)
 
-        # todo: check if should use google directions
+        # right click removes marker
+        handle = google.maps.event.addListener(marker, 'rightclick', ->
+            marker.setMap(null)
+            for i in [0 .. _this.markers.length]
+                if marker == _this.markers[i]
+                    _this.markers.splice(i, 1)
+                    break
+            _this.drawManualRoute()
+        )
+        @mapEventHandles.push(handle)
+
+        # TODO: check if should use google directions
         #@addSimpleManualRouteMarker(marker)
         @addGoogleDirectionsRouteMarker(marker)
 
@@ -307,17 +327,6 @@ class Route
         marker.useGoogleDirections = false;
 
         _this = @
-        # bind to marker events
-        # right click removes marker
-        handle = google.maps.event.addListener(marker, 'rightclick', ->
-            marker.setMap(null)
-            for i in [0 .. _this.markers.length]
-                if marker == _this.markers[i]
-                    _this.markers.splice(i, 1)
-                    break
-            _this.drawManualRoute()
-        )
-        @mapEventHandles.push(handle)
 
         # marker drag re-renders route
         handle = google.maps.event.addListener(marker, 'drag', ->
@@ -326,23 +335,10 @@ class Route
         @mapEventHandles.push(handle)
 
     addGoogleDirectionsRouteMarker: (marker) ->
-        console.log(marker.getPosition)
         # make the marker remembre to use google directions
         marker.useGoogleDirections = true;
 
-        # TODO - usuń duplikację kodu
         _this = @
-        # bind to marker events
-        # right click removes marker
-        handle = google.maps.event.addListener(marker, 'rightclick', ->
-            marker.setMap(null)
-            for i in [0 .. _this.markers.length]
-                if marker == _this.markers[i]
-                    _this.markers.splice(i, 1)
-                    break
-            _this.drawManualRoute()
-        )
-        @mapEventHandles.push(handle)
 
         # bind to marker drag with delay
         delay = 1000
@@ -358,9 +354,11 @@ class Route
 
     drawManualRoute: ->
         # remove previous polyline
-        if @polyline
-            @polyline.setMap(null)
+        if @activePolyline
+            @activePolyline.setMap(null)
+            @polylines.pop()
 
+        # update tracks
         # get path from markers
         path = []
         i = 0
@@ -378,8 +376,9 @@ class Route
 
             i += 1
 
+        # draw tracks
         # draw a polyline between all markers on the map
-        @polyline = new google.maps.Polyline({
+        @activePolyline = new google.maps.Polyline({
             path: path,
             geodesic: true,
             strokeColor: '#FF0000',
@@ -389,12 +388,13 @@ class Route
 
         # bind click on polyline
         _this = @
-        handle = google.maps.event.addListener(@polyline, 'click', (point) ->
+        handle = google.maps.event.addListener(@activePolyline, 'click', (point) ->
             _this.polylineClickCalback(point)
         )
         @mapEventHandles.push(handle)
 
-        @polyline.setMap(@map);
+        @activePolyline.setMap(@map)
+        @polylines.push(@activePolyline)
 
     polylineClickCalback: (point) ->
         # try to determin between witch two markers the line was clicked
@@ -427,8 +427,9 @@ class Route
         }
 
         # modyfy request if mark3 is given, and no path is found betwen
-        # mark2 and mark3
-        if mark3
+        # mark2 and mark3 - use route with waypoint instead of two
+        # requests to google
+        if mark3 and mark3.useGoogleDirections
             cacheKey2 = "#{mark2.position.B}:#{mark2.position.k}-#{mark3.position.B}:#{mark3.position.k}"
             path2 = @directionsCache[cacheKey2]
 
@@ -493,15 +494,15 @@ class Route
 # Distance calculations
 ###############################################################################
 
-getTotalDistance = (routes) ->
+getTotalDistance = (tracks) ->
     distance = 0
 
     # get sections for kilometer markers
     fullKmSectionsList = []
     fullKmDistance = 0
 
-    for route in routes
-        for segment in route['segments']
+    for track in tracks
+        for segment in track['segments']
             for i in [1..segment.length - 1]
                 # calculate section length
                 pt1 = segment[i-1]
