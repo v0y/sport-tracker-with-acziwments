@@ -327,7 +327,6 @@ class Route
         marker.useGoogleDirections = false;
 
         _this = @
-
         # marker drag re-renders route
         handle = google.maps.event.addListener(marker, 'drag', ->
             _this.drawManualRoute()
@@ -358,33 +357,24 @@ class Route
             @activePolyline.setMap(null)
             @polylines.pop()
 
-        # update tracks
-        # get path from markers
-        path = []
-        i = 0
-        for marker in @markers
-            if not marker.useGoogleDirections or i == 0
-                path.push(marker.position)
-            else
-                prevMarker = @markers[i - 1]
-                nextMarker = @markers[i + 1]
-                googlePath = @getGoogleDirections(prevMarker, marker, nextMarker)
-                if not googlePath
-                    return
-                else
-                    path.push.apply(path, googlePath)
+        # escape early if there aren't enough markers to draw anything
+        if @markers.length < 2
+            return
 
-            i += 1
+        # update tracks
+        path = @markersToTracks()
+        if not path
+            return
+        else
+            @tracks = path
 
         # draw tracks
-        # draw a polyline between all markers on the map
-        @activePolyline = new google.maps.Polyline({
-            path: path,
-            geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 2
-        });
+        @drawTracks()
+        @addStartFinishMarkers()
+        fullKmSectionsList = @getRouteDistance()
+        @drawFullKmMarkers(fullKmSectionsList)
+
+        @activePolyline = @polylines[@polylines.length - 1]
 
         # bind click on polyline
         _this = @
@@ -488,6 +478,34 @@ class Route
     makeMarkersUnDragable: () ->
         for marker in @markers
             marker.setDraggable(false)
+
+    markersToTracks: ->
+        # get tracks from markers
+        path = []
+        i = 0
+        for marker in @markers
+            if not marker.useGoogleDirections or i == 0
+                obj = {
+                    'lat': marker.position.lat(),
+                    'lon': marker.position.lng()
+                }
+                path.push(obj)
+            else
+                prevMarker = @markers[i - 1]
+                nextMarker = @markers[i + 1]
+                googlePath = @getGoogleDirections(prevMarker, marker, nextMarker)
+                if not googlePath
+                    return
+                else
+                    for point in googlePath
+                        obj = {
+                            'lat': point.lat(),
+                            'lon': point.lng()
+                        }
+                        path.push(obj)
+            i += 1
+
+        return [{'segments': [path]}]
 
 
 ###############################################################################

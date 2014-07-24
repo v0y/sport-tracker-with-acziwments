@@ -140,17 +140,20 @@
 
     Route.prototype.fullKmMarkers = [];
 
+    Route.latlngbounds = null;
+
     Route.prototype.draw = function() {
       var fullKmSectionsList;
       this.drawTracks();
       this.addStartFinishMarkers();
       fullKmSectionsList = this.getRouteDistance();
       this.drawFullKmMarkers(fullKmSectionsList);
-      return this.getStartFinishTimes();
+      this.getStartFinishTimes();
+      return this.map.fitBounds(this.latlngbounds);
     };
 
     Route.prototype.clear = function() {
-      var marker, polyline, _i, _j, _len, _len1, _ref, _ref1, _results;
+      var marker, polyline, _i, _j, _len, _len1, _ref, _ref1;
       _ref = this.fullKmMarkers;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         marker = _ref[_i];
@@ -159,18 +162,18 @@
       this.startMarker.setMap(null);
       this.finishMarker.setMap(null);
       _ref1 = this.polylines;
-      _results = [];
       for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
         polyline = _ref1[_j];
-        _results.push(polyline.setMap(null));
+        polyline.setMap(null);
       }
-      return _results;
+      return this.polylines = [];
     };
 
     Route.prototype.drawTracks = function() {
-      var latlngbounds, point, polyline, pt, segment, segmentMapPoints, track, trackMapPoints, _i, _j, _k, _len, _len1, _len2, _ref, _ref1;
-      latlngbounds = new google.maps.LatLngBounds();
+      var point, polyline, pt, segment, segmentMapPoints, track, trackMapPoints, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _results;
+      this.latlngbounds = new google.maps.LatLngBounds();
       _ref = this.tracks;
+      _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         track = _ref[_i];
         trackMapPoints = [];
@@ -182,7 +185,7 @@
             point = segment[_k];
             pt = new google.maps.LatLng(point['lat'], point['lon']);
             segmentMapPoints.push(pt);
-            latlngbounds.extend(pt);
+            this.latlngbounds.extend(pt);
           }
           polyline = new google.maps.Polyline({
             path: segmentMapPoints,
@@ -197,9 +200,9 @@
           this.polylines.push(polyline);
           trackMapPoints.push(segmentMapPoints);
         }
-        this.mapPoints.push(trackMapPoints);
+        _results.push(this.mapPoints.push(trackMapPoints));
       }
-      return this.map.fitBounds(latlngbounds);
+      return _results;
     };
 
     Route.prototype.addStartFinishMarkers = function() {
@@ -346,7 +349,7 @@
         return _this.drawManualRoute();
       });
       this.mapEventHandles.push(handle);
-      this.addSimpleManualRouteMarker(marker);
+      this.addGoogleDirectionsRouteMarker(marker);
       return this.drawManualRoute();
     };
 
@@ -376,37 +379,25 @@
     };
 
     Route.prototype.drawManualRoute = function() {
-      var googlePath, handle, i, marker, nextMarker, path, prevMarker, _i, _len, _ref, _this;
+      var fullKmSectionsList, handle, path, _this;
       if (this.activePolyline) {
         this.activePolyline.setMap(null);
         this.polylines.pop();
       }
-      path = [];
-      i = 0;
-      _ref = this.markers;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        marker = _ref[_i];
-        if (!marker.useGoogleDirections || i === 0) {
-          path.push(marker.position);
-        } else {
-          prevMarker = this.markers[i - 1];
-          nextMarker = this.markers[i + 1];
-          googlePath = this.getGoogleDirections(prevMarker, marker, nextMarker);
-          if (!googlePath) {
-            return;
-          } else {
-            path.push.apply(path, googlePath);
-          }
-        }
-        i += 1;
+      if (this.markers.length < 2) {
+        return;
       }
-      this.activePolyline = new google.maps.Polyline({
-        path: path,
-        geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
+      path = this.markersToTracks();
+      if (!path) {
+        return;
+      } else {
+        this.tracks = path;
+      }
+      this.drawTracks();
+      this.addStartFinishMarkers();
+      fullKmSectionsList = this.getRouteDistance();
+      this.drawFullKmMarkers(fullKmSectionsList);
+      this.activePolyline = this.polylines[this.polylines.length - 1];
       _this = this;
       handle = google.maps.event.addListener(this.activePolyline, 'click', function(point) {
         return _this.polylineClickCalback(point);
@@ -454,6 +445,7 @@
         var _ref;
         if (status === google.maps.DirectionsStatus.OK) {
           _ref = _this.googleResponceToPath(response), path = _ref[0], path2 = _ref[1];
+          console.log(path);
           _this.directionsCache[cacheKey] = path;
           if (path2) {
             _this.directionsCache[cacheKey2] = path2;
@@ -511,18 +503,57 @@
       return _results;
     };
 
+    Route.prototype.markersToTracks = function() {
+      var googlePath, i, marker, nextMarker, obj, path, point, prevMarker, _i, _j, _len, _len1, _ref;
+      path = [];
+      i = 0;
+      _ref = this.markers;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        marker = _ref[_i];
+        if (!marker.useGoogleDirections || i === 0) {
+          obj = {
+            'lat': marker.position.lat(),
+            'lon': marker.position.lng()
+          };
+          path.push(obj);
+        } else {
+          prevMarker = this.markers[i - 1];
+          nextMarker = this.markers[i + 1];
+          googlePath = this.getGoogleDirections(prevMarker, marker, nextMarker);
+          if (!googlePath) {
+            return;
+          } else {
+            for (_j = 0, _len1 = googlePath.length; _j < _len1; _j++) {
+              point = googlePath[_j];
+              obj = {
+                'lat': point.lat(),
+                'lon': point.lng()
+              };
+              path.push(obj);
+            }
+          }
+        }
+        i += 1;
+      }
+      return [
+        {
+          'segments': [path]
+        }
+      ];
+    };
+
     return Route;
 
   })();
 
-  getTotalDistance = function(routes) {
-    var distance, fullKmDistance, fullKmSectionsList, i, obj, pt1, pt2, route, segment, x, _i, _j, _k, _len, _len1, _ref, _ref1;
+  getTotalDistance = function(tracks) {
+    var distance, fullKmDistance, fullKmSectionsList, i, obj, pt1, pt2, segment, track, x, _i, _j, _k, _len, _len1, _ref, _ref1;
     distance = 0;
     fullKmSectionsList = [];
     fullKmDistance = 0;
-    for (_i = 0, _len = routes.length; _i < _len; _i++) {
-      route = routes[_i];
-      _ref = route['segments'];
+    for (_i = 0, _len = tracks.length; _i < _len; _i++) {
+      track = tracks[_i];
+      _ref = track['segments'];
       for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
         segment = _ref[_j];
         for (i = _k = 1, _ref1 = segment.length - 1; 1 <= _ref1 ? _k <= _ref1 : _k >= _ref1; i = 1 <= _ref1 ? ++_k : --_k) {
