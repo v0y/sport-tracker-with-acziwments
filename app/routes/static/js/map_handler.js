@@ -400,7 +400,6 @@
         this.tracks = path;
       }
       this.drawTracks();
-      this.addStartFinishMarkers();
       fullKmSectionsList = this.getRouteDistance();
       this.drawFullKmMarkers(fullKmSectionsList);
       this.activePolyline = this.polylines[this.polylines.length - 1];

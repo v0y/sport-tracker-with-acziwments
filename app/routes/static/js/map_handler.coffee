@@ -376,7 +376,6 @@ class Route
 
         # draw tracks
         @drawTracks()
-        @addStartFinishMarkers()
         fullKmSectionsList = @getRouteDistance()
         @drawFullKmMarkers(fullKmSectionsList)
 
