@@ -159,8 +159,13 @@
         marker = _ref[_i];
         marker.setMap(null);
       }
-      this.startMarker.setMap(null);
-      this.finishMarker.setMap(null);
+      this.fullKmMarkers = [];
+      if (this.startMarker) {
+        this.startMarker.setMap(null);
+      }
+      if (this.finishMarker) {
+        this.finishMarker.setMap(null);
+      }
       _ref1 = this.polylines;
       for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
         polyline = _ref1[_j];
@@ -171,6 +176,7 @@
 
     Route.prototype.drawTracks = function() {
       var point, polyline, pt, segment, segmentMapPoints, track, trackMapPoints, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _results;
+      this.clear();
       this.latlngbounds = new google.maps.LatLngBounds();
       _ref = this.tracks;
       _results = [];
@@ -445,7 +451,6 @@
         var _ref;
         if (status === google.maps.DirectionsStatus.OK) {
           _ref = _this.googleResponceToPath(response), path = _ref[0], path2 = _ref[1];
-          console.log(path);
           _this.directionsCache[cacheKey] = path;
           if (path2) {
             _this.directionsCache[cacheKey2] = path2;

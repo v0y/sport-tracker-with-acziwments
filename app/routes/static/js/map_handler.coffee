@@ -139,8 +139,12 @@ class Route
         for marker in @fullKmMarkers
             marker.setMap(null)
 
-        @startMarker.setMap(null)
-        @finishMarker.setMap(null)
+        @fullKmMarkers = []
+
+        if @startMarker
+            @startMarker.setMap(null)
+        if @finishMarker
+            @finishMarker.setMap(null)
 
         for polyline in @polylines
             polyline.setMap(null)
@@ -148,6 +152,8 @@ class Route
         @polylines = []
 
     drawTracks: ->
+        @clear()
+
         # object for handling initial map zoom level and center
         @latlngbounds = new google.maps.LatLngBounds()
 
