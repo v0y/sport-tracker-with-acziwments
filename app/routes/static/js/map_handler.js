@@ -41,7 +41,8 @@
       route = this.addRoute();
       route.tracks = routeJson;
       route.draw();
-      return this.getDistanceAndTimes();
+      this.getDistance();
+      return this.getTimes();
     };
 
     MapHandler.prototype.addManualRoute = function() {
@@ -62,12 +63,23 @@
 
     MapHandler.prototype.singleNewRoute = function(routeJson) {
       this.clearRoutes();
+      this.finishManualRouteHandling();
       return this.addRouteFromJson(routeJson);
     };
 
-    MapHandler.prototype.getDistanceAndTimes = function() {
-      var durationSeconds, route, _i, _len, _ref;
+    MapHandler.prototype.getDistance = function() {
+      var route, _i, _len, _ref;
       this.distance = 0;
+      _ref = this.routes;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        route = _ref[_i];
+        this.distance += route.distance;
+      }
+      return this.distance;
+    };
+
+    MapHandler.prototype.getTimes = function() {
+      var durationSeconds, route, _i, _len, _ref;
       this.startTime = this.routes[0].startTime;
       this.endTime = this.routes[0].startTime;
       _ref = this.routes;
@@ -79,10 +91,12 @@
         if (route.endTime > this.endTime) {
           this.endTime = route.endTime;
         }
-        this.distance += route.distance;
       }
-      durationSeconds = this.endTime.diff(this.startTime, 'seconds');
-      return this.duration = moment.duration(durationSeconds, 'seconds');
+      if (this.endTime) {
+        durationSeconds = this.endTime.diff(this.startTime, 'seconds');
+        this.duration = moment.duration(durationSeconds, 'seconds');
+      }
+      return this.duration;
     };
 
     MapHandler.prototype.toggleManualRouteDrawing = function() {
@@ -107,10 +121,20 @@
     };
 
     MapHandler.prototype.finishManualRouteHandling = function() {
-      console.log('clearManualRouteHandling');
-      this.activeRoute.removeMapBindings();
-      this.activeRoute.makeMarkersUnDragable();
+      if (this.activeRoute) {
+        this.activeRoute.removeMapBindings();
+        this.activeRoute.makeMarkersUnDragable();
+      }
       return this.mode = 'readOnly';
+    };
+
+    MapHandler.prototype.getRouteDataFromMap = function() {
+      if (this.mode === 'edit' && this.activeRoute) {
+        this.finishManualRouteHandling();
+        return this.activeRoute.markersToTracks();
+      } else {
+        return null;
+      }
     };
 
     return MapHandler;
@@ -251,6 +275,9 @@
 
     Route.prototype.getStartFinishTimes = function() {
       var endTimeString, lastSegment, lastTracks, startTimeString;
+      if (!this.tracks[0].segments[0][0].time) {
+        return;
+      }
       startTimeString = this.tracks[0].segments[0][0].time;
       this.startTime = moment(startTimeString, 'YYYY-MM-DD HH:mm:ss');
       lastTracks = this.tracks[this.tracks.length - 1].segments;

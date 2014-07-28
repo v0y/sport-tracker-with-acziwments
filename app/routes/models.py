@@ -11,7 +11,7 @@ from app.shared.helpers import mi2km
 from app.shared.models import CreatedAtMixin
 from app.workouts.models import Workout
 from .gpx_handler import handle_gpx, get_segment_dist_and_ele, \
-    get_segment_start_and_finish_times
+    get_segment_start_and_finish_times, get_distance_and_elevations_delta
 
 
 class Route(CreatedAtMixin):
@@ -54,6 +54,22 @@ class Route(CreatedAtMixin):
         )
 
         return route.id, tracks_json
+
+    @classmethod
+    def save_route(cls, route_data, request):
+        tracks_json = json.loads(route_data)
+        length, _, _ = get_distance_and_elevations_delta(tracks_json)
+
+        input_dct = {
+            'user': request.user,
+            'tracks_json': tracks_json,
+            'length': length,
+        }
+
+        route = cls.objects.create(**input_dct)
+
+        return route.id, route_data
+
 
     def best_time_for_x_km(self, distance):
         """

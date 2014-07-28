@@ -33,7 +33,9 @@ class MapHandler
         route = @addRoute()
         route.tracks = routeJson
         route.draw()
-        @getDistanceAndTimes()
+
+        @getDistance()
+        @getTimes()
 
     addManualRoute: ->
         route = @addRoute()
@@ -44,10 +46,18 @@ class MapHandler
 
     singleNewRoute: (routeJson) ->
         @clearRoutes()
+        @finishManualRouteHandling()
         @addRouteFromJson(routeJson)
 
-    getDistanceAndTimes: ->
+    getDistance: ->
         @distance = 0
+
+        for route in @routes
+            @distance += route.distance
+
+        return @distance
+
+    getTimes: ->
         @startTime = @routes[0].startTime
         @endTime = @routes[0].startTime
 
@@ -58,10 +68,11 @@ class MapHandler
             if route.endTime > @endTime
                 @endTime = route.endTime
 
-            @distance += route.distance
+        if @endTime
+            durationSeconds = @endTime.diff(@startTime, 'seconds')
+            @duration = moment.duration(durationSeconds, 'seconds')
 
-        durationSeconds = @endTime.diff(@startTime, 'seconds')
-        @duration = moment.duration(durationSeconds, 'seconds')
+        return @duration
 
     toggleManualRouteDrawing: ->
         switch @mode
@@ -89,20 +100,25 @@ class MapHandler
         @mode = 'edit'
 
     finishManualRouteHandling: ->
-        console.log('clearManualRouteHandling')
+        if @activeRoute
+            # unbind route to map events
+            @activeRoute.removeMapBindings()
 
-        # unbind route to map events
-        @activeRoute.removeMapBindings()
-
-        # make markers undragable
-        @activeRoute.makeMarkersUnDragable()
-
-        # save actie route
+            # make markers undragable
+            @activeRoute.makeMarkersUnDragable()
 
         # hide controls
 
         # update handler mode
         @mode = 'readOnly'
+
+    getRouteDataFromMap: ->
+        if @mode == 'edit' and @activeRoute
+            @finishManualRouteHandling()
+
+            return @activeRoute.markersToTracks()
+        else
+            return null;
 
 ###############################################################################
 # Route Class
@@ -228,6 +244,9 @@ class Route
         return fullKmSectionsList
 
     getStartFinishTimes: ->
+        if not @tracks[0].segments[0][0].time
+            return
+
         startTimeString = @tracks[0].segments[0][0].time
         @startTime = moment(startTimeString, 'YYYY-MM-DD HH:mm:ss')
 

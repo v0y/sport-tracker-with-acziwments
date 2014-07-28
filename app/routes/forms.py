@@ -23,6 +23,12 @@ class RouteIdMixin(ModelForm):
         if route_id:
             route = Route.objects.get(id=route_id)
 
+
+            # update route properties if needed
+            route.start_time = workout.datetime_start
+            route.finish_time = workout.datetime_stop
+            route.length = workout.distance
+
             # save
             route.workout = workout
             route.save()
