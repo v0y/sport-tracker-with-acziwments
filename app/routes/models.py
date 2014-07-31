@@ -38,6 +38,9 @@ class Route(CreatedAtMixin):
         verbose_name = u"trasa"
         verbose_name_plural = u"trasy"
 
+    def __unicode__(self):
+        return "user:%s, workout:%s, start_time:%s, length:%f" % (self.user_id, self.workout_id, self.start_time, self.length)
+
     @classmethod
     def route_from_gpx(cls, gpx_file, request):
         tracks, s_time, f_time, length, h_up, h_down = handle_gpx(gpx_file)
