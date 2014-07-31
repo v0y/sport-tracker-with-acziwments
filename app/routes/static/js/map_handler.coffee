@@ -575,12 +575,6 @@ get2PointsDistance = (pt1, pt2) ->
     return getDistanceFromLatLonInKm(pt1['lat'], pt1['lon'], pt2['lat'], pt2['lon'])
 
 
-get2MarkersDistance = (mark1, mark2) ->
-    pt1 = {'lat': mark1.position.lat(), 'lon': mark1.position.lng()}
-    pt2 = {'lat': mark2.position.lat(), 'lon': mark2.position.lng()}
-    return get2PointsDistance(pt1, pt2)
-
-
 getPointToMarkerDistance = (obj1, obj2) ->
     if obj1.position?  # this is probably a marker
         pt1 = {'lat': obj1.position.lat(), 'lon': obj1.position.lng()}

@@ -5,11 +5,11 @@ import json
 
 from django.contrib.auth.models import User
 from django.db import models
-from app.routes.gpx_handler import get_distance
 
 from app.shared.helpers import mi2km
 from app.shared.models import CreatedAtMixin
 from app.workouts.models import Workout
+from .helpers import get_distance
 from .gpx_handler import handle_gpx, get_segment_dist_and_ele, \
     get_segment_start_and_finish_times, get_distance_and_elevations_delta
 
