@@ -22,7 +22,7 @@ from .enums import SPORT_CATEGORIES, Unit, UNIT_CHOICES
 class BestTime(models.Model):
     distance = models.ForeignKey('Distance')
     workout = models.ForeignKey('Workout')
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, null=True, blank=True)
     unit = models.CharField(choices=UNIT_CHOICES, max_length=2)
     duration = TimedeltaField()
 
