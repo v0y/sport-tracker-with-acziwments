@@ -44,6 +44,8 @@ class MapHandler
         for route in @routes
             route.clear()
 
+        @routes = []
+
     singleNewRoute: (routeJson) ->
         @clearRoutes()
         @finishManualRouteHandling()
