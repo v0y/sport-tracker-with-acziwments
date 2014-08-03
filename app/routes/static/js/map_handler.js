@@ -487,6 +487,7 @@
       _this = this;
       this.directionsService.route(request, function(response, status) {
         var _ref;
+        console.log(status);
         if (status === google.maps.DirectionsStatus.OK) {
           _ref = _this.googleResponceToPath(response), path = _ref[0], path2 = _ref[1];
           _this.directionsCache[cacheKey] = path;
@@ -494,8 +495,13 @@
             _this.directionsCache[cacheKey2] = path2;
           }
           _this.controls.googleWarningsDisplay.html(response.routes[0].warnings);
-          return _this.drawManualRoute();
+        } else if (status === google.maps.DirectionsStatus.ZERO_RESULTS) {
+          console.log('Nie ma wody na pustyni');
+          mark2.useGoogleDirections = false;
+        } else {
+          mark2.useGoogleDirections = false;
         }
+        return _this.drawManualRoute();
       });
       return false;
     };

@@ -63,7 +63,6 @@
   fillFormFields = function(routeId, mapHandler) {
     var startTime;
     $('#id_route_id').val(routeId);
-    console.log([$('#id_duration_hours').val(), 'x']);
     if ($('#id_distance').val() === '') {
       $('#id_distance').val(mapHandler.distance.toFixed(2));
     }

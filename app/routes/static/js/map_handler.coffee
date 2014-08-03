@@ -201,7 +201,7 @@ class Route
                     geodesic: true,
                     strokeColor: '#FF0000',
                     strokeOpacity: 1.0,
-                    strokeWeight: 2
+                    strokeWeight: 5
                 })
 
                 polyline.setMap(@map)
@@ -467,7 +467,6 @@ class Route
         # finaly ask google
         _this = @
         @directionsService.route(request, (response, status) ->
-            # TODO - fallback
             if status == google.maps.DirectionsStatus.OK
                 # write result to local cache
                 [path, path2] = _this.googleResponceToPath(response)
@@ -478,9 +477,22 @@ class Route
 
                 # handle additional response information (google requierment)
                 _this.controls.googleWarningsDisplay.html(response.routes[0].warnings)
+            else if status == google.maps.DirectionsStatus.ZERO_RESULTS
+                # if no path was found, (or something else went wrong)
+                # set marker 2 to use straight lines instead of google
+                # directions...
+                mark2.useGoogleDirections = false;
+                # ...and tell the user that nothing was found
+                msg = "Nie znaleziono trasy - rysuję linię prostą"
+                _this.controls.googleWarningsDisplay.html(msg)
+            else
+                # if no path was found, (or something else went wrong)
+                # set marker 2 to use straight lines instead of google
+                # directions
+                mark2.useGoogleDirections = false;
 
-                # re render path
-                _this.drawManualRoute()
+            # re render path
+            _this.drawManualRoute()
         )
 
         return false;
