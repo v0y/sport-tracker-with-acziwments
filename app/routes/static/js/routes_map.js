@@ -63,17 +63,22 @@
   fillFormFields = function(routeId, mapHandler) {
     var startTime;
     $('#id_route_id').val(routeId);
-    $('#id_distance').val(mapHandler.distance.toFixed(2));
+    console.log([$('#id_duration_hours').val(), 'x']);
+    if ($('#id_distance').val() === '') {
+      $('#id_distance').val(mapHandler.distance.toFixed(2));
+    }
     if (!mapHandler.startTime) {
       return;
     }
-    startTime = moment.tz(mapHandler.startTime._d, "Europe/Warsaw");
-    startTime.add('minutes', -startTime.zone());
-    $('#id_datetime_start').val(startTime.format('DD-MM-YYYY'));
-    $('#id_time_start').val(startTime.format('HH:mm:ss'));
-    $('#id_duration_hours').val(mapHandler.duration.hours());
-    $('#id_duration_mins').val(mapHandler.duration.minutes());
-    return $('#id_duration_secs').val(mapHandler.duration.seconds());
+    if ($('#id_duration_hours').val() === '0' && $('#id_duration_mins').val() === '0' && $('#id_duration_secs').val() === '0') {
+      startTime = moment.tz(mapHandler.startTime._d, "Europe/Warsaw");
+      startTime.add('minutes', -startTime.zone());
+      $('#id_datetime_start').val(startTime.format('DD-MM-YYYY'));
+      $('#id_time_start').val(startTime.format('HH:mm:ss'));
+      $('#id_duration_hours').val(mapHandler.duration.hours());
+      $('#id_duration_mins').val(mapHandler.duration.minutes());
+      return $('#id_duration_secs').val(mapHandler.duration.seconds());
+    }
   };
 
   displayRelatedRoute = function(routeId, url, mapHandler) {

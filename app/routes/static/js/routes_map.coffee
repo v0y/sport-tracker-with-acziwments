@@ -69,21 +69,27 @@ fillFormFields = (routeId, mapHandler) ->
     # route id
     $('#id_route_id').val(routeId)
     # distance
-    $('#id_distance').val(mapHandler.distance.toFixed(2))
+    if $('#id_distance').val() == ''
+        $('#id_distance').val(mapHandler.distance.toFixed(2))
     # manual routes will not have times
     if not mapHandler.startTime
         return
-    # adjust start time according to timezone
-    startTime = moment.tz(mapHandler.startTime._d, "Europe/Warsaw")
-    startTime.add('minutes', -startTime.zone())
-    # start date
-    $('#id_datetime_start').val(startTime.format('DD-MM-YYYY'))
-    # start time
-    $('#id_time_start').val(startTime.format('HH:mm:ss'))
-    # duration
-    $('#id_duration_hours').val(mapHandler.duration.hours())
-    $('#id_duration_mins').val(mapHandler.duration.minutes())
-    $('#id_duration_secs').val(mapHandler.duration.seconds())
+
+    # fill times only if duration is not filled already
+    if $('#id_duration_hours').val() == '0' and
+            $('#id_duration_mins').val() == '0' and
+            $('#id_duration_secs').val() == '0'
+        # adjust start time according to timezone
+        startTime = moment.tz(mapHandler.startTime._d, "Europe/Warsaw")
+        startTime.add('minutes', -startTime.zone())
+        # start date
+        $('#id_datetime_start').val(startTime.format('DD-MM-YYYY'))
+        # start time
+        $('#id_time_start').val(startTime.format('HH:mm:ss'))
+        # duration
+        $('#id_duration_hours').val(mapHandler.duration.hours())
+        $('#id_duration_mins').val(mapHandler.duration.minutes())
+        $('#id_duration_secs').val(mapHandler.duration.seconds())
 
 
 ###############################################################################
