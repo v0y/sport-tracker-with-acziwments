@@ -14,6 +14,8 @@
 
     MapHandler.prototype.directionsService = null;
 
+    MapHandler.prototype.controls = null;
+
     MapHandler.prototype.initializeMap = function() {
       var mapOptions;
       mapOptions = {
@@ -28,6 +30,7 @@
       var route;
       route = new Route();
       route.map = this.map;
+      route.controls = this.controls;
       if (isManual) {
         route.isManual = true;
       }
@@ -113,6 +116,7 @@
       if (!this.directionsService) {
         this.directionsService = new google.maps.DirectionsService();
       }
+      this.controls.container.show();
       route = this.addRoute(true);
       route.directionsService = this.directionsService;
       route.initializeMapBindings();
@@ -124,6 +128,7 @@
         this.activeRoute.removeMapBindings();
         this.activeRoute.makeMarkersUnDragable();
       }
+      this.controls.container.hide();
       return this.mode = 'readOnly';
     };
 
@@ -164,6 +169,8 @@
     Route.prototype.fullKmMarkers = [];
 
     Route.latlngbounds = null;
+
+    Route.prototype.controls = null;
 
     Route.prototype.draw = function() {
       var fullKmSectionsList;
@@ -269,6 +276,7 @@
       var distance, fullKmSectionsList, _ref;
       _ref = getTotalDistance(this.tracks), distance = _ref[0], fullKmSectionsList = _ref[1];
       this.distance = distance;
+      this.controls.distanceDisplay.html(distance.toFixed(2));
       return fullKmSectionsList;
     };
 
@@ -381,7 +389,11 @@
         return _this.drawManualRoute();
       });
       this.mapEventHandles.push(handle);
-      this.addGoogleDirectionsRouteMarker(marker);
+      if (this.controls.useDirectionsControl.prop('checked')) {
+        this.addGoogleDirectionsRouteMarker(marker);
+      } else {
+        this.addSimpleManualRouteMarker(marker);
+      }
       return this.drawManualRoute();
     };
 
@@ -445,16 +457,17 @@
     };
 
     Route.prototype.getGoogleDirections = function(mark1, mark2, mark3) {
-      var cacheKey, cacheKey2, path, path2, request, waypoint, _this;
+      var cacheKey, cacheKey2, path, path2, request, travelMode, waypoint, _this;
       cacheKey = "" + mark1.position.B + ":" + mark1.position.k + "-" + mark2.position.B + ":" + mark2.position.k;
       path = this.directionsCache[cacheKey];
       if (path) {
         return path;
       }
+      travelMode = this.controls.travelModeControl.find(":selected").val();
       request = {
         origin: mark1.position,
         destination: mark2.position,
-        travelMode: google.maps.TravelMode.WALKING,
+        travelMode: google.maps.TravelMode[travelMode],
         optimizeWaypoints: false,
         provideRouteAlternatives: false,
         region: 'pl'
@@ -480,6 +493,7 @@
           if (path2) {
             _this.directionsCache[cacheKey2] = path2;
           }
+          _this.controls.googleWarningsDisplay.html(response.routes[0].warnings);
           return _this.drawManualRoute();
         }
       });

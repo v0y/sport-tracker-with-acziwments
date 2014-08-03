@@ -11,6 +11,8 @@ class MapHandler
 
     directionsService: null;
 
+    controls: null
+
     initializeMap: ->
         mapOptions = {
             center: new google.maps.LatLng(15, 15),
@@ -22,6 +24,7 @@ class MapHandler
     addRoute: (isManual) ->
         route = new Route()
         route.map = @map
+        route.controls = @controls
         if isManual
             route.isManual = true;
         @routes.push(route)
@@ -89,7 +92,8 @@ class MapHandler
         if not @directionsService
             @directionsService = new google.maps.DirectionsService();
 
-        # TODO show controls
+        # show controls
+        @controls.container.show()
 
         # create new route
         route = @addRoute(true)
@@ -110,6 +114,7 @@ class MapHandler
             @activeRoute.makeMarkersUnDragable()
 
         # hide controls
+        @controls.container.hide()
 
         # update handler mode
         @mode = 'readOnly'
@@ -143,6 +148,8 @@ class Route
     fullKmMarkers: []
 
     @latlngbounds: null;
+
+    controls: null;
 
     draw: ->
         @drawTracks()
@@ -243,6 +250,7 @@ class Route
     getRouteDistance: ->
         [distance, fullKmSectionsList] = getTotalDistance(@tracks)
         @distance = distance
+        @controls.distanceDisplay.html(distance.toFixed(2))
         return fullKmSectionsList
 
     getStartFinishTimes: ->
@@ -343,9 +351,10 @@ class Route
         )
         @mapEventHandles.push(handle)
 
-        # TODO: check if should use google directions
-        #@addSimpleManualRouteMarker(marker)
-        @addGoogleDirectionsRouteMarker(marker)
+        if @controls.useDirectionsControl.prop('checked')
+            @addGoogleDirectionsRouteMarker(marker)
+        else
+            @addSimpleManualRouteMarker(marker)
 
         @drawManualRoute()
 
@@ -430,13 +439,14 @@ class Route
         if path
             return path
 
+        # get travel mode from controls
+        travelMode = @controls.travelModeControl.find(":selected").val()
+
         # prepare request
         request = {
             origin: mark1.position,
             destination: mark2.position,
-            travelMode: google.maps.TravelMode.WALKING, # BICYCLING
-            #unitSystem: UnitSystem.METRIC, # IMPERIAL
-            #waypoints[]: DirectionsWaypoint,
+            travelMode: google.maps.TravelMode[travelMode]
             optimizeWaypoints: false,
             provideRouteAlternatives: false,
             region: 'pl'
@@ -459,8 +469,6 @@ class Route
         @directionsService.route(request, (response, status) ->
             # TODO - fallback
             if status == google.maps.DirectionsStatus.OK
-                # var warnings = document.getElementById("warnings_panel");
-                # warnings.innerHTML = "" + response.routes[0].warnings + "";
                 # write result to local cache
                 [path, path2] = _this.googleResponceToPath(response)
                 _this.directionsCache[cacheKey] = path
@@ -468,7 +476,8 @@ class Route
                 if path2
                     _this.directionsCache[cacheKey2] = path2
 
-                # TODO - handle additional response information
+                # handle additional response information (google requierment)
+                _this.controls.googleWarningsDisplay.html(response.routes[0].warnings)
 
                 # re render path
                 _this.drawManualRoute()
