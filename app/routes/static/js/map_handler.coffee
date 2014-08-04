@@ -11,13 +11,16 @@ class MapHandler
 
     directionsService: null;
 
-    controls: null
+    controls: null;
 
     initializeMap: ->
+        styles = [{featureType: "poi", stylers: [{ visibility: "off" }]}]
+
         mapOptions = {
             center: new google.maps.LatLng(15, 15),
             zoom: 3,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: styles
         }
         @map = new google.maps.Map($("#map-canvas")[0], mapOptions)
 

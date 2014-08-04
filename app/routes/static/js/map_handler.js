@@ -17,11 +17,22 @@
     MapHandler.prototype.controls = null;
 
     MapHandler.prototype.initializeMap = function() {
-      var mapOptions;
+      var mapOptions, styles;
+      styles = [
+        {
+          featureType: "poi",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        }
+      ];
       mapOptions = {
         center: new google.maps.LatLng(50.15, 14.5),
         zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: styles
       };
       return this.map = new google.maps.Map($("#map-canvas")[0], mapOptions);
     };
