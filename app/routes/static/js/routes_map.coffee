@@ -176,6 +176,8 @@ bindControls = (mapHandler) ->
         $('#id_route_id').val('')
         # hide map
         $("#map-canvas").hide()
+        # remove all routes
+        mapHandler.clearRoutes()
     )
 
 
@@ -205,7 +207,7 @@ main = ->
 
         setMapHandlerControls(mapHandler)
 
-        bindControls()
+        bindControls(mapHandler)
 
 $ ->
     main()

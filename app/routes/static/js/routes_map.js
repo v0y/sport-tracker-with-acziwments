@@ -151,7 +151,8 @@
     $cancel = $('#cancel-route');
     return $cancel.on('click', function() {
       $('#id_route_id').val('');
-      return $("#map-canvas").hide();
+      $("#map-canvas").hide();
+      return mapHandler.clearRoutes();
     });
   };
 
@@ -170,7 +171,7 @@
         mapCanvas.hide();
       }
       setMapHandlerControls(mapHandler);
-      return bindControls();
+      return bindControls(mapHandler);
     }
   };
 

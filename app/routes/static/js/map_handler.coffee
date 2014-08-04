@@ -47,7 +47,7 @@ class MapHandler
         @getTimes()
 
     addManualRoute: ->
-        route = @addRoute()
+        route = @addRoute(true)
 
     clearRoutes: ->
         for route in @routes
@@ -167,10 +167,11 @@ class Route
         @map.fitBounds(@latlngbounds)
 
     clear: ->
-        for marker in @fullKmMarkers
-            marker.setMap(null)
+        @clearGpxRelatedStuff()
+        @clearManualRelatedStuff()
 
-        @fullKmMarkers = []
+    clearGpxRelatedStuff: ->
+        @clearFullKmMarkers()
 
         if @startMarker
             @startMarker.setMap(null)
@@ -182,8 +183,14 @@ class Route
 
         @polylines = []
 
+    clearFullKmMarkers: ->
+        for marker in @fullKmMarkers
+            marker.setMap(null)
+
+        @fullKmMarkers = []
+
     drawTracks: ->
-        @clear()
+        @clearGpxRelatedStuff()
 
         # object for handling initial map zoom level and center
         @latlngbounds = new google.maps.LatLngBounds()
@@ -329,6 +336,8 @@ class Route
         for handle in @mapEventHandles
             google.maps.event.removeListener(handle)
 
+        @mapEventHandles = []
+
     addMarker: (point, position) ->
         _this = @
         marker = new google.maps.Marker({
@@ -402,6 +411,9 @@ class Route
 
         # escape early if there aren't enough markers to draw anything
         if @markers.length < 2
+            @clearFullKmMarkers()
+            @distance = 0
+            @controls.distanceDisplay.html(@distance.toFixed(2))
             return
 
         # update tracks
@@ -560,6 +572,18 @@ class Route
             i += 1
 
         return [{'segments': [path]}]
+
+    clearManualRelatedStuff: ->
+        @removeMapBindings()
+
+        for marker in @markers
+            marker.setMap(null)
+
+        @markers = []
+
+        if @activePolyline
+            @activePolyline.setMap(null)
+            @activePolyline = null;
 
 
 ###############################################################################
