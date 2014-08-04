@@ -230,7 +230,7 @@
             geodesic: true,
             strokeColor: '#FF0000',
             strokeOpacity: 1.0,
-            strokeWeight: 2
+            strokeWeight: 5
           });
           polyline.setMap(this.map);
           this.polylines.push(polyline);
@@ -298,7 +298,7 @@
       _results = [];
       for (_i = 0, _len = fullKmSectionsList.length; _i < _len; _i++) {
         section = fullKmSectionsList[_i];
-        start = Math.ceil(section.startDistance);
+        start = Math.max(Math.ceil(section.startDistance), 1);
         pt1ToFullKmDistance = start - section.startDistance;
         kmsToMark = [];
         while (start < Math.floor(section.endDistance + 1)) {
@@ -322,7 +322,8 @@
               icon: image
             });
             this.fullKmMarkers.push(marker);
-            _results1.push(markerCounter += 1);
+            markerCounter += 1;
+            _results1.push(i += 1);
           }
           return _results1;
         }).call(this));
@@ -475,7 +476,7 @@
       if (mark3 && mark3.useGoogleDirections) {
         cacheKey2 = "" + mark2.position.B + ":" + mark2.position.k + "-" + mark3.position.B + ":" + mark3.position.k;
         path2 = this.directionsCache[cacheKey2];
-        if (!path2) {
+        if (!(path2 && path2.length)) {
           request.destination = mark3.position;
           waypoint = {
             location: mark2.position,
@@ -486,18 +487,18 @@
       }
       _this = this;
       this.directionsService.route(request, function(response, status) {
-        var _ref;
-        console.log(status);
+        var msg, _ref;
         if (status === google.maps.DirectionsStatus.OK) {
           _ref = _this.googleResponceToPath(response), path = _ref[0], path2 = _ref[1];
           _this.directionsCache[cacheKey] = path;
-          if (path2) {
+          if (path2.length) {
             _this.directionsCache[cacheKey2] = path2;
           }
           _this.controls.googleWarningsDisplay.html(response.routes[0].warnings);
         } else if (status === google.maps.DirectionsStatus.ZERO_RESULTS) {
-          console.log('Nie ma wody na pustyni');
           mark2.useGoogleDirections = false;
+          msg = "Nie znaleziono trasy - rysuję linię prostą";
+          _this.controls.googleWarningsDisplay.html(msg);
         } else {
           mark2.useGoogleDirections = false;
         }

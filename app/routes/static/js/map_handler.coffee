@@ -272,7 +272,7 @@ class Route
         markerCounter = 1
         for section in fullKmSectionsList
             # split section to subsections (in case section is more then km long)
-            start = Math.ceil(section.startDistance)
+            start = Math.max(Math.ceil(section.startDistance), 1)
             pt1ToFullKmDistance = start - section.startDistance
 
             kmsToMark = []
@@ -298,6 +298,7 @@ class Route
 
                 @fullKmMarkers.push(marker)
                 markerCounter += 1
+                i += 1
 
     # manual route related stuff
     markers: []
@@ -459,7 +460,7 @@ class Route
             cacheKey2 = "#{mark2.position.B}:#{mark2.position.k}-#{mark3.position.B}:#{mark3.position.k}"
             path2 = @directionsCache[cacheKey2]
 
-            if not path2
+            if not (path2 and path2.length)
                 request.destination = mark3.position
                 waypoint = {location:mark2.position, stopover:false}
                 request.waypoints = [waypoint]
@@ -472,7 +473,7 @@ class Route
                 [path, path2] = _this.googleResponceToPath(response)
                 _this.directionsCache[cacheKey] = path
 
-                if path2
+                if path2.length
                     _this.directionsCache[cacheKey2] = path2
 
                 # handle additional response information (google requierment)
