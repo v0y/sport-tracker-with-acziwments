@@ -50,6 +50,8 @@ fileUploadChangeState = (xhr, mapHandler) ->
         handleNewRoute(mapHandler, routes)
         # fill form fields
         fillFormFields(routeId, mapHandler)
+        # show 'cancel button'
+        $('#cancel-route').show()
     # alert if something went wrong
     else if xhr.readyState==4
         alert("Something went wrong. Error" + xhr.status)
@@ -114,7 +116,9 @@ bindManualRouteSwitch = (mapHandler) ->
         # initialize map (if it's not initialized yet).
         mapHandler.initializeMap()
 
-        mapHandler.toggleManualRouteDrawing()
+        if mapHandler.mode == 'readOnly'
+            mapHandler.initializeManualRouteHandling()
+            $('#cancel-route').show()
     )
 
 bindSaveManualRoute = (mapHandler) ->
@@ -147,9 +151,6 @@ bindSaveManualRoute = (mapHandler) ->
         })
     )
 
-###############################################################################
-# Pass iterface controls to map handler
-###############################################################################
 
 setMapHandlerControls = (mapHandler) ->
     controls = {
@@ -161,6 +162,22 @@ setMapHandlerControls = (mapHandler) ->
     }
 
     mapHandler.controls = controls
+
+
+###############################################################################
+# Interface related functions
+###############################################################################
+
+bindControls = (mapHandler) ->
+    # cancel button
+    $cancel = $('#cancel-route')
+    $cancel.on('click', ->
+        # clear route id
+        $('#id_route_id').val('')
+        # hide map
+        $("#map-canvas").hide()
+    )
+
 
 ###############################################################################
 # Run
@@ -187,6 +204,8 @@ main = ->
             mapCanvas.hide()
 
         setMapHandlerControls(mapHandler)
+
+        bindControls()
 
 $ ->
     main()
