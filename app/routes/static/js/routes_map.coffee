@@ -56,9 +56,7 @@ fileUploadChangeState = (xhr, mapHandler) ->
 
 
 handleNewRoute = (mapHandler, routes) ->
-    # check if map was initialized
-    if not mapHandler.map
-        mapHandler.initializeMap()
+    mapHandler.initializeMap()
     # draw routes on map
     mapHandler.singleNewRoute(routes)
     # show map canvas
@@ -111,11 +109,10 @@ displayRelatedRoute = (routeId, url, mapHandler) ->
 ###############################################################################
 
 bindManualRouteSwitch = (mapHandler) ->
-    $('#route-drawing-switch').on('click', ->
+    $switch = $('#route-drawing-switch')
+    $switch.on('click', ->
         # initialize map (if it's not initialized yet).
-        if not mapHandler.map
-            mapHandler.initializeMap()
-            $("#map-canvas").show()
+        mapHandler.initializeMap()
 
         mapHandler.toggleManualRouteDrawing()
     )
