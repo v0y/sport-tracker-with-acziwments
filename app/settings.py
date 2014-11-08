@@ -86,6 +86,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    'app/components/bower_components/',
 )
 
 STATICFILES_FINDERS = (
