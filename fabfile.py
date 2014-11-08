@@ -106,7 +106,7 @@ def lets_rock():
         local("make install")
 
     # npm
-    local("curl https://npmjs.org/install.sh | sh")
+    local("curl -L https://npmjs.org/install.sh | sh")
 
     # Install pip and bower requirements
     execute(install_requirements)
