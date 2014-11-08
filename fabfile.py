@@ -44,6 +44,7 @@ def create_database():
     local("./manage.py loaddata devdata initial_data -v0")
 
 
+@task
 def create_database_role():
     """
     Creates database role for django app.
