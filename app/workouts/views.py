@@ -9,7 +9,6 @@ from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.views.generic.edit import CreateView
 
-from app.shared.helpers import unix_time
 from app.shared.views import LoginRequiredMixin
 from .forms import WorkoutForm
 from .models import Workout
@@ -62,12 +61,7 @@ def workouts_calendar_api(request):
     Get all workouts and return as json for calendar.
     """
 
-    return_json = {
-        'events': [],
-        'current_month': '',
-        'current_year': '',
-    }
-
+    events = []
     current_workout_pk = request.POST.get('current_workout_pk')
 
     for workout in Workout.objects.all():
@@ -79,7 +73,7 @@ def workouts_calendar_api(request):
         # make workout dict
         workout_dict = {
             'title': title,
-            'start': unix_time(workout.datetime_start),
+            'start': workout.datetime_start.isoformat(),
             'url': workout.get_absolute_url()
         }
 
@@ -87,12 +81,9 @@ def workouts_calendar_api(request):
         if int(current_workout_pk) == workout.pk:
             workout_dict['color'] = '#f18d05'  # styles in python xD
             workout_dict.pop('url')
-            # we need to subtract 1, 'cause Jan in JS is 0, but in python is 1
-            return_json['current_month'] = workout.datetime_start.month - 1
-            return_json['current_year'] = workout.datetime_start.year
 
         # append workout dict to workouts list
-        return_json['events'].append(workout_dict)
+        events.append(workout_dict)
 
     return HttpResponse(
-        json.dumps(return_json), content_type="application/json")
+        json.dumps(events), content_type="application/json")
