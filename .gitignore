@@ -37,11 +37,11 @@ nosetests.xml
 # statics and media
 media
 public_html
+app/static/bower_components
 
 # modules
 node-*
 node_modules
-components
 
 # logs
 *.log

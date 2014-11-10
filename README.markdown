@@ -10,9 +10,42 @@ Zaczynamy zabawę!
    virtualenva, aktywuj virtualenva, przejdź do katalogu, gdzie chcesz mieć
    projekt
 1. `git clone git@github.com:v0y/sport-tracker-with-acziwments.git`
-1. Przejdź do folderu zassanego projektu: `cd sport-tracker-with-acziwments`
-1. `pip install -r host-requirements.txt`
-1. Zainstaluj całą resztę i utwórz bazę danych przez `fab lets_rock`
+1. Przejdź do folderu zassanego projektu:
+   ```sh
+   cd sport-tracker-with-acziwments
+   ```
+1. Zainstaluj fabrica:
+   ```sh
+   pip install fabric
+   ```
+1. Zainstaluj Node.js:
+   ```sh
+   curl http://nodejs.org/dist/node-latest.tar.gz | tar xvz
+   cd node-v*
+   ./configure --prefix=$VIRTUAL_ENV
+   make install
+   ```
+1. Zainstaluj npm:
+   ```sh
+   curl -L https://npmjs.org/install.sh | sh
+   ```
+1. Zainstaluj Bowera, uglify-js i uglifycss:
+   ```sh
+   sudo npm install bower uglify-js uglifycss
+   ```
+1. Zainstaluj zależności:
+   ```sh
+   fab install_requirements
+   ```
+1. Utwórz usera MySQL i bazę danych:
+   ```sh
+   fab create_database_role
+   fab create_database
+   ```
+1. Odpal serwer:
+   ```
+   ./manage.py runserver
+   ```
 
 
 Kilka informacji o projekcie - kod

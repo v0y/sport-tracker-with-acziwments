@@ -86,16 +86,13 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    'app/components/bower_components/',
+    'app/static/bower_components/',
 )
 
 STATICFILES_FINDERS = (
     # core
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-
-    # third party
-    'djangobower.finders.BowerFinder',
 )
 
 TEMPLATE_LOADERS = (
@@ -150,7 +147,6 @@ INSTALLED_APPS = filter(None, [
     # third-party
     'debug_toolbar' if DEBUG else None,
     'django_coverage',
-    'djangobower',
     'gravatar',
     'south',
     'django_nose',  # https://github.com/jbalogh/django-nose#using-with-south
@@ -165,10 +161,6 @@ INSTALLED_APPS = filter(None, [
     'app.routes',
     'app.workouts',
 ])
-
-BOWER_INSTALLED_APPS = (
-    'fullcalendar',
-)
 
 
 ###############################################################################
@@ -196,9 +188,6 @@ if DEBUG:
         'INTERCEPT_REDIRECTS': False
     }
 
-
-# Django Bower
-BOWER_COMPONENTS_ROOT = join(_current_dir, 'components')
 
 # Dajngo coverage
 COVERAGE_MODULE_EXCLUDES = [

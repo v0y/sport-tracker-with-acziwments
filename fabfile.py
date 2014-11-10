@@ -69,52 +69,12 @@ def create_superuser(username='admin', password='a'):
 
 
 @task
-def install_host_requirements():
-    """
-    Install pip and npm host requirements.
-    """
-    local("pip install -r host-requirements.txt")
-    local("cat npm-host-requirements.txt | xargs -I % sudo npm install % -g")
-
-
-@task
-def install_npm_requirements():
-    """
-    Install npm requirements.
-    """
-    local("cat npm-requirements.txt | xargs -I % sudo npm install %")
-
-
-@task
 def install_requirements():
     """
     Install pip and bower requirements.
     """
     local("pip install -r requirements.txt")
-    execute(install_npm_requirements)
-    local("./manage.py bower_install")
-
-
-@task
-def lets_rock():
-    """
-    Install all required packages and create database.
-    """
-    # Node.js
-    local("curl http://nodejs.org/dist/node-latest.tar.gz | tar xvz")
-    with lcd(join(_current_dir, "node-v*")):
-        local("./configure --prefix=$VIRTUAL_ENV")
-        local("make install")
-
-    # npm
-    local("curl -L https://npmjs.org/install.sh | sh")
-
-    # Install pip and bower requirements
-    execute(install_requirements)
-
-    # database
-    execute(create_database_role)
-    execute(create_database)
+    local("bower install")
 
 
 @task
