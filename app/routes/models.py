@@ -5,13 +5,13 @@ import json
 
 from django.contrib.auth.models import User
 from django.db import models
-from app.routes.gpx_handler import get_distance
 
 from app.shared.helpers import mi2km
 from app.shared.models import CreatedAtMixin
 from app.workouts.models import Workout
+from .helpers import get_distance
 from .gpx_handler import handle_gpx, get_segment_dist_and_ele, \
-    get_segment_start_and_finish_times
+    get_segment_start_and_finish_times, get_distance_and_elevations_delta
 
 
 class Route(CreatedAtMixin):
@@ -38,6 +38,9 @@ class Route(CreatedAtMixin):
         verbose_name = u"trasa"
         verbose_name_plural = u"trasy"
 
+    def __unicode__(self):
+        return "user:%s, workout:%s, start_time:%s, length:%f" % (self.user_id, self.workout_id, self.start_time, self.length)
+
     @classmethod
     def route_from_gpx(cls, gpx_file, request):
         tracks, s_time, f_time, length, h_up, h_down = handle_gpx(gpx_file)
@@ -54,6 +57,22 @@ class Route(CreatedAtMixin):
         )
 
         return route.id, tracks_json
+
+    @classmethod
+    def save_route(cls, route_data, request):
+        tracks_json = json.loads(route_data)
+        length, _, _ = get_distance_and_elevations_delta(tracks_json)
+
+        input_dct = {
+            'user': request.user,
+            'tracks_json': tracks_json,
+            'length': length,
+        }
+
+        route = cls.objects.create(**input_dct)
+
+        return route.id, route_data
+
 
     def best_time_for_x_km(self, distance):
         """

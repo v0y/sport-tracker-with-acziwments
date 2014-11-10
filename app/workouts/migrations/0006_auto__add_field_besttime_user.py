@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'BestTime.user'
         db.add_column(u'workouts_besttime', 'user',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=None, to=orm['auth.User']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='author', null=True, to=orm['auth.User']),
                       keep_default=False)
 
 
@@ -62,11 +62,11 @@ class Migration(SchemaMigration):
             'duration': ('timedelta.fields.TimedeltaField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'unit': ('django.db.models.fields.CharField', [], {'max_length': '2'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'author'", 'null': 'True', 'to': u"orm['auth.User']"}),
             'workout': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['workouts.Workout']"})
         },
         u'workouts.distance': {
-            'Meta': {'ordering': "['id']", 'unique_together': "(('distance', 'unit'),)", 'object_name': 'Distance'},
+            'Meta': {'ordering': "['unit', 'distance']", 'unique_together': "(('distance', 'unit'),)", 'object_name': 'Distance'},
             'distance': ('django.db.models.fields.FloatField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64', 'blank': 'True'}),

@@ -9,9 +9,23 @@
 		#map-canvas { height: 250px }
 	</style>
 	<div id="map-canvas"></div>
+	<div id="map-controls" style="display:none">
+		Dystans: <a id="map-total-distance"></a><br>
+		Skorzystaj z wyszukiwania tras google: <input id="use-google-directions" type="checkbox"><br>
+		Szukaj dróg dla ruchu:
+		<select id="travel-mode-select">
+			<option value="WALKING">Pieszo</option>
+			<option value="BICYCLING">Na rowerze</option>
+		</select><br>
+		<a id="google-warnings"></a><br>
+		<a id="manual-route-save" data-url="{% url 'save_route' %}">zapisz trasę</a>
+	</div>
 	<form method="post" id="gpx-file-input-form" enctype="multipart/form-data" data-url="{% url 'upload_gpx' %}">
+		Możesz wczytać trasę z pliku gpx
 		<input type="file" name="gpx_file">
+		lub dodać ją <a id="route-drawing-switch">ręcznie</a>.<br>
 	</form>
+	<a id="cancel-route" style="display:none">Anuluj trasę</a><br>
 
 	<div class="row">
 	<form method="post" action="" class="form-horizontal col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
