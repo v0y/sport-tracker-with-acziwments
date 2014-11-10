@@ -38,8 +38,9 @@ def create_database():
         'CREATE DATABASE %s CHARACTER SET utf8 COLLATE utf8_general_ci;' %
         DATABASES['default']['NAME'])
 
-    local("./manage.py syncdb --noinput -v0")
     local("./manage.py migrate -v0 --no-initial-data")
+    local("./manage.py syncdb --noinput -v0")
+    local("./manage.py createcachetable cache_default")
     execute(create_superuser)
     local("./manage.py loaddata devdata initial_data -v0")
 
