@@ -3,7 +3,7 @@
 ###############################################################################
 
 bindToFileInputChange = (mapHandler) ->
-    $form = $('#gpx-file-input-form')
+    $form = $('.js-gpx-file-input-form form')
     $form.find("input:file").change(->
         sendFile($form, mapHandler)
     )
@@ -40,7 +40,7 @@ validateFileExtansion = ($inputField) ->
 
 fileUploadChangeState = (xhr, mapHandler) ->
     # if upload complete and successful
-    if xhr.readyState==4 && xhr.status==200
+    if xhr.readyState == 4 && xhr.status == 200
         # get data from response
         response = JSON.parse(xhr.responseText)
         routeId = response['id']
@@ -53,7 +53,7 @@ fileUploadChangeState = (xhr, mapHandler) ->
         # show 'cancel button'
         $('#cancel-route').show()
     # alert if something went wrong
-    else if xhr.readyState==4
+    else if xhr.readyState == 4
         alert("Something went wrong. Error" + xhr.status)
 
 
@@ -105,6 +105,29 @@ displayRelatedRoute = (routeId, url, mapHandler) ->
         ,
         dataType: 'json'
     )
+
+
+###############################################################################
+# Handle gpx file switch
+###############################################################################
+
+bindFileUploadSwitch = (mapHandler) ->
+    $switch = $('.js-route-from-file-switch')
+    $switch.on 'click', ->
+        $('.js-gpx-file-input-form').show()
+        $('.js-cancel-gpx').show()
+        $('.js-route-drawing-switch').hide()
+        $switch.hide()
+
+    $cancel = $('.js-cancel-gpx')
+    $cancel.on 'click', ->
+        $('.js-route-drawing-switch').show()
+        $switch.show()
+        $('.js-gpx-file-input-form').hide()
+        $(".js-map-canvas").hide()
+        $cancel.hide()
+        mapHandler.clearRoutes()
+
 
 ###############################################################################
 # Handle manual drawing of routes
@@ -219,6 +242,7 @@ main = ->
         setMapHandlerControls(mapHandler)
 
         bindControls(mapHandler)
+        bindFileUploadSwitch(mapHandler)
 
 $ ->
     main()
