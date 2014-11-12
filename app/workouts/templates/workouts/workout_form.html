@@ -35,14 +35,14 @@
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
 
 			<div class="col-lg-6 col-md-6 col-sm-12">
+				<a class="js-cancel-route btn btn-lg btn-danger btn-block" style="display:none">Anuluj</a>
 				<a class="js-route-from-file-switch btn btn-default btn-lg btn-block">Zaimportuj z pliku *.gpx</a>
-				<a class="js-manual-route-save btn btn-lg btn-success btn-block" data-url="{% url 'save_route' %}" style="display:none">zapisz trasę</a>
 				<a class="js-cancel-gpx btn btn-lg btn-danger btn-block" style="display:none">Anuluj</a>
 			</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-12">
+				<a class="js-manual-route-save btn btn-lg btn-success btn-block" data-url="{% url 'save_route' %}" style="display:none">Zapisz trasę</a>
 				<a class="js-route-drawing-switch btn btn-default btn-lg btn-block">Wyznacz trasę ręcznie</a>
-				<a class="js-cancel-route btn btn-lg btn-danger btn-block" style="display:none">Anuluj trasę</a>
 				<div class="well js-gpx-file-input-form" style="display:none">
 					<form method="post" enctype="multipart/form-data" data-url="{% url 'upload_gpx' %}">
 						<label for="gpx_file">Wybierz plik *.gpx</label>
