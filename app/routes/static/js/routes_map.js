@@ -62,9 +62,7 @@
   fillFormFields = function(routeId, mapHandler) {
     var startTime;
     $('#id_route_id').val(routeId);
-    if ($('#id_distance').val() === '') {
-      $('#id_distance').val(mapHandler.distance.toFixed(2));
-    }
+    $('#id_distance').val(mapHandler.distance.toFixed(2));
     if (!mapHandler.startTime) {
       return;
     }

@@ -69,8 +69,7 @@ fillFormFields = (routeId, mapHandler) ->
     # route id
     $('#id_route_id').val(routeId)
     # distance
-    if $('#id_distance').val() == ''
-        $('#id_distance').val(mapHandler.distance.toFixed(2))
+    $('#id_distance').val(mapHandler.distance.toFixed(2))
     # manual routes will not have times
     if not mapHandler.startTime
         return
