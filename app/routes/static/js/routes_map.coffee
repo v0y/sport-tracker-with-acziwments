@@ -62,7 +62,7 @@ handleNewRoute = (mapHandler, routes) ->
     # draw routes on map
     mapHandler.singleNewRoute(routes)
     # show map canvas
-    $("#map-canvas").show()
+    $(".js-map-canvas").show()
 
 
 fillFormFields = (routeId, mapHandler) ->
@@ -111,18 +111,23 @@ displayRelatedRoute = (routeId, url, mapHandler) ->
 ###############################################################################
 
 bindManualRouteSwitch = (mapHandler) ->
-    $switch = $('#route-drawing-switch')
+    $switch = $('.js-route-drawing-switch')
     $switch.on('click', ->
         # initialize map (if it's not initialized yet).
         mapHandler.initializeMap()
+        $('.js-route-drawing-switch').hide()
+        $('.js-route-from-file-switch').hide()
+        $('.js-map-controls').show()
+        $('.js-cancel-route').show()
+        $('.js-manual-route-save').show()
 
         if mapHandler.mode == 'readOnly'
             mapHandler.initializeManualRouteHandling()
-            $('#cancel-route').show()
+            $('.js-cancel-route').show()
     )
 
 bindSaveManualRoute = (mapHandler) ->
-    $saveRouteButton = $('#manual-route-save')
+    $saveRouteButton = $('.js-manual-route-save')
 
     $saveRouteButton.on('click', ->
         routeData = mapHandler.getRouteDataFromMap()
@@ -154,11 +159,11 @@ bindSaveManualRoute = (mapHandler) ->
 
 setMapHandlerControls = (mapHandler) ->
     controls = {
-        container: $('#map-controls'),
-        distanceDisplay: $('#map-total-distance'),
-        useDirectionsControl: $('#use-google-directions'),
-        travelModeControl: $('#travel-mode-select'),
-        googleWarningsDisplay: $('#google-warnings')
+        container: $('.js-map-controls'),
+        distanceDisplay: $('.js-map-total-distance'),
+        useDirectionsControl: $('.js-use-google-directions'),
+        travelModeControl: $('.js-travel-mode-select'),
+        googleWarningsDisplay: $('.js-google-warnings')
     }
 
     mapHandler.controls = controls
@@ -170,14 +175,20 @@ setMapHandlerControls = (mapHandler) ->
 
 bindControls = (mapHandler) ->
     # cancel button
-    $cancel = $('#cancel-route')
+    $cancel = $('.js-cancel-route')
     $cancel.on('click', ->
         # clear route id
         $('#id_route_id').val('')
-        # hide map
-        $("#map-canvas").hide()
         # remove all routes
         mapHandler.clearRoutes()
+        # hide map and shit
+        $(".js-map-canvas").hide()
+        $('.js-map-controls').hide()
+        $('.js-manual-route-save').hide()
+        $cancel.hide()
+        # show some shit
+        $('.js-route-drawing-switch').show()
+        $('.js-route-from-file-switch').show()
     )
 
 
@@ -187,7 +198,7 @@ bindControls = (mapHandler) ->
 
 main = ->
     # if there's no canvas then fail fast
-    mapCanvas = $('#map-canvas')
+    mapCanvas = $('.js-map-canvas')
     if mapCanvas[0]
         mapHandler = new RoutesMapHandler()
         # bind to form file input change event

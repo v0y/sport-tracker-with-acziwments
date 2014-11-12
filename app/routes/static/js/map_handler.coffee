@@ -6,16 +6,13 @@ class MapHandler
     mode: 'readOnly'
     map: null;
     routes: []
-
     activeRoute: null;
-
     directionsService: null;
-
     controls: null;
 
     initializeMap: ->
 
-        $("#map-canvas").show()
+        $(".js-map-canvas").show()
         if not @map
             styles = [{featureType: "poi", stylers: [{ visibility: "off" }]}]
 
@@ -25,7 +22,7 @@ class MapHandler
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 styles: styles
             }
-            @map = new google.maps.Map($("#map-canvas")[0], mapOptions)
+            @map = new google.maps.Map($(".js-map-canvas")[0], mapOptions)
 
     addRoute: (isManual) ->
         route = new Route()
