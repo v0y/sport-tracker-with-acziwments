@@ -5,8 +5,8 @@ from os.path import dirname, join, realpath
 from pytz import UTC
 
 from django.contrib.auth.models import User
+from django.test import TestCase
 from django.test.client import RequestFactory
-from django_nose import FastFixtureTestCase
 
 from ..gpx_handler import handle_gpx
 from ..models import Route
@@ -15,7 +15,7 @@ from ..models import Route
 _current_dir = dirname(realpath(__file__))
 
 
-class TestRoutesTestCase(FastFixtureTestCase):
+class TestRoutesTestCase(TestCase):
 
     def setUp(self):
         # get gpx

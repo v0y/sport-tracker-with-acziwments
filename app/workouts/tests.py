@@ -5,12 +5,13 @@ import numbers
 from pytz import UTC
 
 from django.contrib.auth.models import User
-from django_nose import FastFixtureTestCase
+from django.test import TestCase
 
 from .models import Distance, Sport, Workout, BestTime
 
 
 class CreateWorkoutsMixin(object):
+    fixtures = ['init_data']
 
     def setUp(self):
         # create request and user
@@ -29,7 +30,7 @@ class CreateWorkoutsMixin(object):
         self.workout3 = Workout.objects.create(distance=11.111, **defaults)
 
 
-class WorkoutTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
+class WorkoutTestCase(CreateWorkoutsMixin, TestCase):
 
     def test_best_time_for_x_km(self):
         test_values = [
@@ -75,7 +76,8 @@ class WorkoutTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
         self.assertEqual(time_for_3_mi, expected_for_3_mi)
 
 
-class DistancesTestCase(FastFixtureTestCase):
+class DistancesTestCase(TestCase):
+    fixtures = ['init_data']
 
     def setUp(self):
         self.distance1 = Distance.objects.get(distance=1, unit='km')
@@ -94,7 +96,7 @@ class DistancesTestCase(FastFixtureTestCase):
         self.assertEqual(self.distance6.distance_km, 160.934)
 
 
-class BestTimesTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
+class BestTimesTestCase(CreateWorkoutsMixin, TestCase):
 
     def setUp(self):
         super(BestTimesTestCase, self).setUp()
@@ -146,7 +148,8 @@ class BestTimesTestCase(CreateWorkoutsMixin, FastFixtureTestCase):
         self.assertEqual(best_time.duration, timedelta(minutes=120))
 
 
-class SportTestCase(FastFixtureTestCase):
+class SportTestCase(TestCase):
+    fixtures = ['init_data']
 
     def setUp(self):
         self.running = Sport.objects.get(id=47)

@@ -5,13 +5,13 @@ from pytz import UTC
 
 from django.conf import settings
 from django.contrib.sites.models import Site
-from django_nose import FastFixtureTestCase
+from django.test import TestCase
 
 from .helpers import unix_time
 from .models import SHA1TokenMixin
 
 
-class SHA1TokenMixinTestCase(FastFixtureTestCase):
+class SHA1TokenMixinTestCase(TestCase):
     urls = 'app.test_urls'
 
     def setUp(self):
@@ -27,7 +27,7 @@ class SHA1TokenMixinTestCase(FastFixtureTestCase):
         self.assertEqual(link2, 'http://%s/test1?ticket=123' % domain)
 
 
-class HelpersTestCase(FastFixtureTestCase):
+class HelpersTestCase(TestCase):
 
     def test_unix_time_is_not_aware(self):
         test_datetime = datetime(2010, 1, 2, 3, 4, 5)

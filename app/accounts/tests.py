@@ -5,7 +5,7 @@ from pytz import UTC
 
 from django.contrib.auth.models import User
 from django.core import management
-from django_nose import FastFixtureTestCase
+from django.test import TestCase
 
 from app.health.models import Health
 from app.workouts.models import Workout, Sport
@@ -13,7 +13,7 @@ from .enums import SEX_SELECT
 from .helpers import get_mail_provider_url
 
 
-class GetMailProviderTestCase(FastFixtureTestCase):
+class GetMailProviderTestCase(TestCase):
 
     def test_basic(self):
         # {'given mail': 'expected result}
@@ -34,7 +34,7 @@ class GetMailProviderTestCase(FastFixtureTestCase):
             self.assertEqual(get_mail_provider_url(mail), result)
 
 
-class UserProfileTestCase(FastFixtureTestCase):
+class UserProfileTestCase(TestCase):
 
     def setUp(self):
         # helpers vars
@@ -88,7 +88,7 @@ class UserProfileTestCase(FastFixtureTestCase):
         self.assertEqual(self.u4.profile.last_weight, (98, self.date2.date()),)
 
 
-class SetPasswordManagementCommandTestCase(FastFixtureTestCase):
+class SetPasswordManagementCommandTestCase(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(
@@ -118,7 +118,8 @@ class SetPasswordManagementCommandTestCase(FastFixtureTestCase):
         self.assertTrue(user.check_password('dupa.8'))
 
 
-class UserSportsTestCase(FastFixtureTestCase):
+class UserSportsTestCase(TestCase):
+    fixtures = ['init_data']
 
     def setUp(self):
         # create users
@@ -208,7 +209,7 @@ class UserSportsTestCase(FastFixtureTestCase):
         self.assertEquals(sports, [])
 
 
-class AgeTestCase(FastFixtureTestCase):
+class AgeTestCase(TestCase):
 
     def setUp(self):
         self.user1 = User.objects.create(

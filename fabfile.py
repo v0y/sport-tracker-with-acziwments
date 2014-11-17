@@ -42,7 +42,7 @@ def create_database():
     local("./manage.py syncdb --noinput -v0")
     local("./manage.py createcachetable cache_default")
     execute(create_superuser)
-    local("./manage.py loaddata devdata initial_data -v0")
+    local("./manage.py loaddata devdata init_data -v0")
 
 
 @task
@@ -93,4 +93,4 @@ def syncdb():
     Migrate database and load initial and dev data
     """
     local("./manage.py migrate -v0")
-    local("./manage.py loaddata devdata initial_data -v0")
+    local("./manage.py loaddata devdata init_data -v0")

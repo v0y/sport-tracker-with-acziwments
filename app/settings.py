@@ -36,9 +36,12 @@ DATABASES = {
         'PASSWORD': 'stwa',
         'HOST': 'localhost',
         'PORT': '3306',
-        'TEST_CHARSET': 'utf8',
-        'TEST_COLLATION': 'utf8_general_ci',
-    }
+        'TEST': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'CHARSET': 'utf8',
+            'COLLATION': 'utf8_general_ci',
+        }
+    },
 }
 
 CACHES = {
@@ -151,7 +154,6 @@ INSTALLED_APPS = filter(None, [
     'debug_toolbar',
     'django_coverage',
     'gravatar',
-    'django_nose',
     'widget_tweaks',
 
     # internal
@@ -170,7 +172,7 @@ INSTALLED_APPS = filter(None, [
 ###############################################################################
 
 # Tests
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 
 # Gravatar
