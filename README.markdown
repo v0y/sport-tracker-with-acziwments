@@ -175,16 +175,18 @@ projektu
 
 W projekcie do pisania styli używany jest [less](http://lesscss.org).
 
-**Uwaga!** Pliki `*.less` należy kompilować z parametrem `-x` odpowiedzialnym za
-minifikację.
+Plików nie trzeba kompilować, wrzucamy je z użyciem django compressora, np:
 
-Przykład: `lessc styles.less styles.css -x`.
+```django
+{% load compress %}
+
+{% compress css %}
+    <link rel="stylesheet" media="screen" href="{% static 'css/style.less' %}" type="text/less">
+{% endcompress %}
+```
 
 
 ### CSS
-
-**Uwaga!** uglifycss instalowany jest przez polecenie
-`fab install_host_requirements`
 
 Zewnętrzne CSS-y powinny:
 
@@ -202,9 +204,6 @@ Zewnętrzne CSS-y powinny:
 
 ### JS
 
-**Uwaga!** uglify-js instalowany jest przez polecenie
-`fab install_host_requirements`
-
 Zewnętrze biblioteki/skrypty js powinny:
 
 * być wrzucane do katalogu `app/shared/static/js` lub
@@ -221,6 +220,19 @@ Zewnętrze biblioteki/skrypty js powinny:
   itp.) do pliku skompresowanego
 * po skompresowaniu zapisane z rozszerzeniem `*.min.js`. Nieskompresowany plik
   nie powinien się znaleźć w repo.
+
+
+### CoffeeScript
+
+Plików nie trzeba kompilować, wrzucamy je z użyciem django compressora, np:
+
+```django
+{% load compress %}
+
+{% compress js %}
+    <script src="{% static 'js/map_handler.coffee' %}" type="text/coffeescript"></script>
+{% endcompress %}
+```
 
 
 Zasady

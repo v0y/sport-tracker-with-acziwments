@@ -199,7 +199,8 @@ COVERAGE_MODULE_EXCLUDES = [
 ]
 
 # Django compressor
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = not DEBUG
+COMPRESS_OFFLINE = False
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
     ('text/less', 'lessc {infile} {outfile}'),

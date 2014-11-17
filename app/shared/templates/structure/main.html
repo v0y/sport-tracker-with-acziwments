@@ -1,3 +1,4 @@
+{% load compress %}
 {% load shared_tags %}
 {% load static %}
 {% load staticfiles %}
@@ -84,15 +85,17 @@
 			</div>
 		</div> <!-- wrapper -->
 
-		<!-- jQuery 2. Because fuck you IE < 9  -->
-		<script src="{% static "jquery/dist/jquery.min.js" %}" type="text/javascript"></script>
-		<script src="{% static 'js/jquery.cookie.min.js' %}"></script>
-		<script src="{% static "bootstrap/js/bootstrap.min.js" %}" type="text/javascript"></script>
-		<script src="{% static "bootstrap/js/bootstrap-datepicker.min.js" %}" type="text/javascript"></script>
-		<script src="{% static "bootstrap/js/bootstrap-datepicker.pl.min.js" %}" type="text/javascript" charset="UTF-8"></script>
-		<script src="{% static 'moment/min/moment-with-locales.min.js' %}"></script>
-		<script src="{% static "js/onload.js" %}" type="text/javascript"></script>
-		{% block js_import %}{% endblock %}
+		{% compress js %}
+			<!-- jQuery 2. Because fuck you IE < 9  -->
+			<script src="{% static "jquery/dist/jquery.min.js" %}" type="text/javascript"></script>
+			<script src="{% static 'js/jquery.cookie.min.js' %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap.min.js" %}" type="text/javascript"></script>
+			<script src="{% static "bootstrap/js/bootstrap-datepicker.min.js" %}" type="text/javascript"></script>
+			<script src="{% static "bootstrap/js/bootstrap-datepicker.pl.min.js" %}" type="text/javascript" charset="UTF-8"></script>
+			<script src="{% static 'moment/min/moment-with-locales.min.js' %}"></script>
+			<script src="{% static "js/onload.coffee" %}" type="text/coffeescript"></script>
+			{% block js_import %}{% endblock %}
+		{% endcompress %}
 
 	</body>
 </html>
