@@ -1,4 +1,6 @@
 {% extends "structure/main.html" %}
+
+{% load compress %}
 {% load shared_filters %}
 {% load static %}
 
@@ -124,9 +126,12 @@
 	<script type="text/javascript"
 		src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_BROWSER_KEY }}&sensor=false">
 	</script>
-	<script src="{% static 'js/moment-timezone.min.js' %}"></script>
-	<script src="{% static 'js/moment-timezone-data.min.js' %}"></script>
-	<script src="{% static 'js/jquery.cookie.min.js' %}"></script>
-	<script src="{% static 'js/map_handler.coffee' %}" type="text/coffeescript"></script>
-	<script src="{% static 'js/routes_map.coffee' %}" type="text/coffeescript"></script>
+
+	{% compress js %}
+		<script src="{% static 'js/moment-timezone.min.js' %}"></script>
+		<script src="{% static 'js/moment-timezone-data.min.js' %}"></script>
+		<script src="{% static 'js/jquery.cookie.min.js' %}"></script>
+		<script src="{% static 'js/map_handler.coffee' %}" type="text/coffeescript"></script>
+		<script src="{% static 'js/routes_map.coffee' %}" type="text/coffeescript"></script>
+	{% endcompress %}
 {% endblock %}

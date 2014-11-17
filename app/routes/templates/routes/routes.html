@@ -1,5 +1,6 @@
 {% extends "structure/main.html" %}
 
+{% load compress %}
 {% load static %}
 
 {% block content %}
@@ -17,6 +18,9 @@
 	<script type="text/javascript"
 		src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_BROWSER_KEY }}&sensor=false">
 	</script>
-	<script src="{% static 'js/routes_map.js' %}"></script>
-	<script type="text/javascript">$(function(){main({{ tracks|safe }})})</script>
+
+	{% compress js %}
+		<script src="{% static 'js/routes_map.js' %}"></script>
+		<script type="text/javascript">$(function(){main({{ tracks|safe }})})</script>
+	{% endcompress %}
 {% endblock %}

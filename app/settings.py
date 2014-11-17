@@ -148,7 +148,7 @@ INSTALLED_APPS = filter(None, [
 
     # third-party
     'compressor',
-    'debug_toolbar' if DEBUG else None,
+    'debug_toolbar',
     'django_coverage',
     'gravatar',
     'django_nose',
