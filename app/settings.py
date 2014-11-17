@@ -151,8 +151,7 @@ INSTALLED_APPS = filter(None, [
     'debug_toolbar' if DEBUG else None,
     'django_coverage',
     'gravatar',
-    'south',
-    'django_nose',  # https://github.com/jbalogh/django-nose#using-with-south
+    'django_nose',
     'widget_tweaks',
 
     # internal
@@ -171,7 +170,6 @@ INSTALLED_APPS = filter(None, [
 ###############################################################################
 
 # Tests
-SOUTH_TESTS_MIGRATE = False
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 
@@ -194,7 +192,7 @@ if DEBUG:
 
 # Dajngo coverage
 COVERAGE_MODULE_EXCLUDES = [
-    'debug_toolbar$', 'south$', 'widget_tweaks$', 'tests$', 'settings$',
+    'debug_toolbar$', 'widget_tweaks$', 'tests$', 'settings$',
     'urls$', 'locale$', 'common.views.test', '__init__', 'django', 'migrations'
 ]
 
