@@ -93,6 +93,8 @@ STATICFILES_FINDERS = (
     # core
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # third-party
+    'compressor.finders.CompressorFinder',
 )
 
 TEMPLATE_LOADERS = (
@@ -129,7 +131,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
 
-    #internal
+    # internal
     "app.shared.context_processors.settings_values",
 )
 
@@ -145,6 +147,7 @@ INSTALLED_APPS = filter(None, [
     'django.contrib.admindocs',
 
     # third-party
+    'compressor',
     'debug_toolbar' if DEBUG else None,
     'django_coverage',
     'gravatar',
@@ -195,6 +198,12 @@ COVERAGE_MODULE_EXCLUDES = [
     'urls$', 'locale$', 'common.views.test', '__init__', 'django', 'migrations'
 ]
 
+# Django compressor
+COMPRESS_ENABLED = True
+COMPRESS_PRECOMPILERS = (
+    ('text/coffeescript', 'coffee --compile --stdio'),
+    ('text/less', 'lessc {infile} {outfile}'),
+)
 
 ###############################################################################
 # Core/internal apps settings
