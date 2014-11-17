@@ -17,6 +17,16 @@
 		{% elif field.field.widget|field_type == 'selection' or field.field.widget|field_type == 'special' %}
 			{{ field|add_class:"form-control" }}
 
+		{# checkbox #}
+		{% elif field.field.widget|field_type == 'checkbox' %}
+			<input name="{{ field.name }}"
+				type="{{ field.field.widget|field_type }}"
+				class="form-control form-{{ field.field.widget|field_type }} {{ field.field.widget.attrs.class }}"
+				id="{{ field.id_for_label }}"
+				{% if field.value %}
+					checked
+				{% endif %}>
+
 		{# other #}
 		{% else %}
 			<input name="{{ field.name }}"
