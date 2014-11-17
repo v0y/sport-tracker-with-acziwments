@@ -90,8 +90,7 @@ def recreate_database():
 @task(alias='migrate')
 def syncdb():
     """
-    Migrate database (syncdb + migrate)
+    Migrate database and load initial and dev data
     """
-    local("./manage.py syncdb --noinput -v0")
-    local("./manage.py migrate -v0 --no-initial-data")
+    local("./manage.py migrate -v0")
     local("./manage.py loaddata devdata initial_data -v0")
