@@ -1,18 +1,70 @@
 # coding: utf-8
 
 from datetime import datetime, timedelta
+import json
 from os.path import dirname, join, realpath
 from pytz import UTC
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.test.client import RequestFactory
+from django.test.client import RequestFactory, Client
 
 from ..gpx_handler import handle_gpx
 from ..models import Route
 
 
 _current_dir = dirname(realpath(__file__))
+
+
+class ManualRouteTestCase(TestCase):
+
+    def setUp(self):
+        # create a user (if it doesn't exist already)...
+        if not User.objects.filter(username='b').exists():
+            User.objects.create_user(
+                username='b', email='b@b.bb', password='b')
+
+        # and a logged in client
+        self.client = Client(enforce_csrf_checks=False)
+        self.client.login(username='b', password='b')
+
+    def test_stuff(self):
+        # prepare some example data
+        post_json = json.dumps(
+            [
+                {'segments':
+                    [[
+                        {'lat': 13.168149311827042, 'lon': 18.397670779377222},
+                        {'lat': 13.156114384691714, 'lon': 18.409343753010035},
+                        {'lat': 13.14341020944312, 'lon': 18.425136599689722},
+                        {'lat': 13.127361890026977, 'lon': 18.453975711017847},
+                        {'lat': 13.124687068167537, 'lon': 18.47938159480691}
+                    ]]
+                }
+            ]
+        )
+        post_data = {'tracks': post_json}
+
+        # simulate request that POSTs this data
+        response = self.client.post(
+            '/routes/api/save_route', post_data, follow=True)
+
+        # verify response
+        self.assertEqual(response.status_code, 200)
+        response_dct = json.loads(response.content)
+        self.assertTrue(response_dct['info'], u'OK')
+
+        # check if new route was saved to db...
+        route = Route.objects.get(id=response_dct['id'])
+
+        # ...and if it is possible to retrive it from db...
+        route_tracks_dct = json.loads(route.tracks_json)
+        self.assertTrue('segments' in route_tracks_dct[0])
+
+        # ...and by use of get_route_json view
+        response = self.client.get(
+            '/routes/api/get_route_json', {'route_id': route.id})
+        json.loads(response.content)
 
 
 class TestRoutesTestCase(TestCase):
