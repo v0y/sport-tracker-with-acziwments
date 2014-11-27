@@ -25,7 +25,7 @@ def upload_gpx(request):
 @ajax_request
 @login_required
 def get_route_json(request):
-    route_id = request.GET['route_id'][0]
+    route_id = request.GET['route_id']
     route = get_object_or_404(Route, pk=route_id)
     return {'route': route.tracks_json}
 
