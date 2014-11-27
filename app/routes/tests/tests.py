@@ -6,7 +6,6 @@ from os.path import dirname, join, realpath
 from pytz import UTC
 
 from django.contrib.auth.models import User
-from django.db import transaction
 from django.test import TestCase
 from django.test.client import RequestFactory, Client
 
@@ -18,11 +17,8 @@ _current_dir = dirname(realpath(__file__))
 
 
 class ManualRouteTestCase(TestCase):
-    def setUp(self):
-        # needed because:
-        # stackoverflow.com/questions/20601499/django-testing-client-log
-        transaction.set_autocommit(True)
 
+    def setUp(self):
         # create a user (if it doesn't exist already)...
         if not User.objects.filter(username='b').exists():
             User.objects.create_user(
