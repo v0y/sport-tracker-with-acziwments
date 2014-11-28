@@ -39,7 +39,8 @@ class Route(CreatedAtMixin):
         verbose_name_plural = u"trasy"
 
     def __unicode__(self):
-        return "user:%s, workout:%s, start_time:%s, length:%f" % (self.user_id, self.workout_id, self.start_time, self.length)
+        return ("user:%s, workout:%s, start_time:%s, length:%f" %
+            (self.user_id, self.workout_id, self.start_time, self.length))
 
     @classmethod
     def route_from_gpx(cls, gpx_file, request):
@@ -65,10 +66,9 @@ class Route(CreatedAtMixin):
 
         input_dct = {
             'user': request.user,
-            'tracks_json': tracks_json,
+            'tracks_json': route_data,
             'length': length,
         }
-
         route = cls.objects.create(**input_dct)
 
         return route.id, route_data
