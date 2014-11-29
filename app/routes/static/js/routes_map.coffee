@@ -67,7 +67,7 @@ handleNewRoute = (mapHandler, routes) ->
 
 fillFormFields = (routeId, mapHandler) ->
     # route id
-    $('#id_route').val(routeId)
+    $('#id_route_id').val(routeId)
     # distance
     $('#id_distance').val(mapHandler.distance.toFixed(2))
     # manual routes will not have times
@@ -201,7 +201,7 @@ bindControls = (mapHandler) ->
     $cancel = $('.js-cancel-route')
     $cancel.on('click', ->
         # clear route id
-        $('#id_route').val('')
+        $('#id_route_id').val('')
         # remove all routes
         mapHandler.clearRoutes()
         # hide map and shit

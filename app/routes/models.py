@@ -67,7 +67,6 @@ class Route(CreatedAtMixin):
 
         return route.id, route_data
 
-
     def best_time_for_x_km(self, distance):
         """
         Get best time on x km
@@ -144,7 +143,7 @@ class Route(CreatedAtMixin):
                 _get_time_for_distance(track, distance, old_p1 + 1, p2))
             old_p1 += 1
             old_p2 = p2
-
+        print(times_list, distance)
         return min(times_list)
 
     def best_time_for_x_mi(self, distance):

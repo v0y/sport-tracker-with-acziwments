@@ -135,7 +135,7 @@ class Sport(NameMixin, SlugMixin):
 
 class Workout(CreatedAtMixin):
     route = models.ForeignKey(
-        Route, null=True, related_name=u'workouts', default=None,
+        Route, blank=True, null=True, related_name=u'workouts', default=None,
         verbose_name=u"Trasa")
     name = models.CharField(
         verbose_name=u"Nazwa", max_length=64, null=True, blank=True)
