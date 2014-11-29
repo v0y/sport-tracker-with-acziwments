@@ -33,9 +33,15 @@ def get_route_json(request):
 @ajax_request
 @login_required
 def save_route(request):
-    route_data = request.POST['tracks']
-    if route_data:
-        route_id, tracks_json = Route.save_route(route_data, request)
-        return {'id': route_id, 'tracks': tracks_json, 'info': 'OK'}
-
+    print(request.POST)
+    try:
+        route_data = request.POST['tracks']
+        if route_data:
+            route_id, tracks_json = Route.save_route(route_data, request)
+            return {'id': route_id, 'tracks': tracks_json, 'info': 'OK'}
+    except Exception as e:
+        print('*' * 40)
+        print(e)
+        print('*' * 40)
+        raise
     return {'info': 'Error'}

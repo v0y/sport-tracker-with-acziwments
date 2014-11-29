@@ -8,16 +8,12 @@ from django.db import models
 
 from app.shared.helpers import mi2km
 from app.shared.models import CreatedAtMixin
-from app.workouts.models import Workout
 from .helpers import get_distance
 from .gpx_handler import handle_gpx, get_segment_dist_and_ele, \
     get_segment_start_and_finish_times, get_distance_and_elevations_delta
 
 
 class Route(CreatedAtMixin):
-    workout = models.ForeignKey(
-        Workout, null=True, related_name=u'routes', default=None,
-        verbose_name=u"Trening")
     user = models.ForeignKey(
         User, related_name=u'routes', verbose_name=u"Użytkownik")
 

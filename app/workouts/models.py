@@ -13,6 +13,7 @@ from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from timedelta.fields import TimedeltaField
+from app.routes.models import Route
 
 from app.shared.helpers import is_whole, km2mi, mi2km
 from app.shared.models import CreatedAtMixin, NameMixin, SlugMixin
@@ -133,6 +134,9 @@ class Sport(NameMixin, SlugMixin):
 
 
 class Workout(CreatedAtMixin):
+    route = models.ForeignKey(
+        Route, null=True, related_name=u'workouts', default=None,
+        verbose_name=u"Trasa")
     name = models.CharField(
         verbose_name=u"Nazwa", max_length=64, null=True, blank=True)
     user = models.ForeignKey(

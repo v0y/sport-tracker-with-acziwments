@@ -90,6 +90,7 @@ def get_distance_and_elevations_delta(tracks, round_distance_to=False):
     distance = 0
     delta_elevation_up = 0
     delta_elevation_down = 0
+    print tracks
     for track in tracks:
         for segment in track['segments']:
             distance, delta_elevation_up, delta_elevation_down = \

@@ -153,6 +153,7 @@ bindSaveManualRoute = (mapHandler) ->
 
     $saveRouteButton.on('click', ->
         routeData = mapHandler.getRouteDataFromMap()
+        console.log routeData
 
         data = {
             'tracks': JSON.stringify(routeData),

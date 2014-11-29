@@ -11,6 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('routes', '0001_initial'),
     ]
 
     operations = [
@@ -69,6 +70,7 @@ class Migration(migrations.Migration):
                 ('datetime_start', models.DateTimeField(verbose_name='Czas rozpocz\u0119cia')),
                 ('datetime_stop', models.DateTimeField(verbose_name='Czas zako\u0144czenia')),
                 ('is_active', models.BooleanField(default=True, verbose_name='W\u0142\u0105czony do statystyk')),
+                ('route', models.ForeignKey(related_name='workouts', default=None, verbose_name='Trasa', to='routes.Route', null=True)),
                 ('sport', models.ForeignKey(verbose_name='Dyscyplina', to='workouts.Sport')),
                 ('user', models.ForeignKey(related_name='workouts', verbose_name='U\u017cytkownik', to=settings.AUTH_USER_MODEL)),
             ],

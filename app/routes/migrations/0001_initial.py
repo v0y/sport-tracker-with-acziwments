@@ -8,7 +8,6 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('workouts', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -25,7 +24,6 @@ class Migration(migrations.Migration):
                 ('height_down', models.FloatField(default=0, verbose_name='R\xf3\u017cnica wysoko\u015bci w d\xf3\u0142')),
                 ('tracks_json', models.TextField(default=b'[]')),
                 ('user', models.ForeignKey(related_name='routes', verbose_name='U\u017cytkownik', to=settings.AUTH_USER_MODEL)),
-                ('workout', models.ForeignKey(related_name='routes', default=None, verbose_name='Trening', to='workouts.Workout', null=True)),
             ],
             options={
                 'verbose_name': 'trasa',
