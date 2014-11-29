@@ -9,7 +9,6 @@ from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.views.generic.edit import CreateView
 
-from app.routes.models import Route
 from app.shared.views import LoginRequiredMixin
 from .forms import WorkoutForm
 from .models import Workout

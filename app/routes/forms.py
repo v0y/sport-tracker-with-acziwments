@@ -18,7 +18,6 @@ class RouteIdMixin(ModelForm):
 
     def assign_route_to_workout(self, workout):
         # get route
-        print self.cleaned_data
         route_id = self.cleaned_data['route']
         if route_id:
             route = Route.objects.get(id=route_id)
