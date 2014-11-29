@@ -9,6 +9,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.views.generic.edit import CreateView
 
+from app.routes.models import Route
 from app.shared.views import LoginRequiredMixin
 from .forms import WorkoutForm
 from .models import Workout
@@ -17,10 +18,6 @@ from .models import Workout
 class WorkoutCreateView(LoginRequiredMixin, CreateView):
     model = Workout
     form_class = WorkoutForm
-
-    def form_invalid(self, form):
-        print form.errors
-        return super(WorkoutCreateView, self).form_invalid(form)
 
     def form_valid(self, form):
         post = self.request.POST
