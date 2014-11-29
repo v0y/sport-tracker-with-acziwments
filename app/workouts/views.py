@@ -18,6 +18,10 @@ class WorkoutCreateView(LoginRequiredMixin, CreateView):
     model = Workout
     form_class = WorkoutForm
 
+    def form_invalid(self, form):
+        print form.errors
+        return super(WorkoutCreateView, self).form_invalid(form)
+
     def form_valid(self, form):
         post = self.request.POST
 
@@ -40,7 +44,6 @@ class WorkoutCreateView(LoginRequiredMixin, CreateView):
             .replace(hour=hour, minute=minute, second=second)
         form.instance.datetime_stop = form.instance.datetime_start + duration
         form.instance.user_id = self.request.user.id
-
         return super(WorkoutCreateView, self).form_valid(form)
 
 

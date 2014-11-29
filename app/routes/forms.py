@@ -7,11 +7,10 @@ from .models import Route
 
 
 class RouteIdMixin(ModelForm):
-    route_id = forms.IntegerField(required=False, widget=forms.HiddenInput())
-
+    route = forms.IntegerField(required=False, widget=forms.HiddenInput())
     def clear_route_id(self):
-        if self.cleaned_data['route_id']:
-            route_id = self.cleaned_data['route_id']
+        if self.cleaned_data['route']:
+            route_id = self.cleaned_data['route']
             if Route.objects.filter(id=route_id).exists():
                 return route_id
             else:
@@ -19,7 +18,7 @@ class RouteIdMixin(ModelForm):
 
     def assign_route_to_workout(self, workout):
         # get route
-        route_id = self.cleaned_data['route_id']
+        route_id = self.cleaned_data['route']
         if route_id:
             route = Route.objects.get(id=route_id)
 

@@ -190,9 +190,9 @@ class Workout(CreatedAtMixin):
             return
 
         # if there is no track
-        try:
-            return self.routes.get().best_time_for_x_km(distance)
-        except ObjectDoesNotExist:
+        if self.route:
+            return self.route.best_time_for_x_km(distance)
+        else:
             proportions = distance / float(self.distance)
             return timedelta(seconds=int(proportions * self.duration.seconds))
 

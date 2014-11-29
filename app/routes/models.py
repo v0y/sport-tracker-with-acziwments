@@ -16,7 +16,6 @@ from .gpx_handler import handle_gpx, get_segment_dist_and_ele, \
 class Route(CreatedAtMixin):
     user = models.ForeignKey(
         User, related_name=u'routes', verbose_name=u"Użytkownik")
-
     start_time = models.DateTimeField(
         auto_now=False, null=True, verbose_name=u"Czas rozpoczęcia trasy")
     finish_time = models.DateTimeField(
@@ -27,7 +26,6 @@ class Route(CreatedAtMixin):
         default=0, verbose_name=u"Różnica wysokości w górę")
     height_down = models.FloatField(
         default=0, verbose_name=u"Różnica wysokości w dół")
-
     tracks_json = models.TextField(default='[]')
 
     class Meta:
