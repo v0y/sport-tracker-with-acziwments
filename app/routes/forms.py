@@ -19,15 +19,18 @@ class RouteIdMixin(ModelForm):
     def assign_route_to_workout(self, workout):
         # get route
         route_id = self.cleaned_data['route']
-        if route_id:
-            route = Route.objects.get(id=route_id)
 
-            # update route properties if needed
-            route.start_time = workout.datetime_start
-            route.finish_time = workout.datetime_stop
-            route.length = workout.distance
+        if not route_id:
+            return
 
-            # save
-            route.save()
-            workout.route = route
-            workout.save()
+        route = Route.objects.get(id=route_id)
+
+        # update route properties if needed
+        route.start_time = workout.datetime_start
+        route.finish_time = workout.datetime_stop
+        route.length = workout.distance
+
+        # save
+        route.save()
+        workout.route = route
+        workout.save()
