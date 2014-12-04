@@ -11,4 +11,4 @@ python-dateutil==2.2
 pytz==2014.9
 django-FIUT==0.1.7
 
-git+https://github.com/v0y/django-gravatar.git@2b5e3eee02e883f6f708fe0f1dadd23c1b5a6814
+git+https://github.com/v0y/django-gravatar.git@1c373cfc1c0247db9ecb20f30378326cd6eb4582
