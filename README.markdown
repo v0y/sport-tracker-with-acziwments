@@ -1,4 +1,4 @@
-![travis](https://api.travis-ci.org/v0y/sport-tracker-with-acziwments.svg)
+[![travis](https://api.travis-ci.org/v0y/sport-tracker-with-acziwments.svg)](https://travis-ci.org/v0y/sport-tracker-with-acziwments)
 
 Sports tracker with achievements
 ================================
