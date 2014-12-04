@@ -25,13 +25,13 @@
 {% endblock %}
 
 {% block css_import %}
-	<link href="{% static 'nvd3/nv.d3.min.css' %}" rel="stylesheet" media="screen">
+	<link href="{% static 'nvd3/build/nv.d3.min.css' %}" rel="stylesheet" media="screen">
 {% endblock %}
 
 {% block js_import %}
 	{% compress js %}
 		<script src="{% static 'd3/d3.min.js' %}"></script>
-		<script src="{% static 'nvd3/nv.d3.min.js' %}"></script>
+		<script src="{% static 'nvd3/build/nv.d3.min.js' %}"></script>
 		<script src="{% static 'js/health_charts.coffee' %}" type="text/coffeescript"></script>
 	{% endcompress %}
 {% endblock %}

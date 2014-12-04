@@ -40,7 +40,6 @@ getChartData = (jsonData) ->
 nv.addGraph = (chartData) ->
     # chow chart
     chart = nv.models.multiChart()
-#        .useInteractiveGuideline(true)
         .margin({top: 30, right: 75, bottom: 70, left: 75})
 
     chart.xAxis
@@ -59,7 +58,8 @@ nv.addGraph = (chartData) ->
 
     $chart
         .datum(chartData)
-        .transition().duration(500).call chart
+        .transition().duration(500)
+        .call chart
 
     nv.utils.windowResize -> $chart.call chart
 
