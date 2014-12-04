@@ -261,7 +261,7 @@ nv.addGraph = (chartData) ->
 ###############################################################################
 
 $ ->
-    moment.lang("pl")         # set moment's language
+    moment.locale("pl")         # set moment's language
     setActiveTab()            # set as active right tab
     changeTimeRange()         # change time range tab
     changeDate()              # Change date to prev/next

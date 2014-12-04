@@ -4,11 +4,14 @@ import datetime
 import json
 import re
 
+from annoying.decorators import ajax_request
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import View
 from django.views.generic.edit import CreateView
 
+from app.routes.gpx_handler import get_points_distance_and_elevation
+from app.routes.helpers import get_distance, handle_datetime_string
 from app.shared.views import LoginRequiredMixin
 from .forms import WorkoutForm
 from .models import Workout
@@ -87,3 +90,49 @@ def workouts_calendar_api(request):
 
     return HttpResponse(
         json.dumps(events), content_type="application/json")
+
+
+def _get_kmph_on_km_pace_data_from_track(track):
+    """
+    [
+        {'x': distance, 'y': pace},
+        {...}
+    ]
+    """
+    for segment in track['segments']:
+        i = 1
+        data_pace_kmph = []
+        data_pace_mpkm = []
+        data_altitude = []
+        while i < len(segment):
+            point1 = segment[i - 1]
+            point2 = segment[i]
+            points_distance = get_distance(point1, point2)
+            time1 = handle_datetime_string(point1['time'])
+            time2 = handle_datetime_string(point2['time'])
+            points_timedelta = time2 - time1
+            pace = points_distance / (points_timedelta.seconds / 3600.)
+            distance = get_points_distance_and_elevation(segment[0:i + 1])[0]
+            data_pace_kmph.append({
+                'x': round(distance, 3),
+                'y': round(pace, 2)
+            })
+            data_altitude.append({
+                'x': round(distance, 3),
+                'y': round(point2['ele'], 2)
+            })
+            i += 1
+
+        return {'pace_kmph': data_pace_kmph, 'altitude': data_altitude}
+
+
+@ajax_request
+def workout_chart_api(request):
+    """
+    Get data for workout chart
+    """
+    workout_id = request.POST['workout_id']
+    workout = get_object_or_404(Workout, id=workout_id)
+    track = json.loads(workout.routes.first().tracks_json)[0]
+
+    return _get_kmph_on_km_pace_data_from_track(track)

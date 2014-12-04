@@ -5,6 +5,7 @@ from xml.etree.cElementTree import parse
 
 from .helpers import get_distance, handle_datetime_string
 
+
 def handle_gpx(gpx_file, round_distance_to=False):
     # convert gpx to tracks
     tracks = gpx_to_tracks(gpx_file)
@@ -58,14 +59,17 @@ def gpx_to_tracks(gpx_file):
     return tracks
 
 
-def get_segment_dist_and_ele(segment, round_distance_to=False):
+def get_points_distance_and_elevation(points, round_distance_to=False):
+    """
+    Returns distance for list of points
+    """
     distance = 0
     delta_elevation_up = 0
     delta_elevation_down = 0
     i = 1
-    while i < len(segment):
-        point1 = segment[i - 1]
-        point2 = segment[i]
+    while i < len(points):
+        point1 = points[i - 1]
+        point2 = points[i]
 
         # get distance
         distance += get_distance(point1, point2)
@@ -93,7 +97,7 @@ def get_distance_and_elevations_delta(tracks, round_distance_to=False):
     for track in tracks:
         for segment in track['segments']:
             distance, delta_elevation_up, delta_elevation_down = \
-                get_segment_dist_and_ele(segment)
+                get_points_distance_and_elevation(segment)
 
     if round_distance_to:
         distance = round(distance, round_distance_to)

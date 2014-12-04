@@ -30,6 +30,7 @@
 					<!-- menu pull-left -->
 					<ul class="nav navbar-nav">
 						{% if user.is_authenticated %}
+							{# TODO: refactor tags #}
 							<li class="{% is_active_tab request '/workouts' %}">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									Treningi <b class="caret"></b></a>

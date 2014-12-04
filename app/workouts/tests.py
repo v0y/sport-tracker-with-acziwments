@@ -1,13 +1,16 @@
 # coding: utf-8
 
 from datetime import datetime, timedelta
+import json
 import numbers
 from pytz import UTC
 
 from django.contrib.auth.models import User
 from django.test import TestCase
 
+from app.routes.tests.tests import TestRoutesTestCase
 from .models import Distance, Sport, Workout, BestTime
+from .views import _get_kmph_on_km_pace_data_from_track
 
 
 class CreateWorkoutsMixin(object):
@@ -200,3 +203,21 @@ class SportTestCase(TestCase):
 
     def test_get_distances_imperial_bowling(self):
         self.assertIsNone(self.bowling.get_distances('mi'))
+
+
+class WorkoutChartTestCase(TestRoutesTestCase):
+    def test_get_kmph_on_km_pace_data_from_track_returns_right_lenght(self):
+        track = json.loads(self.route.tracks_json)[0]
+        self.assertEquals(
+            len(_get_kmph_on_km_pace_data_from_track(track)['pace_kmph']), 195)
+
+    def test_get_kmph_on_km_pace_data_from_track_returns_right_data(self):
+        track = json.loads(self.route.tracks_json)[0]
+        data = _get_kmph_on_km_pace_data_from_track(track)
+
+        self.assertEquals(data['pace_kmph'][0]['x'], 0.095)
+        self.assertEquals(data['pace_kmph'][0]['y'], 9.76)
+        self.assertEquals(data['pace_kmph'][69]['x'], 4.547)
+        self.assertEquals(data['pace_kmph'][69]['y'], 6.82)
+        self.assertEquals(data['pace_kmph'][-1]['x'], 14.451)
+        self.assertEquals(data['pace_kmph'][-1]['y'], 8.39)

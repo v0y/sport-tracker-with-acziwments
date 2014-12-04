@@ -96,14 +96,24 @@
 						</ul>
 					</div>
 				</div>
-
 			</div>
+
 			<div class="col-lg-5 col-md-5 col-sm-12">
 				<div class="show-route-map-canvas js-map-canvas" data-route-id="{{ object.routes.all.0.id }}" data-url="{% url 'get_route_json' %}"></div>
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="col-lg-12 col-12 col-sm-12 workout-chart">
+				<svg></svg>
+			</div>
+		</div>
+
 	</div>
+{% endblock %}
+
+{% block css_import %}
+	<link href="{% static 'nvd3/nv.d3.min.css' %}" rel="stylesheet" media="screen">
 {% endblock %}
 
 {% block js_import %}
@@ -117,6 +127,9 @@
 		<script src="{% static "js/workouts_calendar.coffee" %}" type="text/coffeescript"></script>
 		<script src="{% static 'js/map_handler.coffee' %}" type="text/coffeescript"></script>
 		<script src="{% static 'js/routes_map.coffee' %}" type="text/coffeescript"></script>
+		<script src="{% static 'd3/d3.min.js' %}"></script>
+		<script src="{% static 'nvd3/nv.d3.min.js' %}"></script>
+		<script src="{% static 'js/workout_charts.coffee' %}" type="text/coffeescript"></script>
 	{% endcompress %}
 {% endblock %}
 main
