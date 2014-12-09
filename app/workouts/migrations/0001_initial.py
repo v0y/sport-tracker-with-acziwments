@@ -18,7 +18,6 @@ class Migration(migrations.Migration):
             name='BestTime',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('unit', models.CharField(max_length=2, choices=[(b'km', 'kilometers'), (b'mi', 'miles')])),
                 (b'duration', timedelta.fields.TimedeltaField(max_value=None, min_value=None)),
             ],
             options={
@@ -31,12 +30,11 @@ class Migration(migrations.Migration):
             name='Distance',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('unit', models.CharField(max_length=2, choices=[(b'km', 'kilometers'), (b'mi', 'miles')])),
-                ('distance', models.FloatField()),
+                ('distance', models.FloatField(unique=True)),
                 ('name', models.CharField(max_length=64, verbose_name='Nazwa', blank=True)),
             ],
             options={
-                'ordering': ['unit', 'distance'],
+                'ordering': ['distance'],
                 'verbose_name': 'dystans',
                 'verbose_name_plural': 'dystanse',
             },
@@ -83,10 +81,6 @@ class Migration(migrations.Migration):
             name='only_for',
             field=models.ManyToManyField(help_text='Je\u015bli podane, dystans pojawi si\u0119 wy\u0142\u0105cznie dla danych dyscyplin', to='workouts.Sport', null=True, blank=True),
             preserve_default=True,
-        ),
-        migrations.AlterUniqueTogether(
-            name='distance',
-            unique_together=set([('distance', 'unit')]),
         ),
         migrations.AddField(
             model_name='besttime',

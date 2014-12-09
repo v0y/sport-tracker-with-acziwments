@@ -68,45 +68,15 @@ class WorkoutTestCase(CreateWorkoutsMixin, TestCase):
             for case in test_cases:
                 self.assertEqual(workout.best_time_for_x_km(case[0]), case[1])
 
-    def test_best_time_for_x_mi(self):
-        time_for_1_mi = self.workout1.best_time_for_x_mi(1)
-        time_for_3_mi = self.workout1.best_time_for_x_mi(3)
-
-        expected_for_1_mi = timedelta(seconds=1158)
-        expected_for_3_mi = timedelta(seconds=3476)
-
-        self.assertEqual(time_for_1_mi, expected_for_1_mi)
-        self.assertEqual(time_for_3_mi, expected_for_3_mi)
-
-
-class DistancesTestCase(TestCase):
-    fixtures = ['init_data']
-
-    def setUp(self):
-        self.distance1 = Distance.objects.get(distance=1, unit='km')
-        self.distance2 = Distance.objects.get(distance=10, unit='km')
-        self.distance3 = Distance.objects.get(distance=42.195, unit='km')
-        self.distance4 = Distance.objects.get(distance=1, unit='mi')
-        self.distance5 = Distance.objects.create(distance=15.99, unit='mi')
-        self.distance6 = Distance.objects.get(distance=100, unit='mi')
-
-    def test_distance_km(self):
-        self.assertEqual(self.distance1.distance_km, 1)
-        self.assertEqual(self.distance2.distance_km, 10)
-        self.assertEqual(self.distance3.distance_km, 42.195)
-        self.assertEqual(self.distance4.distance_km, 1.60934)
-        self.assertEqual(self.distance5.distance_km, 25.7333466)
-        self.assertEqual(self.distance6.distance_km, 160.934)
-
 
 class BestTimesTestCase(CreateWorkoutsMixin, TestCase):
 
     def setUp(self):
         super(BestTimesTestCase, self).setUp()
-        self.distance1 = Distance.objects.get(distance=1, unit='km')
-        self.distance3 = Distance.objects.get(distance=3, unit='km')
-        self.distance4 = Distance.objects.get(distance=5, unit='km')
-        self.distance6 = Distance.objects.get(distance=10, unit='km')
+        self.distance1 = Distance.objects.get(distance=1)
+        self.distance3 = Distance.objects.get(distance=3)
+        self.distance4 = Distance.objects.get(distance=5)
+        self.distance6 = Distance.objects.get(distance=10)
 
     def test_best_times_creation(self):
         test_values = [
@@ -132,13 +102,13 @@ class BestTimesTestCase(CreateWorkoutsMixin, TestCase):
 
         for workout, test_cases in test_values:
             for case in test_cases:
-                distance = Distance.objects.get(distance=case[0], unit='km')
+                distance = Distance.objects.get(distance=case[0])
                 best_time = BestTime.objects.get(
                     workout=workout, distance=distance)
                 self.assertEqual(best_time.duration, case[1])
 
     def test_best_times_update(self):
-        distance = Distance.objects.get(distance=5, unit='km')
+        distance = Distance.objects.get(distance=5)
         best_time = \
             BestTime.objects.get(workout=self.workout1, distance=distance)
         self.assertEqual(best_time.duration, timedelta(minutes=60))
@@ -179,30 +149,17 @@ class SportTestCase(TestCase):
                 self.assertIsInstance(choice[1], unicode)
 
     def test_get_distances_metric_running(self):
-        distance_ids = [d.id for d in self.running.get_distances('km')]
+        distance_ids = [d.id for d in self.running.get_distances()]
         expected_ids = [1, 2, 3, 4, 5, 6, 7, 8]
         self.assertListEqual(distance_ids, expected_ids)
 
     def test_get_distances_metric_cycling(self):
-        distance_ids = [d.id for d in self.cycling.get_distances('km')]
+        distance_ids = [d.id for d in self.cycling.get_distances()]
         expected_ids = [1, 2, 3, 4, 7, 8]
         self.assertListEqual(distance_ids, expected_ids)
 
     def test_get_distances_metric_bowling(self):
-        self.assertIsNone(self.bowling.get_distances('km'))
-
-    def test_get_distances_imperial_running(self):
-        distance_ids = [d.id for d in self.running.get_distances('mi')]
-        expected_ids = [9, 10, 11, 12, 13, 14, 15, 16]
-        self.assertListEqual(distance_ids, expected_ids)
-
-    def test_get_distances_imperial_cycling(self):
-        distance_ids = [d.id for d in self.cycling.get_distances('mi')]
-        expected_ids = [9, 10, 11, 12, 15, 16]
-        self.assertListEqual(distance_ids, expected_ids)
-
-    def test_get_distances_imperial_bowling(self):
-        self.assertIsNone(self.bowling.get_distances('mi'))
+        self.assertIsNone(self.bowling.get_distances())
 
 
 class WorkoutChartTestCase(TestRoutesTestCase):

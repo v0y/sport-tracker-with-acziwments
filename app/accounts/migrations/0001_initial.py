@@ -62,7 +62,6 @@ class Migration(migrations.Migration):
                 ('dob', models.DateField(null=True, verbose_name='Data urodzin', blank=True)),
                 ('sex', models.CharField(blank=True, max_length=1, null=True, verbose_name='P\u0142e\u0107', choices=[(b'K', 'Kobieta'), (b'M', 'M\u0119\u017cczyzna')])),
                 ('height', models.IntegerField(null=True, verbose_name='Wzrost', blank=True)),
-                ('units', models.IntegerField(default=1, verbose_name='Jednostki miary', choices=[(1, 'Metryczne'), (2, 'Imperialne')])),
                 ('user', models.OneToOneField(related_name='profile', verbose_name='U\u017cytkownik', to=settings.AUTH_USER_MODEL)),
             ],
             options={

@@ -14,16 +14,15 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from timedelta.fields import TimedeltaField
 
-from app.shared.helpers import is_whole, km2mi, mi2km
+from app.shared.helpers import is_whole
 from app.shared.models import CreatedAtMixin, NameMixin, SlugMixin
-from .enums import SPORT_CATEGORIES, Unit, UNIT_CHOICES
+from .enums import SPORT_CATEGORIES
 
 
 class BestTime(models.Model):
     distance = models.ForeignKey('Distance')
     workout = models.ForeignKey('Workout')
     user = models.ForeignKey(User, null=True, blank=True)
-    unit = models.CharField(choices=UNIT_CHOICES, max_length=2)
     duration = TimedeltaField()
 
     class Meta:
@@ -31,9 +30,8 @@ class BestTime(models.Model):
         verbose_name_plural = u"najlepsze czasy"
 
     @classmethod
-    def get_records(cls, sport, user, unit=None):
-        unit = unit or Unit.kilometers
-        distances = sport.get_distances(unit)
+    def get_records(cls, sport, user):
+        distances = sport.get_distances()
         distance_ids = [d.id for d in distances]
 
         # get from cache
@@ -72,8 +70,7 @@ class BestTime(models.Model):
 
 
 class Distance(models.Model):
-    unit = models.CharField(choices=UNIT_CHOICES, max_length=2)
-    distance = models.FloatField()
+    distance = models.FloatField(unique=True)
     only_for = models.ManyToManyField(
         'Sport', null=True, blank=True,
         help_text=u"Jeśli podane, dystans pojawi się wyłącznie dla danych "
@@ -83,16 +80,11 @@ class Distance(models.Model):
     class Meta:
         verbose_name = u"dystans"
         verbose_name_plural = u"dystanse"
-        unique_together = (('distance', 'unit'),)
-        ordering = ['unit', 'distance']
+        ordering = ['distance']
 
     def __unicode__(self):
         distance_repr = int(self.distance) if is_whole else self.distance
-        return self.name or "%s %s" % (distance_repr, self.unit)
-
-    @property
-    def distance_km(self):
-        return self.distance if self.unit == 'km' else mi2km(self.distance)
+        return self.name or "%s km" % distance_repr
 
 
 class Sport(NameMixin, SlugMixin):
@@ -111,22 +103,19 @@ class Sport(NameMixin, SlugMixin):
         choices += [(s.pk, s.name) for s in cls.objects.all().order_by('name')]
         return choices
 
-    def get_distances(self, unit=None):
+    def get_distances(self):
         """
         Get distanced for sport.
 
-        :param unit: get distances in this unit, default: kilometers
         :return: distances for sport
         :rtype: list
         """
-        assert unit in (None, Unit.kilometers, Unit.miles)
         if not self.show_distances:
             return
-        unit = unit or Unit.kilometers
 
         distances_without_only = \
-            Distance.objects.filter(only_for__isnull=True, unit=unit)
-        distances_from_only = self.distance_set.filter(unit=unit)
+            Distance.objects.filter(only_for__isnull=True)
+        distances_from_only = self.distance_set.filter()
         distances = list(chain(distances_without_only, distances_from_only))
 
         return sorted(distances, key=lambda d: d.distance)
@@ -192,16 +181,6 @@ class Workout(CreatedAtMixin):
             proportions = distance / float(self.distance)
             return timedelta(seconds=int(proportions * self.duration.seconds))
 
-    def best_time_for_x_mi(self, distance):
-        """
-        Get best time on x miles
-
-        :param distance: get time for this distance
-        :return: fastest time for given distance
-        :rtype: timedelta
-        """
-        return self.best_time_for_x_km(mi2km(distance))
-
     def update_best_time(self, distance):
         """
         Update or create best time object for given distance
@@ -211,25 +190,20 @@ class Workout(CreatedAtMixin):
         """
         best_times = BestTime.objects.filter(distance=distance, workout=self)
 
-        if distance.unit == Unit.kilometers:
-            duration = self.best_time_for_x_km(distance.distance)
-        else:
-            duration = self.best_time_for_x_mi(distance.distance)
+        duration = self.best_time_for_x_km(distance.distance)
 
         if best_times.exists():
             best_times.update(duration=duration)
         else:
             BestTime.objects.create(
-                distance=distance, unit=distance.unit, workout=self,
+                distance=distance, workout=self,
                 duration=duration, user=self.user)
 
 
 @receiver(post_save, sender=Workout)
 def update_best_times(sender, instance, **kwargs):
     if instance.distance:
-        distances = Distance.objects.filter(
-            Q(distance__lte=instance.distance, unit='km') |
-            Q(distance__lte=km2mi(instance.distance), unit='mi'))
+        distances = Distance.objects.filter(distance__lte=instance.distance)
 
         for distance in distances:
             instance.update_best_time(distance)

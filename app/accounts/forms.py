@@ -247,7 +247,7 @@ class UserProfileForm(ModelForm):
 
     class Meta:
         model = UserProfile
-        exclude = ('user', 'units')
+        exclude = ('user',)
         name = u"Edycja profilu"
         button_text = u"Zapisz zmiany"
 

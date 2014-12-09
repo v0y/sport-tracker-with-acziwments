@@ -544,8 +544,7 @@
         "fields": {
             "distance": 1.0,
             "only_for": [],
-            "name": "",
-            "unit": "km"
+            "name": ""
         }
     },
     {
@@ -554,8 +553,7 @@
         "fields": {
             "distance": 3.0,
             "only_for": [],
-            "name": "",
-            "unit": "km"
+            "name": ""
         }
     },
     {
@@ -564,8 +562,7 @@
         "fields": {
             "distance": 5.0,
             "only_for": [],
-            "name": "",
-            "unit": "km"
+            "name": ""
         }
     },
     {
@@ -574,8 +571,7 @@
         "fields": {
             "distance": 10.0,
             "only_for": [],
-            "name": "",
-            "unit": "km"
+            "name": ""
         }
     },
     {
@@ -584,8 +580,7 @@
         "fields": {
             "distance": 21.975,
             "only_for": [43, 47, 49],
-            "name": "p\u00f3\u0142maraton",
-            "unit": "km"
+            "name": "p\u00f3\u0142maraton"
         }
     },
     {
@@ -594,8 +589,7 @@
         "fields": {
             "distance": 42.195,
             "only_for": [43, 47, 49],
-            "name": "maraton",
-            "unit": "km"
+            "name": "maraton"
         }
     },
     {
@@ -604,8 +598,7 @@
         "fields": {
             "distance": 50.0,
             "only_for": [],
-            "name": "",
-            "unit": "km"
+            "name": ""
         }
     },
     {
@@ -614,88 +607,7 @@
         "fields": {
             "distance": 100.0,
             "only_for": [],
-            "name": "",
-            "unit": "km"
-        }
-    },
-    {
-        "pk": 9,
-        "model": "workouts.distance",
-        "fields": {
-            "distance": 1.0,
-            "only_for": [],
-            "name": "",
-            "unit": "mi"
-        }
-    },
-    {
-        "pk": 10,
-        "model": "workouts.distance",
-        "fields": {
-            "distance": 3.0,
-            "only_for": [],
-            "name": "",
-            "unit": "mi"
-        }
-    },
-    {
-        "pk": 11,
-        "model": "workouts.distance",
-        "fields": {
-            "distance": 5.0,
-            "only_for": [],
-            "name": "",
-            "unit": "mi"
-        }
-    },
-    {
-        "pk": 12,
-        "model": "workouts.distance",
-        "fields": {
-            "distance": 10.0,
-            "only_for": [],
-            "name": "",
-            "unit": "mi"
-        }
-    },
-    {
-        "pk": 13,
-        "model": "workouts.distance",
-        "fields": {
-            "distance": 13.655,
-            "only_for": [43, 47, 49],
-            "name": "p\u00f3\u0142maraton",
-            "unit": "mi"
-        }
-    },
-    {
-        "pk": 14,
-        "model": "workouts.distance",
-        "fields": {
-            "distance": 26.219,
-            "only_for": [43, 47, 49],
-            "name": "maraton",
-            "unit": "mi"
-        }
-    },
-    {
-        "pk": 15,
-        "model": "workouts.distance",
-        "fields": {
-            "distance": 50.0,
-            "only_for": [],
-            "name": "",
-            "unit": "mi"
-        }
-    },
-    {
-        "pk": 16,
-        "model": "workouts.distance",
-        "fields": {
-            "distance": 100.0,
-            "only_for": [],
-            "name": "",
-            "unit": "mi"
+            "name": ""
         }
     }
 ]

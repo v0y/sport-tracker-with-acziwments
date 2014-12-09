@@ -10,10 +10,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import View
 from django.views.generic.edit import CreateView
 
-from app.accounts.enums import UnitsTypes
 from app.routes.gpx_handler import get_points_distance_and_elevation
 from app.routes.helpers import get_distance, handle_datetime_string
-from app.shared.helpers import km2mi
 from app.shared.views import LoginRequiredMixin
 from .forms import WorkoutForm
 from .models import Workout
@@ -94,7 +92,7 @@ def workouts_calendar_api(request):
         json.dumps(events), content_type="application/json")
 
 
-def _get_chart_data_from_track(track, unit=UnitsTypes.metric):
+def _get_chart_data_from_track(track):
     """
     [
         {'x': distance, 'y': pace},
@@ -114,9 +112,6 @@ def _get_chart_data_from_track(track, unit=UnitsTypes.metric):
             points_timedelta = time2 - time1
             pace = points_distance / (points_timedelta.seconds / 3600.)
             distance = get_points_distance_and_elevation(segment[0:i + 1])[0]
-
-            if unit == UnitsTypes.imperial:
-                distance = km2mi(distance)
 
             data_pace.append({
                 'x': round(distance, 3),
@@ -140,5 +135,5 @@ def workout_chart_api(request):
     workout = get_object_or_404(Workout, id=workout_id)
     track = json.loads(workout.routes.first().tracks_json)[0]
 
-    return _get_chart_data_from_track(track, int(request.POST['unit']))
+    return _get_chart_data_from_track(track)
 

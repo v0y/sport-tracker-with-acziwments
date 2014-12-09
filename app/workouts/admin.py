@@ -6,12 +6,12 @@ from .models import BestTime, Distance, Sport, Workout
 
 
 class BestTimeAdmin(admin.ModelAdmin):
-    list_display = ('distance', 'workout', 'unit', 'duration', 'user')
+    list_display = ('distance', 'workout', 'duration', 'user')
 admin.site.register(BestTime, BestTimeAdmin)
 
 
 class DistanceAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'name', 'distance', 'unit')
+    list_display = ('__unicode__', 'name', 'distance')
 admin.site.register(Distance, DistanceAdmin)
 
 

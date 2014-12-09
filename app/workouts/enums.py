@@ -13,14 +13,3 @@ SPORT_CATEGORIES = (
     ('water', u"sporty wodne"),
     ('winter', u"sporty zimowe"),
 )
-
-
-class Unit(object):
-    kilometers = 'km'
-    miles = 'mi'
-
-
-UNIT_CHOICES = (
-    (Unit.kilometers, u"kilometers"),
-    (Unit.miles, u"miles")
-)

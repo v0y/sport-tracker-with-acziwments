@@ -143,13 +143,3 @@ class TestRoutesTestCase(TestCase):
         self.assertEqual(time_for_8_38_km, expected_for_8_38_km)
         self.assertEqual(time_for_10_km, expected_for_10_km)
         self.assertEqual(time_for_1000_km, None)
-
-    def test_best_time_for_x_mi(self):
-        time_for_1_mi = self.route.best_time_for_x_mi(1)
-        time_for_3_mi = self.route.best_time_for_x_mi(3)
-
-        expected_for_1_mi = timedelta(minutes=9, seconds=52)
-        expected_for_3_mi = timedelta(minutes=34)
-
-        self.assertEqual(time_for_1_mi, expected_for_1_mi)
-        self.assertEqual(time_for_3_mi, expected_for_3_mi)

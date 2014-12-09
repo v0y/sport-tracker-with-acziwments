@@ -6,7 +6,6 @@ import json
 from django.contrib.auth.models import User
 from django.db import models
 
-from app.shared.helpers import mi2km
 from app.shared.models import CreatedAtMixin
 from app.workouts.models import Workout
 from .helpers import get_distance
@@ -152,13 +151,3 @@ class Route(CreatedAtMixin):
             old_p2 = p2
 
         return min(times_list)
-
-    def best_time_for_x_mi(self, distance):
-        """
-        Get best time on x miles
-
-        :param distance: get time for this distance
-        :return: fastest time for given distance
-        :rtype: timedelta
-        """
-        return self.best_time_for_x_km(mi2km(distance))
