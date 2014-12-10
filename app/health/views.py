@@ -175,7 +175,7 @@ def health_show_list(request, username=None):
         user = request.user
 
     health = Health.objects.filter(user=user).order_by('-related_date')
-    page, _ = get_page_and_paginator(request, health, 1)
+    page, _ = get_page_and_paginator(request, health, 25)
 
     return {
         'page': page,
