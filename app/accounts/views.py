@@ -23,7 +23,7 @@ from app.workouts.models import BestTime
 from .forms import (
     ChangeEmailForm, ChangePasswordForm, LoginForm, NewPasswordForm,
     PasswordResetForm, RegistrationForm, ResendActivationMailForm,
-    SettingsForm, UserProfileForm)
+    UserProfileForm)
 from .helpers import get_mail_provider_url
 from .models import EmailActivation, UserActivation, PasswordReset, UserProfile
 
@@ -467,11 +467,3 @@ class ProfileSettingsView(BaseProfileUpdateView):
 
     def get_success_url(self):
         return reverse('profile_settings')
-
-
-class SettingsView(BaseProfileUpdateView):
-    form_class = SettingsForm
-    template_name = 'accounts/website_settings.html'
-
-    def get_success_url(self):
-        return reverse('website_settings')

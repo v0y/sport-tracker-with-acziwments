@@ -3,8 +3,6 @@
 <ul class="nav nav-tabs account-settings-menu">
 	<li class="{% is_active_tab request 'profile_settings' %}">
 		<a href="{% url 'profile_settings' %}" title="Edycja profilu">Edycja profilu</a></li>
-	<li class="{% is_active_tab request 'website_settings' %}">
-		<a href="{% url 'website_settings' %}" title="Edycja profilu">Ustawienia</a></li>
 	<li class="
 		{% is_active_tab request 'password_change' %}
 		{% is_active_tab request 'password_change_end' %}
