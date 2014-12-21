@@ -95,14 +95,18 @@ def workouts_calendar_api(request):
 def _get_chart_data_from_track(track):
     """
     [
-        {'x': distance, 'y': pace},
-        {...}
+        ['pace-y', (...)]
+        ['pace-x', (...)]
+        ['altitude-y', (...)]
+        ['altitude-x', (...)]
     ]
     """
     for segment in track['segments']:
         i = 1
-        data_pace = []
-        data_altitude = []
+        pace_y = ['pace-y']
+        pace_x = ['pace-x']
+        altitude_y = ['altitude-y']
+        altitude_x = ['altitude-x']
         while i < len(segment):
             point1 = segment[i - 1]
             point2 = segment[i]
@@ -113,17 +117,13 @@ def _get_chart_data_from_track(track):
             pace = points_distance / (points_timedelta.seconds / 3600.)
             distance = get_points_distance_and_elevation(segment[0:i + 1])[0]
 
-            data_pace.append({
-                'x': round(distance, 3),
-                'y': round(pace, 2)
-            })
-            data_altitude.append({
-                'x': round(distance, 3),
-                'y': round(point2['ele'], 2)
-            })
+            pace_y.append(round(pace, 2))
+            pace_x.append(round(distance, 3))
+            altitude_y.append(round(point2['ele'], 2))
+            altitude_x.append(round(distance, 3))
             i += 1
 
-        return {'pace': data_pace, 'altitude': data_altitude}
+        return [pace_x, pace_y, altitude_x, altitude_y]
 
 
 @ajax_request

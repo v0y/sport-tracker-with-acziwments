@@ -104,8 +104,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-lg-12 col-12 col-sm-12 workout-chart">
-				<svg data-unit="{{ request.user.profile.units }}"></svg>
+			<div class="col-lg-12 col-12 col-sm-12 workout-chart js-workout-chart">
 			</div>
 		</div>
 
@@ -113,7 +112,7 @@
 {% endblock %}
 
 {% block css_import %}
-	<link href="{% static 'nvd3/build/nv.d3.min.css' %}" rel="stylesheet" media="screen">
+	<link href="{% static 'c3/c3.min.css' %}" rel="stylesheet" media="screen">
 {% endblock %}
 
 {% block js_import %}
@@ -128,7 +127,7 @@
 		<script src="{% static 'js/map_handler.coffee' %}" type="text/coffeescript"></script>
 		<script src="{% static 'js/routes_map.coffee' %}" type="text/coffeescript"></script>
 		<script src="{% static 'd3/d3.min.js' %}"></script>
-		<script src="{% static 'nvd3/build/nv.d3.min.js' %}"></script>
+		<script src="{% static 'c3/c3.min.js' %}"></script>
 		<script src="{% static 'js/workout_charts.coffee' %}" type="text/coffeescript"></script>
 	{% endcompress %}
 {% endblock %}

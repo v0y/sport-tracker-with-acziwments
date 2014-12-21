@@ -14,57 +14,52 @@ getJsonData = ->
             workout_id: getWorkoutId()
             csrfmiddlewaretoken: $.cookie('csrftoken')
         error: (jqXHR, textStatus, errorThrown) -> console.log("AJAX Error: #{errorThrown}")
-        success: (data) -> getChartData(data)
+        success: (data) -> generateChart(data)
 
 
-getChartData = (jsonData) ->
-    # get data formatted for chart
-    chartData = [
-        {
-            color: "#61AE24"
-            key: "Tempo (km/h)"
-            values: jsonData.pace
-            yAxis: 1
-            type: 'line'
-        },
-        {
-            color: "#00A1CB"
-            key: "Wysokość (m npm)"
-            values: jsonData.altitude
-            yAxis: 2
-            type: 'line'
-        }
-    ]
-    nv.addGraph(chartData)
-
-nv.addGraph = (chartData) ->
-    # chow chart
-    chart = nv.models.multiChart()
-        .margin({top: 30, right: 75, bottom: 70, left: 75})
-
-    chart.xAxis
-        .axisLabel("Dystans (km)")
-        .tickFormat(d3.format(",.1f"))
-
-    chart.yAxis1
-        .axisLabel("Tempo (km/h)")
-        .tickFormat(d3.format(",.1f"))
-
-    chart.yAxis2
-        .axisLabel("Wysokość (m npm)")
-        .tickFormat(d3.format(",.1f"))
-
-    $chart = d3.select('.workout-chart svg')
-
-    $chart
-        .datum(chartData)
-        .transition().duration(500)
-        .call chart
-
-    nv.utils.windowResize -> $chart.call chart
-
-    chart
-
+generateChart = (jsonData) ->
+    c3.generate(
+        bindto: '.js-workout-chart'
+        color:
+            pattern: ['#e54028', '#00a1cb']
+        data:
+            xs:
+                'pace-y': 'pace-x'
+                'altitude-y': 'altitude-x'
+            columns: jsonData
+            axes:
+                'pace-y': 'y'
+                'altitude-y': 'y2'
+            names:
+                'pace-y': 'Pace',
+                'altitude-y': 'Altitude'
+            type: 'spline'
+        axis:
+            x:
+                tick:
+                    count: 20
+                    format: d3.format('.2f')
+            y:
+                label:
+                    text: 'kmph'
+                    position: 'outer-middle'
+                tick:
+                    format: d3.format('.1f')
+            y2:
+                show: true
+                label:
+                    text: 'mamsl'
+                    position: 'outer-middle'
+                tick:
+                    format: d3.format('.0f')
+        grid:
+            x:
+                show: true
+            y:
+                show: true
+        point:
+            show: false
+    )
 
 $ ->
     moment.locale('pl')
