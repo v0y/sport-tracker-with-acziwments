@@ -32,6 +32,7 @@ drawCalendar = (events, current_month, current_year) ->
         timezone: 'local'
         timeFormat: 'HH:mm'
         defaultDate: moment().format('YYYY-MM-DD')
+        height: 500
     )
 
 $ ->
