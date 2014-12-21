@@ -66,26 +66,14 @@ class Health(RelatedDateMixin):
 
         **Return example**::
 
-            {
-                'weight':
-                    [
-                        {'x': '2013-01-01', 'y': 75},
-                        {'x': '2013-01-02', 'y': 74.5},
-                        {'x': '2013-01-03', 'y': 74.6}
-                    ],
-                'fat':
-                    [
-                        {'x': '2013-01-01', 'y': 26.9},
-                        {'x': '2013-01-02', 'y': 26.7},
-                        {'x': '2013-01-03', 'y': 26}
-                    ],
-                'water':
-                    [
-                        {'x': '2013-01-01', 'y': 50},
-                        {'x': '2013-01-02', 'y': 50.2},
-                        {'x': '2013-01-03', 'y': 50.2}
-                    ]
-            }
+            [
+                ['weight-y' 75, 74.5, 74.6],
+                ['weight-x', '2013-01-01', '2013-01-02', '2013-01-03'],
+                ['fat-y', 26.9, 26.7, 26],
+                ['fat-x', '2013-01-01', '2013-01-02', '2013-01-03'],
+                ['water-y', 50, 50.2, 50.2],
+                ['water-x', '2013-01-01', '2013-01-02', '2013-01-03'],
+            ]
 
         """
 
@@ -93,15 +81,30 @@ class Health(RelatedDateMixin):
         health = Health.get_health_by_date(user, range_type, date_str)
 
         # create return dict
-        return_dict = {'weight': [], 'fat': [], 'water': []}
+        data_dict = {
+            'weight-y': ['weight-y'],
+            'weight-x': ['weight-x'],
+            'fat-y': ['fat-y'],
+            'fat-x': ['fat-x'],
+            'water-y': ['water-y'],
+            'water-x': ['water-x'],
+        }
 
         for h in health:
             date = h.related_date.strftime('%Y-%m-%d')
-            return_dict['weight'].append({'x': date, 'y': h.weight})
-            return_dict['fat'].append({'x': date, 'y': h.fat})
-            return_dict['water'].append({'x': date, 'y': h.water})
+            if h.weight:
+                data_dict['weight-y'].append(h.weight)
+                data_dict['weight-x'].append(date)
+            if h.fat:
+                data_dict['fat-y'].append(h.fat)
+                data_dict['fat-x'].append(date)
+            if h.water:
+                data_dict['water-y'].append(h.water)
+                data_dict['water-x'].append(date)
 
-        return return_dict
+        return_list = [v for v in data_dict.itervalues()]
+
+        return return_list
 
 
     @classmethod
