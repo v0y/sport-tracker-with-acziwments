@@ -193,67 +193,55 @@ getJsonData = ->
             date: date
             csrfmiddlewaretoken: $.cookie('csrftoken')
         error: (jqXHR, textStatus, errorThrown) -> console.log("AJAX Error: #{errorThrown}")
-        success: (data) -> getChartData(data)
+        success: (data) -> generateChart(data)
 
 
-getChartData = (jsonData) ->
-    # get data formatted for chart
-
-    valuesForChart = {}
-    for dataType, datasForType of jsonData
-        valuesForChart[dataType] = []
-        for data in datasForType
-            splittedDate = data['x'].split("-")
-            newDate = new Date(splittedDate[0], splittedDate[1]-1, splittedDate[2])
-            valuesForChart[dataType].push {'x': newDate, 'y': data['y']}
-
-    chartData = [
-        {
-            color: "#61AE24"
-            key: "Waga (kg)"
-            values: valuesForChart.weight
-        },
-        {
-            color: "#F18D05"
-            key: "Tłuszcz (%)"
-            values: valuesForChart.fat
-        },
-        {
-            color: "#00A1CB"
-            key: "Woda (%)"
-            values: valuesForChart.water
-        },
-    ]
-
-    nv.addGraph(chartData)
-
-
-nv.addGraph = (chartData) ->
-    # chow chart
-    chart = nv.models.lineChart()
-        .useInteractiveGuideline(true)
-        .margin({bottom: 70, left: 75})
-        .forceX(getChartBorderDates())
-
-    chart.xAxis
-        .axisLabel("Data")
-        .rotateLabels(-30)
-        .tickFormat (d) ->
-            d3.time.format("%d-%m-%Y")(new Date(d))
-
-    chart.yAxis
-        .axisLabel("Wartość")
-        .tickFormat(d3.format(",.1f"))
-
-    $chart = d3.select(".weight-chart svg")
-
-    $chart
-        .datum(chartData)
-        .transition().duration(500).call(chart)
-
-    nv.utils.windowResize -> $chart.call(chart)
-
-    chart
+generateChart = (jsonData) ->
+    c3.generate(
+        bindto: '.js-weight-chart'
+        color:
+            pattern: ['#d0d102', '#00a1cb', '#e54028']
+        data:
+            xs:
+                'weight-y': 'weight-x'
+                'fat-y': 'fat-x'
+                'water-y': 'water-x'
+            xFormat: '%Y-%m-%d',
+            columns: jsonData
+            axes:
+                'weight-y': 'y'
+                'fat-y': 'y2'
+                'water-y': 'y2'
+            names:
+                'weight-y': 'Weight',
+                'fat-y': 'Body fat'
+                'water-y': 'Body water'
+            type: 'spline'
+        axis:
+            x:
+                type: 'timeseries'
+                tick:
+                    format: '%Y-%m-%d'
+                    rotate: 60
+            y:
+                label:
+                    text: 'kg'
+                    position: 'outer-middle'
+                tick:
+                    format: d3.format('.1f')
+            y2:
+                show: true
+                label:
+                    text: '%'
+                    position: 'outer-middle'
+                tick:
+                    format: d3.format('.1f')
+        grid:
+            x:
+                show: true
+            y:
+                show: true
+    )
 
 
 ###############################################################################
