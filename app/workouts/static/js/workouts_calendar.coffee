@@ -18,7 +18,7 @@ main = ->
 
 
 drawCalendar = (events, current_month, current_year) ->
-    $('#calendar').fullCalendar(
+    $('.js-workouts-calendar').fullCalendar(
         header:
             left: 'prev,today,next'
             center: 'title'
