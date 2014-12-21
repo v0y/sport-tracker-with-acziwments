@@ -165,16 +165,36 @@ class SportTestCase(TestCase):
 class WorkoutChartTestCase(TestRoutesTestCase):
     def test_get_kmph_on_km_pace_data_from_track_returns_right_lenght(self):
         track = json.loads(self.route.tracks_json)[0]
-        self.assertEquals(
-            len(_get_chart_data_from_track(track)['pace']), 195)
+        data = _get_chart_data_from_track(track)
+        self.assertEquals(len(data), 4)
+        self.assertEquals(len(data[0]), 196)
+        self.assertEquals(len(data[1]), 196)
+        self.assertEquals(len(data[2]), 196)
+        self.assertEquals(len(data[3]), 196)
 
     def test_get_kmph_on_km_pace_data_from_track_returns_right_data(self):
         track = json.loads(self.route.tracks_json)[0]
         data = _get_chart_data_from_track(track)
 
-        self.assertEquals(data['pace'][0]['x'], 0.095)
-        self.assertEquals(data['pace'][0]['y'], 9.76)
-        self.assertEquals(data['pace'][69]['x'], 4.547)
-        self.assertEquals(data['pace'][69]['y'], 6.82)
-        self.assertEquals(data['pace'][-1]['x'], 14.451)
-        self.assertEquals(data['pace'][-1]['y'], 8.39)
+        pace_x = data[0]
+        pace_y = data[1]
+        altitude_x = data[2]
+        altitude_y = data[3]
+
+        self.assertEquals(pace_x[0], 'pace-x')
+        self.assertEquals(pace_y[0], 'pace-y')
+        self.assertEquals(pace_x[1], 0.095)
+        self.assertEquals(pace_y[1], 9.76)
+        self.assertEquals(pace_x[70], 4.547)
+        self.assertEquals(pace_y[70], 6.82)
+        self.assertEquals(pace_x[-1], 14.451)
+        self.assertEquals(pace_y[-1], 8.39)
+
+        self.assertEquals(altitude_x[0], 'altitude-x')
+        self.assertEquals(altitude_y[0], 'altitude-y')
+        self.assertEquals(altitude_x[1], 0.095)
+        self.assertEquals(altitude_y[1], 93.7)
+        self.assertEquals(altitude_x[70], 4.547)
+        self.assertEquals(altitude_y[70], 89)
+        self.assertEquals(altitude_x[-1], 14.451)
+        self.assertEquals(altitude_y[-1], 87.5)
