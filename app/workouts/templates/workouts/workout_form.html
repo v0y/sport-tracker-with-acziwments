@@ -14,15 +14,15 @@
 				<table class="table">
 					<tr>
 						<td>
-							Dystans: <span class="js-map-total-distance text-bold">0.00</span> km<br>
+							Distance: <span class="js-map-total-distance text-bold">0.00</span> km<br>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input class="js-use-google-directions" type="checkbox"> Przyciągaj do dróg dla ruchu
+							<input class="js-use-google-directions" type="checkbox"> Snap to roads for
 							<select class="js-travel-mode-select">
-								<option value="WALKING">pieszego</option>
-								<option value="BICYCLING">rowerowego</option>
+								<option value="WALKING">walking</option>
+								<option value="BICYCLING">cycling</option>
 							</select>
 							{# <a class="js-google-warnings"></a><br> #}
 						</td>
@@ -37,17 +37,17 @@
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
 
 			<div class="col-lg-6 col-md-6 col-sm-12">
-				<a class="js-cancel-route btn btn-lg btn-danger btn-block" style="display:none">Anuluj</a>
-				<a class="js-route-from-file-switch btn btn-default btn-lg btn-block">Zaimportuj z pliku *.gpx</a>
-				<a class="js-cancel-gpx btn btn-lg btn-danger btn-block" style="display:none">Anuluj</a>
+				<a class="js-cancel-route btn btn-lg btn-danger btn-block" style="display:none">Cancel</a>
+				<a class="js-route-from-file-switch btn btn-default btn-lg btn-block">Import from *.gpx file</a>
+				<a class="js-cancel-gpx btn btn-lg btn-danger btn-block" style="display:none">Cancel</a>
 			</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-12">
-				<a class="js-manual-route-save btn btn-lg btn-success btn-block" data-url="{% url 'save_route' %}" style="display:none">Zapisz trasę</a>
-				<a class="js-route-drawing-switch btn btn-default btn-lg btn-block">Wyznacz trasę ręcznie</a>
+				<a class="js-manual-route-save btn btn-lg btn-success btn-block" data-url="{% url 'save_route' %}" style="display:none">Save route</a>
+				<a class="js-route-drawing-switch btn btn-default btn-lg btn-block">Designate a route</a>
 				<div class="well js-gpx-file-input-form" style="display:none">
 					<form method="post" enctype="multipart/form-data" data-url="{% url 'upload_gpx' %}">
-						<label for="gpx_file">Wybierz plik *.gpx</label>
+						<label for="gpx_file">Select *.gpx file</label>
 						<input type="file" name="gpx_file">
 					</form>
 				</div>
@@ -71,7 +71,7 @@
 			{# duration label #}
 			<div class="form-group label-wrapper row">
 				<div class="col-lg-3 col-3 col-sm-3 text-right">
-					<label for="{{ form.duration_hours.id_for_label }}" class="control-label">Czas trwania</label>
+					<label for="{{ form.duration_hours.id_for_label }}" class="control-label">Duration</label>
 				</div>
 
 				{# duration fields #}
@@ -81,7 +81,7 @@
 						class="form-control form-text"
 						id="{{ form.duration_hours.id_for_label }}"
 							value="{{ form.duration_hours.value }}"
-					><span class="input-group-addon add-on">godz</span>
+					><span class="input-group-addon add-on">h</span>
 					<input name="{{ form.duration_mins.name }}"
 						type="text"
 						class="form-control form-text"
@@ -93,7 +93,7 @@
 						class="form-control form-text"
 						id="{{ form.duration_secs.id_for_label }}"
 							value="{{ form.duration_secs.value }}"
-					><span class="input-group-addon add-on">sek</span>
+					><span class="input-group-addon add-on">sec</span>
 				</div>
 
 				{# errors #}

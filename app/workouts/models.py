@@ -25,10 +25,6 @@ class BestTime(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
     duration = TimedeltaField()
 
-    class Meta:
-        verbose_name = u"najlepszy czas"
-        verbose_name_plural = u"najlepsze czasy"
-
     @classmethod
     def get_records(cls, sport, user):
         distances = sport.get_distances()
@@ -71,15 +67,10 @@ class BestTime(models.Model):
 
 class Distance(models.Model):
     distance = models.FloatField(unique=True)
-    only_for = models.ManyToManyField(
-        'Sport', null=True, blank=True,
-        help_text=u"Jeśli podane, dystans pojawi się wyłącznie dla danych "
-                  u"dyscyplin")
-    name = models.CharField(verbose_name=u"Nazwa", max_length=64, blank=True)
+    only_for = models.ManyToManyField('Sport', null=True, blank=True)
+    name = models.CharField(max_length=64, blank=True)
 
     class Meta:
-        verbose_name = u"dystans"
-        verbose_name_plural = u"dystanse"
         ordering = ['distance']
 
     def __unicode__(self):
@@ -88,14 +79,9 @@ class Distance(models.Model):
 
 
 class Sport(NameMixin, SlugMixin):
-    category = models.CharField(
-        verbose_name=u"Kategoria", choices=SPORT_CATEGORIES, max_length=16)
+    category = models.CharField(choices=SPORT_CATEGORIES, max_length=16)
     show_distances = models.BooleanField(default=True)
     show_map = models.BooleanField(default=True)
-
-    class Meta:
-        verbose_name = u"sport"
-        verbose_name_plural = u"sporty"
 
     @classmethod
     def get_sports_choices(cls):
@@ -122,24 +108,15 @@ class Sport(NameMixin, SlugMixin):
 
 
 class Workout(CreatedAtMixin):
-    name = models.CharField(
-        verbose_name=u"Nazwa", max_length=64, null=True, blank=True)
-    user = models.ForeignKey(
-        User, verbose_name=u"Użytkownik", related_name='workouts')
-    sport = models.ForeignKey('Sport', verbose_name=u"Dyscyplina")
-    notes = models.CharField(
-        verbose_name=u"Notatki", max_length=512, null=True, blank=True)
-    distance = models.FloatField(
-        verbose_name=u"Dystans", validators=[MinValueValidator(0)], null=True,
+    name = models.CharField(max_length=64, null=True, blank=True)
+    user = models.ForeignKey(User, related_name='workouts')
+    sport = models.ForeignKey('Sport')
+    notes = models.CharField(max_length=512, null=True, blank=True)
+    distance = models.FloatField(validators=[MinValueValidator(0)], null=True,
         blank=True)
-    datetime_start = models.DateTimeField(verbose_name=u"Czas rozpoczęcia")
-    datetime_stop = models.DateTimeField(verbose_name=u"Czas zakończenia")
-    is_active = models.BooleanField(
-        verbose_name=u"Włączony do statystyk", default=True)
-
-    class Meta:
-        verbose_name = u"trening"
-        verbose_name_plural = u"treningi"
+    datetime_start = models.DateTimeField()
+    datetime_stop = models.DateTimeField()
+    is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
         visible_name = self.sport.name

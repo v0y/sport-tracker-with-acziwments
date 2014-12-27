@@ -62,5 +62,4 @@ generateChart = (jsonData) ->
     )
 
 $ ->
-    moment.locale('pl')
     getJsonData()

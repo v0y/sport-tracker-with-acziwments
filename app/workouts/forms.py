@@ -10,10 +10,9 @@ from .models import Sport, Workout
 
 
 class WorkoutForm(RouteIdMixin):
-    notes = forms.CharField(
-        widget=forms.widgets.Textarea, label=u"Notatki", required=False)
-    datetime_start = forms.DateField(label=u"Data", input_formats=['%d-%m-%Y'])
-    time_start = forms.TimeField(label=u"Godzina rozpoczęcia")
+    notes = forms.CharField(widget=forms.widgets.Textarea, required=False)
+    datetime_start = forms.DateField(label='Date', input_formats=['%d-%m-%Y'])
+    time_start = forms.TimeField(label='Start time')
     duration_hours = forms.IntegerField(
         validators=[MinValueValidator(0)], initial=0, required=False)
     duration_mins = forms.IntegerField(
@@ -22,13 +21,13 @@ class WorkoutForm(RouteIdMixin):
     duration_secs = forms.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(59)], initial=0,
         required=False)
-    sport = forms.ChoiceField(label=u"Dyscyplina")
+    sport = forms.ChoiceField(label='Discipline')
 
     class Meta:
-        button_text = u"Zapisz"
+        button_text = 'Save'
         exclude = ('user', 'datetime_stop', 'is_active')
         model = Workout
-        name = u"Dodaj trening"
+        name = 'Create Workout'
 
     def __init__(self, initial=None, *args, **kwargs):
         super(WorkoutForm, self).__init__(*args, **kwargs)
@@ -51,7 +50,7 @@ class WorkoutForm(RouteIdMixin):
         secs = cd.get('duration_secs')
 
         if not any([hours, mins, secs]):
-            raise forms.ValidationError(u"Musisz podać czas trwania treningu")
+            raise forms.ValidationError('Workout duration is required')
 
         return secs
 

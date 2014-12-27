@@ -24,7 +24,7 @@ drawCalendar = (events, current_month, current_year) ->
             center: 'title'
             right: ''
         editable: false
-        lang: 'pl'
+        lang: 'en'
         firstDay: 1  # monday
         aspectRatio: 3
         events: events

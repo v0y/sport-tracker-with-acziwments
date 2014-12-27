@@ -6,12 +6,19 @@ import re
 
 from annoying.decorators import ajax_request
 from django.http import HttpResponse
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import (
+    get_object_or_404,
+    redirect,
+    render,
+)
 from django.views.generic import View
 from django.views.generic.edit import CreateView
 
 from app.routes.gpx_handler import get_points_distance_and_elevation
-from app.routes.helpers import get_distance, handle_datetime_string
+from app.routes.helpers import (
+    get_distance,
+    handle_datetime_string,
+)
 from app.shared.views import LoginRequiredMixin
 from .forms import WorkoutForm
 from .models import Workout

@@ -5,7 +5,10 @@ from django.views.generic import RedirectView
 from django.views.generic.detail import DetailView
 
 from .models import Workout
-from .views import WorkoutCreateView, LastWorkoutView
+from .views import (
+    LastWorkoutView,
+    WorkoutCreateView,
+)
 
 
 urlpatterns = patterns('app.workouts.views',
