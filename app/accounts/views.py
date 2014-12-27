@@ -77,14 +77,14 @@ def login_view(request):
         if user is None:
             return {
                 'form': form,
-                'error': u"Nieprawidłowy login lub hasło"
+                'error': 'Incorrect username or password'
             }
 
         # check, if account is activated
         elif not user.is_active:
             return {
                 'form': form,
-                'error': u"Twoje konto nie zostało aktywowane"
+                'error': 'Account is now active'
             }
 
         login(request, user)

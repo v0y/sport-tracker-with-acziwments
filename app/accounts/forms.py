@@ -19,22 +19,27 @@ from .models import UserActivation, UserProfile
 
 class CheckCurrentPasswordMixin(forms.Form):
     current_password = forms.CharField(
-        max_length=30, required=True, widget=forms.PasswordInput,
-        label=u"Hasło",
-        error_messages={'required': u"Podaj hasło", })
+        max_length=30,
+        required=True,
+        widget=forms.PasswordInput,
+        label='Password'
+    )
 
     def clean_current_password(self):
         current_password = self.cleaned_data.get('current_password')
         if not self.request.user.check_password(current_password):
-            raise forms.ValidationError(u"Podane hasło jest niepoprane")
+            raise forms.ValidationError('Password is incorrect')
         return current_password
 
 
 class EmailMixin(forms.Form):
     email = forms.EmailField(
-        max_length=50, required=True, label=u"Email",
-        error_messages={'invalid': u"Podaj poprawny adres email",
-                        'required': u"Podaj adres email"})
+        max_length=50, required=True
+        # error_messages={
+        #     'invalid': 'Enter a valid email address',
+        #     'required': 'Enter email address'
+        # }
+    )
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -49,30 +54,34 @@ class EmailMixin(forms.Form):
                 activation.delete()
                 user.delete()
         if email and User.objects.filter(email=email):
-            raise forms.ValidationError(
-                u"Użytkownik o takim adresie email już istnieje")
+            raise forms.ValidationError('This email is already taken.')
         return email
 
 
 class SetNewPasswordFormMixin(forms.Form):
     password = forms.CharField(
         validators=[validators.MinLengthValidator(5)],
-        max_length=30, required=True, widget=forms.PasswordInput,
-        label=u"Nowe hasło",
+        max_length=30,
+        required=True,
+        widget=forms.PasswordInput,
+        label='New password',
         error_messages={
-            'required': u"Podaj hasło",
-            'min_length': u"Hasło musi mieć minimum 5 znaków długości"})
+            'min_length': 'The password must be at least 5 characters long.'
+        }
+    )
 
     re_password = forms.CharField(
-        max_length=30, required=True, widget=forms.PasswordInput,
-        label=u"Powtórz nowe hasło",
-        error_messages={'required': u"Powtórz hasło", })
+        max_length=30,
+        required=True,
+        widget=forms.PasswordInput,
+        label='Retype new password',
+    )
 
     def clean_re_password(self):
         password = self.cleaned_data.get('password')
         re_password = self.cleaned_data.get('re_password')
         if password != re_password:
-            raise forms.ValidationError(u"Hasła nie są zgodne")
+            raise forms.ValidationError('Passwords doesn\'t match')
         return re_password
 
 
@@ -87,14 +96,13 @@ class UsernameOrEmailMixin(forms.Form):
             # email
             user = get_object_or_None(User, email=username_or_email)
             if not user:
-                raise forms.ValidationError(
-                    u"Użytkownik o takim adresie email nie istnieje")
+                raise forms.ValidationError('This email is already taken.')
         else:
-            #username
+            # username
             user = get_object_or_None(User, username=username_or_email)
             if not user:
                 raise forms.ValidationError(
-                    u"Użytkownik o takim loginie nie istnieje")
+                    'User with this username does\'t exists.')
 
         return username_or_email
 
@@ -104,50 +112,50 @@ class UsernameOrEmailMixin(forms.Form):
 # -----------------------------------------------------------------------------
 
 class LoginForm(forms.Form):
-    username = forms.CharField(
-        max_length=30, label=u"Login", required=True,
-        error_messages={'required': u"Podaj login"})
-
+    username = forms.CharField(max_length=30, required=True)
     password = forms.CharField(
-        max_length=30, label=u"Hasło", required=True,
+        max_length=30,
+        required=True,
         widget=forms.PasswordInput,
-        error_messages={'required': u"Podaj hasło"})
+    )
 
     class Meta:
-        name = u"Logowanie"
-        button_text = u"Zaloguj się"
+        name = 'Sign up'
+        button_text = 'Sign up'
 
 
 class RegistrationForm(EmailMixin):
     username = forms.SlugField(
         validators=[validators.MinLengthValidator(3)],
-        max_length=30, required=True, label=u"Login",
+        max_length=30,
+        required=True,
+        label='Username',
         error_messages={
-            'required': u"Podaj login",
-            'invalid': u"Login może zawierać tylko litery, "
-                       u"cyfry, podkreślenie i myślnik",
-            'min_length': u"Login musi mieć minimum 3 znaki długości"})
-
+            'min_length': 'Username is too short (at least 3 chars).'
+        },
+    )
     password = forms.CharField(
         validators=[validators.MinLengthValidator(5)],
-        max_length=30, required=True, widget=forms.PasswordInput,
-        label=u"Hasło",
+        max_length=30,
+        required=True,
+        widget=forms.PasswordInput,
         error_messages={
-            'required': u"Podaj hasło",
-            'min_length': u"Hasło musi mieć minimum 5 znaków długości"})
-
+            'invalid': 'Username can only contain letters, '
+                       'numbers and signs _ + @ .-',
+            'min_length': 'Password is too short (at least 5 chars).'
+        },
+    )
     re_password = forms.CharField(
-        max_length=30, required=True, widget=forms.PasswordInput,
-        label=u"Powtórz hasło", error_messages={'required': u"Powtórz hasło"})
-
-    rules = forms.BooleanField(
-        required=True, label=u"Akceptuję regulamin",
-        error_messages={
-            'required': u"Musisz zaakceptować regulamin"})
+        max_length=30,
+        required=True,
+        widget=forms.PasswordInput,
+        label='Retype password',
+    )
+    rules = forms.BooleanField(required=True, label='I accept the terms')
 
     class Meta:
-        name = u"Rejestracja"
-        button_text = u"Zarejestruj się"
+        name = 'Registration'
+        button_text = 'Register'
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -159,21 +167,21 @@ class RegistrationForm(EmailMixin):
         password = self.cleaned_data.get('password')
         re_password = self.cleaned_data.get('re_password')
         if password != re_password:
-            raise forms.ValidationError(u"Hasła nie są zgodne")
+            raise forms.ValidationError('Passwords doesn\'t match')
         return re_password
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if username and User.objects.filter(username=username):
             raise forms.ValidationError(
-                u"Użytkownik o takim loginie już istnieje")
+                'This username is already taken.')
         return username
 
 
 class ResendActivationMailForm(UsernameOrEmailMixin):
     class Meta:
-        name = u"Wyślij link aktywacyjny"
-        button_text = u"Wyślij link aktywacyjny"
+        name = 'Send activation link'
+        button_text = 'Send activation link'
 
     def clean_username_or_email(self):
         username_or_email = self.cleaned_data.get('username_or_email')
@@ -182,25 +190,26 @@ class ResendActivationMailForm(UsernameOrEmailMixin):
 
         # check, if account is already activated
         if user and user.is_active:
-            raise forms.ValidationError(
-                u"Konto jest już aktywne, możesz się zalogować.")
+            raise forms.ValidationError('Account is already activated')
 
         # check, if old activation link is used
         if user and not get_object_or_None(UserActivation, user=user):
-            raise forms.ValidationError(u"Nie możesz aktywować swojego konta")
+            raise forms.ValidationError('Activation link is incorrect')
 
         return super(ResendActivationMailForm, self).clean_username_or_email()
 
 
 class ChangePasswordForm(SetNewPasswordFormMixin):
     old_password = forms.CharField(
-        max_length=30, required=True, widget=forms.PasswordInput,
-        label=u"Aktualne hasło",
-        error_messages={'required': u"Powtórz hasło", })
+        max_length=30,
+        required=True,
+        widget=forms.PasswordInput,
+        label='Current password',
+    )
 
     class Meta:
-        name = u"Zmiana hasła"
-        button_text = u"Zmień hasło"
+        name = 'Password change'
+        button_text = 'Change password'
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -210,28 +219,28 @@ class ChangePasswordForm(SetNewPasswordFormMixin):
     def clean_old_password(self):
         old_password = self.cleaned_data.get('old_password')
         if not self.request.user.check_password(old_password):
-            raise forms.ValidationError(u"Podane hasło jest niepoprane")
+            raise forms.ValidationError('Password is incorrect.')
         return old_password
 
 
 class PasswordResetForm(UsernameOrEmailMixin):
     class Meta:
-        name = u"Reset hasła"
-        button_text = u"Resetuj hasło"
+        name = 'Password reset'
+        button_text = 'Reset Password'
 
 
 class NewPasswordForm(SetNewPasswordFormMixin):
 
     class Meta:
-        name = u"Ustawienie nowego hasła"
-        button_text = u"Ustaw nowe hasło"
+        name = 'Password change'
+        button_text = 'Change password'
 
 
 class ChangeEmailForm(CheckCurrentPasswordMixin, EmailMixin):
 
     class Meta:
-        name = u"Zmiana adresu email"
-        button_text = u"Zmień adres email"
+        name = 'Email address change'
+        button_text = 'Change email'
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -242,24 +251,26 @@ class ChangeEmailForm(CheckCurrentPasswordMixin, EmailMixin):
 class UserProfileForm(ModelForm):
     dob = forms.DateField(widget=SelectDateWidgetWithNone(
         years=(lambda y=date.today().year: range(y, y - 150, -1))(),
-        attrs={'class': 'form-control dob-field'}), required=False,
-        label=u"Data urodzenia")
+        attrs={'class': 'form-control dob-field'}),
+        required=False,
+        label=u"Date of birth",
+    )
 
     class Meta:
         model = UserProfile
         exclude = ('user',)
-        name = u"Edycja profilu"
-        button_text = u"Zapisz zmiany"
+        name = 'Profile settings'
+        button_text = 'Save'
 
     def clean_dob(self):
         dob = self.cleaned_data.get('dob')
         if dob and not date.today() > dob:
             raise forms.ValidationError(
-                u"Śmieszku, jeszcze się nie urodziłeś xD")
+                'Are you time traveller, or something?')
         return dob
 
     def clean_height(self):
         height = self.cleaned_data.get('height')
         if height and not 30 < height < 300:
-            raise forms.ValidationError(u"Serio masz %s cm wzrostu?" % height)
+            raise forms.ValidationError('Are you really %s cm tall?' % height)
         return height

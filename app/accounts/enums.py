@@ -2,6 +2,6 @@
 
 #: selection for sex field
 SEX_SELECT = (
-    ('K', u'Kobieta'),
-    ('M', u'Mężczyzna'),
+    ('F', 'Female'),
+    ('M', 'Male'),
 )

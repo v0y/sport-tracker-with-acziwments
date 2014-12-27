@@ -16,17 +16,15 @@ from .enums import SEX_SELECT
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(
-        User, verbose_name=u'Użytkownik', related_name='profile')
-    dob = models.DateField(verbose_name=u'Data urodzin', null=True, blank=True)
+    user = models.OneToOneField(User, related_name='profile')
+    dob = models.DateField(null=True, blank=True)
     sex = models.CharField(
-        verbose_name=u'Płeć', max_length=1, choices=SEX_SELECT, null=True,
-        blank=True)
-    height = models.IntegerField(verbose_name=u'Wzrost', null=True, blank=True)
-
-    class Meta:
-        verbose_name = u'profil użytkownika'
-        verbose_name_plural = u'profile użytkowników'
+        max_length=1,
+        choices=SEX_SELECT,
+        null=True,
+        blank=True,
+    )
+    height = models.IntegerField(null=True, blank=True)
 
     @property
     def age(self):
@@ -185,12 +183,7 @@ class UserActivation(CreatedAtMixin, SHA1TokenMixin):
 
 
 class PasswordReset(CreatedAtMixin, SHA1TokenMixin):
-    user = models.OneToOneField(
-        User, verbose_name=u'Użytkownik', related_name='password_reset')
-
-    class Meta:
-        verbose_name = u'reset hasła'
-        verbose_name_plural = u'reset hasła'
+    user = models.OneToOneField(User, related_name='password_reset')
 
     def get_password_reset_link(self):
         """
@@ -204,13 +197,8 @@ class PasswordReset(CreatedAtMixin, SHA1TokenMixin):
 
 
 class EmailActivation(CreatedAtMixin, SHA1TokenMixin):
-    user = models.OneToOneField(
-        User, verbose_name=u'Użytkownik', related_name='email_activation')
+    user = models.OneToOneField(User, related_name='email_activation')
     email = models.EmailField(verbose_name='Adres email')
-
-    class Meta:
-        verbose_name = u'aktywacja emaila'
-        verbose_name_plural = u'aktywacja emaila'
 
     @property
     def activation_link(self):

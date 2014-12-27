@@ -60,7 +60,7 @@ if 'test' in sys.argv:
 ###############################################################################
 
 TIME_ZONE = 'Europe/Warsaw'
-LANGUAGE_CODE = 'pl'
+LANGUAGE_CODE = 'eng'
 
 SITE_ID = 1
 
