@@ -2,7 +2,10 @@
 
 from django.contrib import admin
 
-from .models import Activity, ActivityType
+from .models import (
+    Activity,
+    ActivityType,
+)
 
 
 class ActivityAdmin(admin.ModelAdmin):
