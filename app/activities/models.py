@@ -11,26 +11,17 @@ from app.workouts.models import Workout
 
 
 class ActivityType(models.Model):
-    label = models.SlugField(max_length=64, verbose_name=u"Etykieta")
-    description = models.CharField(
-        max_length=128, blank=True, null=True, verbose_name=u"Opis")
-
-    class Meta:
-        verbose_name = u"typ aktywności"
-        verbose_name_plural = u"typy aktywności"
+    label = models.SlugField(max_length=64)
+    description = models.CharField(max_length=128, blank=True, null=True)
 
     def __unicode__(self):
         return self.label
 
 
 class Activity(CreatedAtMixin, RelatedDateMixin):
-    type = models.ForeignKey('ActivityType', verbose_name=u"Typ")
-    user = models.ForeignKey(User, verbose_name=u"Użytkownik")
-    data_json = JSONField(default={}, verbose_name=u"json templatki")
-
-    class Meta:
-        verbose_name = u"aktywność"
-        verbose_name_plural = u"aktywności"
+    type = models.ForeignKey('ActivityType')
+    user = models.ForeignKey(User)
+    data_json = JSONField(default={})
 
     def __unicode__(self):
         return '%s dla %s' % (self.type.label, self.user)
