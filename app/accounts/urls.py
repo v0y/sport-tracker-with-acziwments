@@ -1,9 +1,15 @@
 # encoding: utf-8
 
 from django.conf.urls import patterns, url
-from django.views.generic import RedirectView, TemplateView
+from django.views.generic import (
+    RedirectView,
+    TemplateView,
+)
 
-from .views import ProfileSettingsView, ShowUserProfileView
+from .views import (
+    ProfileSettingsView,
+    ShowUserProfileView,
+)
 
 
 urlpatterns = patterns('app.accounts.views',

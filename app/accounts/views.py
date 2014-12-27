@@ -5,14 +5,21 @@ from datetime import datetime
 from annoying.decorators import render_to
 from annoying.functions import get_object_or_None
 from django.conf import settings
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import (
+    authenticate,
+    login,
+    logout,
+)
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.models import get_current_site
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import (
+    DetailView,
+    UpdateView,
+)
 from fiut.helpers import simple_send_email
 
 from app.activities.models import Activity
@@ -21,11 +28,22 @@ from app.shared.helpers import create_url
 from app.shared.views import LoginRequiredMixin
 from app.workouts.models import BestTime
 from .forms import (
-    ChangeEmailForm, ChangePasswordForm, LoginForm, NewPasswordForm,
-    PasswordResetForm, RegistrationForm, ResendActivationMailForm,
-    UserProfileForm)
+    ChangeEmailForm,
+    ChangePasswordForm,
+    LoginForm,
+    NewPasswordForm,
+    PasswordResetForm,
+    RegistrationForm,
+    ResendActivationMailForm,
+    UserProfileForm,
+)
 from .helpers import get_mail_provider_url
-from .models import EmailActivation, UserActivation, PasswordReset, UserProfile
+from .models import (
+    EmailActivation,
+    UserActivation,
+    PasswordReset,
+    UserProfile,
+)
 
 
 class ShowUserProfileView(DetailView):

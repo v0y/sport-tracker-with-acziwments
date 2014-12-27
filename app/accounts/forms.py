@@ -10,7 +10,10 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 
 from app.shared.forms import SelectDateWidgetWithNone
-from .models import UserActivation, UserProfile
+from .models import (
+    UserActivation,
+    UserProfile,
+)
 
 
 # -----------------------------------------------------------------------------

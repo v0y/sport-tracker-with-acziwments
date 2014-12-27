@@ -10,7 +10,10 @@ from django.db import models
 from django.dispatch import receiver
 
 from app.health.models import Health
-from app.shared.models import CreatedAtMixin, SHA1TokenMixin
+from app.shared.models import (
+    CreatedAtMixin,
+    SHA1TokenMixin,
+)
 from app.workouts.models import Sport
 from .enums import SEX_SELECT
 

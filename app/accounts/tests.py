@@ -1,6 +1,10 @@
 # coding: utf-8
 
-from datetime import datetime, timedelta, date
+from datetime import (
+    date,
+    datetime,
+    timedelta,
+)
 from pytz import UTC
 
 from django.contrib.auth.models import User
@@ -8,7 +12,10 @@ from django.core import management
 from django.test import TestCase
 
 from app.health.models import Health
-from app.workouts.models import Workout, Sport
+from app.workouts.models import (
+    Sport,
+    Workout,
+)
 from .enums import SEX_SELECT
 from .helpers import get_mail_provider_url
 

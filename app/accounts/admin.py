@@ -2,7 +2,12 @@
 
 from django.contrib import admin
 
-from .models import EmailActivation, PasswordReset, UserActivation, UserProfile
+from .models import (
+    EmailActivation,
+    PasswordReset,
+    UserActivation,
+    UserProfile,
+)
 
 
 class EmailActivationAdmin(admin.ModelAdmin):
