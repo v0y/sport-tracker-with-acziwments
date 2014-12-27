@@ -34,7 +34,7 @@ validateFileExtansion = ($inputField) ->
     if extention == 'gpx'
         return true;
     else
-        alert("To nie jest właściwy rodzaj pliku - wybierz plik .gpx")
+        alert("Incorrect file type - select .gpx file")
         return false;
 
 

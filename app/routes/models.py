@@ -15,27 +15,20 @@ from .gpx_handler import handle_gpx, get_points_distance_and_elevation, \
 
 class Route(CreatedAtMixin):
     workout = models.ForeignKey(
-        Workout, null=True, related_name=u'routes', default=None,
-        verbose_name=u"Trening")
-    user = models.ForeignKey(
-        User, related_name=u'routes', verbose_name=u"Użytkownik")
+        Workout,
+        null=True,
+        related_name=u'routes',
+        default=None,
+    )
+    user = models.ForeignKey(User, related_name=u'routes')
 
-    start_time = models.DateTimeField(
-        auto_now=False, null=True, verbose_name=u"Czas rozpoczęcia trasy")
-    finish_time = models.DateTimeField(
-        auto_now=False, null=True, verbose_name=u"Czas zakończenia trasy")
-    length = models.FloatField(
-        default=0, verbose_name=u"Długość trasy")
-    height_up = models.FloatField(
-        default=0, verbose_name=u"Różnica wysokości w górę")
-    height_down = models.FloatField(
-        default=0, verbose_name=u"Różnica wysokości w dół")
+    start_time = models.DateTimeField(auto_now=False, null=True)
+    finish_time = models.DateTimeField(auto_now=False, null=True)
+    length = models.FloatField(default=0)
+    height_up = models.FloatField(default=0)
+    height_down = models.FloatField(default=0)
 
     tracks_json = models.TextField(default='[]')
-
-    class Meta:
-        verbose_name = u"trasa"
-        verbose_name_plural = u"trasy"
 
     def __unicode__(self):
         return ("user:%s, workout:%s, start_time:%s, length:%f" %

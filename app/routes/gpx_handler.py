@@ -3,7 +3,10 @@
 from dateutil import parser as iso8601parser
 from xml.etree.cElementTree import parse
 
-from .helpers import get_distance, handle_datetime_string
+from .helpers import (
+    get_distance,
+    handle_datetime_string,
+)
 
 
 def handle_gpx(gpx_file, round_distance_to=False):

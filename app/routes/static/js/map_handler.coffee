@@ -235,12 +235,12 @@ class Route
         @finishMarker = new google.maps.Marker({
             position: trackPoints[trackPoints.length - 1],
             map: @map,
-            title: "Koniec"
+            title: "Finish"
         })
 
         # add info windows
         finishInfoWindow = new google.maps.InfoWindow({
-            content: "<span>Koniec</span>"
+            content: "<span>Finish</span>"
         })
 
         startInfoWindow = new google.maps.InfoWindow({
@@ -499,7 +499,7 @@ class Route
                 # directions...
                 mark2.useGoogleDirections = false;
                 # ...and tell the user that nothing was found
-                msg = "Nie znaleziono trasy - rysuję linię prostą"
+                msg = "Route not found - drawing straight line"
                 _this.controls.googleWarningsDisplay.html(msg)
             else
                 # if no path was found, (or something else went wrong)
