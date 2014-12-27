@@ -6,8 +6,8 @@
             "category": "athletic",
             "show_map": false,
             "show_distances": false,
-            "name": "si\u0142ownia",
-            "slug": "silownia"
+            "name": "gym",
+            "slug": "gym"
         }
     },
     {
@@ -17,8 +17,8 @@
             "category": "athletic",
             "show_map": false,
             "show_distances": false,
-            "name": "podnoszenie ci\u0119\u017car\u00f3w",
-            "slug": "podnoszenie-ciezarow"
+            "name": "weight-lifting",
+            "slug": "weight-lifting"
         }
     },
     {
@@ -28,8 +28,8 @@
             "category": "athletic",
             "show_map": false,
             "show_distances": false,
-            "name": "gimnastyka",
-            "slug": "gimnastyka"
+            "name": "gymnastics",
+            "slug": "gymnastics"
         }
     },
     {
@@ -50,8 +50,8 @@
             "category": "horsemanship",
             "show_map": true,
             "show_distances": true,
-            "name": "je\u017adziectwo",
-            "slug": "jezdziectwo"
+            "name": "horseback riding",
+            "slug": "horseback-riding"
         }
     },
     {
@@ -61,8 +61,8 @@
             "category": "cycling",
             "show_map": true,
             "show_distances": true,
-            "name": "kolarstwo szosowe",
-            "slug": "kolarstwo-szosowe"
+            "name": "road cycling",
+            "slug": "road-cycling"
         }
     },
     {
@@ -72,8 +72,8 @@
             "category": "cycling",
             "show_map": true,
             "show_distances": true,
-            "name": "kolarstwo g\u00f3rskie",
-            "slug": "kolarstwo-gorskie"
+            "name": "mountain biking",
+            "slug": "mountain-biking"
         }
     },
     {
@@ -83,8 +83,8 @@
             "category": "cycling",
             "show_map": true,
             "show_distances": true,
-            "name": "jazda na rowerze",
-            "slug": "jazda-na-rowerze"
+            "name": "cycling",
+            "slug": "cycling"
         }
     },
     {
@@ -94,8 +94,8 @@
             "category": "other",
             "show_map": false,
             "show_distances": false,
-            "name": "\u0142ucznictwo",
-            "slug": "lucznictwo"
+            "name": "archery",
+            "slug": "archery"
         }
     },
     {
@@ -105,8 +105,8 @@
             "category": "other",
             "show_map": false,
             "show_distances": false,
-            "name": "strzelectwo",
-            "slug": "strzelectwo"
+            "name": "shooting",
+            "slug": "shooting"
         }
     },
     {
@@ -116,8 +116,8 @@
             "category": "combat",
             "show_map": false,
             "show_distances": false,
-            "name": "sporty walki",
-            "slug": "sporty-walki"
+            "name": "fighting sport",
+            "slug": "fighting-sport"
         }
     },
     {
@@ -127,8 +127,8 @@
             "category": "combat",
             "show_map": false,
             "show_distances": false,
-            "name": "szermierka",
-            "slug": "szermierka"
+            "name": "fencing",
+            "slug": "fencing"
         }
     },
     {
@@ -138,8 +138,8 @@
             "category": "water",
             "show_map": true,
             "show_distances": true,
-            "name": "p\u0142ywanie",
-            "slug": "plywanie"
+            "name": "swimming",
+            "slug": "swimming"
         }
     },
     {
@@ -149,8 +149,8 @@
             "category": "water",
             "show_map": true,
             "show_distances": true,
-            "name": "kajakarstwo",
-            "slug": "kajakarstwo"
+            "name": "kayaking",
+            "slug": "kayaking"
         }
     },
     {
@@ -160,8 +160,8 @@
             "category": "water",
             "show_map": true,
             "show_distances": true,
-            "name": "\u017ceglarstwo",
-            "slug": "zeglarstwo"
+            "name": "sailing",
+            "slug": "sailing"
         }
     },
     {
@@ -171,8 +171,8 @@
             "category": "tennis",
             "show_map": false,
             "show_distances": false,
-            "name": "tenis",
-            "slug": "tenis"
+            "name": "tennis",
+            "slug": "tennis"
         }
     },
     {
@@ -182,8 +182,8 @@
             "category": "tennis",
             "show_map": false,
             "show_distances": false,
-            "name": "tenis sto\u0142owy",
-            "slug": "tenis-stolowy"
+            "name": "table tennis",
+            "slug": "table-tennis"
         }
     },
     {
@@ -193,8 +193,8 @@
             "category": "team",
             "show_map": true,
             "show_distances": true,
-            "name": "hokej",
-            "slug": "hokej"
+            "name": "hockey",
+            "slug": "hockey"
         }
     },
     {
@@ -204,8 +204,8 @@
             "category": "team",
             "show_map": true,
             "show_distances": true,
-            "name": "koszyk\u00f3wka",
-            "slug": "koszykowka"
+            "name": "basketball",
+            "slug": "basketball"
         }
     },
     {
@@ -215,8 +215,8 @@
             "category": "team",
             "show_map": true,
             "show_distances": true,
-            "name": "pi\u0142ka r\u0119czna",
-            "slug": "pilka-reczna"
+            "name": "handball",
+            "slug": "handball"
         }
     },
     {
@@ -226,8 +226,8 @@
             "category": "team",
             "show_map": true,
             "show_distances": true,
-            "name": "pi\u0142ka no\u017cna",
-            "slug": "pilka-nozna"
+            "name": "football",
+            "slug": "football"
         }
     },
     {
@@ -237,8 +237,8 @@
             "category": "team",
             "show_map": true,
             "show_distances": true,
-            "name": "pi\u0142ka wodna",
-            "slug": "pilka-wodna"
+            "name": "water polo",
+            "slug": "water polo"
         }
     },
     {
@@ -248,8 +248,8 @@
             "category": "team",
             "show_map": false,
             "show_distances": false,
-            "name": "siatk\u00f3wka",
-            "slug": "siatkowka"
+            "name": "volleyball",
+            "slug": "volleyball"
         }
     },
     {
@@ -270,8 +270,8 @@
             "category": "winter",
             "show_map": true,
             "show_distances": true,
-            "name": "\u0142y\u017cwiarstwo",
-            "slug": "lyzwiarstwo"
+            "name": "skating",
+            "slug": "skating"
         }
     },
     {
@@ -281,8 +281,8 @@
             "category": "water",
             "show_map": false,
             "show_distances": false,
-            "name": "nurkowanie",
-            "slug": "nurkowanie"
+            "name": "diving",
+            "slug": "diving"
         }
     },
     {
@@ -292,8 +292,8 @@
             "category": "winter",
             "show_map": true,
             "show_distances": true,
-            "name": "narciarstwo",
-            "slug": "narciarstwo"
+            "name": "skiing",
+            "slug": "skiing"
         }
     },
     {
@@ -303,8 +303,8 @@
             "category": "winter",
             "show_map": true,
             "show_distances": true,
-            "name": "narciarstwo biegowe",
-            "slug": "narciarstwo-biegowe"
+            "name": "cross-country skiing",
+            "slug": "cross-country skiing"
         }
     },
     {
@@ -325,8 +325,8 @@
             "category": "winter",
             "show_map": true,
             "show_distances": true,
-            "name": "sporty saneczkowe",
-            "slug": "sporty-saneczkowe"
+            "name": "Luge",
+            "slug": "Luge"
         }
     },
     {
@@ -369,8 +369,8 @@
             "category": "team",
             "show_map": true,
             "show_distances": true,
-            "name": "futbol",
-            "slug": "futbol"
+            "name": "american football",
+            "slug": "american-football"
         }
     },
     {
@@ -391,8 +391,8 @@
             "category": "team",
             "show_map": true,
             "show_distances": true,
-            "name": "krykiet",
-            "slug": "krykiet"
+            "name": "cricket",
+            "slug": "cricket"
         }
     },
     {
@@ -402,8 +402,8 @@
             "category": "other",
             "show_map": false,
             "show_distances": false,
-            "name": "taniec",
-            "slug": "taniec"
+            "name": "dancing",
+            "slug": "dancing"
         }
     },
     {
@@ -413,19 +413,19 @@
             "category": "other",
             "show_map": true,
             "show_distances": true,
-            "name": "wrotkarstwo",
-            "slug": "wrotkarstwo"
+            "name": "roller skating",
+            "slug": "roller-skating"
         }
     },
     {
         "pk": 39,
         "model": "workouts.sport",
         "fields": {
-            "category": "walking",
+            "category": "cycling",
             "show_map": true,
             "show_distances": true,
-            "name": "marsze na orientacj\u0119",
-            "slug": "marsze-na-orientacje"
+            "name": "bike orienteering",
+            "slug": "bike-orienteering"
         }
     },
     {
@@ -435,8 +435,8 @@
             "category": "walking",
             "show_map": true,
             "show_distances": true,
-            "name": "chodzenie",
-            "slug": "chodzenie"
+            "name": "walking",
+            "slug": "walking"
         }
     },
     {
@@ -446,8 +446,8 @@
             "category": "walking",
             "show_map": true,
             "show_distances": true,
-            "name": "w\u0119drowanie",
-            "slug": "wedrowanie"
+            "name": "trekking",
+            "slug": "trekking"
         }
     },
     {
@@ -457,8 +457,8 @@
             "category": "walking",
             "show_map": true,
             "show_distances": true,
-            "name": "ch\u00f3d sportowy",
-            "slug": "chod-sportowy"
+            "name": "racewalking",
+            "slug": "racewalking"
         }
     },
     {
@@ -468,8 +468,8 @@
             "category": "running",
             "show_map": true,
             "show_distances": true,
-            "name": "biegi na orientacj\u0119",
-            "slug": "biegi-na-orientacje"
+            "name": "foot orienteering",
+            "slug": "foot-orienteering"
         }
     },
     {
@@ -479,8 +479,8 @@
             "category": "cycling",
             "show_map": false,
             "show_distances": true,
-            "name": "rower stacjonarny",
-            "slug": "rower-stacjonarny"
+            "name": "indoor cycling",
+            "slug": "indoor-cycling"
         }
     },
     {
@@ -490,8 +490,8 @@
             "category": "athletic",
             "show_map": true,
             "show_distances": true,
-            "name": "lekka atletyka",
-            "slug": "lekka-atletyka"
+            "name": "athletics",
+            "slug": "athletics"
         }
     },
     {
@@ -501,8 +501,8 @@
             "category": "athletic",
             "show_map": false,
             "show_distances": false,
-            "name": "kulturystyka",
-            "slug": "kulturystyka"
+            "name": "bodybuilding",
+            "slug": "bodybuilding"
         }
     },
     {
@@ -512,8 +512,8 @@
             "category": "running",
             "show_map": true,
             "show_distances": true,
-            "name": "bieganie",
-            "slug": "bieganie"
+            "name": "running",
+            "slug": "running"
         }
     },
     {
@@ -523,8 +523,8 @@
             "category": "other",
             "show_map": false,
             "show_distances": false,
-            "name": "kr\u0119gle",
-            "slug": "kregle"
+            "name": "bowling",
+            "slug": "bowling"
         }
     },
     {
@@ -534,8 +534,8 @@
             "category": "running",
             "show_map": false,
             "show_distances": true,
-            "name": "bieg na bie\u017cni",
-            "slug": "bieg-na-biezni"
+            "name": "treadmill running",
+            "slug": "treadmill-running"
         }
     },
     {
@@ -580,7 +580,7 @@
         "fields": {
             "distance": 21.975,
             "only_for": [43, 47, 49],
-            "name": "p\u00f3\u0142maraton"
+            "name": "half-marathon"
         }
     },
     {
@@ -589,7 +589,7 @@
         "fields": {
             "distance": 42.195,
             "only_for": [43, 47, 49],
-            "name": "maraton"
+            "name": "marathon"
         }
     },
     {
