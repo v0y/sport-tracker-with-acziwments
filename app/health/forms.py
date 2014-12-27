@@ -16,16 +16,16 @@ def _str_to_float(string):
 
 class HealthForm(ModelForm):
     related_date = forms.DateField(
-        label=u"Data Pomiaru", input_formats=['%d-%m-%Y'])
-    weight = forms.CharField(label=u'Waga', required=False)
-    fat = forms.CharField(label=u'Tłuszcz', required=False)
-    water = forms.CharField(label=u'Woda', required=False)
+        label='Date', input_formats=['%d-%m-%Y'])
+    weight = forms.CharField(required=False)
+    fat = forms.CharField(label='Body fat', required=False)
+    water = forms.CharField(label='Body water', required=False)
 
     class Meta:
-        button_text = u"Zapisz"
+        button_text = 'Save'
         exclude = ('user',)
         model = Health
-        name = u"Dodaj pomiar wagi"
+        name = 'Add weight data'
 
     def clean(self):
         cd = super(HealthForm, self).clean()
@@ -34,8 +34,9 @@ class HealthForm(ModelForm):
         water = cd.get('water')
         if not any([weight, fat, water]):
             raise forms.ValidationError(
-                u"Co najmniej jedno z pól 'Waga', 'Tłuszcz', 'Woda' musi "
-                u"zostać wypełnione")
+                'At least one of "Weight", "Body fat", "Body water" '
+                'is required'
+            )
         return cd
 
     def clean_related_date(self):
@@ -43,8 +44,7 @@ class HealthForm(ModelForm):
         # check, if entry for this date already exist
         current_pk = self.instance.pk
         if Health.objects.filter(related_date=date).exclude(pk=current_pk):
-            raise forms.ValidationError(
-                u"Dla tej daty istnieje już pomiar wagi")
+            raise forms.ValidationError('There is existing data for this date')
         return date
 
     def clean_weight(self):

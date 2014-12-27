@@ -1,28 +1,38 @@
 # coding: utf-8
 
-from datetime import datetime, timedelta
+from datetime import (
+    datetime,
+    timedelta,
+)
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import (
+    MaxValueValidator,
+    MinValueValidator,
+)
 
 from app.shared.helpers import get_date_format
 from app.shared.models import RelatedDateMixin
 
 
 class Health(RelatedDateMixin):
-    user = models.ForeignKey(
-        User, verbose_name=u'Użytkownik', related_name='health')
-    weight = models.FloatField(verbose_name=u'Waga', null=True,
-        blank=True, validators=[MinValueValidator(0)])
-    fat = models.FloatField(verbose_name=u'Tłuszcz', null=True, blank=True,
-        validators=[MaxValueValidator(100), MinValueValidator(0)])
-    water = models.FloatField(verbose_name=u'Woda', null=True, blank=True,
-        validators=[MaxValueValidator(100), MinValueValidator(0)])
-
-    class Meta:
-        verbose_name = u'stan zdrowia'
-        verbose_name_plural = u'stan zdrowia'
+    user = models.ForeignKey(User, related_name='health')
+    weight = models.FloatField(
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(0)]
+    )
+    fat = models.FloatField(
+        null=True,
+        blank=True,
+        validators=[MaxValueValidator(100), MinValueValidator(0)]
+    )
+    water = models.FloatField(
+        null=True,
+        blank=True,
+        validators=[MaxValueValidator(100), MinValueValidator(0)]
+    )
 
     @classmethod
     def get_health_by_date(cls, user, range_type, date_str):

@@ -6,10 +6,10 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Data</th>
-				<th>Waga (kg)</th>
-				<th>Tłuszcz (%)</th>
-				<th>Woda (%)</th>
+				<th>Date</th>
+				<th>Weight (kg)</th>
+				<th>Body fat (%)</th>
+				<th>Body water (%)</th>
 				{% if is_mine %}<th></th>{% endif %}
 			</tr>
 		</thead>
@@ -21,7 +21,7 @@
 					<td>{{ health.fat|I_dont_want_None }}</td>
 					<td>{{ health.water|I_dont_want_None }}</td>
 					{% if is_mine %}
-						<td><a href="{% url 'edit_health' health.pk %}" title="Edytuj ten pomiar">edycja</a></td>
+						<td><a href="{% url 'edit_health' health.pk %}" title="Edit">edit</a></td>
 					{% endif %}
 				</tr>
 			{% endfor %}

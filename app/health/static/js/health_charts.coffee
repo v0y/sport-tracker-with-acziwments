@@ -249,7 +249,6 @@ generateChart = (jsonData) ->
 ###############################################################################
 
 $ ->
-    moment.locale("pl")         # set moment's language
     setActiveTab()            # set as active right tab
     changeTimeRange()         # change time range tab
     changeDate()              # Change date to prev/next
