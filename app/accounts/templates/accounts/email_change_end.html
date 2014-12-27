@@ -5,14 +5,14 @@
 {% include "accounts/account_settings_menu.html" %}
 
 <div class="alert alert-success text-center">
-	Aby potwierdzić zmianę adresu kliknij link, który został wysłany adres <b>{{ email }}</b><br>
-	Dopóki tego nie zrobisz, jedynym adresem powiązanym z Twoim kontem będzie "stary" adres: {{ old_email }}
+	To confirm email change, click the link from message that was sent to the address <b>{{ email }}</b><br>
+	Before that the only address associated with your account will be "old" address: {{ old_email }}
 </div>
 
 {% if email_provider %}
 	<div class="box-center text-center">
-		<a href="{{ email_provider }}" title="Przejdź na swoją pocztę">
-			Przejdź na swoją pocztę
+		<a href="{{ email_provider }}" title="Go to your mailbox">
+			Go to your mailbox
 		</a>
 	</div>
 {% endif %}

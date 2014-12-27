@@ -3,14 +3,14 @@
 {% block content %}
 
 <div class="alert alert-success text-center">
-	Dziękujemy za rejestrację. Aktywuj swoje konto klikając w linka, 
-	który został wysłany na adres <b>{{ email }}</b>.
+	Thanks for registration.
+	Activate your account by clicking link, that has been sent on your email:<b>{{ email }}</b>.
 </div>
 
 {% if email_provider %}
 	<div class="box-center text-center">
 		<a href="{{ email_provider }}" title="Przejdź na swoją pocztę">
-			Przejdź na swoją pocztę
+			Go to your mailbox
 		</a>
 	</div>
 {% endif %}

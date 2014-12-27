@@ -11,7 +11,7 @@
 					{% if object.username == request.user.username %}
 						<a href="{{ GRAVATAR_CHANGE_URL }}"
 							data-toggle="tooltip" data-placement="bottom" class="js-tooltip"
-							title="Zmień avatar na gravatar.com" target="_blank">
+							title="Change avatar at gravatar.com" target="_blank">
 							{% gravatar_img_for_user object %}
 						</a>
 					{% else %}
@@ -28,20 +28,20 @@
 								{% endif %}
 							</li>
 						{% elif profile.age %}
-							<li>Wiek: <strong>{{ profile.age }} lat</strong></li>
+							<li>Age: <strong>{{ profile.age }} lat</strong></li>
 						{% endif %}
 						{% if profile.height %}
-							<li>Wzrost: <strong>{{ profile.height }} cm</strong></li>
+							<li>Height: <strong>{{ profile.height }} cm</strong></li>
 						{% endif %}
 						{% if profile.last_weight.0 %}
-							<li>Waga: <strong>{{ profile.last_weight.0 }} kg</strong></li>
+							<li>Weight: <strong>{{ profile.last_weight.0 }} kg</strong></li>
 						{% endif %}
 						{% if profile.bmi.0 %}
 							<li>BMI: <strong>{{ profile.bmi.0 }}</strong></li>
 						{% endif %}
 						{% with profile.favourite_sport as favourite_sport %}
 							{% if favourite_sport %}
-								<li>Ulubiona dyscyplina: <strong>{{ favourite_sport }}</strong></li>
+								<li>Favourite discipline: <strong>{{ favourite_sport }}</strong></li>
 							{% endif %}
 						{% endwith %}
 					</ul>
@@ -51,7 +51,7 @@
 
 		{% if best_times.times %}
 			<div class="panel panel-default user-profile-panel">
-				<div class="panel-heading text-bold">Rekordy życiowe</div>
+				<div class="panel-heading text-bold">personal records</div>
 				<div class="panel-body">
 					<div class="user-info col-lg-12 col-md-12 col-sm-6">
 						<ul>
@@ -69,11 +69,11 @@
 
 	<div class="col-md-9 col-sm-7">
 		<div class="panel panel-default user-profile-activity">
-			<div class="panel-heading text-bold">Aktywność użytkownika</div>
+			<div class="panel-heading text-bold">Activity</div>
 			<div class="panel-body">
 				{% if not activities %}
 					<div class="alert alert-info">
-						Brak aktywności użytkownika
+						Nothing to show :(
 					</div>
 				{% else %}
 					<ul class="list-group">

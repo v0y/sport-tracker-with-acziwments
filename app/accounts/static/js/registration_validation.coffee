@@ -92,12 +92,12 @@ class Username extends Field
     runValidators: ->
         @hideInfo()
         @value = @field.val()
-        isOk = @validateMinLength(3, "Login jest zbyt krótki")
+        isOk = @validateMinLength(3, "Username is too short (at least 3 chars)")
         if isOk
-            @validateRegex(@usernamePattern, "Login może zawierać tylko litery, cyfry i znaki _ + @ .-")
+            @validateRegex(@usernamePattern, "Username can only contain letters, numbers and signs _ + @ .-")
 
     runValidatorsOnBlur: ->
-        @validateIfNotInUse(this, "/accounts/api/check_username", "Ten login jest już zajęty")
+        @validateIfNotInUse(this, "/accounts/api/check_username", "This username is already taken")
 
 
 class Email extends Field
@@ -114,17 +114,17 @@ class Email extends Field
     runValidators: ->
         @hideInfo()
         @value = @field.val()
-        @validateRegex(@emailPattern, "Podaj poprawny adres email")
+        @validateRegex(@emailPattern, "Enter a valid email address")
 
     runValidatorsOnBlur: ->
-        @validateIfNotInUse(this, "/accounts/api/check_email", "Ten email jest już zajęty")
+        @validateIfNotInUse(this, "/accounts/api/check_email", "This email is already taken")
 
 
 class Password extends Field
     validateRepeat: (rePassword) ->
         if @value and rePassword.value
             if @value isnt rePassword.value
-                rePassword.showAlert("Hasła nie są zgodne")
+                rePassword.showAlert("Passwords doesn't match")
                 rePassword.setNotOk()
             else
                 rePassword.setOk()
@@ -133,7 +133,7 @@ class Password extends Field
         @hideInfo()
         rePassword.hideInfo()
         @value = @field.val()
-        @validateMinLength(5, "Hasło jest za krótkie")
+        @validateMinLength(5, "Password is too short (at least 5 chars)")
         @validateRepeat(rePassword)
 
 
@@ -141,7 +141,7 @@ class RePassword extends Field
     validateRepeat: (password) ->
         if @value and password.value
             if @value isnt password.value
-                @showAlert("Hasła nie są zgodne")
+                @showAlert("Passwords doesn't match")
                 @setNotOk()
             else
                 @setOk()

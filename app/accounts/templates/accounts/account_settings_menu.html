@@ -2,13 +2,13 @@
 
 <ul class="nav nav-tabs account-settings-menu">
 	<li class="{% is_active_tab request 'profile_settings' %}">
-		<a href="{% url 'profile_settings' %}" title="Edycja profilu">Edycja profilu</a></li>
+		<a href="{% url 'profile_settings' %}" title="Profile settings">Profile settings</a></li>
 	<li class="
 		{% is_active_tab request 'password_change' %}
 		{% is_active_tab request 'password_change_end' %}
 	">
-		<a href="{% url 'password_change' %}" title="Zmiana hasła">Zmiana hasła</a></li>
+		<a href="{% url 'password_change' %}" title="Password change">Password change</a></li>
 	<li class="{% is_active_tab request '/accounts/settings/email' %}">
-		<a href="{% url 'email_change' %}" title="Zmiana adresu email">Zmiana adresu email</a></li>
-	<li><a href="{{ GRAVATAR_CHANGE_URL }}" title="Zmiana avataru na gravatar.com" target="_blank">Zmiana avataru na gravatar.com</a></li>
+		<a href="{% url 'email_change' %}" title="Email change">Email change</a></li>
+	<li><a href="{{ GRAVATAR_CHANGE_URL }}" title="Change avatar at gravatar.com" target="_blank">Change avatar at gravatar.com</a></li>
 </ul>
