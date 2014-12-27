@@ -48,15 +48,14 @@ class SHA1TokenMixin(models.Model):
 
 
 class CreatedAtMixin(models.Model):
-    created_at = models.DateTimeField(
-        verbose_name=u'czas utworzenia', auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True
 
 
 class NameMixin(models.Model):
-    name = models.CharField(verbose_name=u"Nazwa", max_length=64)
+    name = models.CharField(max_length=64)
 
     class Meta:
         abstract = True
@@ -66,7 +65,7 @@ class NameMixin(models.Model):
 
 
 class RelatedDateMixin(models.Model):
-    related_date = models.DateField(verbose_name=u'powiązana data')
+    related_date = models.DateField()
 
     class Meta:
         abstract = True

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{% block title %}Tytuł strony{% endblock %}</title>
+		<title>{% block title %}STWA{% endblock %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{% include 'structure/include_css.html' %}
 		{% block css_import %}{% endblock %}
@@ -17,7 +17,7 @@
 		<div id="wrapper">
 			<nav class="navbar navbar-default" role="navigation">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/">Project name</a>
+					<a class="navbar-brand" href="/">STWA</a>
 
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 						<span class="icon-bar"></span>
@@ -33,20 +33,20 @@
 							{# TODO: refactor tags #}
 							<li class="{% is_active_tab request '/workouts' %}">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									Treningi <b class="caret"></b></a>
+									Workouts <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="{% url 'workout_show_last' %}"><i class="fa fa-calendar"></i> Przeglądaj</a><li>
-									<li><a href="{% url 'workout_add' %}"><i class="fa fa-plus"></i> Nowy trening</a><li>
+									<li><a href="{% url 'workout_show_last' %}"><i class="fa fa-calendar"></i> Browse</a><li>
+									<li><a href="{% url 'workout_add' %}"><i class="fa fa-plus"></i> New workout</a><li>
 								</ul>
 							</li>
 
 							<li class="{% is_active_tab request '/health' %}">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									Waga <b class="caret"></b></a>
+									Health <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="{% url 'health_show_charts' request.user.username %}"><i class="fa fa-bar-chart-o"></i> Wykresy</a><li>
-									<li><a href="{% url 'health_show_list' request.user.username %}"><i class="fa fa-list-alt"></i> Lista pomiarów</a><li>
-									<li><a href="{% url 'add_health' %}"><i class="fa fa-plus"></i> Dodaj pomiar</a><li>
+									<li><a href="{% url 'health_show_charts' request.user.username %}"><i class="fa fa-bar-chart-o"></i> Charts</a><li>
+									<li><a href="{% url 'health_show_list' request.user.username %}"><i class="fa fa-list-alt"></i> Weight data list</a><li>
+									<li><a href="{% url 'add_health' %}"><i class="fa fa-plus"></i> Add weight data</a><li>
 								</ul>
 							</li>
 						{% endif %}
@@ -56,18 +56,18 @@
 						{% if user.is_authenticated %}
 							<li class="{% is_active_tab request '/accounts' %}">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									Cześć, {{ request.user.username }}! <b class="caret"></b></a>
+									Hi, {{ request.user.username }}! <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="{% url 'profile' request.user.username %}"><i class="fa fa-user"></i> Mój profil</a><li>
-									<li><a href="{% url 'profile_settings' %}"><i class="fa fa-cog"></i> Ustawienia konta</a><li>
-									<li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Wyloguj</a><li>
+									<li><a href="{% url 'profile' request.user.username %}"><i class="fa fa-user"></i> My profile</a><li>
+									<li><a href="{% url 'profile_settings' %}"><i class="fa fa-cog"></i> Account settings</a><li>
+									<li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Log out</a><li>
 								</ul>
 							</li>
 						{% else %}
 							<li class="{% is_active_tab request 'registration' %}">
-								<a href="{% url 'registration' %}">Rejestracja</a><li>
+								<a href="{% url 'registration' %}">Sign up</a><li>
 							<li class="{% is_active_tab request 'login' %}">
-								<a href="{% url 'login' %}">Logowanie</a><li>
+								<a href="{% url 'login' %}">Sign in</a><li>
 						{% endif %}
 					</ul>
 				</div>

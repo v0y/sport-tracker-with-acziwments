@@ -1,8 +1,14 @@
 # encoding: utf-8
 
 import datetime
-from urllib import unquote, urlencode
-from urlparse import urlparse, urlunparse
+from urllib import (
+    unquote,
+    urlencode,
+)
+from urlparse import (
+    urlparse,
+    urlunparse,
+)
 
 from django.utils import timezone
 
