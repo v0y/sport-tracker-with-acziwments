@@ -6,7 +6,7 @@ getCurrentWorkoutId = ->
 
 main = ->
     $.ajax
-        url: "/workouts/api/get/all"
+        url: "/api/workouts/get/calendar"
         type: "POST"
         dataType: "json"
         data:

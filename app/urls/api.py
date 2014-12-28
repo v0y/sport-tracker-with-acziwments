@@ -6,5 +6,6 @@ from django.conf.urls import (
 )
 
 urlpatterns = patterns('',
-    (r'^/routes/', include('app.routes.urls.api')),
+    (r'^/routes', include('app.routes.urls.api')),
+    (r'^/workouts', include('app.workouts.urls.api')),
 )

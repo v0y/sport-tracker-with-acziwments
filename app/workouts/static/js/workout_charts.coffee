@@ -7,7 +7,7 @@ getJsonData = ->
     # get json data for chart
 
     $.ajax
-        url: "/workouts/api/get/chart"
+        url: "/api/workouts/get/chart"
         type: "POST"
         dataType: "json"
         data:
