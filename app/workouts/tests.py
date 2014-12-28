@@ -10,7 +10,7 @@ from django.test import TestCase
 
 from app.routes.tests.tests import TestRoutesTestCase
 from .models import Distance, Sport, Workout, BestTime
-from .views import _get_chart_data_from_track
+from .views.api import _get_chart_data_from_track
 
 
 class CreateWorkoutsMixin(object):

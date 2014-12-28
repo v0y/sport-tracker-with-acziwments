@@ -8,7 +8,7 @@ from django.views.generic import RedirectView
 from django.views.generic.detail import DetailView
 
 from ..models import Workout
-from ..views import (
+from ..views.views import (
     LastWorkoutView,
     WorkoutCreateView,
 )
