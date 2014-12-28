@@ -280,6 +280,9 @@ def password_reset(request):
     """
     Password reset
     """
+    if request.user.is_authenticated():
+        return redirect('/')
+
     form = PasswordResetForm(request.POST or None)
 
     if form.is_valid():
