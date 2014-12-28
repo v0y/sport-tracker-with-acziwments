@@ -90,7 +90,7 @@ class SetNewPasswordFormMixin(forms.Form):
 
 class UsernameOrEmailMixin(forms.Form):
     username_or_email = forms.CharField(
-        max_length=50, label=u"Login lub adres email", required=True)
+        max_length=50, label=u"Username or email", required=True)
 
     def clean_username_or_email(self):
         username_or_email = self.cleaned_data.get('username_or_email')
@@ -123,8 +123,8 @@ class LoginForm(forms.Form):
     )
 
     class Meta:
-        name = 'Sign up'
-        button_text = 'Sign up'
+        name = 'Sign in'
+        button_text = 'Sign in'
 
 
 class RegistrationForm(EmailMixin):
@@ -157,8 +157,8 @@ class RegistrationForm(EmailMixin):
     rules = forms.BooleanField(required=True, label='I accept the terms')
 
     class Meta:
-        name = 'Registration'
-        button_text = 'Register'
+        name = 'Sign up'
+        button_text = 'Sign up'
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
