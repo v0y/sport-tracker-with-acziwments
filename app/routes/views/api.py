@@ -4,7 +4,7 @@ from annoying.decorators import ajax_request
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
-from .models import Route
+from ..models import Route
 
 
 @ajax_request

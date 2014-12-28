@@ -2,12 +2,20 @@
 
 from datetime import datetime, timedelta
 import json
-from os.path import dirname, join, realpath
+from django.core.urlresolvers import reverse
+from os.path import (
+    dirname,
+    join,
+    realpath,
+)
 from pytz import UTC
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.test.client import RequestFactory, Client
+from django.test.client import (
+    Client,
+    RequestFactory,
+)
 
 from ..gpx_handler import handle_gpx
 from ..models import Route
@@ -47,7 +55,7 @@ class ManualRouteTestCase(TestCase):
 
         # simulate request that POSTs this data
         response = self.client.post(
-            '/routes/api/save_route', post_data, follow=True)
+            reverse('save_route'), post_data, follow=True)
 
         # verify response
         self.assertEqual(response.status_code, 200)
@@ -63,7 +71,7 @@ class ManualRouteTestCase(TestCase):
 
         # ...and by use of get_route_json view
         response = self.client.get(
-            '/routes/api/get_route_json', {'route_id': route.id})
+            reverse('get_route_json'), {'route_id': route.id})
         json.loads(response.content)
 
 
