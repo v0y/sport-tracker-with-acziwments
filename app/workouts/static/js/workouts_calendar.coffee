@@ -18,7 +18,8 @@ main = ->
 
 
 drawCalendar = (events, current_month, current_year) ->
-    $('.js-workouts-calendar').fullCalendar(
+    $calendar = $('.js-workouts-calendar')
+    $calendar.fullCalendar(
         header:
             left: 'prev,today,next'
             center: 'title'
@@ -31,7 +32,7 @@ drawCalendar = (events, current_month, current_year) ->
         eventColor: '#61ae24'
         timezone: 'local'
         timeFormat: 'HH:mm'
-        defaultDate: moment().format('YYYY-MM-DD')
+        defaultDate: $calendar.data('date') or moment().format('YYYY-MM-DD')
         height: 500
     )
 
