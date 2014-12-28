@@ -105,7 +105,7 @@ class UsernameOrEmailMixin(forms.Form):
             user = get_object_or_None(User, username=username_or_email)
             if not user:
                 raise forms.ValidationError(
-                    'User with this username does\'t exists.')
+                    'User with this username doesn\'t exists.')
 
         return username_or_email
 
