@@ -39,14 +39,14 @@ checkChangeDateButtons = (currentDate=null, timeRange=null) ->
     firstDate = new Date($prevButton.data("firstDate"))
     prevDate = getDateToChange(currentDate, timeRange, "prev")
 
-    if firstDate - prevDate > currentDate - prevDate
+    if (firstDate - prevDate > currentDate - prevDate) or timeRange == 'all-time'
         $prevButton.addClass(disableClass)
     else
         $prevButton.removeClass(disableClass)
     # next button
     $nextButton = $("li.js-next")
     nextDate = getDateToChange(currentDate, timeRange, "next")
-    if nextDate > new Date
+    if (nextDate > new Date) or timeRange == 'all-time'
         $nextButton.addClass(disableClass)
     else
         $nextButton.removeClass(disableClass)
@@ -139,7 +139,13 @@ parseUrl = ->
 refreshChart = (username, timeRange, dateString) ->
         # set url
         refreshUrl = $('.js-weight-chart').data('refresh-url')
-        url = "#{refreshUrl}/#{username}/#{timeRange}/#{dateString}"
+
+        if dateString
+            dateString = "/#{dateString}"
+        else
+            dateString = ''
+
+        url = "#{refreshUrl}/#{username}/#{timeRange}#{dateString}"
         window.history.pushState({}, document.title, url)
         # disable navigation button?
         checkChangeDateButtons(new Date(dateString), timeRange)

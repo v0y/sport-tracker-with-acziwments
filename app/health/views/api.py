@@ -36,7 +36,7 @@ def health_chart_api(request):
     try:
         username = request.POST['username']
         range_type = request.POST['range_type']
-        date = request.POST['date']
+        date = request.POST.get('date')
     except (KeyError, TypeError):
         raise Http404
 

@@ -47,15 +47,17 @@ class Health(RelatedDateMixin):
         """
         date_format = get_date_format(range_type)
 
-        # get date
-        date = datetime.strptime(date_str, date_format)
         # get health queryset
         health = cls.objects.filter(user=user).order_by('related_date')
+
         if range_type in ('year', 'month'):
+            date = datetime.strptime(date_str, date_format)
             health = health.filter(related_date__year=date.strftime('%Y'))
             if range_type == 'month':
                 health = health.filter(related_date__month=date.strftime('%m'))
-        else:
+
+        elif range_type == 'week':
+            date = datetime.strptime(date_str, date_format)
             start_date = date.strftime('%Y-%m-%d')
             end_date = date + timedelta(days=6)
             end_date = end_date.strftime('%Y-%m-%d')
@@ -69,7 +71,7 @@ class Health(RelatedDateMixin):
         Get datas for health in pretty format
 
         :param user: user object
-        :param range_type: dates range type - week, month or year
+        :param range_type: dates range type - week, month, year or all-time
         :param date_str: date string
         :return: dict of health datas
         :rtype: dict of list of dicts

@@ -42,7 +42,9 @@ def get_date_format(date_type):
     return {
         'week': '%Y-%m-%d',
         'month': '%Y-%m',
-        'year': '%Y'}[date_type]
+        'year': '%Y',
+        'all-time': None,
+    }[date_type]
 
 
 def unix_time(datetime_):

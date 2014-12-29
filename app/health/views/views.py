@@ -78,7 +78,7 @@ def health_show_charts(request, username=None, range_type='month', date=None):
     username = username or request.user.username
 
     # url without date?
-    url_is_complete = bool(date)
+    url_is_complete = bool(date) or range_type == 'all-time'
 
     date = get_and_validate_date(range_type, date)
 
@@ -88,8 +88,11 @@ def health_show_charts(request, username=None, range_type='month', date=None):
 
     # redirect with date
     if not url_is_complete:
-        return redirect(
-            reverse('health:show_charts', args=[username, range_type, date]))
+        args = [username, range_type]
+        if date:
+            args.append(date)
+
+        return redirect(reverse('health:show_charts', args=args))
 
     # get first date of registered health datas
     first_date = Health.get_first_date(user, '%Y-%m-%d')

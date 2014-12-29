@@ -19,6 +19,9 @@ def get_and_validate_date(range_type, date=None):
     :rtype: str
     :raise: Http404
     """
+    if range_type == 'all-time':
+        return None
+
     # get regex
     regex = {
         'week': r'^[\d]{4}-[\d]{2}-[\d]{2}$',
