@@ -76,9 +76,16 @@ def _get_chart_data_from_track(track):
 
             pace_y.append(round(pace, 2))
             pace_x.append(round(distance, 3))
-            altitude_y.append(round(point2['ele'], 2))
-            altitude_x.append(round(distance, 3))
+
+            if point2.get('ele'):
+                altitude_y.append(round(point2['ele'], 2))
+                altitude_x.append(round(distance, 3))
+
             i += 1
+
+        if len(altitude_y) == 1:
+            altitude_y = []
+            altitude_x = []
 
         return [pace_x, pace_y, altitude_x, altitude_y]
 

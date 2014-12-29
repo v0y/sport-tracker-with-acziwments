@@ -143,7 +143,6 @@ class Workout(CreatedAtMixin):
     @property
     def track(self):
         route = self.routes.first()
-
         if not route:
             return None
 
@@ -153,6 +152,18 @@ class Workout(CreatedAtMixin):
             return None
         else:
             return track_json
+
+    @property
+    def show_chart(self):
+        track = self.track
+        if not track:
+            return False
+
+        point = track['segments'][0][0]
+        if not point.get('time'):
+            return False
+        else:
+            return True
 
     def best_time_for_x_km(self, distance):
         """

@@ -117,6 +117,47 @@ class WorkoutTestCase(CreateWorkoutsMixin, TestCase):
         self.workout1.routes.add(route)
         self.assertEquals(self.workout1.track, expected_track_json)
 
+    def test_workout_without_route_show_chart_property_returns_false(self):
+        self.assertFalse(self.workout1.show_chart)
+
+    def test_workout_with_empty_route_show_chart_property_returns_false(self):
+        route = Route(workout=self.workout1, user=self.user, tracks_json='[]')
+        self.workout1.routes.add(route)
+        self.assertFalse(self.workout1.show_chart)
+
+    def test_workout_with_route_show_chart_property_returns_true(self):
+        track_json = """
+            [{"segments": [[{
+                "lat": 52.263643755, "time": "2013-09-08 10:15:04",
+                "lon": 21.162123266, "ele": 86.9
+            },{
+                "lat": 52.263777986, "time": "2013-09-08 10:15:19",
+                "lon": 21.162024105, "ele": 86.4}
+            ]]}]
+        """
+        route = Route(
+            workout=self.workout1,
+            user=self.user,
+            tracks_json=track_json
+        )
+        self.workout1.routes.add(route)
+        self.assertTrue(self.workout1.show_chart)
+
+    def test_workout_with_route_wo_time_show_chart_prop_returns_false(self):
+        track_json = """
+            [{"segments": [[{
+                "lat": 52.263643755, "lon": 21.162123266, "ele": 86.9
+            },{
+                "lat": 52.263777986, "lon": 21.162024105, "ele": 86.4}
+            ]]}]
+        """
+        route = Route(
+            workout=self.workout1,
+            user=self.user,
+            tracks_json=track_json
+        )
+        self.workout1.routes.add(route)
+        self.assertFalse(self.workout1.show_chart)
 
 class BestTimesTestCase(CreateWorkoutsMixin, TestCase):
 
