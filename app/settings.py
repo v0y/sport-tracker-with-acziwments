@@ -37,7 +37,6 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '3306',
         'TEST': {
-            'ENGINE': 'django.db.backends.sqlite3',
             'CHARSET': 'utf8',
             'COLLATION': 'utf8_general_ci',
         }
