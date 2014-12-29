@@ -103,6 +103,9 @@ getHumanizedDateString = (timeRange=null, dateString=null, forceMonday=true) ->
     if not dateString
         dateString = getDateString(timeRange, new Date(dateString), forceMonday)
 
+    if timeRange == 'all-time'
+        return 'All time'
+
     switch timeRange
         when "year" then formatString = "YYYY"
         when "month" then formatString = "MMMM YYYY"
@@ -223,13 +226,13 @@ generateChart = (jsonData) ->
                 'weight-y': 'Weight',
                 'fat-y': 'Body fat'
                 'water-y': 'Body water'
-            type: 'spline'
         axis:
             x:
                 type: 'timeseries'
                 tick:
                     format: '%Y-%m-%d'
                     rotate: 60
+                    fit: false
             y:
                 label:
                     text: 'kg'
