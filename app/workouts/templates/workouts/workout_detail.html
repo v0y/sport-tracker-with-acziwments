@@ -105,10 +105,12 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-lg-12 col-12 col-sm-12 workout-chart js-workout-chart"
-				data-url="{% url 'workouts_api:chart' %}"></div>
-		</div>
+		{% if object.show_chart %}
+			<div class="row">
+				<div class="col-lg-12 col-12 col-sm-12 workout-chart js-workout-chart"
+					data-url="{% url 'workouts_api:chart' %}"></div>
+			</div>
+		{% endif %}
 
 	</div>
 {% endblock %}
