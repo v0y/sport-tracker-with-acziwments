@@ -21,7 +21,7 @@
 					<td>{{ health.fat|I_dont_want_None }}</td>
 					<td>{{ health.water|I_dont_want_None }}</td>
 					{% if is_mine %}
-						<td><a href="{% url 'edit_health' health.pk %}" title="Edit">edit</a></td>
+						<td><a href="{% url 'health:edit' health.pk %}" title="Edit">edit</a></td>
 					{% endif %}
 				</tr>
 			{% endfor %}

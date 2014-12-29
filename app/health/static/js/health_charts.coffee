@@ -138,7 +138,8 @@ parseUrl = ->
 
 refreshChart = (username, timeRange, dateString) ->
         # set url
-        url = "/health/show/charts/#{username}/#{timeRange}/#{dateString}"
+        refreshUrl = $('.js-weight-chart').data('refresh-url')
+        url = "#{refreshUrl}/#{username}/#{timeRange}/#{dateString}"
         window.history.pushState({}, document.title, url)
         # disable navigation button?
         checkChangeDateButtons(new Date(dateString), timeRange)
@@ -184,7 +185,7 @@ getJsonData = ->
 
     # get health data using ajax
     $.ajax
-        url: "/health/api"
+        url: $('.js-weight-chart').data('url')
         type: "POST"
         dataType: "json"
         data:

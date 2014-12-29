@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     (r'^accounts', include('app.accounts.urls')),
 
     # health
-    (r'^health', include('app.health.urls')),
+    (r'^health', include('app.health.urls.urls', namespace='health')),
 
     # workouts
     (r'^workouts', include('app.workouts.urls.urls', namespace='workouts')),

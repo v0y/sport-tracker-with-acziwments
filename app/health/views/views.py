@@ -1,8 +1,6 @@
 # encoding: utf-8
 
 from datetime import datetime
-import json
-from re import match
 
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
@@ -10,7 +8,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import (
     Http404,
-    HttpResponse,
 )
 from django.shortcuts import (
     get_object_or_404,
@@ -18,8 +15,9 @@ from django.shortcuts import (
 )
 from fiut.helpers import get_page_and_paginator
 
-from .forms import HealthForm
-from .models import Health
+from ..forms import HealthForm
+from ..helpers import get_and_validate_date
+from ..models import Health
 
 
 @login_required
@@ -35,7 +33,7 @@ def add_health(request):
         pre_saved_form = form.save(commit=False)
         pre_saved_form.user = request.user
         pre_saved_form.save()
-        return redirect(reverse('health_show_charts'))
+        return redirect(reverse('health:show_charts'))
     return {'form': form}
 
 
@@ -55,39 +53,8 @@ def edit_health(request, pk):
     if form.is_valid():
         form.user = request.user
         form.save()
-        return redirect(reverse('health_show_list'))
+        return redirect('health:show_list')
     return {'form': form}
-
-
-def _get_and_validate_date(range_type, date=None):
-    """
-    Return date if valid, else raise 404
-
-    :param range_type: week, month or year
-    :param date: date to validate. Valid formats:
-                 * ``yyyy-mm-dd`` for week - this is week start date
-                 * ``yyyy-mm`` for month - show chart for this month
-                 * ``yyyy`` for year - chow chart for this year
-    :return: date. If date was None, todays date for range_type==month
-    :rtype: str
-    :raise: Http404
-    """
-    # get regex
-    regex = {
-        'week': r'^[\d]{4}-[\d]{2}-[\d]{2}$',
-        'month': r'^[\d]{4}-[\d]{2}$',
-        'year': r'^[\d]{4}$'}[range_type]
-
-    # get date if not given
-    if not date:
-        today = datetime.now()
-        date = '%s-%s' % (today.year, str(today.month).zfill(2))
-
-    # check, if regex is valid for chosen range type
-    if not match(regex, date):
-        raise Http404
-
-    return date
 
 
 @login_required
@@ -113,7 +80,7 @@ def health_show_charts(request, username=None, range_type='month', date=None):
     # url without date?
     url_is_complete = bool(date)
 
-    date = _get_and_validate_date(range_type, date)
+    date = get_and_validate_date(range_type, date)
 
     # get user
     user = get_object_or_404(User, username=username)
@@ -122,51 +89,12 @@ def health_show_charts(request, username=None, range_type='month', date=None):
     # redirect with date
     if not url_is_complete:
         return redirect(
-            reverse('health_show_charts', args=[username, range_type, date]))
+            reverse('health:show_charts', args=[username, range_type, date]))
 
     # get first date of registered health datas
     first_date = Health.get_first_date(user, '%Y-%m-%d')
 
     return {'first_date': first_date}
-
-
-def health_api(request):
-    """
-    Return health data as json
-
-    Required POST values:
-
-    * username: get data for this username
-    * range_type: get data for week, month or year.
-    * date: show chart from this date. Valid formats:
-
-      * ``yyyy-mm-dd`` for week - this is week start date
-      * ``yyyy-mm`` for month - show chart for this month
-      * ``yyyy`` for year - chow chart for this year
-
-    :return: health datas for given user and period
-    :rtype: json
-    """
-
-    # get values from POST
-    try:
-        username = request.POST['username']
-        range_type = request.POST['range_type']
-        date = request.POST['date']
-    except (KeyError, TypeError):
-        raise Http404
-
-    # get user or raise 404
-    user = get_object_or_404(User, username=username)
-
-    # validate date, if invalid raise 404
-    _get_and_validate_date(range_type, date)
-
-    # get dict data
-    data_dict = Health.get_data(user, range_type, date)
-
-    # return json
-    return HttpResponse(json.dumps(data_dict), content_type="application/json")
 
 
 @login_required

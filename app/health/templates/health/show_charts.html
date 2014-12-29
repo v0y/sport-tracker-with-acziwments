@@ -18,7 +18,9 @@
 		</ul>
 	</div>
 
-	<div class="col-lg-12 col-12 col-sm-12 weight-chart js-weight-chart">
+	<div class="col-lg-12 col-12 col-sm-12 weight-chart js-weight-chart"
+		data-url="{% url 'health_api:chart' %}"
+		data-refresh-url="{% url 'health:show_charts' %}">
 	</div>
 
 {% endblock %}

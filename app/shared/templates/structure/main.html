@@ -44,9 +44,9 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									Health <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="{% url 'health_show_charts' request.user.username %}"><i class="fa fa-bar-chart-o"></i> Charts</a><li>
-									<li><a href="{% url 'health_show_list' request.user.username %}"><i class="fa fa-list-alt"></i> Weight data list</a><li>
-									<li><a href="{% url 'add_health' %}"><i class="fa fa-plus"></i> Add weight data</a><li>
+									<li><a href="{% url 'health:show_charts' request.user.username %}"><i class="fa fa-bar-chart-o"></i> Charts</a><li>
+									<li><a href="{% url 'health:show_list' request.user.username %}"><i class="fa fa-list-alt"></i> Weight data list</a><li>
+									<li><a href="{% url 'health:add' %}"><i class="fa fa-plus"></i> Add weight data</a><li>
 								</ul>
 							</li>
 						{% endif %}
