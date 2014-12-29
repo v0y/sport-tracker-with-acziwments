@@ -9,8 +9,12 @@ from django.db import models
 from app.shared.models import CreatedAtMixin
 from app.workouts.models import Workout
 from .helpers import get_distance
-from .gpx_handler import handle_gpx, get_points_distance_and_elevation, \
-    get_segment_start_and_finish_times, get_distance_and_elevations_delta
+from .gpx_handler import (
+    get_distance_and_elevations_delta,
+    get_points_distance_and_elevation,
+    get_segment_start_and_finish_times,
+    handle_gpx,
+)
 
 
 class Route(CreatedAtMixin):
@@ -21,13 +25,11 @@ class Route(CreatedAtMixin):
         default=None,
     )
     user = models.ForeignKey(User, related_name=u'routes')
-
     start_time = models.DateTimeField(auto_now=False, null=True)
     finish_time = models.DateTimeField(auto_now=False, null=True)
     length = models.FloatField(default=0)
     height_up = models.FloatField(default=0)
     height_down = models.FloatField(default=0)
-
     tracks_json = models.TextField(default='[]')
 
     def __unicode__(self):
@@ -65,7 +67,6 @@ class Route(CreatedAtMixin):
 
         return route.id, route_data
 
-
     def best_time_for_x_km(self, distance):
         """
         Get best time on x km
@@ -87,8 +88,8 @@ class Route(CreatedAtMixin):
                 # distance would be too short
                 if p2_ < old_p2_:
                     continue
-                distance_to_p2, _, _ = \
-                    get_points_distance_and_elevation(track_[start_point:p2_], 3)
+                distance_to_p2, _, _ = get_points_distance_and_elevation(
+                    track_[start_point:p2_], 3)
                 if distance_to_p2 > target_distance:
                     return p2_
 
@@ -99,7 +100,8 @@ class Route(CreatedAtMixin):
             segment = track_[p1_:p2_ - 1]
             start, finish_partial = get_segment_start_and_finish_times(segment)
             partial_timedelta = finish_partial - start
-            distance_partial, _, _ = get_points_distance_and_elevation(segment, 3)
+            distance_partial, _, _ = get_points_distance_and_elevation(
+                segment, 3)
 
             # get missing distance and its time
             missing_distance = target_distance - distance_partial
