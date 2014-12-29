@@ -1,8 +1,8 @@
 # encoding: utf-8
 
 from app.accounts.tests import UserProfileTestCase
-
-from app.health.models import Health
+from .enums import Range
+from .models import Health
 
 
 class HealthTestCase(UserProfileTestCase):
@@ -19,10 +19,11 @@ class HealthTestCase(UserProfileTestCase):
         self.assertEqual(u4_first_date, '2013 01 02')
 
     def test_get_data(self):
-        u1_data = Health.get_data(self.u1, 'year', '2013')
-        u2_data = Health.get_data(self.u2, 'week', '2013-01-02')
-        u3_data = Health.get_data(self.u3, 'month', '2013-01')
-        u4_data = Health.get_data(self.u4, 'month', '2013-01')
+        u1_data = Health.get_data(self.u1, Range.YEAR, '2013')
+        u2_data = Health.get_data(self.u2, Range.WEEK, '2013-01-02')
+        u3_data = Health.get_data(self.u3, Range.MONTH, '2013-01')
+        u4_data = Health.get_data(self.u4, Range.MONTH, '2013-01')
+        u5_data = Health.get_data(self.u4, Range.ALLTIME)
 
         u1_expected_data = [
             ['fat-y'],
@@ -56,8 +57,10 @@ class HealthTestCase(UserProfileTestCase):
             ['weight-y', 98],
             ['weight-x', '2013-01-02'],
         ]
+        u5_expected_data = u4_expected_data
 
         self.assertEqual(u1_data, u1_expected_data)
         self.assertEqual(u2_data, u2_expected_data)
         self.assertEqual(u3_data, u3_expected_data)
         self.assertEqual(u4_data, u4_expected_data)
+        self.assertEqual(u5_data, u5_expected_data)

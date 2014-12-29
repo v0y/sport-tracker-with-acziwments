@@ -14,6 +14,7 @@ from django.core.validators import (
 
 from app.shared.helpers import get_date_format
 from app.shared.models import RelatedDateMixin
+from .enums import Range
 
 
 class Health(RelatedDateMixin):
@@ -50,13 +51,13 @@ class Health(RelatedDateMixin):
         # get health queryset
         health = cls.objects.filter(user=user).order_by('related_date')
 
-        if range_type in ('year', 'month'):
+        if range_type in (Range.YEAR, Range.MONTH):
             date = datetime.strptime(date_str, date_format)
             health = health.filter(related_date__year=date.strftime('%Y'))
-            if range_type == 'month':
+            if range_type == Range.MONTH:
                 health = health.filter(related_date__month=date.strftime('%m'))
 
-        elif range_type == 'week':
+        elif range_type == Range.WEEK:
             date = datetime.strptime(date_str, date_format)
             start_date = date.strftime('%Y-%m-%d')
             end_date = date + timedelta(days=6)
@@ -66,7 +67,7 @@ class Health(RelatedDateMixin):
         return health
 
     @classmethod
-    def get_data(cls, user, range_type, date_str):
+    def get_data(cls, user, range_type, date_str=None):
         """
         Get datas for health in pretty format
 

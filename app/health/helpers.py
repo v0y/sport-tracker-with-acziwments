@@ -5,6 +5,8 @@ from re import match
 
 from django.http import Http404
 
+from .enums import Range
+
 
 def get_and_validate_date(range_type, date=None):
     """
@@ -19,14 +21,14 @@ def get_and_validate_date(range_type, date=None):
     :rtype: str
     :raise: Http404
     """
-    if range_type == 'all-time':
+    if range_type == Range.ALLTIME:
         return None
 
     # get regex
     regex = {
-        'week': r'^[\d]{4}-[\d]{2}-[\d]{2}$',
-        'month': r'^[\d]{4}-[\d]{2}$',
-        'year': r'^[\d]{4}$'}[range_type]
+        Range.WEEK: r'^[\d]{4}-[\d]{2}-[\d]{2}$',
+        Range.MONTH: r'^[\d]{4}-[\d]{2}$',
+        Range.YEAR: r'^[\d]{4}$'}[range_type]
 
     # get date if not given
     if not date:
