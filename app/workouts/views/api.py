@@ -90,6 +90,4 @@ def workout_chart_api(request):
     """
     workout_id = request.POST['workout_id']
     workout = get_object_or_404(Workout, id=workout_id)
-    track = json.loads(workout.routes.first().tracks_json)[0]
-
-    return _get_chart_data_from_track(track)
+    return _get_chart_data_from_track(workout.track)

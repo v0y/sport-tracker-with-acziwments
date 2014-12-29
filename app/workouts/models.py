@@ -2,6 +2,7 @@
 
 from datetime import timedelta
 from itertools import chain
+import json
 
 from django.contrib.auth.models import User
 from django.core.cache import cache
@@ -138,6 +139,20 @@ class Workout(CreatedAtMixin):
         splitted = visible.split(':')
         return '%s godz. %s min. %s sek.' \
             % (splitted[0], splitted[1], splitted[2])
+
+    @property
+    def track(self):
+        route = self.routes.first()
+
+        if not route:
+            return None
+
+        try:
+            track_json = json.loads(route.tracks_json)[0]
+        except IndexError:
+            return None
+        else:
+            return track_json
 
     def best_time_for_x_km(self, distance):
         """

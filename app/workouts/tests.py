@@ -1,15 +1,24 @@
 # coding: utf-8
 
-from datetime import datetime, timedelta
+from datetime import (
+    datetime,
+    timedelta,
+)
 import json
 import numbers
-from pytz import UTC
 
 from django.contrib.auth.models import User
 from django.test import TestCase
+from pytz import UTC
 
+from app.routes.models import Route
 from app.routes.tests.tests import TestRoutesTestCase
-from .models import Distance, Sport, Workout, BestTime
+from .models import (
+    BestTime,
+    Distance,
+    Sport,
+    Workout,
+)
 from .views.api import _get_chart_data_from_track
 
 
@@ -18,12 +27,13 @@ class CreateWorkoutsMixin(object):
 
     def setUp(self):
         # create request and user
-        user = User.objects.create(username='a', email='a@a.aa', password='a')
+        self.user = User.objects.create(
+            username='a', email='a@a.aa', password='a')
 
         # create workout
         sport = Sport.objects.create(name=u'sport', category='cycling')
         defaults = {
-            'user': user,
+            'user': self.user,
             'sport': sport,
             'datetime_start': datetime(2000, 01, 01, 12, tzinfo=UTC),
             'datetime_stop': datetime(2000, 01, 01, 13, tzinfo=UTC),
@@ -67,6 +77,45 @@ class WorkoutTestCase(CreateWorkoutsMixin, TestCase):
         for workout, test_cases in test_values:
             for case in test_cases:
                 self.assertEqual(workout.best_time_for_x_km(case[0]), case[1])
+
+    def test_workout_without_route_track_property_returns_none(self):
+        self.assertIsNone(self.workout1.track)
+
+    def test_workout_with_empty_route_track_property_returns_none(self):
+        route = Route(workout=self.workout1, user=self.user, tracks_json='[]')
+        self.workout1.routes.add(route)
+        self.assertIsNone(self.workout1.track)
+
+    def test_workout_with_route_track_property_returns_route(self):
+        track_json = """
+            [{"segments": [[{
+                "lat": 52.263643755, "time": "2013-09-08 10:15:04",
+                "lon": 21.162123266, "ele": 86.9
+            },{
+                "lat": 52.263777986, "time": "2013-09-08 10:15:19",
+                "lon": 21.162024105, "ele": 86.4}
+            ]]}]
+        """
+        expected_track_json = {
+            'segments': [[{
+                    'lat': 52.263643755,
+                    'time': '2013-09-08 10:15:04',
+                    'lon': 21.162123266,
+                    'ele': 86.9
+            }, {
+                    'lat': 52.263777986,
+                    'time': '2013-09-08 10:15:19',
+                    'lon': 21.162024105,
+                    'ele': 86.4}
+            ]]
+        }
+        route = Route(
+            workout=self.workout1,
+            user=self.user,
+            tracks_json=track_json
+        )
+        self.workout1.routes.add(route)
+        self.assertEquals(self.workout1.track, expected_track_json)
 
 
 class BestTimesTestCase(CreateWorkoutsMixin, TestCase):
