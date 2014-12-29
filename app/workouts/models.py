@@ -126,7 +126,7 @@ class Workout(CreatedAtMixin):
         return visible_name
 
     def get_absolute_url(self):
-        return reverse('workout_show', args=[self.pk])
+        return reverse('workouts:show', args=[self.pk])
 
     @property
     def duration(self):

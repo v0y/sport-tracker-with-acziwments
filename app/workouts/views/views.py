@@ -54,4 +54,4 @@ class LastWorkoutView(LoginRequiredMixin, View):
         except Workout.DoesNotExist:
             return render(request, 'workouts/workout_missing.html')
 
-        return redirect('workout_show', latest_pk)
+        return redirect('workouts:show', latest_pk)
