@@ -1,0 +1,6 @@
+main = ->
+    return
+
+
+$ ->
+    main()

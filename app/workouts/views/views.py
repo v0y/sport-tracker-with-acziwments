@@ -7,7 +7,10 @@ from django.shortcuts import (
     redirect,
     render,
 )
-from django.views.generic import View
+from django.views.generic import (
+    View,
+    TemplateView,
+)
 from django.views.generic.edit import CreateView
 
 from app.shared.views import LoginRequiredMixin
@@ -46,7 +49,6 @@ class WorkoutCreateView(LoginRequiredMixin, CreateView):
 
 
 class LastWorkoutView(LoginRequiredMixin, View):
-
     def get(self, request, *args, **kwargs):
         try:
             latest_pk = Workout.objects.filter(user=request.user) \
@@ -55,3 +57,14 @@ class LastWorkoutView(LoginRequiredMixin, View):
             return render(request, 'workouts/workout_missing.html')
 
         return redirect('workouts:show', latest_pk)
+
+
+class WorkoutChartsView(TemplateView):
+    template_name = 'workouts/overview_charts.html'
+
+    def get(self, request, *args, **kwargs):
+        if not kwargs.get('username'):
+            username = request.user.username
+            return redirect('workouts:show_charts', username=username)
+
+        return super(WorkoutChartsView, self).get(request, *args, **kwargs)

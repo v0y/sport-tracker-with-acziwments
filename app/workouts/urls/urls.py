@@ -11,6 +11,7 @@ from ..models import Workout
 from ..views.views import (
     LastWorkoutView,
     WorkoutCreateView,
+    WorkoutChartsView,
 )
 
 
@@ -20,4 +21,8 @@ urlpatterns = patterns('',
     url(r'^/show/(?P<pk>\d+)$',
         DetailView.as_view(model=Workout), name='show'),
     url(r'^/add$', WorkoutCreateView.as_view(), name='add'),
+    # charts
+    url(r'^/show/charts$', WorkoutChartsView.as_view(), name='show_charts'),
+    url(r'^/show/charts/(?P<username>[\w.@+-]+)$',
+        WorkoutChartsView.as_view(), name='show_charts'),
 )

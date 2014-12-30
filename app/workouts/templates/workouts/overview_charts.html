@@ -1,0 +1,27 @@
+{% extends "structure/main.html" %}
+
+{% load static %}
+{% load compress %}
+
+
+{% block content %}
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#">Distance</a></li>
+		<li><a href="#">Time</a></li>
+		<li><a href="#">Personal bests</a></li>
+	</ul>
+{% endblock %}
+
+
+{% block css_import %}
+	<link href="{% static 'c3/c3.min.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+
+{% block js_import %}
+	{% compress js %}
+		<script src="{% static 'd3/d3.min.js' %}"></script>
+		<script src="{% static 'c3/c3.min.js' %}"></script>
+		<script src="{% static 'js/workout_overview_charts.coffee' %}" type="text/coffeescript"></script>
+	{% endcompress %}
+{% endblock %}
