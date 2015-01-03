@@ -65,7 +65,4 @@ def unix_time(datetime_):
 
 
 def is_whole(x):
-    if (x % 1) == 0:
-        return True
-    else:
-        return False
+    return (x % 1) == 0
