@@ -137,8 +137,7 @@ class Workout(CreatedAtMixin):
     def duration_visible(self):
         visible = str(self.datetime_stop - self.datetime_start)
         splitted = visible.split(':')
-        return '%s godz. %s min. %s sek.' \
-            % (splitted[0], splitted[1], splitted[2])
+        return '%sh %smin %ss' % (splitted[0], splitted[1], splitted[2])
 
     @property
     def track(self):
