@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 
-class Range(object):
+class ChartTimeRange(object):
     WEEK = 'week'
     MONTH = 'month'
     YEAR = 'year'

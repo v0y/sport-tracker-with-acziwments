@@ -11,7 +11,8 @@ from urlparse import (
 )
 
 from django.utils import timezone
-from app.health.enums import Range
+
+from app.shared.enums import ChartTimeRange
 
 
 def create_url(scheme='', url='', path='', params=None):
@@ -41,10 +42,10 @@ def get_date_format(date_type):
     :return: date format
     """
     return {
-        Range.WEEK: '%Y-%m-%d',
-        Range.MONTH: '%Y-%m',
-        Range.YEAR: '%Y',
-        Range.ALLTIME: None,
+        ChartTimeRange.WEEK: '%Y-%m-%d',
+        ChartTimeRange.MONTH: '%Y-%m',
+        ChartTimeRange.YEAR: '%Y',
+        ChartTimeRange.ALLTIME: None,
     }[date_type]
 
 

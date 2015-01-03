@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 from app.accounts.tests import UserProfileTestCase
-from .enums import Range
+from app.shared.enums import ChartTimeRange
 from .models import Health
 
 
@@ -19,11 +19,11 @@ class HealthTestCase(UserProfileTestCase):
         self.assertEqual(u4_first_date, '2013 01 02')
 
     def test_get_data(self):
-        u1_data = Health.get_data(self.u1, Range.YEAR, '2013')
-        u2_data = Health.get_data(self.u2, Range.WEEK, '2013-01-02')
-        u3_data = Health.get_data(self.u3, Range.MONTH, '2013-01')
-        u4_data = Health.get_data(self.u4, Range.MONTH, '2013-01')
-        u5_data = Health.get_data(self.u4, Range.ALLTIME)
+        u1_data = Health.get_data(self.u1, ChartTimeRange.YEAR, '2013')
+        u2_data = Health.get_data(self.u2, ChartTimeRange.WEEK, '2013-01-02')
+        u3_data = Health.get_data(self.u3, ChartTimeRange.MONTH, '2013-01')
+        u4_data = Health.get_data(self.u4, ChartTimeRange.MONTH, '2013-01')
+        u5_data = Health.get_data(self.u4, ChartTimeRange.ALLTIME)
 
         u1_expected_data = [
             ['fat-y'],

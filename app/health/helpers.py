@@ -5,7 +5,7 @@ from re import match
 
 from django.http import Http404
 
-from .enums import Range
+from app.shared.enums import ChartTimeRange
 
 
 def get_and_validate_date(range_type, date=None):
@@ -21,14 +21,14 @@ def get_and_validate_date(range_type, date=None):
     :rtype: str
     :raise: Http404
     """
-    if range_type == Range.ALLTIME:
+    if range_type == ChartTimeRange.ALLTIME:
         return None
 
     # get regex
     regex = {
-        Range.WEEK: r'^[\d]{4}-[\d]{2}-[\d]{2}$',
-        Range.MONTH: r'^[\d]{4}-[\d]{2}$',
-        Range.YEAR: r'^[\d]{4}$'}[range_type]
+        ChartTimeRange.WEEK: r'^[\d]{4}-[\d]{2}-[\d]{2}$',
+        ChartTimeRange.MONTH: r'^[\d]{4}-[\d]{2}$',
+        ChartTimeRange.YEAR: r'^[\d]{4}$'}[range_type]
 
     # get date if not given
     if not date:

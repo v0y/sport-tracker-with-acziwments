@@ -15,7 +15,7 @@ from django.shortcuts import (
 )
 from fiut.helpers import get_page_and_paginator
 
-from ..enums import Range
+from app.shared.enums import ChartTimeRange
 from ..forms import HealthForm
 from ..helpers import get_and_validate_date
 from ..models import Health
@@ -79,7 +79,7 @@ def health_show_charts(request, username=None, range_type='month', date=None):
     username = username or request.user.username
 
     # url without date?
-    url_is_complete = bool(date) or range_type == Range.ALLTIME
+    url_is_complete = bool(date) or range_type == ChartTimeRange.ALLTIME
 
     date = get_and_validate_date(range_type, date)
 

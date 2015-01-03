@@ -14,7 +14,7 @@ from django.core.validators import (
 
 from app.shared.helpers import get_date_format
 from app.shared.models import RelatedDateMixin
-from .enums import Range
+from app.shared.enums import ChartTimeRange
 
 
 class Health(RelatedDateMixin):
@@ -51,13 +51,13 @@ class Health(RelatedDateMixin):
         # get health queryset
         health = cls.objects.filter(user=user).order_by('related_date')
 
-        if range_type in (Range.YEAR, Range.MONTH):
+        if range_type in (ChartTimeRange.YEAR, ChartTimeRange.MONTH):
             date = datetime.strptime(date_str, date_format)
             health = health.filter(related_date__year=date.strftime('%Y'))
-            if range_type == Range.MONTH:
+            if range_type == ChartTimeRange.MONTH:
                 health = health.filter(related_date__month=date.strftime('%m'))
 
-        elif range_type == Range.WEEK:
+        elif range_type == ChartTimeRange.WEEK:
             date = datetime.strptime(date_str, date_format)
             start_date = date.strftime('%Y-%m-%d')
             end_date = date + timedelta(days=6)
