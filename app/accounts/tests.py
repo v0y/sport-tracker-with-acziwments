@@ -140,10 +140,10 @@ class UserSportsTestCase(TestCase):
         # get dates
         today = datetime.now(tz=UTC)
         self.year_ago = today - timedelta(days=365)
-        in_last_year_start = today - timedelta(days=101)
-        in_last_year_stop = today - timedelta(days=100)
-        older_than_last_year_start = today - timedelta(days=501)
-        older_than_last_year_stop = today - timedelta(days=500)
+        in_curr_year_start = today - timedelta(seconds=1)
+        in_curr_year_stop = today
+        older_than_last_year_start = today - timedelta(days=365*2, seconds=1)
+        older_than_last_year_stop = today - timedelta(days=365*2)
         self.old_year = older_than_last_year_stop.year
 
         # get sports
@@ -161,13 +161,13 @@ class UserSportsTestCase(TestCase):
             datetime_stop=older_than_last_year_stop)
         Workout.objects.create(
             user=self.user1, sport=self.sport1,
-            datetime_start=in_last_year_start, datetime_stop=in_last_year_stop)
+            datetime_start=in_curr_year_start, datetime_stop=in_curr_year_stop)
         Workout.objects.create(
             user=self.user1, sport=self.sport2,
-            datetime_start=in_last_year_start, datetime_stop=in_last_year_stop)
+            datetime_start=in_curr_year_start, datetime_stop=in_curr_year_stop)
         Workout.objects.create(
             user=self.user1, sport=self.sport2,
-            datetime_start=in_last_year_start, datetime_stop=in_last_year_stop)
+            datetime_start=in_curr_year_start, datetime_stop=in_curr_year_stop)
 
         # create workouts for user3
         Workout.objects.create(
