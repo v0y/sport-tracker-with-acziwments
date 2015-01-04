@@ -13,6 +13,8 @@ from app.routes.helpers import (
     get_distance,
     handle_datetime_string,
 )
+from app.shared.enums import ChartTimeRange
+from ..charts import DistanceChart
 from ..models import Workout
 
 
@@ -98,3 +100,9 @@ def workout_chart_api(request):
     workout_id = request.POST['workout_id']
     workout = get_object_or_404(Workout, id=workout_id)
     return _get_chart_data_from_track(workout.track)
+
+
+@ajax_request
+def overview_charts_api(request):
+    chart = DistanceChart(request.user, ChartTimeRange.ALLTIME)
+    return chart.get_data()

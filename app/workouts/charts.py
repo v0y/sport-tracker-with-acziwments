@@ -48,7 +48,7 @@ class DistanceChart(object):
 
     def _get_alltime_data(self, discipline, year_start, year_end):
         years_range = range(year_start, year_end + 1)
-        dates = [str(year) for year in years_range]
+        dates = ['%s-' % year for year in years_range]
         data = {}
         for date in years_range:
             data[date] = float()
