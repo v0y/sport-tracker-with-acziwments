@@ -40,6 +40,18 @@ class DistanceChart(object):
         disciplines = self.queryset.values_list('sport', flat=True)
         return Sport.objects.filter(id__in=disciplines)
 
+    @staticmethod
+    def _cleaned_values(data):
+        """
+        :return: None if there is no distance, else list of values
+        """
+        total_distance = float()
+        values = list(data.itervalues())
+        for distance in values:
+            total_distance += distance
+
+        return values if total_distance else None
+
     def _get_alltime_data(self, discipline, year_start, year_end):
         years_range = range(year_start, year_end + 1)
         dates = ['%s-' % year for year in years_range]
@@ -52,16 +64,11 @@ class DistanceChart(object):
             if workout.distance:
                 data[workout.datetime_start.year] += workout.distance
 
-        # return None if there is no distance
-        total_distance = float()
-        values = list(data.itervalues())
-        for distance in values:
-            total_distance += distance
-
-        if not total_distance:
-            return None
+        values = self._cleaned_values(data)
+        if values:
+            return dates, values
         else:
-            return dates, list(values)
+            return None
 
     def _get_year_data(self, discipline):
         """
@@ -79,7 +86,11 @@ class DistanceChart(object):
             if workout.distance:
                 data[workout.datetime_start.month] += workout.distance
 
-        return dates, list(data.itervalues())
+        values = self._cleaned_values(data)
+        if values:
+            return dates, values
+        else:
+            return None
 
     def _get_data(self, *args, **kwargs):
         return {
@@ -94,8 +105,8 @@ class DistanceChart(object):
         data_dict = defaultdict(list)
         data_list = []
 
-        # get min and max year
         if self.range_type == ChartTimeRange.ALLTIME:
+            # get min and max year
             year_start = self.queryset.first().datetime_start.year
             year_end = self.queryset.last().datetime_start.year
             # get workouts for disciplines
