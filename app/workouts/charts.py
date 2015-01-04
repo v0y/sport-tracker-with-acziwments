@@ -58,7 +58,16 @@ class DistanceChart(object):
             if workout.distance:
                 data[workout.datetime_start.year] += workout.distance
 
-        return dates, list(data.itervalues())
+        # return None if there is no distance
+        total_distance = float()
+        values = list(data.itervalues())
+        for distance in values:
+            total_distance += distance
+
+        if not total_distance:
+            return None
+        else:
+            return dates, list(values)
 
     def _get_year_data(self, discipline):
         """
@@ -97,12 +106,15 @@ class DistanceChart(object):
             year_end = self.queryset.last().datetime_start.year
             # get workouts for disciplines
             for discipline in disciplines:
-                data_dict[discipline.name] = self._get_data(
-                    discipline, year_start, year_end)
+                data = self._get_data(discipline, year_start, year_end)
+                if data:
+                    data_dict[discipline.name] = data
         else:
             # get workouts for disciplines
             for discipline in disciplines:
-                data_dict[discipline.name] = self._get_data(discipline)
+                data = self._get_data(discipline)
+                if data:
+                    data_dict[discipline.name] = data
 
         # adapt to c3 charts data format
         for discipline_name, data in data_dict.iteritems():
