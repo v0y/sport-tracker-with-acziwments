@@ -1,13 +1,45 @@
 String::endsWith ?= (s) -> s == '' or @slice(-s.length) == s
 
 
+parseUrl = ->
+    url = document.URL.split("//")[1].split("#")[0].split("/")
+    {
+        user: url[4]
+        dataType: url[5]
+        rangeType: url[6]
+        date: url[7]
+    }
+
+dateFormat = ->
+    rangeType = parseUrl().rangeType
+
+    switch rangeType
+        when 'all-time' then xFormat = '%Y-'
+        when 'year' then xFormat = '%Y-%m'
+        when 'month' then xFormat = '%Y-%m-%d'
+
+    switch rangeType
+        when 'all-time' then labelFormat = '%Y'
+        when 'year' then labelFormat = '%Y-%m'
+        when 'month' then labelFormat = '%Y-%m-%d'
+
+    {xFormat: xFormat, labelFormat: labelFormat}
+
+
 getJsonData = ->
     # get json data for chart
+
+    urlData = parseUrl()
+
     $.ajax
         url: $('.js-workouts-overview-chart').data('url')
         type: "POST"
         dataType: "json"
         data:
+            user: urlData.user
+            data_type: urlData.dataType
+            range_type: urlData.rangeType
+            date: urlData.date
             csrfmiddlewaretoken: $.cookie('csrftoken')
         error: (jqXHR, textStatus, errorThrown) -> console.log("AJAX Error: #{errorThrown}")
         success: (data) -> generateChart(data)
@@ -32,13 +64,14 @@ generateChart = (jsonData) ->
             xs: xs
             columns: jsonData
             type: 'bar'
-            xFormat: '%Y-'
+            xFormat: dateFormat().xFormat
             groups: [xLabels]
         axis:
             x:
                 type: 'timeseries'
                 tick:
-                    format: '%Y'
+                    format: dateFormat().labelFormat
+                    culling: false
             y:
                 label:
                     text: 'km'

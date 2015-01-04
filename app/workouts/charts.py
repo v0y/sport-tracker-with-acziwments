@@ -3,7 +3,6 @@
 from collections import defaultdict
 from datetime import (
     datetime,
-    timedelta,
 )
 
 from app.shared.enums import ChartTimeRange
@@ -34,11 +33,6 @@ class DistanceChart(object):
 
         if self.range_type == ChartTimeRange.MONTH:
             workouts = workouts.filter(datetime_start__month=self.date.month)
-
-        if self.range_type == ChartTimeRange.WEEK:
-            end_date = self.date + timedelta(days=6)
-            workouts = workouts.filter(
-                datetime_start__range=[self.date, end_date])
 
         return workouts
 

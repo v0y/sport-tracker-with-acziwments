@@ -3,7 +3,11 @@
 import json
 
 from annoying.decorators import ajax_request
-from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.http import (
+    Http404,
+    HttpResponse,
+)
 from django.shortcuts import (
     get_object_or_404,
 )
@@ -13,7 +17,7 @@ from app.routes.helpers import (
     get_distance,
     handle_datetime_string,
 )
-from app.shared.enums import ChartTimeRange
+from ..enums import ChartDataTypes
 from ..charts import DistanceChart
 from ..models import Workout
 
@@ -104,5 +108,16 @@ def workout_chart_api(request):
 
 @ajax_request
 def overview_charts_api(request):
-    chart = DistanceChart(request.user, ChartTimeRange.ALLTIME)
+    try:
+        params = request.POST
+        user = get_object_or_404(User, username=params['user'])
+
+        if params['data_type'] == ChartDataTypes.DISTANCE:
+            chart = DistanceChart(user, params['range_type'], params.get('date'))
+        else:
+            raise Http404
+    except Exception as e:
+        print e
+        raise
+
     return chart.get_data()

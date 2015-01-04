@@ -13,3 +13,9 @@ SPORT_CATEGORIES = (
     ('water', 'water'),
     ('winter', 'winter'),
 )
+
+
+class ChartDataTypes(object):
+    DISTANCE = 'distance'
+    TIME = 'time'
+    PERSONAL_BEST = 'personal-best'

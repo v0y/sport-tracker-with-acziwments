@@ -25,4 +25,13 @@ urlpatterns = patterns('',
     url(r'^/show/charts$', WorkoutChartsView.as_view(), name='show_charts'),
     url(r'^/show/charts/(?P<username>[\w.@+-]+)$',
         WorkoutChartsView.as_view(), name='show_charts'),
+    url(r'^/show/charts/(?P<username>[\w.@+-]+)/'
+        r'(?P<data_type>distance|time|personal-best)/'
+        r'(?P<range_type>week|month|year)/'
+        r'(?P<date>(\d{4})(-\d{2})?(-\d{2})?)$',
+        WorkoutChartsView.as_view(), name='show_charts'),
+    url(r'^/show/charts/(?P<username>[\w.@+-]+)/'
+        r'(?P<data_type>distance|time|personal-best)/'
+        r'(?P<range_type>all-time)$',
+        WorkoutChartsView.as_view(), name='show_charts'),
 )
