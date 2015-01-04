@@ -19,7 +19,8 @@ class DistanceChart(object):
         self.date_format = get_date_format(range_type)
         self.range_type = range_type
         self.user = user
-        self.date = datetime.strptime(date, self.date_format)
+        if date:
+            self.date = datetime.strptime(date, self.date_format)
         self.queryset = self._get_queryset()
 
     def _get_queryset(self):
@@ -45,6 +46,20 @@ class DistanceChart(object):
         disciplines = self.queryset.values_list('sport', flat=True)
         return Sport.objects.filter(id__in=disciplines)
 
+    def _get_alltime_data(self, discipline, year_start, year_end):
+        years_range = range(year_start, year_end + 1)
+        dates = [str(year) for year in years_range]
+        data = {}
+        for date in years_range:
+            data[date] = float()
+        workouts = self.queryset.filter(sport=discipline)
+
+        for workout in workouts:
+            if workout.distance:
+                data[workout.datetime_start.year] += workout.distance
+
+        return dates, list(data.itervalues())
+
     def _get_year_data(self, discipline):
         """
         :param discipline: discipline object
@@ -63,22 +78,33 @@ class DistanceChart(object):
 
         return dates, list(data.itervalues())
 
-    def _get_data(self, discipline):
+    def _get_data(self, *args, **kwargs):
         return {
-            # ChartTimeRange.ALLTIME: self._get_alltime_data,
+            ChartTimeRange.ALLTIME: self._get_alltime_data,
             ChartTimeRange.YEAR: self._get_year_data,
             # ChartTimeRange.MONTH: self._get_month_data,
             # ChartTimeRange.WEEK: self._get_week_data,
-        }[self.range_type](discipline)
+        }[self.range_type](*args, **kwargs)
 
     def get_data(self):
         disciplines = self._get_disciplines()
         data_dict = defaultdict(list)
         data_list = []
 
-        for discipline in disciplines:
-            data_dict[discipline.name] = self._get_data(discipline)
+        # get min and max year
+        if self.range_type == ChartTimeRange.ALLTIME:
+            year_start = self.queryset.first().datetime_start.year
+            year_end = self.queryset.last().datetime_start.year
+            # get workouts for disciplines
+            for discipline in disciplines:
+                data_dict[discipline.name] = self._get_data(
+                    discipline, year_start, year_end)
+        else:
+            # get workouts for disciplines
+            for discipline in disciplines:
+                data_dict[discipline.name] = self._get_data(discipline)
 
+        # adapt to c3 charts data format
         for discipline_name, data in data_dict.iteritems():
             x_data = data[0]
             x_data.insert(0, '%s-x' % discipline_name)
