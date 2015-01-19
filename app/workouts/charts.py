@@ -13,7 +13,7 @@ from .models import (
 )
 
 
-class DistanceChart(object):
+class ChartBase(object):
     def __init__(self, user, range_type, date=None):
         self.date_format = get_date_format(range_type)
         self.range_type = range_type
@@ -22,6 +22,11 @@ class DistanceChart(object):
             self.date = datetime.strptime(date, self.date_format)
         self.queryset = self._get_queryset()
 
+    def _get_queryset(self):
+        pass
+
+
+class DistanceChart(ChartBase):
     def _get_queryset(self):
         # get health queryset
         workouts = Workout.objects \
@@ -133,3 +138,11 @@ class DistanceChart(object):
             data_list.append(y_data)
 
         return data_list
+
+
+class BestChart(ChartBase):
+    pass
+
+
+class TimeChart(ChartBase):
+    pass

@@ -18,7 +18,12 @@ from app.routes.helpers import (
     handle_datetime_string,
 )
 from ..enums import ChartDataTypes
-from ..charts import DistanceChart
+from ..charts import (
+    BestChart,
+    DistanceChart,
+    TimeChart,
+)
+
 from ..models import Workout
 
 
@@ -108,16 +113,16 @@ def workout_chart_api(request):
 
 @ajax_request
 def overview_charts_api(request):
-    try:
-        params = request.POST
-        user = get_object_or_404(User, username=params['user'])
+    params = request.POST
+    user = get_object_or_404(User, username=params['user'])
 
-        if params['data_type'] == ChartDataTypes.DISTANCE:
-            chart = DistanceChart(user, params['range_type'], params.get('date'))
-        else:
-            raise Http404
-    except Exception as e:
-        print e
-        raise
+    if params['data_type'] == ChartDataTypes.DISTANCE:
+        chart = DistanceChart(user, params['range_type'], params.get('date'))
+    elif params['data_type'] == ChartDataTypes.TIME:
+        chart = TimeChart(user, params['range_type'], params.get('date'))
+    elif params['data_type'] == ChartDataTypes.PERSONAL_BEST:
+        chart = BestChart(user, params['range_type'], params.get('date'))
+    else:
+        raise Http404
 
     return chart.get_data()
