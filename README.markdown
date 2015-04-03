@@ -1,4 +1,5 @@
 [![travis](https://api.travis-ci.org/v0y/sport-tracker-with-acziwments.svg)](https://travis-ci.org/v0y/sport-tracker-with-acziwments)
+[![Code Health](https://landscape.io/github/v0y/sport-tracker-with-acziwments/master/landscape.svg?style=flat)](https://landscape.io/github/v0y/sport-tracker-with-acziwments/master)
 
 Sports tracker with achievements
 ================================
